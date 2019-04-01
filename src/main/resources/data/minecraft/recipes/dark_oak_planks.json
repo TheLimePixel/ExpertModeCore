@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "minecraft:dark_oak_logs"
+    },
+    {
+      "tag": "expertmodecore:saws"
+    }
+  ],
+  "result": {
+    "item": "minecraft:dark_oak_planks",
+    "count": 4
+  }
+}

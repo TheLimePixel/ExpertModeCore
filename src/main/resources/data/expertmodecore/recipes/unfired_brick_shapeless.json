@@ -1,0 +1,14 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:clay_ball"
+    },
+    {
+      "item": "expertmodecore:brick_mold"
+    }
+  ],
+  "result": {
+    "item": "expertmodecore:unfired_brick"
+  }
+}

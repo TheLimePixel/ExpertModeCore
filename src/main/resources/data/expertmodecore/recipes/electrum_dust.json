@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:dusts/gold"
+    },
+    {
+      "tag": "forge:dusts/silver"
+    }
+  ],
+  "result": {
+    "item": "expertmodecore:electrum_dust",
+    "count": 2
+  }
+}

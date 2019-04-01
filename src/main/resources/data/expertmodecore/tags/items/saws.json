@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "expertmodecore:bronze_saw",
+    "expertmodecore:electrum_saw",
+    "expertmodecore:flint_saw",
+    "expertmodecore:steel_saw"
+  ]
+}

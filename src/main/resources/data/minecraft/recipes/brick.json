@@ -1,0 +1,9 @@
+{
+  "type": "smelting",
+  "ingredient": {
+    "item": "expertmodecore:unfired_brick"
+  },
+  "result": "minecraft:brick",
+  "experience": 0.3,
+  "cookingtime": 200
+}

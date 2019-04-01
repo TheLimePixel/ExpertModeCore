@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "expertmodecore:block/blast_furnace_side",
+        "front": "expertmodecore:block/blast_furnace_front_on",
+        "side": "expertmodecore:block/blast_furnace_side"
+    }
+}

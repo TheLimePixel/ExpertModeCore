@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "###",
+    "#X#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:clay_ball"
+    },
+    "X": {
+      "item": "expertmodecore:brick_mold"
+    }
+  },
+  "result": {
+    "item": "expertmodecore:unfired_brick",
+    "count": 8
+  }
+}

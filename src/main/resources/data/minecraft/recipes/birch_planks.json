@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "minecraft:birch_logs"
+    },
+    {
+      "tag": "expertmodecore:saws"
+    }
+  ],
+  "result": {
+    "item": "minecraft:birch_planks",
+    "count": 4
+  }
+}

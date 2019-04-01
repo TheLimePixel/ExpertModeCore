@@ -1,0 +1,12 @@
+
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/copper",
+    "#forge:ingots/bronze",
+    "#forge:ingots/electrum",
+    "#forge:ingots/tin",
+    "#forge:ingots/silver",
+    "#forge:ingots/steel"
+  ]
+}

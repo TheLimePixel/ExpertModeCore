@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:dusts/copper"
+    },
+    {
+      "tag": "forge:dusts/copper"
+    },
+    {
+      "tag": "forge:dusts/copper"
+    },
+    {
+      "tag": "forge:dusts/tin"
+    }
+  ],
+  "result": {
+    "item": "expertmodecore:bronze_dust",
+    "count": 4
+  }
+}

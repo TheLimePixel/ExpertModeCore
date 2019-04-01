@@ -1,0 +1,12 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "expertmodecore:steel_ingot"
+    }
+  ],
+  "result": {
+    "item": "expertmodecore:steel_nugget",
+    "count": 9
+  }
+}

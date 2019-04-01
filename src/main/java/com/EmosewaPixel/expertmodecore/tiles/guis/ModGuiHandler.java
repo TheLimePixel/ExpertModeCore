@@ -1,0 +1,21 @@
+package com.EmosewaPixel.expertmodecore.tiles.guis;
+
+import com.EmosewaPixel.expertmodecore.tiles.TileEntityBlastFurnace;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.network.FMLPlayMessages;
+
+public class ModGuiHandler {
+    public static GuiScreen guis(FMLPlayMessages.OpenContainer container) {
+        EntityPlayer player = Minecraft.getInstance().player;
+        TileEntity tile = player.world.getTileEntity(container.getAdditionalData().readBlockPos());
+        switch (container.getId().toString()) {
+            case "expertmodecore:blast_furnace":
+                return new GUIBlastFurnace(player.inventory, (TileEntityBlastFurnace) tile);
+            default:
+                return null;
+        }
+    }
+}

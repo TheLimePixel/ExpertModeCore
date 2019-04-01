@@ -1,0 +1,9 @@
+{
+  "type": "smelting",
+  "ingredient": {
+    "tag": "forge:dusts/copper"
+  },
+  "result": "expertmodecore:copper_ingot",
+  "experience": 1.0,
+  "cookingtime": 200
+}
