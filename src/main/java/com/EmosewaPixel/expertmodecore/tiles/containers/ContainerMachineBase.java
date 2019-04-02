@@ -7,10 +7,14 @@ import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerMachineBase extends Container {
     private TileEntityFurnaceBase te;
+
+    private IItemHandler itemHandler;
 
     @Override
     public boolean canInteractWith(EntityPlayer playerIn) {
@@ -19,6 +23,15 @@ public class ContainerMachineBase extends Container {
 
     public ContainerMachineBase(IInventory playerInventory, TileEntityFurnaceBase te) {
         this.te = te;
+
+        te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> itemHandler = handler);
+
+        for (int i = 0; i < te.slotCount - 2; i++) {
+            this.addSlot(new SlotItemHandler(itemHandler, i, 56 - i * 30, 17));
+        }
+        this.addSlot(new SlotItemHandler(itemHandler, te.slotCount - 2, 56, 53));
+        this.addSlot(new SlotItemHandler(itemHandler, te.slotCount - 1, 116, 35));
+
         addPlayerSlots(playerInventory);
     }
 

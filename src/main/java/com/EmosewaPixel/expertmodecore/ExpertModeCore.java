@@ -4,6 +4,7 @@ import com.EmosewaPixel.expertmodecore.blocks.BlockRegistry;
 import com.EmosewaPixel.expertmodecore.blocks.OreGen;
 import com.EmosewaPixel.expertmodecore.items.ItemRegistry;
 import com.EmosewaPixel.expertmodecore.items.tools.ModHammer;
+import com.EmosewaPixel.expertmodecore.recipes.RecipeAddition;
 import com.EmosewaPixel.expertmodecore.tiles.ExpertTypes;
 import com.EmosewaPixel.expertmodecore.tiles.guis.ModGuiHandler;
 import net.minecraft.block.Block;
@@ -62,7 +63,7 @@ public class ExpertModeCore {
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
-
+        RecipeAddition.registry();
     }
 
     private void processIMC(final InterModProcessEvent event) {

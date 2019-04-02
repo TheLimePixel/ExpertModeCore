@@ -1,22 +1,19 @@
 package com.EmosewaPixel.expertmodecore.blocks;
 
-import com.EmosewaPixel.expertmodecore.tiles.TileEntityBlastFurnace;
-import com.EmosewaPixel.expertmodecore.tiles.containers.ContainerBlastFurnace;
+import com.EmosewaPixel.expertmodecore.tiles.TileEntityFurnaceBase;
+import com.EmosewaPixel.expertmodecore.tiles.guis.MachineBaseInterface;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.BlockRedstoneTorch;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Particles;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.IProperty;
@@ -24,26 +21,40 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockBlastFurnace extends Block implements ITileEntityProvider {
+public class BlockFurnaceBase extends Block implements ITileEntityProvider {
     public static final DirectionProperty FACING = BlockHorizontal.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = BlockRedstoneTorch.LIT;
 
-    public BlockBlastFurnace() {
-        super(Block.Properties.create(Material.ROCK));
-        setRegistryName("blast_furnace");
+    private String name;
+    private TileEntityFurnaceBase te;
+
+    public BlockFurnaceBase(String name, TileEntityFurnaceBase te) {
+        super(Properties.create(Material.ROCK).hardnessAndResistance(3.5F));
+        setRegistryName(name);
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.NORTH).with(LIT, false));
+        this.name = name;
+        this.te = te;
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createNewTileEntity(IBlockReader worldIn) {
+        return te;
+    }
+
+    @Override
+    public ToolType getHarvestTool(IBlockState state) {
+        return ToolType.PICKAXE;
     }
 
     public int getLightValue(IBlockState state) {
@@ -57,23 +68,14 @@ public class BlockBlastFurnace extends Block implements ITileEntityProvider {
     @Deprecated
     public boolean onBlockActivated(IBlockState state, World worldIn, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote)
-            NetworkHooks.openGui((EntityPlayerMP) player, new BlastFurnaceInterface(pos), pos);
+            NetworkHooks.openGui((EntityPlayerMP) player, new MachineBaseInterface(pos, name), pos);
         return true;
-    }
-
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase entity, ItemStack stack) {
-        if (stack.hasDisplayName()) {
-            TileEntity te = world.getTileEntity(pos);
-            if (te instanceof TileEntityBlastFurnace) {
-                ((TileEntityBlastFurnace) te).setCustomName(stack.getDisplayName());
-            }
-        }
     }
 
     public void onReplaced(IBlockState state, World world, BlockPos pos, IBlockState newState, boolean p_196243_5_) {
         if (state.getBlock() != newState.getBlock()) {
             TileEntity te = world.getTileEntity(pos);
-            if (te instanceof TileEntityBlastFurnace) {
+            if (te instanceof TileEntityFurnaceBase) {
                 world.updateComparatorOutputLevel(pos, this);
             }
 
@@ -125,45 +127,5 @@ public class BlockBlastFurnace extends Block implements ITileEntityProvider {
 
     protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> stateBuilder) {
         stateBuilder.add(new IProperty[]{FACING, LIT});
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
-        return new TileEntityBlastFurnace();
-    }
-
-    public class BlastFurnaceInterface implements IInteractionObject {
-        private BlockPos pos;
-
-        private BlastFurnaceInterface(BlockPos pos) {
-            this.pos = pos;
-        }
-
-        @Override
-        public Container createContainer(InventoryPlayer inventoryPlayer, EntityPlayer entityPlayer) {
-            return new ContainerBlastFurnace(inventoryPlayer, (TileEntityBlastFurnace) entityPlayer.world.getTileEntity(pos));
-        }
-
-        @Override
-        public String getGuiID() {
-            return "expertmodecore:blast_furnace";
-        }
-
-        @Override
-        public ITextComponent getName() {
-            return new TextComponentTranslation(BlockRegistry.BLAST_FURNACE.getTranslationKey() + ".name", new Object[0]);
-        }
-
-        @Override
-        public boolean hasCustomName() {
-            return false;
-        }
-
-        @Nullable
-        @Override
-        public ITextComponent getCustomName() {
-            return null;
-        }
     }
 }

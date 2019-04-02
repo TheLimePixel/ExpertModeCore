@@ -9,11 +9,13 @@ import net.minecraft.util.ResourceLocation;
 public class GUIMachineBase extends GuiContainer {
     private TileEntityFurnaceBase te;
     private String backGround;
+    private IInventory playerInventory;
 
     public GUIMachineBase(IInventory playerInventory, TileEntityFurnaceBase te, String backGround) {
         super(new ContainerMachineBase(playerInventory, te));
         this.te = te;
-        this.backGround=backGround;
+        this.backGround = backGround;
+        this.playerInventory = playerInventory;
     }
 
     @Override
@@ -28,6 +30,11 @@ public class GUIMachineBase extends GuiContainer {
 
         progress = getProgressLeftScaled(24);
         this.drawTexturedModalRect(guiLeft + 79, guiTop + 34, 176, 14, progress + 1, 16);
+    }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+        this.fontRenderer.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float) (this.ySize - 96 + 2), 4210752);
     }
 
     @Override

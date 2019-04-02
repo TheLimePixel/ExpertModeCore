@@ -1,7 +1,7 @@
 {
     "parent": "block/orientable",
     "textures": {
-        "top": "expertmodecore:lock/alloyer_side",
+        "top": "expertmodecore:block/alloyer_side",
         "front": "expertmodecore:block/alloyer_front",
         "side": "expertmodecore:block/alloyer_side"
     }

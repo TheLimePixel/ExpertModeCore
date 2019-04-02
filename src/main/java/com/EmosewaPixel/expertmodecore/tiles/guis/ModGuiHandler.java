@@ -1,5 +1,6 @@
 package com.EmosewaPixel.expertmodecore.tiles.guis;
 
+import com.EmosewaPixel.expertmodecore.tiles.TileEntityAlloyer;
 import com.EmosewaPixel.expertmodecore.tiles.TileEntityBlastFurnace;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -14,6 +15,8 @@ public class ModGuiHandler {
         switch (container.getId().toString()) {
             case "expertmodecore:blast_furnace":
                 return new GUIBlastFurnace(player.inventory, (TileEntityBlastFurnace) tile);
+            case "expertmodecore:alloyer":
+                return new GUIAlloyer(player.inventory, (TileEntityAlloyer) tile);
             default:
                 return null;
         }

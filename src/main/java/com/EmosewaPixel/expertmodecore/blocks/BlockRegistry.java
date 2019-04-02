@@ -1,6 +1,8 @@
 package com.EmosewaPixel.expertmodecore.blocks;
 
 import com.EmosewaPixel.expertmodecore.ExpertModeCore;
+import com.EmosewaPixel.expertmodecore.tiles.TileEntityAlloyer;
+import com.EmosewaPixel.expertmodecore.tiles.TileEntityBlastFurnace;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -19,6 +21,7 @@ public class BlockRegistry {
     public static Block TIN_BLOCK;
     public static Block TIN_ORE;
 
+    public static Block ALLOYER;
     public static Block BLAST_FURNACE;
 
     public static void registry(RegistryEvent.Register<Block> e) {
@@ -32,7 +35,8 @@ public class BlockRegistry {
         TIN_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.METAL), "tin_block", 0), e);
         TIN_ORE = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.STONE), "tin_ore", 0), e);
 
-        BLAST_FURNACE = register(new BlockBlastFurnace(), e);
+        ALLOYER = register(new BlockFurnaceBase("alloyer", new TileEntityAlloyer()), e);
+        BLAST_FURNACE = register(new BlockFurnaceBase("blast_furnace", new TileEntityBlastFurnace()), e);
     }
 
     public static void itemRegistry(RegistryEvent.Register<Item> e) {
@@ -46,6 +50,7 @@ public class BlockRegistry {
         registerItemBlock(TIN_BLOCK, e);
         registerItemBlock(TIN_ORE, e);
 
+        registerItemBlock(ALLOYER, e);
         registerItemBlock(BLAST_FURNACE, e);
     }
 
