@@ -1,10 +1,10 @@
 package com.EmosewaPixel.expertmodecore.tiles.guis;
 
-import com.EmosewaPixel.expertmodecore.tiles.TileEntityBlastFurnace;
+import com.EmosewaPixel.expertmodecore.tiles.TileEntityAlloyer;
 import net.minecraft.inventory.IInventory;
 
-public class GUIBlastFurnace extends GUIMachineBase {
-    public GUIBlastFurnace(IInventory playerInventory, TileEntityBlastFurnace te) {
-        super(playerInventory, te, "textures/gui/container/furnace.png");
+public class GUIAlloyer extends GUIMachineBase {
+    public GUIAlloyer(IInventory playerInventory, TileEntityAlloyer te) {
+        super(playerInventory, te, "expertmodecore:textures/gui/container/alloyer.png");
     }
 }

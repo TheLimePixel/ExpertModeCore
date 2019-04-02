@@ -25,7 +25,7 @@ public class GUIMachineBase extends GuiContainer {
         int progress;
         if (te.getBurnTime() > 0) {
             progress = this.getBurnLeftScaled(13);
-            this.drawTexturedModalRect(guiLeft + 56, guiTop + 36 + 12 - progress, 176, 12 - progress, 14, progress + 1);
+            this.drawTexturedModalRect(guiLeft + 56 - (te.slotCount - 3) * 9, guiTop + 36 + 12 - progress, 176, 12 - progress, 14, progress + 1);
         }
 
         progress = getProgressLeftScaled(24);
