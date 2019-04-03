@@ -86,6 +86,7 @@ public class ExpertModeCore {
         @SubscribeEvent
         public static void onTERegistry(final RegistryEvent.Register<TileEntityType<?>> e) {
             e.getRegistry().register(ExpertTypes.BLAST_FURNACE);
+            e.getRegistry().register(ExpertTypes.ALLOYER);
         }
     }
 

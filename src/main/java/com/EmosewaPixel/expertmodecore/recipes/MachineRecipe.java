@@ -1,8 +1,6 @@
 package com.EmosewaPixel.expertmodecore.recipes;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.util.ResourceLocation;
 
 public class MachineRecipe {
     private Object[] input;
@@ -37,10 +35,10 @@ public class MachineRecipe {
                     if (stack.getItem() == ((ItemStack) stackRec).getItem() && stack.getCount() >= ((ItemStack) stackRec).getCount())
                         matches++;
                 }
-                if (stackRec instanceof StringStack) {
-                    if (((StringStack) stackRec).isEmpty())
+                if (stackRec instanceof TagStack) {
+                    if (((TagStack) stackRec).isEmpty())
                         return false;
-                    if (new ItemTags.Wrapper(new ResourceLocation("forge", ((StringStack) stackRec).getString())).contains(stack.getItem()) && stack.getCount() >= ((StringStack) stackRec).getCount())
+                    if (((TagStack) stackRec).geTag().contains(stack.getItem()) && stack.getCount() >= ((TagStack) stackRec).getCount())
                         matches++;
                 }
             }
@@ -57,7 +55,7 @@ public class MachineRecipe {
             if (stackRec instanceof ItemStack) {
                 if (((ItemStack) stackRec).getItem() == stack.getItem())
                     return true;
-            } else if (new ItemTags.Wrapper(new ResourceLocation("forge", ((StringStack) stackRec).getString())).contains(stack.getItem()))
+            } else if (((TagStack) stackRec).geTag().contains(stack.getItem()))
                 return true;
         }
         return false;

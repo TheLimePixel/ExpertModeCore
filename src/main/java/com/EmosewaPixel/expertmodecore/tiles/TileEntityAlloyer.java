@@ -2,11 +2,9 @@ package com.EmosewaPixel.expertmodecore.tiles;
 
 import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
-import com.EmosewaPixel.expertmodecore.recipes.StringStack;
+import com.EmosewaPixel.expertmodecore.recipes.TagStack;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
@@ -70,8 +68,8 @@ public class TileEntityAlloyer extends TileEntityFurnaceBase implements ITickabl
                             if (input.getStackInSlot(i).getItem() == ((ItemStack) recipe.getinput(j)).getItem()) {
                                 input.extractItem(i, ((ItemStack) recipe.getinput(j)).copy().getCount(), false);
                             }
-                        } else if (new ItemTags.Wrapper(new ResourceLocation("forge", ((StringStack) recipe.getinput(j)).getString())).contains(input.getStackInSlot(i).getItem()))
-                            input.extractItem(i, ((StringStack) recipe.getinput(j)).copy().getCount(), false);
+                        } else if (((TagStack) recipe.getinput(j)).geTag().contains(input.getStackInSlot(i).getItem()))
+                            input.extractItem(i, ((TagStack) recipe.getinput(j)).copy().getCount(), false);
                     }
             }
     }
