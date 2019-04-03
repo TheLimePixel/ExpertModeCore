@@ -79,8 +79,9 @@ public class ContainerMachineBase extends Container {
         super.detectAndSendChanges();
         for (IContainerListener listener : listeners) {
             listener.sendWindowProperty(this, 0, te.getProgress());
-            listener.sendWindowProperty(this, 1, te.getBurnTime());
-            listener.sendWindowProperty(this, 2, te.getMaxBurnTime());
+            listener.sendWindowProperty(this, 1, te.getMaxProgress());
+            listener.sendWindowProperty(this, 2, te.getBurnTime());
+            listener.sendWindowProperty(this, 3, te.getMaxBurnTime());
         }
     }
 
@@ -91,9 +92,12 @@ public class ContainerMachineBase extends Container {
                 te.setProgress(data);
                 break;
             case 1:
-                te.setBurnTime(data);
+                te.setMaxProgress(data);
                 break;
             case 2:
+                te.setBurnTime(data);
+                break;
+            case 3:
                 te.setMaxBurnTime(data);
                 break;
         }

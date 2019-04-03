@@ -24,17 +24,20 @@ public class GUIMachineBase extends GuiContainer {
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
         int progress;
         if (te.getBurnTime() > 0) {
-            progress = this.getBurnLeftScaled(13);
-            this.drawTexturedModalRect(guiLeft + 56 - (te.slotCount - 3) * 9, guiTop + 36 + 12 - progress, 176, 12 - progress, 14, progress + 1);
+            progress = getBurnLeftScaled(13);
+            drawTexturedModalRect(guiLeft + 56 - (te.slotCount - 3) * 9, guiTop + 36 + 12 - progress, 176, 12 - progress, 14, progress + 1);
         }
-
-        progress = getProgressLeftScaled(24);
-        this.drawTexturedModalRect(guiLeft + 79, guiTop + 34, 176, 14, progress + 1, 16);
+        if (te.getProgress() > 0) {
+            progress = getProgressLeftScaled(24);
+            drawTexturedModalRect(guiLeft + 79, guiTop + 34, 176, 14, progress + 1, 16);
+        }
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        this.fontRenderer.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float) (this.ySize - 96 + 2), 4210752);
+        String name = te.getBlockState().getBlock().getNameTextComponent().getFormattedText();
+        fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6.0F, 4210752);
+        fontRenderer.drawString(playerInventory.getDisplayName().getFormattedText(), 8.0F, ySize - 96 + 2, 4210752);
     }
 
     @Override
@@ -46,12 +49,7 @@ public class GUIMachineBase extends GuiContainer {
     }
 
     private int getProgressLeftScaled(int scale) {
-        int progress = te.getProgress();
-        if (progress == 0)
-            progress = 200;
-
-
-        return (int) (scale - (float) progress / 200 * scale);
+        return (int) (scale - (float) te.getProgress() / te.getMaxProgress() * scale);
     }
 
     private int getBurnLeftScaled(int scale) {

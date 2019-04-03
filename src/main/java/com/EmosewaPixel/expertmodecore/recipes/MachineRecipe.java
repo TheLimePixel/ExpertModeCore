@@ -5,10 +5,17 @@ import net.minecraft.item.ItemStack;
 public class MachineRecipe {
     private Object[] input;
     private ItemStack output;
+    private int time;
 
-    public MachineRecipe(Object[] input, ItemStack output) {
+    public MachineRecipe(Object[] input, ItemStack output, int time) {
         this.input = input;
         this.output = output;
+        this.time = time;
+    }
+
+
+    public MachineRecipe(Object[] input, ItemStack output) {
+        this(input, output, 200);
     }
 
     public Object getinput(int index) {
@@ -17,6 +24,10 @@ public class MachineRecipe {
 
     public ItemStack getOutput() {
         return output;
+    }
+
+    public int getTime() {
+        return time;
     }
 
     public boolean isInputValid(ItemStack[] stacks) {

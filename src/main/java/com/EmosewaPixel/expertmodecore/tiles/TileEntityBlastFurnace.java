@@ -1,6 +1,5 @@
 package com.EmosewaPixel.expertmodecore.tiles;
 
-import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -15,39 +14,10 @@ import javax.annotation.Nonnull;
 public class TileEntityBlastFurnace extends TileEntityFurnaceBase implements ITickable {
     public TileEntityBlastFurnace() {
         super(ExpertTypes.BLAST_FURNACE, 1, RecipeTypes.blastFurnaceRecipes);
-
-        input = new ItemStackHandler(1) {
-            @Override
-            public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-                for (MachineRecipe recipe : recipes)
-                    if (recipe.itemBelongsInRecipe(stack))
-                        return true;
-
-                return false;
-            }
-
-            @Override
-            protected void onContentsChanged(int slot) {
-                TileEntityBlastFurnace.this.markDirty();
-            }
-        };
-
         fuel_input = new ItemStackHandler(1) {
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
                 return stack.getItem() == Items.COAL || stack.getItem() == Items.CHARCOAL || stack.getItem() == Blocks.COAL_BLOCK.asItem();
-            }
-
-            @Override
-            protected void onContentsChanged(int slot) {
-                TileEntityBlastFurnace.this.markDirty();
-            }
-        };
-
-        output = new ItemStackHandler(1) {
-            @Override
-            public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-                return false;
             }
 
             @Override
@@ -62,7 +32,7 @@ public class TileEntityBlastFurnace extends TileEntityFurnaceBase implements ITi
     @Override
     protected void consumeFuel() {
         Item fuel = fuel_input.getStackInSlot(0).getItem();
-        if (fuel == Items.COAL || fuel == Items.CHARCOAL || fuel == Blocks.COAL_BLOCK.asItem()) {
+        if ((fuel == Items.COAL || fuel == Items.CHARCOAL || fuel == Blocks.COAL_BLOCK.asItem()) && getRecipeByInput() != null) {
             setBurnTime(getItemBurnTime(fuel_input.getStackInSlot(0)));
             setMaxBurnTime(getItemBurnTime(fuel_input.getStackInSlot(0)));
             fuel_input.extractItem(0, 1, false);
