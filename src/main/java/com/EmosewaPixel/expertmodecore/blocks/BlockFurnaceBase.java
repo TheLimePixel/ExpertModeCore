@@ -1,7 +1,7 @@
 package com.EmosewaPixel.expertmodecore.blocks;
 
 import com.EmosewaPixel.expertmodecore.tiles.TileEntityFurnaceBase;
-import com.EmosewaPixel.expertmodecore.tiles.guis.MachineBaseInterface;
+import com.EmosewaPixel.expertmodecore.tiles.containers.ContainerMachineBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.BlockRedstoneTorch;
@@ -10,6 +10,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Particles;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
@@ -21,7 +22,10 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -36,20 +40,18 @@ public class BlockFurnaceBase extends Block implements ITileEntityProvider {
     public static final BooleanProperty LIT = BlockRedstoneTorch.LIT;
 
     private String name;
-    private TileEntityFurnaceBase te;
 
-    public BlockFurnaceBase(String name, TileEntityFurnaceBase te) {
+    public BlockFurnaceBase(String name) {
         super(Properties.create(Material.ROCK).hardnessAndResistance(3.5F));
         setRegistryName(name);
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.NORTH).with(LIT, false));
         this.name = name;
-        this.te = te;
     }
 
     @Nullable
     @Override
     public TileEntity createNewTileEntity(IBlockReader worldIn) {
-        return te;
+        return null;
     }
 
     @Override
@@ -58,7 +60,7 @@ public class BlockFurnaceBase extends Block implements ITileEntityProvider {
     }
 
     public int getLightValue(IBlockState state) {
-        return state.get(LIT) ? super.getLightValue(state) : 0;
+        return state.get(LIT) ? 13 : 0;
     }
 
     public IBlockState getStateForPlacement(BlockItemUseContext context) {
@@ -68,7 +70,7 @@ public class BlockFurnaceBase extends Block implements ITileEntityProvider {
     @Deprecated
     public boolean onBlockActivated(IBlockState state, World worldIn, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote)
-            NetworkHooks.openGui((EntityPlayerMP) player, new MachineBaseInterface(pos, name), pos);
+            NetworkHooks.openGui((EntityPlayerMP) player, new MachineBaseInterface(pos), pos);
         return true;
     }
 
@@ -124,8 +126,42 @@ public class BlockFurnaceBase extends Block implements ITileEntityProvider {
         return state.rotate(mirror.toRotation(state.get(FACING)));
     }
 
-
     protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> stateBuilder) {
         stateBuilder.add(new IProperty[]{FACING, LIT});
     }
+
+    public class MachineBaseInterface implements IInteractionObject {
+        private BlockPos pos;
+
+        public MachineBaseInterface(BlockPos pos) {
+            this.pos = pos;
+        }
+
+        @Override
+        public Container createContainer(InventoryPlayer inventoryPlayer, EntityPlayer entityPlayer) {
+            return new ContainerMachineBase(inventoryPlayer, (TileEntityFurnaceBase) entityPlayer.world.getTileEntity(pos));
+        }
+
+        @Override
+        public String getGuiID() {
+            return "expertmodecore:" + name;
+        }
+
+        @Override
+        public ITextComponent getName() {
+            return new TextComponentTranslation("block.skyresourcesclassic." + name, new Object[0]);
+        }
+
+        @Override
+        public boolean hasCustomName() {
+            return false;
+        }
+
+        @Nullable
+        @Override
+        public ITextComponent getCustomName() {
+            return null;
+        }
+    }
+
 }

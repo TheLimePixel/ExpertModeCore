@@ -2,6 +2,7 @@ package com.EmosewaPixel.expertmodecore.tiles;
 
 import com.EmosewaPixel.expertmodecore.blocks.BlockFurnaceBase;
 import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
+import com.EmosewaPixel.expertmodecore.recipes.StringStack;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -22,13 +23,13 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 public class TileEntityFurnaceBase extends TileEntity implements ITickable {
-    private int progress = 0;
+    protected int progress = 0;
     protected int burnTime = 0;
     protected int maxBurnTime = 0;
     private int inputCount;
     public int slotCount;
 
-    private ArrayList<MachineRecipe> recipes;
+    protected ArrayList<MachineRecipe> recipes;
 
     public void setProgress(int i) {
         progress = i;
@@ -105,12 +106,17 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
             }
     }
 
-    private void smelt() {
+    protected void smelt() {
         MachineRecipe recipe = getRecipeByInput();
         if (recipe != null)
             if (output.insertItem(0, recipe.getOutput().copy(), false).isEmpty()) {
-                for (int i = 0; i < inputCount; i++)
-                    input.extractItem(i, recipe.getinput(i).copy().getCount(), false);
+                for (int i = 0; i < inputCount; i++) {
+                    if (recipe.getinput(i) instanceof ItemStack)
+                        input.extractItem(i, ((ItemStack) recipe.getinput(i)).copy().getCount(), false);
+                    else
+                        input.extractItem(i, ((StringStack) recipe.getinput(i)).copy().getCount(), false);
+
+                }
             }
     }
 
@@ -170,7 +176,7 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
         return LazyOptional.empty();
     }
 
-    private MachineRecipe getRecipeByInput() {
+    protected MachineRecipe getRecipeByInput() {
         ItemStack[] stacks = new ItemStack[inputCount];
         for (int i = 0; i < inputCount; i++)
             stacks[i] = input.getStackInSlot(i);

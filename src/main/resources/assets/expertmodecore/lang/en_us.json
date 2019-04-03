@@ -1,5 +1,6 @@
 {
 	"itemGroup.expert_mode_main": "Expert Mode Core",
+	"block.expertmodecore.alloyer": "Alloy Smelter",
 	"block.expertmodecore.bronze_block": "Block of Bronze",
 	"block.expertmodecore.copper_block": "Block of Copper",
 	"block.expertmodecore.copper_ore": "Copper Ore",
@@ -9,6 +10,7 @@
 	"block.expertmodecore.steel_block": "Block of Steel",
 	"block.expertmodecore.tin_block": "Block of Tin",
 	"block.expertmodecore.tin_ore": "Tin Ore",
+	"block.expertmodecore.blast_furnace": "Blast Furnace",
 	"item.expertmodecore.brick_mold": "Brick Mold",
 	"item.expertmodecore.bronze_dust": "Bronze Dust",
 	"item.expertmodecore.bronze_ingot": "Bronze Ingot",

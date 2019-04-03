@@ -12,7 +12,7 @@ public class RecipeTypes {
         blastFurnaceRecipes.add(new MachineRecipe(new ItemStack[]{input}, output));
     }
 
-    public static void addAlloyerRecipe(ItemStack input1, ItemStack input2, ItemStack output) {
-        alloyerRecipes.add(new MachineRecipe(new ItemStack[]{input1, input2}, output));
+    public static void addAlloyerRecipe(Object input1, Object input2, ItemStack output) {
+        alloyerRecipes.add(new MachineRecipe(new Object[]{input1, input2}, output));
     }
 }

@@ -1,5 +1,6 @@
 package com.EmosewaPixel.expertmodecore.tiles;
 
+import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -18,7 +19,11 @@ public class TileEntityBlastFurnace extends TileEntityFurnaceBase implements ITi
         input = new ItemStackHandler(1) {
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-                return stack.getItem() == Items.IRON_INGOT;
+                for (MachineRecipe recipe : recipes)
+                    if (recipe.itemBelongsInRecipe(stack))
+                        return true;
+
+                return false;
             }
 
             @Override

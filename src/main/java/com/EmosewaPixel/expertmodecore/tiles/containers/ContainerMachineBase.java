@@ -56,7 +56,7 @@ public class ContainerMachineBase extends Container {
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (index < 3) {
+            if (index < te.slotCount) {
                 if (!this.mergeItemStack(itemstack1, te.slotCount, this.inventorySlots.size(), true)) {
                     return ItemStack.EMPTY;
                 }

@@ -1,9 +1,12 @@
 package com.EmosewaPixel.expertmodecore.tiles;
 
+import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
-import net.minecraft.init.Items;
+import com.EmosewaPixel.expertmodecore.recipes.StringStack;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
@@ -16,7 +19,11 @@ public class TileEntityAlloyer extends TileEntityFurnaceBase implements ITickabl
         input = new ItemStackHandler(2) {
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-                return true;
+                for (MachineRecipe recipe : recipes)
+                    if (recipe.itemBelongsInRecipe(stack))
+                        return true;
+
+                return false;
             }
 
             @Override
@@ -50,5 +57,22 @@ public class TileEntityAlloyer extends TileEntityFurnaceBase implements ITickabl
         };
 
         combinedHandler = new CombinedInvWrapper(input, fuel_input, output);
+    }
+
+    @Override
+    protected void smelt() {
+        MachineRecipe recipe = getRecipeByInput();
+        if (recipe != null)
+            if (output.insertItem(0, recipe.getOutput().copy(), false).isEmpty()) {
+                for (int i = 0; i < 2; i++)
+                    for (int j = 0; j < 2; j++) {
+                        if (recipe.getinput(j) instanceof ItemStack) {
+                            if (input.getStackInSlot(i).getItem() == ((ItemStack) recipe.getinput(j)).getItem()) {
+                                input.extractItem(i, ((ItemStack) recipe.getinput(j)).copy().getCount(), false);
+                            }
+                        } else if (new ItemTags.Wrapper(new ResourceLocation("forge", ((StringStack) recipe.getinput(j)).getString())).contains(input.getStackInSlot(i).getItem()))
+                            input.extractItem(i, ((StringStack) recipe.getinput(j)).copy().getCount(), false);
+                    }
+            }
     }
 }
