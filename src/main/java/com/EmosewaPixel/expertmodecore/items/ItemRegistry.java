@@ -1,7 +1,10 @@
 package com.EmosewaPixel.expertmodecore.items;
 
 import com.EmosewaPixel.expertmodecore.ExpertModeCore;
+import com.EmosewaPixel.expertmodecore.items.armor.ExpertMaterials;
+import com.EmosewaPixel.expertmodecore.items.armor.ModArmor;
 import com.EmosewaPixel.expertmodecore.items.tools.*;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 
@@ -9,7 +12,12 @@ public class ItemRegistry {
     public static Item BRICK_MOLD;
     public static Item BRONZE_DUST;
     public static Item BRONZE_INGOT;
+    public static Item BRONZE_PLATE;
     public static Item BRONZE_NUGGET;
+    public static Item BRONZE_BOOTS;
+    public static Item BRONZE_CHEST;
+    public static Item BRONZE_HELMET;
+    public static Item BRONZE_LEGS;
     public static Item BRONZE_AXE;
     public static Item BRONZE_HAMMER;
     public static Item BRONZE_HOE;
@@ -19,11 +27,17 @@ public class ItemRegistry {
     public static Item BRONZE_SWORD;
     public static Item COPPER_DUST;
     public static Item COPPER_INGOT;
+    public static Item COPPER_PLATE;
     public static Item COPPER_NUGGET;
     public static Item CRUSHED_MAGMA_BLOCK;
     public static Item ELECTRUM_DUST;
     public static Item ELECTRUM_INGOT;
+    public static Item ELECTRUM_PLATE;
     public static Item ELECTRUM_NUGGET;
+    public static Item ELECTRUM_BOOTS;
+    public static Item ELECTRUM_CHEST;
+    public static Item ELECTRUM_HELMET;
+    public static Item ELECTRUM_LEGS;
     public static Item ELECTRUM_AXE;
     public static Item ELECTRUM_HAMMER;
     public static Item ELECTRUM_HOE;
@@ -32,7 +46,9 @@ public class ItemRegistry {
     public static Item ELECTRUM_SHOVEl;
     public static Item ELECTRUM_SWORD;
     public static Item GOLD_DUST;
+    public static Item GOLD_PLATE;
     public static Item IRON_DUST;
+    public static Item IRON_PLATE;
     public static Item FLINT_AXE;
     public static Item FLINT_HAMMER;
     public static Item FLINT_HOE;
@@ -43,10 +59,16 @@ public class ItemRegistry {
     public static Item NETHERRACK_DUST;
     public static Item SILVER_DUST;
     public static Item SILVER_INGOT;
+    public static Item SILVER_PLATE;
     public static Item SILVER_NUGGET;
     public static Item STEEl_DUST;
     public static Item STEEL_INGOT;
+    public static Item STEEL_PLATE;
     public static Item STEEL_NUGGET;
+    public static Item STEEL_BOOTS;
+    public static Item STEEL_CHEST;
+    public static Item STEEL_HELMET;
+    public static Item STEEL_LEGS;
     public static Item STEEL_AXE;
     public static Item STEEL_HAMMER;
     public static Item STEEL_HOE;
@@ -54,8 +76,10 @@ public class ItemRegistry {
     public static Item STEEL_SAW;
     public static Item STEEL_SHOVEl;
     public static Item STEEL_SWORD;
+    public static Item STONE_DUST;
     public static Item TIN_DUST;
     public static Item TIN_INGOT;
+    public static Item TIN_PLATE;
     public static Item TIN_NUGGET;
     public static Item UNFIRED_BRICK;
 
@@ -63,7 +87,12 @@ public class ItemRegistry {
         BRICK_MOLD = register(new SelfContainerItem("brick_mold"), e);
         BRONZE_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("bronze_dust"), e);
         BRONZE_INGOT = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("bronze_ingot"), e);
+        BRONZE_PLATE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("bronze_plate"), e);
         BRONZE_NUGGET = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("bronze_nugget"), e);
+        BRONZE_BOOTS = register(new ModArmor(ExpertMaterials.BRONZE, EntityEquipmentSlot.FEET), e);
+        BRONZE_CHEST = register(new ModArmor(ExpertMaterials.BRONZE, EntityEquipmentSlot.CHEST), e);
+        BRONZE_HELMET = register(new ModArmor(ExpertMaterials.BRONZE, EntityEquipmentSlot.HEAD), e);
+        BRONZE_LEGS = register(new ModArmor(ExpertMaterials.BRONZE, EntityEquipmentSlot.LEGS), e);
         BRONZE_AXE = register(new ModAxe(ExpertTiers.BRONZE, 7, -3.2F), e);
         BRONZE_HAMMER = register(new ModHammer(ExpertTiers.BRONZE, 7, -3.2F), e);
         BRONZE_HOE = register(new ModHoe(ExpertTiers.BRONZE, -2.0F), e);
@@ -73,11 +102,17 @@ public class ItemRegistry {
         BRONZE_SWORD = register(new ModSword(ExpertTiers.BRONZE, 3, -2.4F), e);
         COPPER_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("copper_dust"), e);
         COPPER_INGOT = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("copper_ingot"), e);
+        COPPER_PLATE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("copper_plate"), e);
         COPPER_NUGGET = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("copper_nugget"), e);
         CRUSHED_MAGMA_BLOCK = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("crushed_magma_cream"), e);
         ELECTRUM_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("electrum_dust"), e);
         ELECTRUM_INGOT = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("electrum_ingot"), e);
+        ELECTRUM_PLATE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("electrum_plate"), e);
         ELECTRUM_NUGGET = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("electrum_nugget"), e);
+        ELECTRUM_BOOTS = register(new ModArmor(ExpertMaterials.ELECTRUM, EntityEquipmentSlot.FEET), e);
+        ELECTRUM_CHEST = register(new ModArmor(ExpertMaterials.ELECTRUM, EntityEquipmentSlot.CHEST), e);
+        ELECTRUM_HELMET = register(new ModArmor(ExpertMaterials.ELECTRUM, EntityEquipmentSlot.HEAD), e);
+        ELECTRUM_LEGS = register(new ModArmor(ExpertMaterials.ELECTRUM, EntityEquipmentSlot.LEGS), e);
         ELECTRUM_AXE = register(new ModAxe(ExpertTiers.ELECTRUM, 6, -3.0F), e);
         ELECTRUM_HAMMER = register(new ModHammer(ExpertTiers.ELECTRUM, 6, -3.0F), e);
         ELECTRUM_HOE = register(new ModHoe(ExpertTiers.ELECTRUM, -3.0F), e);
@@ -93,14 +128,22 @@ public class ItemRegistry {
         FLINT_SHOVEl = register(new ModShovel(ExpertTiers.FLINT, 1.5F, -3.2F), e);
         FLINT_SWORD = register(new ModSword(ExpertTiers.FLINT, 3, -2.4F), e);
         GOLD_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("gold_dust"), e);
+        GOLD_PLATE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("gold_plate"), e);
         IRON_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("iron_dust"), e);
+        IRON_PLATE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("iron_plate"), e);
         NETHERRACK_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("netherrack_dust"), e);
         SILVER_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("silver_dust"), e);
         SILVER_INGOT = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("silver_ingot"), e);
+        SILVER_PLATE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("silver_plate"), e);
         SILVER_NUGGET = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("silver_nugget"), e);
         STEEl_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("steel_dust"), e);
         STEEL_INGOT = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("steel_ingot"), e);
+        STEEL_PLATE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("steel_plate"), e);
         STEEL_NUGGET = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("steel_nugget"), e);
+        STEEL_BOOTS = register(new ModArmor(ExpertMaterials.STEEL, EntityEquipmentSlot.FEET), e);
+        STEEL_CHEST = register(new ModArmor(ExpertMaterials.STEEL, EntityEquipmentSlot.CHEST), e);
+        STEEL_HELMET = register(new ModArmor(ExpertMaterials.STEEL, EntityEquipmentSlot.HEAD), e);
+        STEEL_LEGS = register(new ModArmor(ExpertMaterials.STEEL, EntityEquipmentSlot.LEGS), e);
         STEEL_AXE = register(new ModAxe(ExpertTiers.STEEl, 6, -3.1F), e);
         STEEL_HAMMER = register(new ModHammer(ExpertTiers.STEEl, 6, -3.1F), e);
         STEEL_HOE = register(new ModHoe(ExpertTiers.STEEl, -1.0F), e);
@@ -108,8 +151,10 @@ public class ItemRegistry {
         STEEL_SAW = register(new ModSaw(ExpertTiers.STEEl, 3, -3.1F), e);
         STEEL_SHOVEl = register(new ModShovel(ExpertTiers.STEEl, 1.5F, -3.0F), e);
         STEEL_SWORD = register(new ModSword(ExpertTiers.STEEl, 3, -2.4F), e);
+        STONE_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("stone_dust"), e);
         TIN_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("tin_dust"), e);
         TIN_INGOT = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("tin_ingot"), e);
+        TIN_PLATE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("tin_plate"), e);
         TIN_NUGGET = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("tin_nugget"), e);
         UNFIRED_BRICK = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("unfired_brick"), e);
     }

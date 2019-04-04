@@ -1,0 +1,9 @@
+{
+    "parent": "expertmodecore:block/improved_orientable",
+    "textures": {
+        "top": "expertmodecore:block/crusher_top_on",
+        "front": "expertmodecore:block/crusher_front_on",
+        "side": "expertmodecore:block/crusher_side_on",
+        "bottom": "expertmodecore:block/crusher_bottom"
+    }
+}

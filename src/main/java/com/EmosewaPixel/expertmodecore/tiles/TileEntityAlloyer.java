@@ -8,14 +8,14 @@ import net.minecraft.util.ITickable;
 
 public class TileEntityAlloyer extends TileEntityFurnaceBase implements ITickable {
     public TileEntityAlloyer() {
-        super(ExpertTypes.ALLOYER, 2, RecipeTypes.alloyerRecipes);
+        super(ExpertTypes.ALLOYER, 2, 1, RecipeTypes.alloyerRecipes);
     }
 
     @Override
     protected void smelt() {
         MachineRecipe recipe = getRecipeByInput();
         if (recipe != null)
-            if (output.insertItem(0, recipe.getOutput().copy(), false).isEmpty()) {
+            if (canOutput(recipe, false)) {
                 for (int i = 0; i < 2; i++)
                     for (int j = 0; j < 2; j++) {
                         if (recipe.getinput(j) instanceof ItemStack) {

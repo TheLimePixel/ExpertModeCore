@@ -26,11 +26,13 @@ public class ContainerMachineBase extends Container {
 
         te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> itemHandler = handler);
 
-        for (int i = 0; i < te.slotCount - 2; i++) {
-            this.addSlot(new SlotItemHandler(itemHandler, i, 56 - i * 18, 17));
-        }
-        this.addSlot(new SlotItemHandler(itemHandler, te.slotCount - 2, 56 - (te.slotCount - 3) * 9, 53));
-        this.addSlot(new SlotItemHandler(itemHandler, te.slotCount - 1, 116, 35));
+        for (int i = 0; i < te.getInputCount(); i++)
+            this.addSlot(new SlotItemHandler(itemHandler, i, te.getInputCount() == 1 ? 56 : 38 + i * 18, 17));
+
+        this.addSlot(new SlotItemHandler(itemHandler, te.getInputCount(), 56 - (te.getInputCount() - 1) * 9, 53));
+
+        for (int i = 0; i < te.getOutputCount(); i++)
+            this.addSlot(new SlotItemHandler(itemHandler, te.slotCount - i - 1, 116, te.getOutputCount() == 1 ? 35 : 48 - i * 22));
 
         addPlayerSlots(playerInventory);
     }

@@ -1,0 +1,18 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+  	"H",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/silver"
+    },
+    "H": {
+      "tag": "expertmodecore:hammers"
+  }
+  },
+  "result": {
+    "item": "expertmodecore:silver_plate"
+  }
+}

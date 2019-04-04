@@ -4,25 +4,24 @@ import net.minecraft.item.ItemStack;
 
 public class MachineRecipe {
     private Object[] input;
-    private ItemStack output;
+    private ItemStack[] output;
     private int time;
 
-    public MachineRecipe(Object[] input, ItemStack output, int time) {
+    public MachineRecipe(Object[] input, ItemStack[] output, int time) {
         this.input = input;
         this.output = output;
         this.time = time;
-    }
-
-
-    public MachineRecipe(Object[] input, ItemStack output) {
-        this(input, output, 200);
     }
 
     public Object getinput(int index) {
         return input[index];
     }
 
-    public ItemStack getOutput() {
+    public ItemStack getOutput(int index) {
+        return output[index];
+    }
+
+    public ItemStack[] getAllOutputs() {
         return output;
     }
 

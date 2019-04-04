@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
 
 public class TileEntityBlastFurnace extends TileEntityFurnaceBase implements ITickable {
     public TileEntityBlastFurnace() {
-        super(ExpertTypes.BLAST_FURNACE, 1, RecipeTypes.blastFurnaceRecipes);
+        super(ExpertTypes.BLAST_FURNACE, 1, 1, RecipeTypes.blastFurnaceRecipes);
         fuel_input = new ItemStackHandler(1) {
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "expertmodecore:bronze_hammer",
+    "expertmodecore:electrum_hammer",
+    "expertmodecore:flint_hammer",
+    "expertmodecore:steel_hammer"
+  ]
+}

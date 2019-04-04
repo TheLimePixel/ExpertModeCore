@@ -20,13 +20,13 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -47,7 +47,6 @@ public class ExpertModeCore {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
         ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.GUIFACTORY, () -> ModGuiHandler::guis);
 
@@ -56,10 +55,6 @@ public class ExpertModeCore {
 
     private void setup(final FMLCommonSetupEvent event) {
         OreGen.addOres();
-    }
-
-    private void doClientStuff(final FMLClientSetupEvent event) {
-
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
@@ -115,26 +110,27 @@ public class ExpertModeCore {
                 }
                 if (e.getHarvester().getHeldItemMainhand().getItem() instanceof ModHammer) {
                     if (tag("forge:ores").contains(item)) {
-                        if (tag("forge:ores/iron").contains(item)) {
+                        if (Tags.Items.ORES_IRON.contains(item)) {
                             e.getDrops().removeAll(e.getDrops());
                             e.getDrops().add(new ItemStack(ItemRegistry.IRON_DUST));
                         }
-                        if (tag("forge:ores/copper").contains(item)) {
+                        if (RecipeAddition.ORES_COPPER.contains(item)) {
                             e.getDrops().removeAll(e.getDrops());
                             e.getDrops().add(new ItemStack(ItemRegistry.GOLD_DUST));
                         }
-                        if (tag("forge:ores/tin").contains(item)) {
+                        if (RecipeAddition.ORES_TIN.contains(item)) {
                             e.getDrops().removeAll(e.getDrops());
                             e.getDrops().add(new ItemStack(ItemRegistry.TIN_DUST));
                         }
-                        if (tag("forge:ores/silver").contains(item)) {
+                        if (RecipeAddition.ORES_SILVER.contains(item)) {
                             e.getDrops().removeAll(e.getDrops());
                             e.getDrops().add(new ItemStack(ItemRegistry.SILVER_DUST));
                         }
-                        if (tag("forge:ores/gold").contains(item)) {
+                        if (Tags.Items.ORES_GOLD.contains(item)) {
                             e.getDrops().removeAll(e.getDrops());
                             e.getDrops().add(new ItemStack(ItemRegistry.GOLD_DUST));
                         }
+                        e.getDrops().add(new ItemStack(ItemRegistry.STONE_DUST));
                     }
                     if (e.getState().getBlock() == Blocks.MAGMA_BLOCK) {
                         e.getDrops().remove(0);

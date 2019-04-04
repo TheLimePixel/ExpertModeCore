@@ -21,6 +21,7 @@ public class BlockRegistry {
 
     public static Block ALLOYER;
     public static Block BLAST_FURNACE;
+    public static Block CRUSHER;
 
     public static void registry(RegistryEvent.Register<Block> e) {
         BRONZER_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.METAL), "bronze_block", 0), e);
@@ -35,6 +36,7 @@ public class BlockRegistry {
 
         ALLOYER = register(new BlockAlloyer(), e);
         BLAST_FURNACE = register(new BlockBlastFurnace(), e);
+        CRUSHER = register(new BlockCrusher(), e);
     }
 
     public static void itemRegistry(RegistryEvent.Register<Item> e) {
@@ -50,6 +52,7 @@ public class BlockRegistry {
 
         registerItemBlock(ALLOYER, e);
         registerItemBlock(BLAST_FURNACE, e);
+        registerItemBlock(CRUSHER, e);
     }
 
     private static Block register(Block block, RegistryEvent.Register<Block> e) {

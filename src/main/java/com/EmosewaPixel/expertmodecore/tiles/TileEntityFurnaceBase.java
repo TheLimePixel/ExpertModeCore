@@ -28,6 +28,7 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
     private int burnTime = 0;
     private int maxBurnTime = 0;
     private int inputCount;
+    private int outputCount;
     public int slotCount;
 
     private ArrayList<MachineRecipe> recipes;
@@ -64,10 +65,19 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
         return maxBurnTime;
     }
 
-    public TileEntityFurnaceBase(TileEntityType type, int inputCount, ArrayList<MachineRecipe> recipes) {
+    public int getInputCount() {
+        return inputCount;
+    }
+
+    public int getOutputCount() {
+        return outputCount;
+    }
+
+    public TileEntityFurnaceBase(TileEntityType type, int inputCount, int outputCount, ArrayList<MachineRecipe> recipes) {
         super(type);
         this.inputCount = inputCount;
-        slotCount = 2 + inputCount;
+        this.outputCount = outputCount;
+        slotCount = inputCount + 1 + outputCount;
         this.recipes = recipes;
 
         input = new ItemStackHandler(inputCount) {
@@ -98,7 +108,7 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
             }
         };
 
-        output = new ItemStackHandler(1) {
+        output = new ItemStackHandler(outputCount) {
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
                 return false;
@@ -152,7 +162,7 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
     private void startSmelting() {
         MachineRecipe recipe = getRecipeByInput();
         if (recipe != null)
-            if (output.insertItem(0, recipe.getOutput().copy(), true).isEmpty()) {
+            if (canOutput(recipe, true)) {
                 maxProgress = progress = recipe.getTime();
             }
     }
@@ -160,7 +170,7 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
     protected void smelt() {
         MachineRecipe recipe = getRecipeByInput();
         if (recipe != null)
-            if (output.insertItem(0, recipe.getOutput().copy(), false).isEmpty()) {
+            if (canOutput(recipe, false)) {
                 for (int i = 0; i < inputCount; i++) {
                     if (recipe.getinput(i) instanceof ItemStack)
                         input.extractItem(i, ((ItemStack) recipe.getinput(i)).copy().getCount(), false);
@@ -239,5 +249,15 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
                 return recipe;
         }
         return null;
+    }
+
+    protected boolean canOutput(MachineRecipe recipe, boolean simulate) {
+        boolean can = true;
+
+        for (int i = 0; i < recipe.getAllOutputs().length; i++)
+            if (!output.insertItem(i, recipe.getOutput(i).copy(), simulate).isEmpty())
+                can = false;
+
+        return can;
     }
 }
