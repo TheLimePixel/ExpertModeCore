@@ -10,6 +10,7 @@ import net.minecraftforge.event.RegistryEvent;
 
 public class BlockRegistry {
     public static Block BRONZER_BLOCK;
+    public static Block COKE_BRICKS;
     public static Block COPPER_BLOCK;
     public static Block COPPER_ORE;
     public static Block ELECTRUM_BLOCK;
@@ -20,27 +21,33 @@ public class BlockRegistry {
     public static Block TIN_ORE;
 
     public static Block ALLOYER;
+    public static Block COKE_OVEN;
     public static Block BLAST_FURNACE;
     public static Block CRUSHER;
+    public static Block INFUSION_TABLE;
 
     public static void registry(RegistryEvent.Register<Block> e) {
-        BRONZER_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.METAL), "bronze_block", 0), e);
-        COPPER_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.METAL), "copper_block", 0), e);
-        COPPER_ORE = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.STONE), "copper_ore", 0), e);
-        ELECTRUM_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.METAL), "electrum_block", 2), e);
-        SILVER_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(5.0F, 6.0F).sound(SoundType.METAL), "silver_block", 1), e);
-        SILVER_ORE = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(5.0F, 6.0F).sound(SoundType.STONE), "silver_ore", 1), e);
-        STEEL_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(5.0F, 6.0F).sound(SoundType.METAL), "steel_block", 1), e);
-        TIN_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.METAL), "tin_block", 0), e);
-        TIN_ORE = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.STONE), "tin_ore", 0), e);
+        BRONZER_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6).sound(SoundType.METAL), "bronze_block", 0), e);
+        COKE_BRICKS = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2, 6).sound(SoundType.STONE), "coke_bricks", 0), e);
+        COPPER_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6).sound(SoundType.METAL), "copper_block", 0), e);
+        COPPER_ORE = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6).sound(SoundType.STONE), "copper_ore", 0), e);
+        ELECTRUM_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6).sound(SoundType.METAL), "electrum_block", 2), e);
+        SILVER_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(5, 6).sound(SoundType.METAL), "silver_block", 1), e);
+        SILVER_ORE = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(5, 6).sound(SoundType.STONE), "silver_ore", 1), e);
+        STEEL_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(5, 6).sound(SoundType.METAL), "steel_block", 1), e);
+        TIN_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6).sound(SoundType.METAL), "tin_block", 0), e);
+        TIN_ORE = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6).sound(SoundType.STONE), "tin_ore", 0), e);
 
         ALLOYER = register(new BlockAlloyer(), e);
         BLAST_FURNACE = register(new BlockBlastFurnace(), e);
+        COKE_OVEN = register(new BlockCokeOven(), e);
         CRUSHER = register(new BlockCrusher(), e);
+        INFUSION_TABLE = register(new BlockInfusionTable(), e);
     }
 
     public static void itemRegistry(RegistryEvent.Register<Item> e) {
         registerItemBlock(BRONZER_BLOCK, e);
+        registerItemBlock(COKE_BRICKS, e);
         registerItemBlock(COPPER_BLOCK, e);
         registerItemBlock(COPPER_ORE, e);
         registerItemBlock(ELECTRUM_BLOCK, e);
@@ -52,7 +59,9 @@ public class BlockRegistry {
 
         registerItemBlock(ALLOYER, e);
         registerItemBlock(BLAST_FURNACE, e);
+        registerItemBlock(COKE_OVEN, e);
         registerItemBlock(CRUSHER, e);
+        registerItemBlock(INFUSION_TABLE, e);
     }
 
     private static Block register(Block block, RegistryEvent.Register<Block> e) {

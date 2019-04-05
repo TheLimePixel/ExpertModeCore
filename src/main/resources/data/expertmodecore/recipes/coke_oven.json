@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "###",
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "expertmodecore:coke_bricks"
+    }
+  },
+  "result": {
+    "item": "expertmodecore:coke_oven"
+  }
+}

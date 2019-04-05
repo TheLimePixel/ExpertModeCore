@@ -1,0 +1,9 @@
+{
+  "type": "smelting",
+  "ingredient": {
+    "item": "expertmodecore:unfired_coke_brick"
+  },
+  "result": "expertmodecore:coke_brick",
+  "experience": 0.3,
+  "cookingtime": 200
+}

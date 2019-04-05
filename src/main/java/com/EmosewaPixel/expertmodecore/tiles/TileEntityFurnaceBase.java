@@ -23,9 +23,9 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 public class TileEntityFurnaceBase extends TileEntity implements ITickable {
-    private int progress = 0;
+    protected int progress = 0;
     private int maxProgress = 0;
-    private int burnTime = 0;
+    protected int burnTime = 0;
     private int maxBurnTime = 0;
     private int inputCount;
     private int outputCount;
@@ -159,7 +159,7 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
         return ForgeEventFactory.getItemBurnTime(stack, rec == -1 ? TileEntityFurnace.getBurnTimes().getOrDefault(stack.getItem(), 0) : rec);
     }
 
-    private void startSmelting() {
+    protected void startSmelting() {
         MachineRecipe recipe = getRecipeByInput();
         if (recipe != null)
             if (canOutput(recipe, true)) {
@@ -182,7 +182,8 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
     }
 
     protected void consumeFuel() {
-        if (getRecipeByInput() != null) {
+        MachineRecipe recipe = getRecipeByInput();
+        if (recipe != null && output.insertItem(0, recipe.getOutput(0), true).isEmpty()) {
             burnTime = maxBurnTime = getItemBurnTime(fuel_input.getStackInSlot(0));
             if (burnTime > 0)
                 fuel_input.extractItem(0, 1, false);
@@ -198,9 +199,10 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
             fuel_input.deserializeNBT((NBTTagCompound) compound.getTag("FuelItems"));
         if (compound.hasKey("OutputItems"))
             output.deserializeNBT((NBTTagCompound) compound.getTag("OutputItems"));
-        compound.getInt("Progress");
-        compound.getInt("BurnTime");
-        compound.getInt("MaxBurnTime");
+        progress = compound.getInt("Progress");
+        maxProgress = compound.getInt("MaxProgress");
+        burnTime = compound.getInt("BurnTime");
+        maxBurnTime = compound.getInt("MaxBurnTime");
     }
 
     @Override
@@ -210,6 +212,7 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
         compound.setTag("FuelItems", fuel_input.serializeNBT());
         compound.setTag("OutputItems", output.serializeNBT());
         compound.setInt("Progress", progress);
+        compound.setInt("MaxProgress", maxProgress);
         compound.setInt("BurnTime", burnTime);
         compound.setInt("MaxBurnTime", maxBurnTime);
         return compound;

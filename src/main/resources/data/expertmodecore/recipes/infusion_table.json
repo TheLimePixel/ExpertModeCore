@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "DED",
+    "GPG",
+    "P#P"
+  ],
+  "key": {
+    "#": {
+      "tag": "planks"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "E": {
+      "item": "minecraft:emerald"
+    },
+    "G": {
+      "tag": "forge:dusts/gold"
+    },
+    "P": {
+      "item": "minecraft:purple_carpet"
+    }
+  },
+  "result": {
+    "item": "expertmodecore:infusion_table"
+  }
+}

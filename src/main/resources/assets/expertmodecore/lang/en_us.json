@@ -3,16 +3,19 @@
 
 	"block.expertmodecore.alloyer": "Alloy Smelter",
 	"block.expertmodecore.bronze_block": "Block of Bronze",
+	"block.expertmodecore.blast_furnace": "Blast Furnace",
 	"block.expertmodecore.copper_block": "Block of Copper",
+	"block.expertmodecore.coke_bricks": "Coke Bricks",
+	"block.expertmodecore.coke_oven": "Coke Oven",
 	"block.expertmodecore.copper_ore": "Copper Ore",
 	"block.expertmodecore.crusher": "Crusher",
 	"block.expertmodecore.electrum_block": "Block of Electrum",
+	"block.expertmodecore.infusion_table": "Infusion Table",
 	"block.expertmodecore.silver_block": "Block of Silver",
 	"block.expertmodecore.silver_ore": "Silver Ore",
 	"block.expertmodecore.steel_block": "Block of Steel",
 	"block.expertmodecore.tin_block": "Block of Tin",
 	"block.expertmodecore.tin_ore": "Tin Ore",
-	"block.expertmodecore.blast_furnace": "Blast Furnace",
 
 	"item.expertmodecore.brick_mold": "Brick Mold",
 	"item.expertmodecore.bronze_dust": "Bronze Dust",
@@ -30,10 +33,13 @@
 	"item.expertmodecore.bronze_saw": "Bronze Saw",
 	"item.expertmodecore.bronze_shovel": "Bronze Shovel",
 	"item.expertmodecore.bronze_sword": "Bronze Sword",
+	"item.expertmodecore.coke_coal": "Coke Coal",
+	"item.expertmodecore.coke_brick": "Coke Brick",
 	"item.expertmodecore.copper_dust": "Copper Dust",
 	"item.expertmodecore.copper_ingot": "Copper Ingot",
 	"item.expertmodecore.copper_plate": "Copper Plate",
 	"item.expertmodecore.copper_nugget": "Copper Nugget",
+	"item.expertmodecore.creosote_bucket": "Creosote Oil Bucket",
 	"item.expertmodecore.crushed_magma_cream": "Crushed Magma Block",
 	"item.expertmodecore.electrum_dust": "Electrum Dust",
 	"item.expertmodecore.electrum_ingot": "Electrum Ingot",
@@ -86,5 +92,6 @@
 	"item.expertmodecore.tin_ingot": "Tin Ingot",
 	"item.expertmodecore.tin_plate": "Tin Plate",
 	"item.expertmodecore.tin_nugget": "Tin Nugget",
-	"item.expertmodecore.unfired_brick": "Unfired Brick"
+	"item.expertmodecore.unfired_brick": "Unfired Clay Brick",
+	"item.expertmodecore.unfired_coke_brick": "Unfired Coke Brick"
 }

@@ -1,8 +1,6 @@
 package com.EmosewaPixel.expertmodecore.tiles.guis;
 
-import com.EmosewaPixel.expertmodecore.tiles.TileEntityAlloyer;
-import com.EmosewaPixel.expertmodecore.tiles.TileEntityBlastFurnace;
-import com.EmosewaPixel.expertmodecore.tiles.TileEntityCrusher;
+import com.EmosewaPixel.expertmodecore.tiles.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,8 +16,12 @@ public class ModGuiHandler {
                 return new GUIAlloyer(player.inventory, (TileEntityAlloyer) tile);
             case "expertmodecore:blast_furnace":
                 return new GUIBlastFurnace(player.inventory, (TileEntityBlastFurnace) tile);
+            case "expertmodecore:coke_oven":
+                return new GUICokeOven(player.inventory, (TileEntityCokeOven) tile);
             case "expertmodecore:crusher":
                 return new GUICrusher(player.inventory, (TileEntityCrusher) tile);
+            case "expertmodecore:infusion_table":
+                return new GUIInfusionTable(player.inventory, (TileEntityInfusionTable) tile);
             default:
                 return null;
         }

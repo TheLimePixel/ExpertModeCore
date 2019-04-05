@@ -1,7 +1,6 @@
 package com.EmosewaPixel.expertmodecore.tiles.containers;
 
-import com.EmosewaPixel.expertmodecore.tiles.TileEntityCokeOven;
-import com.EmosewaPixel.expertmodecore.tiles.TileEntityFurnaceBase;
+import com.EmosewaPixel.expertmodecore.tiles.TileEntityInfusionTable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
@@ -12,8 +11,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ContainerMachineBase extends Container {
-    private TileEntityFurnaceBase te;
+public class ContainerInfusionTable extends Container {
+    private TileEntityInfusionTable te;
 
     private IItemHandler itemHandler;
 
@@ -22,23 +21,15 @@ public class ContainerMachineBase extends Container {
         return te.canInteractWith(playerIn);
     }
 
-    public ContainerMachineBase(IInventory playerInventory, TileEntityFurnaceBase te) {
+    public ContainerInfusionTable(IInventory playerInventory, TileEntityInfusionTable te) {
         this.te = te;
 
         te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> itemHandler = handler);
 
-        for (int i = 0; i < te.getInputCount(); i++)
-            this.addSlot(new SlotItemHandler(itemHandler, i, te.getInputCount() == 1 ? 56 : 38 + i * 18, 17));
+        this.addSlot(new SlotItemHandler(itemHandler, 0, 38, 35));
+        this.addSlot(new SlotItemHandler(itemHandler, 1, 38 + 18, 35));
 
-        this.addSlot(new SlotItemHandler(itemHandler, te.getInputCount(), 56 - (te.getInputCount() - 1) * 9, 53));
-
-        for (int i = 0; i < te.getOutputCount(); i++)
-            this.addSlot(new SlotItemHandler(itemHandler, te.slotCount - i - 1, 116, te.getOutputCount() == 1 ? 35 : 48 - i * 22));
-
-        if (te instanceof TileEntityCokeOven) {
-            this.addSlot(new SlotItemHandler(itemHandler, 2, 146, 17));
-            this.addSlot(new SlotItemHandler(itemHandler, 3, 146, 53));
-        }
+        this.addSlot(new SlotItemHandler(itemHandler, 2, 116, 35));
 
         addPlayerSlots(playerInventory);
     }
@@ -88,10 +79,6 @@ public class ContainerMachineBase extends Container {
         for (IContainerListener listener : listeners) {
             listener.sendWindowProperty(this, 0, te.getProgress());
             listener.sendWindowProperty(this, 1, te.getMaxProgress());
-            listener.sendWindowProperty(this, 2, te.getBurnTime());
-            listener.sendWindowProperty(this, 3, te.getMaxBurnTime());
-            if (te instanceof TileEntityCokeOven)
-                listener.sendWindowProperty(this, 4, ((TileEntityCokeOven) te).getCreosoteAmount());
         }
     }
 
@@ -103,16 +90,6 @@ public class ContainerMachineBase extends Container {
                 break;
             case 1:
                 te.setMaxProgress(data);
-                break;
-            case 2:
-                te.setBurnTime(data);
-                break;
-            case 3:
-                te.setMaxBurnTime(data);
-                break;
-            case 4:
-                if (te instanceof TileEntityCokeOven)
-                    ((TileEntityCokeOven) te).setCreosoteAmount(data);
                 break;
         }
     }

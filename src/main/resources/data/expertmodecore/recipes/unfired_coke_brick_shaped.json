@@ -1,0 +1,23 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SX#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:clay_ball"
+    },
+    "S": {
+      "tag": "minecraft:sand"
+    },
+    "X": {
+      "item": "expertmodecore:brick_mold"
+    }
+  },
+  "result": {
+    "item": "expertmodecore:unfired_coke_brick",
+    "count": 4
+  }
+}

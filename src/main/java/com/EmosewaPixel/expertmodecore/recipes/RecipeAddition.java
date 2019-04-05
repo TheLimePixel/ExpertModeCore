@@ -20,13 +20,14 @@ public class RecipeAddition {
         RecipeTypes.addAlloyerRecipe(new TagStack(INGOT_TIN), new TagStack(DUST_COPPER, 3), new ItemStack(ItemRegistry.BRONZE_INGOT, 4), 200);
         RecipeTypes.addAlloyerRecipe(new TagStack(DUST_TIN), new TagStack(INGOT_COPPER, 3), new ItemStack(ItemRegistry.BRONZE_INGOT, 4), 200);
         RecipeTypes.addAlloyerRecipe(new TagStack(BLOCK_TIN), new TagStack(BLOCK_COPPER, 3), new ItemStack(BlockRegistry.BRONZER_BLOCK, 4), 9 * 200);
-
         RecipeTypes.addAlloyerRecipe(new TagStack(Tags.Items.INGOTS_GOLD), new TagStack(INGOT_SILVER), new ItemStack(ItemRegistry.ELECTRUM_INGOT, 2), 100);
         RecipeTypes.addAlloyerRecipe(new TagStack(DUST_GOLD), new TagStack(DUST_SILVER), new ItemStack(ItemRegistry.ELECTRUM_INGOT, 2), 100);
         RecipeTypes.addAlloyerRecipe(new TagStack(Tags.Items.INGOTS_GOLD), new TagStack(DUST_SILVER), new ItemStack(ItemRegistry.ELECTRUM_INGOT, 2), 100);
         RecipeTypes.addAlloyerRecipe(new TagStack(DUST_GOLD), new TagStack(INGOT_SILVER), new ItemStack(ItemRegistry.ELECTRUM_INGOT, 2), 100);
         RecipeTypes.addAlloyerRecipe(new TagStack(Tags.Items.STORAGE_BLOCKS_GOLD), new TagStack(BLOCK_SILVER), new ItemStack(BlockRegistry.ELECTRUM_BLOCK, 2), 9 * 100);
+        RecipeTypes.addAlloyerRecipe(new TagStack(ItemTags.SAND), new ItemStack(Blocks.SAND), new ItemStack(ItemRegistry.COKE_BRICK), 200);
 
+        RecipeTypes.addCrusherRecipe(new ItemStack(Items.BLAZE_ROD), new ItemStack(Items.BLAZE_POWDER, 2), 100);
         RecipeTypes.addCrusherRecipe(new ItemStack(Blocks.NETHERRACK), new ItemStack(ItemRegistry.NETHERRACK_DUST, 2), 150);
         RecipeTypes.addCrusherRecipe(new ItemStack(Blocks.MAGMA_BLOCK), new ItemStack(ItemRegistry.CRUSHED_MAGMA_BLOCK, 2), 150);
         RecipeTypes.addCrusherRecipe(new TagStack(Tags.Items.ORES_IRON), new ItemStack(ItemRegistry.IRON_DUST, 2), new ItemStack(ItemRegistry.STONE_DUST), 200);
@@ -39,6 +40,14 @@ public class RecipeAddition {
         RecipeTypes.addCrusherRecipe(new TagStack(ORES_SILVER), new ItemStack(ItemRegistry.SILVER_DUST, 2), new ItemStack(ItemRegistry.STONE_DUST), 200);
         RecipeTypes.addCrusherRecipe(new TagStack(ORES_TIN), new ItemStack(ItemRegistry.TIN_DUST, 2), new ItemStack(ItemRegistry.STONE_DUST), 200);
         RecipeTypes.addCrusherRecipe(new TagStack(Tags.Items.ORES_QUARTZ), new ItemStack(Items.QUARTZ, 2), new ItemStack(ItemRegistry.NETHERRACK_DUST), 200);
+
+        RecipeTypes.addInfusionRecipe(new ItemStack(Items.ENDER_PEARL), new ItemStack(Items.BLAZE_POWDER), new ItemStack(Items.ENDER_EYE), 4000);
+        RecipeTypes.addInfusionRecipe(new ItemStack(Items.APPLE), new TagStack(Tags.Items.INGOTS_GOLD, 8), new ItemStack(Items.GOLDEN_APPLE), 5000);
+        RecipeTypes.addInfusionRecipe(new ItemStack(Items.CARROT), new TagStack(Tags.Items.NUGGETS_GOLD, 8), new ItemStack(Items.GOLDEN_CARROT), 3000);
+        RecipeTypes.addInfusionRecipe(new ItemStack(Items.SLIME_BALL), new ItemStack(Items.BLAZE_POWDER), new ItemStack(Items.MAGMA_CREAM), 2000);
+
+        RecipeTypes.addCokeOvenRecipe(new TagStack(ItemTags.LOGS), new ItemStack(Items.CHARCOAL), 900);
+        RecipeTypes.addCokeOvenRecipe(new ItemStack(Items.COAL), new ItemStack(ItemRegistry.COKE_COKE), 900);
     }
 
     public static final ItemTags.Wrapper BLOCK_TIN = tag("storage_blocks/tin");

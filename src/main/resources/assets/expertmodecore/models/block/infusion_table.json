@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "expertmodecore:block/infusion_table_side",
+        "down": "expertmodecore:block/infusion_table_bottom",
+        "up": "expertmodecore:block/infusion_table_top",
+        "north": "expertmodecore:block/infusion_table_side",
+        "east": "expertmodecore:block/infusion_table_side",
+        "south": "expertmodecore:block/infusion_table_side",
+        "west": "expertmodecore:block/infusion_table_side"
+    }
+}

@@ -1,5 +1,6 @@
 package com.EmosewaPixel.expertmodecore.tiles;
 
+import com.EmosewaPixel.expertmodecore.items.ItemRegistry;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -17,7 +18,7 @@ public class TileEntityBlastFurnace extends TileEntityFurnaceBase implements ITi
         fuel_input = new ItemStackHandler(1) {
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-                return stack.getItem() == Items.COAL || stack.getItem() == Items.CHARCOAL || stack.getItem() == Blocks.COAL_BLOCK.asItem();
+                return stack.getItem() == Items.COAL || stack.getItem() == Items.CHARCOAL || stack.getItem() == Blocks.COAL_BLOCK.asItem() || stack.getItem() == ItemRegistry.COKE_COKE;
             }
 
             @Override

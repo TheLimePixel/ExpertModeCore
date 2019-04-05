@@ -25,10 +25,13 @@ public class ItemRegistry {
     public static Item BRONZE_SAW;
     public static Item BRONZE_SHOVEl;
     public static Item BRONZE_SWORD;
+    public static Item COKE_BRICK;
+    public static Item COKE_COKE;
     public static Item COPPER_DUST;
     public static Item COPPER_INGOT;
     public static Item COPPER_PLATE;
     public static Item COPPER_NUGGET;
+    public static Item CREOSOTE_BUCKET;
     public static Item CRUSHED_MAGMA_BLOCK;
     public static Item ELECTRUM_DUST;
     public static Item ELECTRUM_INGOT;
@@ -82,6 +85,7 @@ public class ItemRegistry {
     public static Item TIN_PLATE;
     public static Item TIN_NUGGET;
     public static Item UNFIRED_BRICK;
+    public static Item UNFIRED_COKE_BRICK;
 
     public static void registry(RegistryEvent.Register<Item> e) {
         BRICK_MOLD = register(new SelfContainerItem("brick_mold"), e);
@@ -104,6 +108,9 @@ public class ItemRegistry {
         COPPER_INGOT = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("copper_ingot"), e);
         COPPER_PLATE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("copper_plate"), e);
         COPPER_NUGGET = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("copper_nugget"), e);
+        COKE_BRICK = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("coke_brick"), e);
+        COKE_COKE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("coke_coal"), e);
+        CREOSOTE_BUCKET = register(new FakeFluidBucket("creosote_bucket"), e);
         CRUSHED_MAGMA_BLOCK = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("crushed_magma_cream"), e);
         ELECTRUM_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("electrum_dust"), e);
         ELECTRUM_INGOT = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("electrum_ingot"), e);
@@ -157,6 +164,7 @@ public class ItemRegistry {
         TIN_PLATE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("tin_plate"), e);
         TIN_NUGGET = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("tin_nugget"), e);
         UNFIRED_BRICK = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("unfired_brick"), e);
+        UNFIRED_COKE_BRICK = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("unfired_coke_brick"), e);
     }
 
     private static Item register(Item item, RegistryEvent.Register<Item> e) {

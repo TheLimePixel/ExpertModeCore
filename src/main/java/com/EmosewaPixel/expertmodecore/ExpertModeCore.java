@@ -22,6 +22,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ExtensionPoint;
@@ -80,13 +81,24 @@ public class ExpertModeCore {
 
         @SubscribeEvent
         public static void onTERegistry(final RegistryEvent.Register<TileEntityType<?>> e) {
-            e.getRegistry().register(ExpertTypes.BLAST_FURNACE);
             e.getRegistry().register(ExpertTypes.ALLOYER);
+            e.getRegistry().register(ExpertTypes.BLAST_FURNACE);
+            e.getRegistry().register(ExpertTypes.COKE_OVEN);
+            e.getRegistry().register(ExpertTypes.CRUSHER);
+            e.getRegistry().register(ExpertTypes.INFUSION_TABLE);
         }
     }
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, modid = ModId)
     public static class GameEvents {
+        @SubscribeEvent
+        public static void fuelTime(FurnaceFuelBurnTimeEvent e) {
+            if (e.getItemStack().getItem() == ItemRegistry.COKE_COKE)
+                e.setBurnTime(3200);
+            if (e.getItemStack().getItem() == ItemRegistry.CREOSOTE_BUCKET)
+                e.setBurnTime(6400);
+        }
+
         @SubscribeEvent
         public static void onBreak(BlockEvent.BreakEvent e) {
             if (new ItemTags.Wrapper(new ResourceLocation("forge:ores")).contains(e.getState().getBlock().asItem()) && !(e.getPlayer().getHeldItemMainhand().getItem() instanceof ModHammer))
