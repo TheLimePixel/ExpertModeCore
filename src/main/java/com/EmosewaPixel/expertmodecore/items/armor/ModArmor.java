@@ -23,6 +23,6 @@ public class ModArmor extends ItemArmor {
             case "feet":
                 type = "boots";
         }
-        setRegistryName(materialIn.getName() + "_" + type);
+        setRegistryName(materialIn.toString().toLowerCase() + "_" + type);
     }
 }
