@@ -1,0 +1,68 @@
+{
+  "parent": "minecraft:story/bronze",
+  "display": {
+    "icon": {
+      "item": "expertmodecore:bronze_chestplate"
+    },
+    "title": {
+      "translate": "advancements.story.obtain_armor.title"
+    },
+    "description": {
+      "translate": "Protect yourself with a piece of Bronze Armor"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "iron_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "expertmodecore:bronze_helmet"
+          }
+        ]
+      }
+    },
+    "iron_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "expertmodecore:bronze_chestplate"
+          }
+        ]
+      }
+    },
+    "iron_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "expertmodecore:bronze_leggings"
+          }
+        ]
+      }
+    },
+    "iron_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "expertmodecore:bronze_boots"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "iron_helmet",
+      "iron_chestplate",
+      "iron_leggings",
+      "iron_boots"
+    ]
+  ]
+}

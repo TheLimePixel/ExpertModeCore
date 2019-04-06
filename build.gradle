@@ -78,7 +78,7 @@ dependencies {
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "expertmodecore",
+                "Specification-Title"     : "ExpertModeCore",
                 "Specification-Vendor"    : "TheEmosewaPixel",
                 "Specification-Version"   : "1",
                 "Implementation-Title"    : project.name,

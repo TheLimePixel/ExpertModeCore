@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/boom",
+  "display": {
+    "icon": {
+      "item": "expertmodecore:steel_ingot"
+    },
+    "title": {
+      "translate": "advancements.story.smelt_iron.title"
+    },
+    "description": {
+      "translate": "Make Steel in the Blast Furnace"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "iron": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/steel"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "iron"
+    ]
+  ]
+}

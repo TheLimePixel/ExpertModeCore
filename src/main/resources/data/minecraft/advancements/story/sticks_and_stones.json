@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:story/root",
+  "display": {
+    "icon": {
+      "item": "minecraft:flint"
+    },
+    "title": {
+      "translate": "Sticks And Stones"
+    },
+    "description": {
+      "translate": "Break Leaves to obtain Sticks and break Gravel to obtain Flint"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "get_stone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:stick"
+          },
+          {
+            "item": "minecraft:flint"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_stone"
+    ]
+  ]
+}

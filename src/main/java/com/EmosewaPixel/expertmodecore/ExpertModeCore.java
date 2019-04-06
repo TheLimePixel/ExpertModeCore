@@ -10,6 +10,7 @@ import com.EmosewaPixel.expertmodecore.tiles.guis.ModGuiHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLog;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -103,6 +104,11 @@ public class ExpertModeCore {
         public static void onBreak(BlockEvent.BreakEvent e) {
             if (new ItemTags.Wrapper(new ResourceLocation("forge:ores")).contains(e.getState().getBlock().asItem()) && !(e.getPlayer().getHeldItemMainhand().getItem() instanceof ModHammer))
                 e.setExpToDrop(0);
+
+            if (e.getState().getBlock() == Blocks.REDSTONE_ORE && e.getPlayer().getHeldItemMainhand().getItem() == ItemRegistry.BRONZE_HAMMER) {
+                e.getWorld().spawnEntity(new EntityItem(e.getWorld().getWorld(), e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), new ItemStack(Items.REDSTONE, 3)));
+                e.getWorld().spawnEntity(new EntityItem(e.getWorld().getWorld(), e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), new ItemStack(ItemRegistry.STONE_DUST)));
+            }
         }
 
         @SubscribeEvent

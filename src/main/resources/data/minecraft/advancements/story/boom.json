@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/hellish_dust",
+  "display": {
+    "icon": {
+      "item": "expertmodecore:blast_furnace"
+    },
+    "title": {
+      "translate": "Boom!"
+    },
+    "description": {
+      "translate": "Smelt together Netherrack Dust and Unfired Clay Bricks into Nether Bricks an use them to make a Blast Furnace"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "iron": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+  		    "item": "expertmodecore:blast_furnace"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "iron"
+    ]
+  ]
+}

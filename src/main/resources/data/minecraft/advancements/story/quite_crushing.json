@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/mine_diamond",
+  "display": {
+    "icon": {
+      "item": "expertmodecore:crusher"
+    },
+    "title": {
+      "translate": "Quite Crushing"
+    },
+    "description": {
+      "translate": "Craft a Crusher"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "iron": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+  		    "item": "expertmodecore:crusher"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "iron"
+    ]
+  ]
+}

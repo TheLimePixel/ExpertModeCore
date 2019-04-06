@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/its_getting_hot",
+  "display": {
+    "icon": {
+      "item": "expertmodecore:bronze_ingot"
+    },
+    "title": {
+      "translate": "Bronze"
+    },
+    "description": {
+      "translate": "Obtain Copper and Tin and make Bronze"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "stone_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+    		  "tag": "forge:ingots/bronze"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "stone_pickaxe"
+    ]
+  ]
+}

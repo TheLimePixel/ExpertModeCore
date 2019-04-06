@@ -1,0 +1,35 @@
+{
+  "parent": "expertmodecore:recipes/root",
+  "rewards": {
+    "recipes": [
+      "expertmodecore:flint_saw"
+    ]
+  },
+  "criteria": {
+    "has_stick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:stick"
+          },
+          {
+            "item": "minecraft:flint"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "expertmodecore:flint_saw"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_stick",
+      "has_the_recipe"
+    ]
+  ]
+}

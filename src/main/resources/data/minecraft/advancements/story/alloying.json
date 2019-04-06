@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/its_getting_hot",
+  "display": {
+    "icon": {
+      "item": "expertmodecore:alloyer"
+    },
+    "title": {
+      "translate": "Alloying"
+    },
+    "description": {
+      "translate": "Craft an Alloy Smelter"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "stone_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+    		  "item": "expertmodecore:alloyer"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "stone_pickaxe"
+    ]
+  ]
+}

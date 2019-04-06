@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/its_getting_hot",
+  "display": {
+    "icon": {
+      "item": "expertmodecore:coke_oven"
+    },
+    "title": {
+      "translate": "Coka Oven"
+    },
+    "description": {
+      "translate": "Make Charcoal in a Coke Oven"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "stone_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+    		  "item": "minecraft:charcoal"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "stone_pickaxe"
+    ]
+  ]
+}

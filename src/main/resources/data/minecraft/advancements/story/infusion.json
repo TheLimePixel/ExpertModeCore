@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/mine_diamond",
+  "display": {
+    "icon": {
+      "item": "expertmodecore:infusion_table"
+    },
+    "title": {
+      "translate": "Infusion"
+    },
+    "description": {
+      "translate": "Craft an Infusion Table. It's a machine the processing speed of which depends on the amount of Bookshelves nearby"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "iron": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+  		    "item": "expertmodecore:infusion_table"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "iron"
+    ]
+  ]
+}

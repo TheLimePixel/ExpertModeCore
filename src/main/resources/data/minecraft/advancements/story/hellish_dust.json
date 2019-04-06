@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/upgrade_tools",
+  "display": {
+    "icon": {
+      "item": "expertmodecore:netherrack_dust"
+    },
+    "title": {
+      "translate": "Don't Breathe It In"
+    },
+    "description": {
+      "translate": "Mix Redstone Dust, Stone Dust and Crushed Magma Block into Netherrack Dust. Now, where could you possibly find Magma Blocks in the Aquatic Update?"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "iron": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+  		    "item": "expertmodecore:netherrack_dust"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "iron"
+    ]
+  ]
+}

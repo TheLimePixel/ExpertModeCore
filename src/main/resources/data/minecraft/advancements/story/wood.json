@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/sticks_and_stones",
+  "display": {
+    "icon": {
+      "item": "minecraft:oak_log"
+    },
+    "title": {
+      "translate": "RIP Tree"
+    },
+    "description": {
+      "translate": "Cut down a tree with a Saw."
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "get_wood": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "minecraft:logs"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_wood"
+    ]
+  ]
+}

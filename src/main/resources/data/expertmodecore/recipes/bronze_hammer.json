@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "FFF",
+    "FSF",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:rods/wooden"
+    },
+    "F": {
+      "tag": "forge:ingots/bronze"
+    }
+  },
+  "result": {
+    "item": "expertmodecore:bronze_hammer"
+  }
+}

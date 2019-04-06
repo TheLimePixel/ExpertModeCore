@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/mine_stone",
+  "display": {
+    "icon": {
+      "item": "minecraft:furnace"
+    },
+    "title": {
+      "translate": "It's Getting Hot In Here"
+    },
+    "description": {
+      "translate": "Craft a Furnace"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "stone_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+    		  "item": "minecraft:furnace"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "stone_pickaxe"
+    ]
+  ]
+}

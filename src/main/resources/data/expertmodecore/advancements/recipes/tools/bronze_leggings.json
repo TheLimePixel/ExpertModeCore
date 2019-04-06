@@ -1,0 +1,32 @@
+{
+  "parent": "expertmodecore:recipes/root",
+  "rewards": {
+    "recipes": [
+      "expertmodecore:bronze_leggings"
+    ]
+  },
+  "criteria": {
+    "has_bronze": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/bronze"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "expertmodecore:bronze_leggings"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bronze",
+      "has_the_recipe"
+    ]
+  ]
+}
