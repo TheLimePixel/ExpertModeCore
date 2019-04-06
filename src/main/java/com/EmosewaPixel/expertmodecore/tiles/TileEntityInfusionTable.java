@@ -4,6 +4,7 @@ import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
 import com.EmosewaPixel.expertmodecore.recipes.TagStack;
 import net.minecraft.block.BlockBookshelf;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -191,5 +192,13 @@ public class TileEntityInfusionTable extends TileEntity implements ITickable {
                 can = false;
 
         return can;
+    }
+
+    public void dropInventory() {
+        for (int i = 0; i < slotCount; i++) {
+            ItemStack stack = combinedHandler.getStackInSlot(i);
+
+            world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack));
+        }
     }
 }

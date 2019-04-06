@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -42,6 +43,12 @@ public class BlockInfusionTable extends Block implements ITileEntityProvider {
         return ToolType.AXE;
     }
 
+    @Override
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+        if (te instanceof TileEntityInfusionTable)
+            ((TileEntityInfusionTable) te).dropInventory();
+        super.harvestBlock(worldIn, player, pos, state, te, stack);
+    }
 
     @Deprecated
     public boolean onBlockActivated(IBlockState state, World worldIn, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {

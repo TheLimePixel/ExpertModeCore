@@ -15,8 +15,8 @@ public class RecipeTypes {
         alloyerRecipes.add(new MachineRecipe(new Object[]{input1, input2}, new ItemStack[]{output}, time));
     }
 
-    public static void addBlastFurnaceRecipe(ItemStack input, ItemStack output, int time) {
-        blastFurnaceRecipes.add(new MachineRecipe(new ItemStack[]{input}, new ItemStack[]{output}, time));
+    public static void addBlastFurnaceRecipe(Object input, ItemStack output, int time) {
+        blastFurnaceRecipes.add(new MachineRecipe(new Object[]{input}, new ItemStack[]{output}, time));
     }
 
     public static void addCokeOvenRecipe(Object input, ItemStack output, int time) {

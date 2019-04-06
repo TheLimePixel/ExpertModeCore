@@ -3,6 +3,7 @@ package com.EmosewaPixel.expertmodecore.tiles;
 import com.EmosewaPixel.expertmodecore.blocks.BlockFurnaceBase;
 import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
 import com.EmosewaPixel.expertmodecore.recipes.TagStack;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,9 +24,9 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 public class TileEntityFurnaceBase extends TileEntity implements ITickable {
-    protected int progress = 0;
+    private int progress = 0;
     private int maxProgress = 0;
-    protected int burnTime = 0;
+    private int burnTime = 0;
     private int maxBurnTime = 0;
     private int inputCount;
     private int outputCount;
@@ -144,9 +145,10 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
                 } else
                     startSmelting();
             } else {
-                world.setBlockState(pos, world.getBlockState(pos).with(BlockFurnaceBase.LIT, false));
                 if (!fuel_input.getStackInSlot(0).isEmpty())
                     consumeFuel();
+                else
+                    world.setBlockState(pos, world.getBlockState(pos).with(BlockFurnaceBase.LIT, false));
             }
             markDirty();
         }
@@ -183,11 +185,13 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
 
     protected void consumeFuel() {
         MachineRecipe recipe = getRecipeByInput();
-        if (recipe != null && output.insertItem(0, recipe.getOutput(0), true).isEmpty()) {
+        if (recipe != null && canOutput(recipe, true)) {
             burnTime = maxBurnTime = getItemBurnTime(fuel_input.getStackInSlot(0));
             if (burnTime > 0)
                 fuel_input.extractItem(0, 1, false);
-        }
+        } else
+            world.setBlockState(pos, world.getBlockState(pos).with(BlockFurnaceBase.LIT, false));
+
     }
 
     @Override
@@ -262,5 +266,13 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
                 can = false;
 
         return can;
+    }
+
+    public void dropInventory() {
+        for (int i = 0; i < slotCount; i++) {
+            ItemStack stack = combinedHandler.getStackInSlot(i);
+
+            world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack));
+        }
     }
 }

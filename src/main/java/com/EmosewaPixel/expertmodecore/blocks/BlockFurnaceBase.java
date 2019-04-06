@@ -15,6 +15,7 @@ import net.minecraft.init.Particles;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.IProperty;
@@ -59,7 +60,15 @@ public class BlockFurnaceBase extends Block implements ITileEntityProvider {
         return ToolType.PICKAXE;
     }
 
-    public int getLightValue(IBlockState state) {
+    @Override
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+        if (te instanceof TileEntityFurnaceBase)
+            ((TileEntityFurnaceBase) te).dropInventory();
+        super.harvestBlock(worldIn, player, pos, state, te, stack);
+    }
+
+
+        public int getLightValue(IBlockState state) {
         return state.get(LIT) ? 13 : 0;
     }
 

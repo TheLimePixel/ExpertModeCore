@@ -68,23 +68,24 @@ public class TileEntityCokeOven extends TileEntityFurnaceBase implements ITickab
     @Override
     public void tick() {
         if (!world.isRemote) {
-            if (burnTime > 0) {
-                burnTime--;
+            if (getBurnTime() > 0) {
+                setBurnTime(getBurnTime() - 1);
                 if (creosoteAmount < 6000) {
                     world.setBlockState(pos, world.getBlockState(pos).with(BlockFurnaceBase.LIT, true));
-                    if (progress > 0) {
-                        progress--;
-                        if (progress == 0)
+                    if (getProgress() > 0) {
+                        setProgress(getProgress() - 1);
+                        if (getProgress() == 0)
                             smelt();
                     } else
                         startSmelting();
                 }
             } else {
-                world.setBlockState(pos, world.getBlockState(pos).with(BlockFurnaceBase.LIT, false));
                 if (!fuel_input.getStackInSlot(0).isEmpty() && creosoteAmount < 6000)
                     consumeFuel();
+                else
+                    world.setBlockState(pos, world.getBlockState(pos).with(BlockFurnaceBase.LIT, false));
             }
-            if (creosoteAmount > 1000)
+            if (creosoteAmount >= 1000)
                 consumeBucket();
 
             markDirty();
