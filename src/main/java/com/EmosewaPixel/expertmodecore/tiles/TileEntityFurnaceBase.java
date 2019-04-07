@@ -165,7 +165,7 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
         MachineRecipe recipe = getRecipeByInput();
         if (recipe != null)
             if (canOutput(recipe, true)) {
-                maxProgress = progress = recipe.getTime();
+                maxProgress = progress = recipe.getTime() - 1;
             }
     }
 

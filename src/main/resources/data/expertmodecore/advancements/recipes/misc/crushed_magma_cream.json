@@ -1,0 +1,32 @@
+{
+  "parent": "expertmodecore:recipes/root",
+  "rewards": {
+    "recipes": [
+      "expertmodecore:netherrack_dust"
+    ]
+  },
+  "criteria": {
+    "has_magma": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "expertmodecore:crushed_magma_cream"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "expertmodecore:netherrack_dust"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_magma",
+      "has_the_recipe"
+    ]
+  ]
+}

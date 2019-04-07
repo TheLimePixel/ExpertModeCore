@@ -10,6 +10,7 @@ import com.EmosewaPixel.expertmodecore.tiles.guis.ModGuiHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLog;
+import net.minecraft.block.BlockPistonBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -19,7 +20,10 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.RegistryEvent;
@@ -33,10 +37,15 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.List;
 
 @Mod(ExpertModeCore.ModId)
 public class ExpertModeCore {
     public static final String ModId = "expertmodecore";
+    private static final Logger LOGGER = LogManager.getLogger();
 
     public static ItemGroup main = new ItemGroup("expert_mode_main") {
         @Override
@@ -112,6 +121,21 @@ public class ExpertModeCore {
         }
 
         @SubscribeEvent
+        public static void onPistonUpdate(BlockEvent e) {
+            if (e.getState() == Blocks.PISTON_HEAD.getDefaultState().with(BlockPistonBase.FACING, EnumFacing.DOWN)) {
+                BlockPos pos = e.getPos();
+                List<EntityItem> items = e.getWorld().getWorld().getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY(), pos.getZ() + 1));
+                for (EntityItem item : items)
+                    if (tag("ingots").contains(item.getItem().getItem())) {
+                        if (Tags.Items.INGOTS_IRON.contains(item.getItem().getItem())) {
+                            item.remove();
+                            e.getWorld().getWorld().spawnEntity(new EntityItem(e.getWorld().getWorld(), item.posX, item.posY, item.posZ, new ItemStack(ItemRegistry.IRON_PLATE, item.getItem().copy().getCount())));
+                        }
+                    }
+            }
+        }
+
+        @SubscribeEvent
         public static void onDrop(BlockEvent.HarvestDropsEvent e) {
             Item item = e.getState().getBlock().asItem();
             if (e.getState().getBlock() instanceof BlockLeaves && e.getWorld().getRandom().nextInt(100) < 25) {
@@ -122,19 +146,19 @@ public class ExpertModeCore {
                     e.getDrops().remove(0);
                     e.getWorld().getWorld().setBlockState(e.getPos(), e.getState());
                 }
-                if (tag("forge:ores").contains(item) && !e.getDrops().contains(new ItemStack(e.getState().getBlock())) && !(e.getHarvester().getHeldItemMainhand().getItem() instanceof ModHammer)) {
+                if (tag("ores").contains(item) && !e.getDrops().contains(new ItemStack(e.getState().getBlock())) && !(e.getHarvester().getHeldItemMainhand().getItem() instanceof ModHammer)) {
                     e.getDrops().removeAll(e.getDrops());
                     e.getDrops().add(new ItemStack(e.getState().getBlock()));
                 }
                 if (e.getHarvester().getHeldItemMainhand().getItem() instanceof ModHammer) {
-                    if (tag("forge:ores").contains(item)) {
+                    if (tag("ores").contains(item)) {
                         if (Tags.Items.ORES_IRON.contains(item)) {
                             e.getDrops().removeAll(e.getDrops());
                             e.getDrops().add(new ItemStack(ItemRegistry.IRON_DUST));
                         }
                         if (RecipeAddition.ORES_COPPER.contains(item)) {
                             e.getDrops().removeAll(e.getDrops());
-                            e.getDrops().add(new ItemStack(ItemRegistry.GOLD_DUST));
+                            e.getDrops().add(new ItemStack(ItemRegistry.COPPER_DUST));
                         }
                         if (RecipeAddition.ORES_TIN.contains(item)) {
                             e.getDrops().removeAll(e.getDrops());
@@ -160,10 +184,13 @@ public class ExpertModeCore {
                     }
                 }
             }
+
+            if (e.getState().getBlock() == Blocks.GRASS && e.getWorld().getRandom().nextInt(100) < 10)
+                e.getDrops().add(new ItemStack(Items.WHEAT_SEEDS));
         }
 
         private static ItemTags.Wrapper tag(String name) {
-            return new ItemTags.Wrapper(new ResourceLocation(name));
+            return new ItemTags.Wrapper(new ResourceLocation("forge", name));
         }
     }
 }

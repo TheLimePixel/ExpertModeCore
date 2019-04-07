@@ -10,19 +10,13 @@ loaderVersion="[25,)" #mandatory (24 is current forge version)
 # A URL to refer people to when problems occur with this mod
 issueTrackerURL="http://my.issue.tracker/" #optional
 # A list of mods - how many allowed here is determined by the individual mod loader
-[[mods]] #mandatory
-# The modid of the mod
-modId="expertmodecore" #mandatory
-# The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
-version="${file.jarVersion}" #mandatory
- # A display name for the mod
-displayName="Expert Mode Core" #mandatory
-# A text field displayed in the mod UI
-authors="TheEmosewaPixel" #optional
-# The description text for the mod (multi line!) (#mandatory)
+[[mods]]
+modId="expertmodecore"
+version="${file.jarVersion}"
+displayName="Expert Mode Core"
+authors="TheEmosewaPixel"
 description="A mod made for the Vanilla: Expert Mode pack"
-# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.expertmodecore]] #optional
+[[dependencies.expertmodecore]]
     # the modid of the dependency
     modId="forge" #mandatory
     # Does this dependency have to exist - if not, ordering below must be specified
@@ -33,10 +27,15 @@ description="A mod made for the Vanilla: Expert Mode pack"
     ordering="NONE"
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
-# Here's another dependency
 [[dependencies.expertmodecore]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.13.2]"
     ordering="NONE"
+    side="BOTH"
+[[dependencies.expertmodecore]]
+    modId="jei"
+    mandatory=false
+    versionRange="[5.0.0.19,)"
+    ordering="AFTER"
     side="BOTH"
