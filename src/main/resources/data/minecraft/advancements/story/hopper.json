@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/sacrifices_must_be_made",
+  "display": {
+    "icon": {
+      "item": "minecraft:hopper"
+    },
+    "title": {
+      "translate": "Where Did It Go?"
+    },
+    "description": {
+      "translate": "Craft a Hopper"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "lava_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:hopper"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "lava_bucket"
+    ]
+  ]
+}

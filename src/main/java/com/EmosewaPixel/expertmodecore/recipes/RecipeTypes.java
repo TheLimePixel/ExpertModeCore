@@ -11,27 +11,44 @@ public class RecipeTypes {
     public static ArrayList<MachineRecipe> crusherRecipes = new ArrayList<>();
     public static ArrayList<MachineRecipe> infusionRecipes = new ArrayList<>();
 
-    public static void addAlloyerRecipe(Object input1, Object input2, ItemStack output, int time) {
-        alloyerRecipes.add(new MachineRecipe(new Object[]{input1, input2}, new ItemStack[]{output}, time));
+
+    public static class AlloyerRecipe extends MachineRecipe {
+        public AlloyerRecipe(Object input1, Object input2, ItemStack output, int time) {
+            super(new Object[]{input1, input2}, new ItemStack[]{output}, time);
+            alloyerRecipes.add(this);
+        }
     }
 
-    public static void addBlastFurnaceRecipe(Object input, ItemStack output, int time) {
-        blastFurnaceRecipes.add(new MachineRecipe(new Object[]{input}, new ItemStack[]{output}, time));
+    public static class BlastFurnaceRecipe extends MachineRecipe {
+        public BlastFurnaceRecipe(Object input, ItemStack output, int time) {
+            super(new Object[]{input}, new ItemStack[]{output}, time);
+            blastFurnaceRecipes.add(this);
+        }
     }
 
-    public static void addCokeOvenRecipe(Object input, ItemStack output, int time) {
-        cokeOvenRecipes.add(new MachineRecipe(new Object[]{input}, new ItemStack[]{output}, time));
+    public static class CokeOvenRecipe extends MachineRecipe {
+        public CokeOvenRecipe(Object input, ItemStack output, int time) {
+            super(new Object[]{input}, new ItemStack[]{output}, time);
+            cokeOvenRecipes.add(this);
+        }
     }
 
-    public static void addCrusherRecipe(Object input, ItemStack output1, ItemStack output2, int time) {
-        crusherRecipes.add(new MachineRecipe(new Object[]{input}, new ItemStack[]{output1, output2}, time));
+    public static class CrusherRecipe extends MachineRecipe {
+        public CrusherRecipe(Object input, ItemStack output, int time) {
+            super(new Object[]{input}, new ItemStack[]{output}, time);
+            crusherRecipes.add(this);
+        }
+
+        public CrusherRecipe(Object input, ItemStack output1, ItemStack output2, int time) {
+            super(new Object[]{input}, new ItemStack[]{output1, output2}, time);
+            crusherRecipes.add(this);
+        }
     }
 
-    public static void addCrusherRecipe(Object input, ItemStack output, int time) {
-        crusherRecipes.add(new MachineRecipe(new Object[]{input}, new ItemStack[]{output}, time));
-    }
-
-    public static void addInfusionRecipe(Object input1, Object input2, ItemStack output, int time) {
-        infusionRecipes.add(new MachineRecipe(new Object[]{input1, input2}, new ItemStack[]{output}, time));
+    public static class InfusionRecipe extends MachineRecipe {
+        public InfusionRecipe(Object input1, Object input2, ItemStack output, int time) {
+            super(new Object[]{input1, input2}, new ItemStack[]{output}, time);
+            infusionRecipes.add(this);
+        }
     }
 }

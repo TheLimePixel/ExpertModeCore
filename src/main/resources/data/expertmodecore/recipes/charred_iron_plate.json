@@ -1,0 +1,18 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+  	"H",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "expertmodecore:charred_iron_ingot"
+    },
+    "H": {
+      "tag": "expertmodecore:hammers"
+  }
+  },
+  "result": {
+    "item": "expertmodecore:charred_iron_plate"
+  }
+}

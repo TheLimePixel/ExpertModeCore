@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "expertmodecore:block/charred_iron_block"
+    }
+}

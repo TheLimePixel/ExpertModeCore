@@ -8,7 +8,7 @@
       "translate": "Boom!"
     },
     "description": {
-      "translate": "Smelt together Netherrack Dust and Unfired Clay Bricks into Nether Bricks an use them to make a Blast Furnace"
+      "translate": "Make Nether Bricks and use them to craft a Blast Furnace"
     },
     "frame": "task",
     "show_toast": true,

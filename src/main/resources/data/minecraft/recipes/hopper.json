@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "I I",
+    "ICI",
+    " I "
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "I": {
+      "tag": "forge:plates/charred_iron"
+    }
+  },
+  "result": {
+    "item": "minecraft:hopper"
+  }
+}

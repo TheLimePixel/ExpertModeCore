@@ -1,6 +1,10 @@
 package com.EmosewaPixel.expertmodecore.recipes;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MachineRecipe {
     private Object[] input;
@@ -23,6 +27,28 @@ public class MachineRecipe {
 
     public ItemStack[] getAllOutputs() {
         return output;
+    }
+
+    public List<List<ItemStack>> getInputsAsList() {
+        List<List<ItemStack>> list = new ArrayList<>();
+        for (Object stack : input) {
+            List<ItemStack> singleList = new ArrayList<>();
+            if (stack instanceof ItemStack)
+                singleList.add((ItemStack) stack);
+            else
+                for (Item stackitem : ((TagStack) stack).geTag().getAllElements())
+                    singleList.add(new ItemStack(stackitem, ((TagStack) stack).getCount()));
+            list.add(singleList);
+        }
+
+        return list;
+    }
+
+    public List<ItemStack> getOutputsAsList() {
+        List<ItemStack> list = new ArrayList<>();
+        for (ItemStack stack : output)
+            list.add(stack);
+        return list;
     }
 
     public int getTime() {

@@ -2,11 +2,11 @@
 {
   "replace": false,
   "values": [
-    "#forge:nuggets/copper",
     "#forge:nuggets/bronze",
+    "#forge:nuggets/copper",
     "#forge:nuggets/electrum",
-    "#forge:nuggets/tin",
     "#forge:nuggets/silver",
-    "#forge:nuggets/steel"
+    "#forge:nuggets/steel",
+    "#forge:nuggets/tin"
   ]
 }

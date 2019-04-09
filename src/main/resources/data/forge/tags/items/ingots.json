@@ -2,8 +2,9 @@
 {
   "replace": false,
   "values": [
-    "#forge:ingots/copper",
     "#forge:ingots/bronze",
+    "#forge:ingots/charred_iron",
+    "#forge:ingots/copper",
     "#forge:ingots/electrum",
     "#forge:ingots/tin",
     "#forge:ingots/silver",

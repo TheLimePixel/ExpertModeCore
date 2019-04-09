@@ -4,6 +4,7 @@
 	"block.expertmodecore.alloyer": "Alloy Smelter",
 	"block.expertmodecore.bronze_block": "Block of Bronze",
 	"block.expertmodecore.blast_furnace": "Blast Furnace",
+	"block.expertmodecore.charred_iron_block": "Block of Charred Iron",
 	"block.expertmodecore.copper_block": "Block of Copper",
 	"block.expertmodecore.coke_bricks": "Coke Bricks",
 	"block.expertmodecore.coke_oven": "Coke Oven",
@@ -33,6 +34,8 @@
 	"item.expertmodecore.bronze_saw": "Bronze Saw",
 	"item.expertmodecore.bronze_shovel": "Bronze Shovel",
 	"item.expertmodecore.bronze_sword": "Bronze Sword",
+	"item.expertmodecore.charred_iron_ingot": "Charred Iron Ingot",
+	"item.expertmodecore.charred_iron_plate": "Charred Iron Plate",
 	"item.expertmodecore.coke_coal": "Coke Coal",
 	"item.expertmodecore.coke_brick": "Coke Brick",
 	"item.expertmodecore.copper_dust": "Copper Dust",
@@ -68,6 +71,7 @@
 	"item.expertmodecore.gold_dust": "Gold Dust",
 	"item.expertmodecore.gold_plate": "Gold Plate",
 	"item.expertmodecore.netherrack_dust": "Netherrack Dust",
+	"item.expertmodecore.pebble": "Pebble",
 	"item.expertmodecore.silver_dust": "Silver Dust",
 	"item.expertmodecore.silver_ingot": "Silver Ingot",
 	"item.expertmodecore.silver_plate": "Silver Plate",
@@ -88,10 +92,17 @@
 	"item.expertmodecore.steel_shovel": "Steel Shovel",
 	"item.expertmodecore.steel_sword": "Steel Sword",
 	"item.expertmodecore.stone_dust": "Stone Dust",
+	"item.expertmodecore.small_stone_dust": "Small Pile of Stone Dust",
 	"item.expertmodecore.tin_dust": "Tin Dust",
 	"item.expertmodecore.tin_ingot": "Tin Ingot",
 	"item.expertmodecore.tin_plate": "Tin Plate",
 	"item.expertmodecore.tin_nugget": "Tin Nugget",
 	"item.expertmodecore.unfired_brick": "Unfired Clay Brick",
-	"item.expertmodecore.unfired_coke_brick": "Unfired Coke Brick"
+	"item.expertmodecore.unfired_coke_brick": "Unfired Coke Brick",
+
+	"gui.jei.category.alloyer": "Alloyer Recipes",
+	"gui.jei.category.blast_furnace": "Blast Furnace Recipes",
+	"gui.jei.category.coke_oven": "Coke Oven Recipes",
+	"gui.jei.category.crusher": "Crusher Recipes",
+	"gui.jei.category.infusion": "Infusion Recipes"
 }

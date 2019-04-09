@@ -7,10 +7,7 @@ import com.EmosewaPixel.expertmodecore.items.tools.ModHammer;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeAddition;
 import com.EmosewaPixel.expertmodecore.tiles.ExpertTypes;
 import com.EmosewaPixel.expertmodecore.tiles.guis.ModGuiHandler;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockLog;
-import net.minecraft.block.BlockPistonBase;
+import net.minecraft.block.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -20,6 +17,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -27,12 +25,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -40,6 +40,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Mod(ExpertModeCore.ModId)
@@ -121,17 +123,63 @@ public class ExpertModeCore {
         }
 
         @SubscribeEvent
-        public static void onPistonUpdate(BlockEvent e) {
+        public static void onGeneralBlockEvent(BlockEvent e) {
             if (e.getState() == Blocks.PISTON_HEAD.getDefaultState().with(BlockPistonBase.FACING, EnumFacing.DOWN)) {
                 BlockPos pos = e.getPos();
                 List<EntityItem> items = e.getWorld().getWorld().getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY(), pos.getZ() + 1));
                 for (EntityItem item : items)
                     if (tag("ingots").contains(item.getItem().getItem())) {
-                        if (Tags.Items.INGOTS_IRON.contains(item.getItem().getItem())) {
-                            item.remove();
-                            e.getWorld().getWorld().spawnEntity(new EntityItem(e.getWorld().getWorld(), item.posX, item.posY, item.posZ, new ItemStack(ItemRegistry.IRON_PLATE, item.getItem().copy().getCount())));
-                        }
+                        if (Tags.Items.INGOTS_IRON.contains(item.getItem().getItem()))
+                            item.setItem(new ItemStack(ItemRegistry.IRON_PLATE, item.getItem().copy().getCount()));
+                        if (Tags.Items.INGOTS_GOLD.contains(item.getItem().getItem()))
+                            item.setItem(new ItemStack(ItemRegistry.GOLD_PLATE, item.getItem().copy().getCount()));
+                        if (RecipeAddition.INGOTS_BRONZE.contains(item.getItem().getItem()))
+                            item.setItem(new ItemStack(ItemRegistry.BRONZE_PLATE, item.getItem().copy().getCount()));
+                        if (RecipeAddition.INGOTS_COPPER.contains(item.getItem().getItem()))
+                            item.setItem(new ItemStack(ItemRegistry.COPPER_PLATE, item.getItem().copy().getCount()));
+                        if (RecipeAddition.INGOTS_ELECTRUM.contains(item.getItem().getItem()))
+                            item.setItem(new ItemStack(ItemRegistry.ELECTRUM_PLATE, item.getItem().copy().getCount()));
+                        if (RecipeAddition.INGOTS_SILVER.contains(item.getItem().getItem()))
+                            item.setItem(new ItemStack(ItemRegistry.SILVER_PLATE, item.getItem().copy().getCount()));
+                        if (RecipeAddition.INGOTS_STEEL.contains(item.getItem().getItem()))
+                            item.setItem(new ItemStack(ItemRegistry.STEEL_PLATE, item.getItem().copy().getCount()));
+                        if (RecipeAddition.INGOTS_TIN.contains(item.getItem().getItem()))
+                            item.setItem(new ItemStack(ItemRegistry.TIN_PLATE, item.getItem().copy().getCount()));
+                        if (tag("ingots/charred_iron").contains(item.getItem().getItem()))
+                            item.setItem(new ItemStack(ItemRegistry.CHARRED_IRON_PLATE, item.getItem().copy().getCount()));
                     }
+            }
+        }
+
+        private static List<EntityItem> ironIngots = new ArrayList<>();
+
+        @SubscribeEvent
+        public static void onJoin(EntityJoinWorldEvent e) {
+            if (e.getEntity() instanceof EntityItem)
+                if (((EntityItem) e.getEntity()).getItem().getItem() == Items.IRON_INGOT)
+                    ironIngots.add((EntityItem) e.getEntity());
+        }
+
+        @SubscribeEvent
+        public static void onTick(TickEvent.WorldTickEvent e) {
+            for (Iterator<EntityItem> iterator = ironIngots.iterator(); iterator.hasNext(); ) {
+                EntityItem item = iterator.next();
+                if (item.removed) {
+                    iterator.remove();
+                    continue;
+                }
+
+                if (item.getItem().getItem() != Items.IRON_INGOT) {
+                    iterator.remove();
+                    continue;
+                }
+
+                for (BlockPos pos : new BlockPos[]{item.getPosition().down(), item.getPosition().west(), item.getPosition().east(), item.getPosition().north(), item.getPosition().south()})
+                    if (e.world.getBlockState(pos).getBlock() instanceof BlockFire)
+                        item.attackEntityFrom(DamageSource.IN_FIRE, -100);
+
+                if (e.world.getBlockState(item.getPosition()).getBlock() instanceof BlockFire)
+                    item.setItem(new ItemStack(ItemRegistry.CHARRED_IRON_INGOT, item.getItem().getCount()));
             }
         }
 

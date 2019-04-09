@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/its_crafting_time",
+  "display": {
+    "icon": {
+      "item": "minecraft:chest"
+    },
+    "title": {
+      "translate": "Basic Storage"
+    },
+    "description": {
+      "translate": "Craft a basic Chest with Stripped Logs"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "get_chest": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chest"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_chest"
+    ]
+  ]
+}

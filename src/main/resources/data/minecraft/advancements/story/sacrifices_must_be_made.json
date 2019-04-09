@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/lava_bucket",
+  "display": {
+    "icon": {
+      "item": "expertmodecore:charred_iron_ingot"
+    },
+    "title": {
+      "translate": "Sacrifices Must Be Made"
+    },
+    "description": {
+      "translate": "Throw an Iron Ingot into Fire to turn it into a Charred Iron Ingot"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "lava_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "expertmodecore:charred_iron_ingot"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "lava_bucket"
+    ]
+  ]
+}

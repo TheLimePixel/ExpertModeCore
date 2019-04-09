@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "III",
+    " i ",
+    "iii"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:storage_blocks/charred_iron"
+    },
+    "i": {
+      "tag": "forge:ingots/charred_iron"
+    }
+  },
+  "result": {
+    "item": "minecraft:anvil"
+  }
+}

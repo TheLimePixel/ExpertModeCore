@@ -25,6 +25,8 @@ public class ItemRegistry {
     public static Item BRONZE_SAW;
     public static Item BRONZE_SHOVEl;
     public static Item BRONZE_SWORD;
+    public static Item CHARRED_IRON_INGOT;
+    public static Item CHARRED_IRON_PLATE;
     public static Item COKE_BRICK;
     public static Item COKE_COKE;
     public static Item COPPER_DUST;
@@ -60,6 +62,7 @@ public class ItemRegistry {
     public static Item FLINT_SHOVEl;
     public static Item FLINT_SWORD;
     public static Item NETHERRACK_DUST;
+    public static Item PEBBLE;
     public static Item SILVER_DUST;
     public static Item SILVER_INGOT;
     public static Item SILVER_PLATE;
@@ -80,6 +83,7 @@ public class ItemRegistry {
     public static Item STEEL_SHOVEl;
     public static Item STEEL_SWORD;
     public static Item STONE_DUST;
+    public static Item SMALL_STONE_DUST;
     public static Item TIN_DUST;
     public static Item TIN_INGOT;
     public static Item TIN_PLATE;
@@ -104,6 +108,8 @@ public class ItemRegistry {
         BRONZE_SAW = register(new ModSaw(ExpertTiers.BRONZE, 3F, -3.2F), e);
         BRONZE_SHOVEl = register(new ModShovel(ExpertTiers.BRONZE, 3, -3.2F), e);
         BRONZE_SWORD = register(new ModSword(ExpertTiers.BRONZE, 3, -2.4F), e);
+        CHARRED_IRON_INGOT = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("charred_iron_ingot"), e);
+        CHARRED_IRON_PLATE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("charred_iron_plate"), e);
         COPPER_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("copper_dust"), e);
         COPPER_INGOT = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("copper_ingot"), e);
         COPPER_PLATE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("copper_plate"), e);
@@ -139,6 +145,7 @@ public class ItemRegistry {
         IRON_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("iron_dust"), e);
         IRON_PLATE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("iron_plate"), e);
         NETHERRACK_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("netherrack_dust"), e);
+        PEBBLE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("pebble"), e);
         SILVER_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("silver_dust"), e);
         SILVER_INGOT = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("silver_ingot"), e);
         SILVER_PLATE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("silver_plate"), e);
@@ -158,6 +165,7 @@ public class ItemRegistry {
         STEEL_SAW = register(new ModSaw(ExpertTiers.STEEl, 3, -3.1F), e);
         STEEL_SHOVEl = register(new ModShovel(ExpertTiers.STEEl, 1.5F, -3.0F), e);
         STEEL_SWORD = register(new ModSword(ExpertTiers.STEEl, 3, -2.4F), e);
+        SMALL_STONE_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("small_stone_dust"), e);
         STONE_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("stone_dust"), e);
         TIN_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("tin_dust"), e);
         TIN_INGOT = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("tin_ingot"), e);

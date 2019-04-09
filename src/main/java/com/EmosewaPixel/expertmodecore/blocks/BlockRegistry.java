@@ -10,6 +10,7 @@ import net.minecraftforge.event.RegistryEvent;
 
 public class BlockRegistry {
     public static Block BRONZER_BLOCK;
+    public static Block CHARRED_IRON_BLOCK;
     public static Block COKE_BRICKS;
     public static Block COPPER_BLOCK;
     public static Block COPPER_ORE;
@@ -28,6 +29,7 @@ public class BlockRegistry {
 
     public static void registry(RegistryEvent.Register<Block> e) {
         BRONZER_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6).sound(SoundType.METAL), "bronze_block", 0), e);
+        CHARRED_IRON_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(5, 6).sound(SoundType.METAL), "charred_iron_block", 1), e);
         COKE_BRICKS = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2, 6).sound(SoundType.STONE), "coke_bricks", 0), e);
         COPPER_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6).sound(SoundType.METAL), "copper_block", 0), e);
         COPPER_ORE = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6).sound(SoundType.STONE), "copper_ore", 0), e);
@@ -47,6 +49,7 @@ public class BlockRegistry {
 
     public static void itemRegistry(RegistryEvent.Register<Item> e) {
         registerItemBlock(BRONZER_BLOCK, e);
+        registerItemBlock(CHARRED_IRON_BLOCK, e);
         registerItemBlock(COKE_BRICKS, e);
         registerItemBlock(COPPER_BLOCK, e);
         registerItemBlock(COPPER_ORE, e);

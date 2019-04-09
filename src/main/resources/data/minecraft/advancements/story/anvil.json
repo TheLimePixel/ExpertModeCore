@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/sacrifices_must_be_made",
+  "display": {
+    "icon": {
+      "item": "minecraft:anvil"
+    },
+    "title": {
+      "translate": "Heavy Metal"
+    },
+    "description": {
+      "translate": "Craft an Anvil"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "lava_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:anvil"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "lava_bucket"
+    ]
+  ]
+}

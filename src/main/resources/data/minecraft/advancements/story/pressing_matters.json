@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:story/upgrade_tools",
+  "parent": "minecraft:story/redstone",
   "display": {
     "icon": {
       "item": "minecraft:piston"
