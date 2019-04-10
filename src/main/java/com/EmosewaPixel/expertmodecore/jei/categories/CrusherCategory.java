@@ -32,4 +32,10 @@ public class CrusherCategory extends MachineBaseCategory {
         if (outputs.size() == 2)
             layout.getItemStacks().set(2, outputs.get(1));
     }
+
+    @Override
+    public void draw(MachineRecipe recipe, double mouseX, double mouseY) {
+        arrow.draw(24, 18);
+        flame.draw(1, 20);
+    }
 }

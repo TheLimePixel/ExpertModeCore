@@ -187,11 +187,14 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
         MachineRecipe recipe = getRecipeByInput();
         if (recipe != null && canOutput(recipe, true)) {
             burnTime = maxBurnTime = getItemBurnTime(fuel_input.getStackInSlot(0));
-            if (burnTime > 0)
-                fuel_input.extractItem(0, 1, false);
+            if (burnTime > 0) {
+                if (fuel_input.getStackInSlot(0).getItem().hasContainerItem())
+                    fuel_input.setStackInSlot(0, new ItemStack(fuel_input.getStackInSlot(0).getItem().getContainerItem()));
+                else
+                    fuel_input.extractItem(0, 1, false);
+            }
         } else
             world.setBlockState(pos, world.getBlockState(pos).with(BlockFurnaceBase.LIT, false));
-
     }
 
     @Override

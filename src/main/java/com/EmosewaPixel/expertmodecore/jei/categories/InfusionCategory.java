@@ -31,4 +31,9 @@ public class InfusionCategory extends MachineBaseCategory {
         layout.getItemStacks().init(2, false, 78, 18);
         layout.getItemStacks().set(2, outputs.get(0));
     }
+
+    @Override
+    public void draw(MachineRecipe recipe, double mouseX, double mouseY) {
+        arrow.draw(42, 18);
+    }
 }

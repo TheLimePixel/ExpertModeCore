@@ -4,7 +4,9 @@ import com.EmosewaPixel.expertmodecore.blocks.BlockRegistry;
 import com.EmosewaPixel.expertmodecore.blocks.OreGen;
 import com.EmosewaPixel.expertmodecore.items.ItemRegistry;
 import com.EmosewaPixel.expertmodecore.items.tools.ModHammer;
+import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeAddition;
+import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
 import com.EmosewaPixel.expertmodecore.tiles.ExpertTypes;
 import com.EmosewaPixel.expertmodecore.tiles.guis.ModGuiHandler;
 import net.minecraft.block.*;
@@ -128,26 +130,9 @@ public class ExpertModeCore {
                 BlockPos pos = e.getPos();
                 List<EntityItem> items = e.getWorld().getWorld().getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY(), pos.getZ() + 1));
                 for (EntityItem item : items)
-                    if (tag("ingots").contains(item.getItem().getItem())) {
-                        if (Tags.Items.INGOTS_IRON.contains(item.getItem().getItem()))
-                            item.setItem(new ItemStack(ItemRegistry.IRON_PLATE, item.getItem().copy().getCount()));
-                        if (Tags.Items.INGOTS_GOLD.contains(item.getItem().getItem()))
-                            item.setItem(new ItemStack(ItemRegistry.GOLD_PLATE, item.getItem().copy().getCount()));
-                        if (RecipeAddition.INGOTS_BRONZE.contains(item.getItem().getItem()))
-                            item.setItem(new ItemStack(ItemRegistry.BRONZE_PLATE, item.getItem().copy().getCount()));
-                        if (RecipeAddition.INGOTS_COPPER.contains(item.getItem().getItem()))
-                            item.setItem(new ItemStack(ItemRegistry.COPPER_PLATE, item.getItem().copy().getCount()));
-                        if (RecipeAddition.INGOTS_ELECTRUM.contains(item.getItem().getItem()))
-                            item.setItem(new ItemStack(ItemRegistry.ELECTRUM_PLATE, item.getItem().copy().getCount()));
-                        if (RecipeAddition.INGOTS_SILVER.contains(item.getItem().getItem()))
-                            item.setItem(new ItemStack(ItemRegistry.SILVER_PLATE, item.getItem().copy().getCount()));
-                        if (RecipeAddition.INGOTS_STEEL.contains(item.getItem().getItem()))
-                            item.setItem(new ItemStack(ItemRegistry.STEEL_PLATE, item.getItem().copy().getCount()));
-                        if (RecipeAddition.INGOTS_TIN.contains(item.getItem().getItem()))
-                            item.setItem(new ItemStack(ItemRegistry.TIN_PLATE, item.getItem().copy().getCount()));
-                        if (tag("ingots/charred_iron").contains(item.getItem().getItem()))
-                            item.setItem(new ItemStack(ItemRegistry.CHARRED_IRON_PLATE, item.getItem().copy().getCount()));
-                    }
+                    for (MachineRecipe recipe : RecipeTypes.pressingRecipes)
+                        if (recipe.itemBelongsInRecipe(item.getItem()))
+                            item.setItem(new ItemStack(recipe.getOutput(0).getItem(), item.getItem().copy().getCount()));
             }
         }
 

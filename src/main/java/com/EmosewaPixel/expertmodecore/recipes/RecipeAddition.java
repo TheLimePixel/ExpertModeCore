@@ -26,7 +26,7 @@ public class RecipeAddition {
         new RecipeTypes.AlloyerRecipe(new TagStack(Tags.Items.INGOTS_GOLD), new TagStack(DUSTS_SILVER), new ItemStack(ItemRegistry.ELECTRUM_INGOT, 2), 100);
         new RecipeTypes.AlloyerRecipe(new TagStack(DUSTS_GOLD), new TagStack(INGOTS_SILVER), new ItemStack(ItemRegistry.ELECTRUM_INGOT, 2), 100);
         new RecipeTypes.AlloyerRecipe(new TagStack(Tags.Items.STORAGE_BLOCKS_GOLD), new TagStack(BLOCKS_SILVER), new ItemStack(BlockRegistry.ELECTRUM_BLOCK, 2), 9 * 100);
-        new RecipeTypes.AlloyerRecipe(new TagStack(ItemTags.SAND), new ItemStack(Blocks.SAND), new ItemStack(ItemRegistry.COKE_BRICK), 200);
+        new RecipeTypes.AlloyerRecipe(new TagStack(ItemTags.SAND), new ItemStack(ItemRegistry.UNFIRED_BRICK), new ItemStack(ItemRegistry.COKE_BRICK), 200);
 
         new RecipeTypes.CrusherRecipe(new ItemStack(Items.BLAZE_ROD), new ItemStack(Items.BLAZE_POWDER, 2), 100);
         new RecipeTypes.CrusherRecipe(new ItemStack(Blocks.NETHERRACK), new ItemStack(ItemRegistry.NETHERRACK_DUST, 2), 150);
@@ -66,6 +66,16 @@ public class RecipeAddition {
 
         new RecipeTypes.CokeOvenRecipe(new TagStack(ItemTags.LOGS), new ItemStack(Items.CHARCOAL), 1800);
         new RecipeTypes.CokeOvenRecipe(new ItemStack(Items.COAL), new ItemStack(ItemRegistry.COKE_COKE), 1800);
+
+        new RecipeTypes.PressingRecipe(new TagStack(Tags.Items.INGOTS_IRON), new ItemStack(ItemRegistry.IRON_PLATE));
+        new RecipeTypes.PressingRecipe(new TagStack(Tags.Items.INGOTS_GOLD), new ItemStack(ItemRegistry.GOLD_PLATE));
+        new RecipeTypes.PressingRecipe(new TagStack(INGOTS_BRONZE), new ItemStack(ItemRegistry.BRONZE_PLATE));
+        new RecipeTypes.PressingRecipe(new TagStack(INGOTS_COPPER), new ItemStack(ItemRegistry.COPPER_PLATE));
+        new RecipeTypes.PressingRecipe(new TagStack(INGOTS_ELECTRUM), new ItemStack(ItemRegistry.ELECTRUM_PLATE));
+        new RecipeTypes.PressingRecipe(new TagStack(INGOTS_SILVER), new ItemStack(ItemRegistry.SILVER_PLATE));
+        new RecipeTypes.PressingRecipe(new TagStack(INGOTS_STEEL), new ItemStack(ItemRegistry.STEEL_PLATE));
+        new RecipeTypes.PressingRecipe(new TagStack(INGOTS_TIN), new ItemStack(ItemRegistry.TIN_PLATE));
+        new RecipeTypes.PressingRecipe(new ItemStack(ItemRegistry.CHARRED_IRON_INGOT), new ItemStack(ItemRegistry.CHARRED_IRON_PLATE));
     }
 
     public static final ItemTags.Wrapper INGOTS_BRONZE = tag("ingots/bronze");

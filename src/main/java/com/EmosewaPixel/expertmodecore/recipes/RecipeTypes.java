@@ -10,6 +10,7 @@ public class RecipeTypes {
     public static ArrayList<MachineRecipe> cokeOvenRecipes = new ArrayList<>();
     public static ArrayList<MachineRecipe> crusherRecipes = new ArrayList<>();
     public static ArrayList<MachineRecipe> infusionRecipes = new ArrayList<>();
+    public static ArrayList<MachineRecipe> pressingRecipes = new ArrayList<>();
 
 
     public static class AlloyerRecipe extends MachineRecipe {
@@ -49,6 +50,13 @@ public class RecipeTypes {
         public InfusionRecipe(Object input1, Object input2, ItemStack output, int time) {
             super(new Object[]{input1, input2}, new ItemStack[]{output}, time);
             infusionRecipes.add(this);
+        }
+    }
+
+    public static class PressingRecipe extends MachineRecipe {
+        public PressingRecipe(Object input, ItemStack output) {
+            super(new Object[]{input}, new ItemStack[]{output}, 0);
+            pressingRecipes.add(this);
         }
     }
 }

@@ -10,6 +10,7 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -23,7 +24,7 @@ public class JEIPlugIn implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration reg) {
         IGuiHelper helper = reg.getJeiHelpers().getGuiHelper();
-        reg.addRecipeCategories(new AlloyerCategory(helper), new BlastFurnaceCategory(helper), new CokeOvenCategory(helper), new CrusherCategory(helper), new InfusionCategory(helper));
+        reg.addRecipeCategories(new AlloyerCategory(helper), new BlastFurnaceCategory(helper), new CokeOvenCategory(helper), new CrusherCategory(helper), new InfusionCategory(helper), new PressingCategory(helper));
     }
 
     @Override
@@ -33,6 +34,8 @@ public class JEIPlugIn implements IModPlugin {
         reg.addRecipeCatalyst(new ItemStack(BlockRegistry.COKE_OVEN), new ResourceLocation("expertmodecore:coke_oven"));
         reg.addRecipeCatalyst(new ItemStack(BlockRegistry.CRUSHER), new ResourceLocation("expertmodecore:crusher"));
         reg.addRecipeCatalyst(new ItemStack(BlockRegistry.INFUSION_TABLE), new ResourceLocation("expertmodecore:infusion"));
+        reg.addRecipeCatalyst(new ItemStack(Blocks.PISTON), new ResourceLocation("expertmodecore:pressing"));
+
     }
 
     @Override
@@ -42,5 +45,6 @@ public class JEIPlugIn implements IModPlugin {
         reg.addRecipes(RecipeTypes.cokeOvenRecipes, new ResourceLocation("expertmodecore:coke_oven"));
         reg.addRecipes(RecipeTypes.crusherRecipes, new ResourceLocation("expertmodecore:crusher"));
         reg.addRecipes(RecipeTypes.infusionRecipes, new ResourceLocation("expertmodecore:infusion"));
+        reg.addRecipes(RecipeTypes.pressingRecipes, new ResourceLocation("expertmodecore:pressing"));
     }
 }

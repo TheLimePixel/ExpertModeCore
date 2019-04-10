@@ -28,4 +28,10 @@ public class CokeOvenCategory extends MachineBaseCategory {
         layout.getItemStacks().init(1, false, 60, 18);
         layout.getItemStacks().set(1, outputs.get(0));
     }
+
+    @Override
+    public void draw(MachineRecipe recipe, double mouseX, double mouseY) {
+        arrow.draw(24, 18);
+        flame.draw(1, 20);
+    }
 }
