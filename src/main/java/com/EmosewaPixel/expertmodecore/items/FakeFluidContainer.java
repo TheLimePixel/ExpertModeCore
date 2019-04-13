@@ -5,10 +5,13 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class FakeFluidBucket extends Item {
-    public FakeFluidBucket(String name) {
+public class FakeFluidContainer extends Item {
+    private Item container;
+
+    public FakeFluidContainer(String name, Item container) {
         super(new Properties().group(ExpertModeCore.main).maxStackSize(1));
         setRegistryName(name);
+        this.container = container;
     }
 
     @Override
@@ -18,6 +21,6 @@ public class FakeFluidBucket extends Item {
 
     @Override
     public ItemStack getContainerItem(ItemStack itemStack) {
-        return new ItemStack(Items.BUCKET);
+        return new ItemStack(container);
     }
 }

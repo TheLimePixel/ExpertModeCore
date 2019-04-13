@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "expertmodecore:redwood_log",
+    "expertmodecore:redwood_wood",
+    "expertmodecore:stripped_redwood_log",
+    "expertmodecore:stripped_redwood_wood"
+  ]
+}

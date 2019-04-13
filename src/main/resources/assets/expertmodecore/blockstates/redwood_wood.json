@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=y": { "model": "expertmodecore:block/redwood_wood" },
+        "axis=z": { "model": "expertmodecore:block/redwood_wood", "x": 90 },
+        "axis=x": { "model": "expertmodecore:block/redwood_wood", "x": 90, "y": 90 }
+    }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "SS",
+    "FF"
+  ],
+  "key": {
+    "S": {
+      "item": "expertmodecore:treated_stick"
+    },
+    "F": {
+      "tag": "forge:ingots/electrum"
+    }
+  },
+  "result": {
+    "item": "expertmodecore:electrum_saw"
+  }
+}

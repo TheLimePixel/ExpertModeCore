@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "minecraft:rubber_logs"
+    },
+    {
+      "tag": "expertmodecore:saws"
+    }
+  ],
+  "result": {
+    "item": "expertmodecore:rubber_planks",
+    "count": 4
+  }
+}

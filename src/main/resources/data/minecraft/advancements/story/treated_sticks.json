@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/coka_oven",
+  "display": {
+    "icon": {
+      "item": "expertmodecore:treated_stick"
+    },
+    "title": {
+      "translate": "Treated Sticks"
+    },
+    "description": {
+      "translate": "Use Creosote Oil to make Treated Sticks"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "sticks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+    		  "item": "expertmodecore:treated_stick"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "sticks"
+    ]
+  ]
+}

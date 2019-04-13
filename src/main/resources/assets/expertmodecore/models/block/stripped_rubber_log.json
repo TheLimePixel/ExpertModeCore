@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "expertmodecore:block/stripped_rubber_log_top",
+        "side": "expertmodecore:block/stripped_rubber_log"
+    }
+}

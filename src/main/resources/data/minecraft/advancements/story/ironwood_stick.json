@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/upgrade_tools",
+  "display": {
+    "icon": {
+      "item": "expertmodecore:ironwood_stick"
+    },
+    "title": {
+      "translate": "Oh, The Irony"
+    },
+    "description": {
+      "translate": "Cut down an Ironwood tree and make Ironwood Sticks. They can be found in warm biomes"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "iron": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+  		    "item": "expertmodecore:ironwood_stick"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "iron"
+    ]
+  ]
+}

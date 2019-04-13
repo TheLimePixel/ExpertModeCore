@@ -1,0 +1,18 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "expertmodecore:coke_coal"
+    },
+    {
+      "item": "expertmodecore:rubber_drop"
+    },
+    {
+      "item": "minecraft:stick"
+    }
+  ],
+  "result": {
+    "item": "minecraft:torch",
+    "count": 8
+  }
+}

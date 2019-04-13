@@ -1,0 +1,23 @@
+{
+	"type": "uteamcore:crafting_special_copy_nbt",
+	"pattern": [
+		"WLW",
+		"LBL",
+		"WLW"
+	],
+	"key": {
+		"W": {
+			"tag": "minecraft:wool"
+		},
+		"L": {
+			"item": "minecraft:diamond"
+		},
+		"B": {
+			"type": "uteamcore:copy_nbt",
+			"item": "usefulbackpacks:backpack_medium"
+		}
+	},
+	"result": {
+		"item": "usefulbackpacks:backpack_large"
+	}
+}

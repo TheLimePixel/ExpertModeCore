@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "expertmodecore:rubber_log",
+    "expertmodecore:rubber_wood",
+    "expertmodecore:stripped_rubber_log",
+    "expertmodecore:stripped_rubber_wood"
+  ]
+}

@@ -5,7 +5,9 @@ import com.EmosewaPixel.expertmodecore.items.ItemRegistry;
 import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
 import com.EmosewaPixel.expertmodecore.recipes.TagStack;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemBucket;
+import net.minecraft.item.ItemGlassBottle;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -33,7 +35,7 @@ public class TileEntityCokeOven extends TileEntityFurnaceBase implements ITickab
     private ItemStackHandler bucket_input = new ItemStackHandler(1) {
         @Override
         public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-            return stack.getItem() instanceof ItemBucket;
+            return stack.getItem() == Items.BUCKET || stack.getItem() == Items.GLASS_BOTTLE;
         }
 
         @Override
@@ -85,7 +87,7 @@ public class TileEntityCokeOven extends TileEntityFurnaceBase implements ITickab
                 else
                     world.setBlockState(pos, world.getBlockState(pos).with(BlockFurnaceBase.LIT, false));
             }
-            if (creosoteAmount >= 1000)
+            if (creosoteAmount >= 500)
                 consumeBucket();
 
             markDirty();
@@ -93,10 +95,15 @@ public class TileEntityCokeOven extends TileEntityFurnaceBase implements ITickab
     }
 
     private void consumeBucket() {
-        if (bucket_input.getStackInSlot(0).getItem() instanceof ItemBucket)
+        if (bucket_input.getStackInSlot(0).getItem() == Items.BUCKET && creosoteAmount > 1000)
             if (bucket_output.insertItem(0, new ItemStack(ItemRegistry.CREOSOTE_BUCKET), false).isEmpty()) {
                 bucket_input.extractItem(0, 1, false);
                 creosoteAmount -= 1000;
+            }
+        if (bucket_input.getStackInSlot(0).getItem() == Items.GLASS_BOTTLE)
+            if (bucket_output.insertItem(0, new ItemStack(ItemRegistry.CREOSOTE_BOTTLE), false).isEmpty()) {
+                bucket_input.extractItem(0, 1, false);
+                creosoteAmount -= 500;
             }
     }
 
@@ -120,12 +127,18 @@ public class TileEntityCokeOven extends TileEntityFurnaceBase implements ITickab
     public void read(NBTTagCompound compound) {
         super.read(compound);
         creosoteAmount = compound.getInt("CreosoteAmount");
+        if (compound.hasKey("BucketInput"))
+            bucket_input.deserializeNBT((NBTTagCompound) compound.getTag("BucketInput"));
+        if (compound.hasKey("BucketOutput"))
+            bucket_output.deserializeNBT((NBTTagCompound) compound.getTag("BucketOutput"));
     }
 
     @Override
     public NBTTagCompound write(NBTTagCompound compound) {
         super.write(compound);
         compound.setInt("CreosoteAmount", creosoteAmount);
+        compound.setTag("BucketInput", bucket_input.serializeNBT());
+        compound.setTag("BucketOutput", bucket_output.serializeNBT());
         return compound;
     }
 

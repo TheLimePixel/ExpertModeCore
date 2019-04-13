@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/rubber",
+  "display": {
+    "icon": {
+      "item": "minecraft:torch"
+    },
+    "title": {
+      "translate": "Let There Be Light"
+    },
+    "description": {
+      "translate": "Craft a Torch"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "get_wood": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:torch"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_wood"
+    ]
+  ]
+}

@@ -4,6 +4,7 @@ import com.EmosewaPixel.expertmodecore.ExpertModeCore;
 import com.EmosewaPixel.expertmodecore.items.armor.ExpertMaterials;
 import com.EmosewaPixel.expertmodecore.items.armor.ModArmor;
 import com.EmosewaPixel.expertmodecore.items.tools.*;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
@@ -34,6 +35,7 @@ public class ItemRegistry {
     public static Item COPPER_PLATE;
     public static Item COPPER_NUGGET;
     public static Item CREOSOTE_BUCKET;
+    public static Item CREOSOTE_BOTTLE;
     public static Item CRUSHED_MAGMA_BLOCK;
     public static Item ELECTRUM_DUST;
     public static Item ELECTRUM_INGOT;
@@ -54,6 +56,7 @@ public class ItemRegistry {
     public static Item GOLD_PLATE;
     public static Item IRON_DUST;
     public static Item IRON_PLATE;
+    public static Item IRONWOOD_STICK;
     public static Item FLINT_AXE;
     public static Item FLINT_HAMMER;
     public static Item FLINT_HOE;
@@ -63,6 +66,8 @@ public class ItemRegistry {
     public static Item FLINT_SWORD;
     public static Item NETHERRACK_DUST;
     public static Item PEBBLE;
+    public static Item REDWOOD_STICK;
+    public static Item RUBBER_DROP;
     public static Item SILVER_DUST;
     public static Item SILVER_INGOT;
     public static Item SILVER_PLATE;
@@ -88,6 +93,7 @@ public class ItemRegistry {
     public static Item TIN_INGOT;
     public static Item TIN_PLATE;
     public static Item TIN_NUGGET;
+    public static Item TREATED_STICK;
     public static Item UNFIRED_BRICK;
     public static Item UNFIRED_COKE_BRICK;
 
@@ -116,7 +122,8 @@ public class ItemRegistry {
         COPPER_NUGGET = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("copper_nugget"), e);
         COKE_BRICK = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("coke_brick"), e);
         COKE_COKE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("coke_coal"), e);
-        CREOSOTE_BUCKET = register(new FakeFluidBucket("creosote_bucket"), e);
+        CREOSOTE_BUCKET = register(new FakeFluidContainer("creosote_bucket", Items.BUCKET), e);
+        CREOSOTE_BOTTLE = register(new FakeFluidContainer("creosote_bottle", Items.GLASS_BOTTLE), e);
         CRUSHED_MAGMA_BLOCK = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("crushed_magma_cream"), e);
         ELECTRUM_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("electrum_dust"), e);
         ELECTRUM_INGOT = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("electrum_ingot"), e);
@@ -144,8 +151,11 @@ public class ItemRegistry {
         GOLD_PLATE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("gold_plate"), e);
         IRON_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("iron_dust"), e);
         IRON_PLATE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("iron_plate"), e);
+        IRONWOOD_STICK = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("ironwood_stick"), e);
         NETHERRACK_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("netherrack_dust"), e);
         PEBBLE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("pebble"), e);
+        REDWOOD_STICK = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("redwood_stick"), e);
+        RUBBER_DROP = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("rubber_drop"), e);
         SILVER_DUST = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("silver_dust"), e);
         SILVER_INGOT = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("silver_ingot"), e);
         SILVER_PLATE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("silver_plate"), e);
@@ -171,6 +181,7 @@ public class ItemRegistry {
         TIN_INGOT = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("tin_ingot"), e);
         TIN_PLATE = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("tin_plate"), e);
         TIN_NUGGET = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("tin_nugget"), e);
+        TREATED_STICK = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("treated_stick"), e);
         UNFIRED_BRICK = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("unfired_brick"), e);
         UNFIRED_COKE_BRICK = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("unfired_coke_brick"), e);
     }

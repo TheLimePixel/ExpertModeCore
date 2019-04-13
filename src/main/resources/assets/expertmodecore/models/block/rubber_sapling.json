@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "expertmodecore:block/rubber_sapling"
+    }
+}

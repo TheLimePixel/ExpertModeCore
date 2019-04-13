@@ -1,18 +1,23 @@
 package com.EmosewaPixel.expertmodecore;
 
 import com.EmosewaPixel.expertmodecore.blocks.BlockRegistry;
-import com.EmosewaPixel.expertmodecore.blocks.OreGen;
 import com.EmosewaPixel.expertmodecore.items.ItemRegistry;
 import com.EmosewaPixel.expertmodecore.items.tools.ModHammer;
+import com.EmosewaPixel.expertmodecore.proxy.ClientProxy;
+import com.EmosewaPixel.expertmodecore.proxy.IModProxy;
+import com.EmosewaPixel.expertmodecore.proxy.ServerProxy;
 import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeAddition;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
 import com.EmosewaPixel.expertmodecore.tiles.ExpertTypes;
 import com.EmosewaPixel.expertmodecore.tiles.guis.ModGuiHandler;
+import com.EmosewaPixel.expertmodecore.world.OreGen;
 import net.minecraft.block.*;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemGroup;
@@ -22,15 +27,19 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -50,6 +59,7 @@ import java.util.List;
 public class ExpertModeCore {
     public static final String ModId = "expertmodecore";
     private static final Logger LOGGER = LogManager.getLogger();
+    private static IModProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
 
     public static ItemGroup main = new ItemGroup("expert_mode_main") {
         @Override
@@ -74,10 +84,11 @@ public class ExpertModeCore {
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
         RecipeAddition.registry();
+        proxy.enque(event);
     }
 
     private void processIMC(final InterModProcessEvent event) {
-
+        proxy.process(event);
     }
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = ModId)
@@ -111,6 +122,48 @@ public class ExpertModeCore {
                 e.setBurnTime(3200);
             if (e.getItemStack().getItem() == ItemRegistry.CREOSOTE_BUCKET)
                 e.setBurnTime(6400);
+            if (e.getItemStack().getItem() == ItemRegistry.CREOSOTE_BOTTLE)
+                e.setBurnTime(3200);
+            if (e.getItemStack().getItem() == ItemRegistry.TREATED_STICK)
+                e.setBurnTime(800);
+        }
+
+        @SubscribeEvent
+        public static void onClick(PlayerInteractEvent.RightClickBlock e) {
+            World world = e.getWorld();
+            IBlockState state = world.getBlockState(e.getPos());
+            if (e.getEntityPlayer().getHeldItemMainhand().getItem() instanceof ItemAxe && ((ItemAxe) e.getEntityPlayer().getHeldItemMainhand().getItem()).getTier().getHarvestLevel() >= state.getBlock().getHarvestLevel(state)) {
+                if (state.getBlock() == BlockRegistry.RUBBER_LOG) {
+                    world.playSound(e.getEntityPlayer(), e.getPos(), SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    e.getEntityPlayer().getHeldItemMainhand().damageItem(1, e.getEntityLiving());
+                    world.setBlockState(e.getPos(), BlockRegistry.STRIPPED_RUBBER_LOG.getDefaultState().with(BlockRotatedPillar.AXIS, state.get(BlockRotatedPillar.AXIS)));
+                }
+                if (state.getBlock() == BlockRegistry.RUBBER_WOOD) {
+                    world.playSound(e.getEntityPlayer(), e.getPos(), SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    e.getEntityPlayer().getHeldItemMainhand().damageItem(1, e.getEntityLiving());
+                    world.setBlockState(e.getPos(), BlockRegistry.STRIPPED_RUBBER_WOOD.getDefaultState().with(BlockRotatedPillar.AXIS, state.get(BlockRotatedPillar.AXIS)));
+                }
+                if (state.getBlock() == BlockRegistry.IRONWOOD_LOG) {
+                    world.playSound(e.getEntityPlayer(), e.getPos(), SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    e.getEntityPlayer().getHeldItemMainhand().damageItem(1, e.getEntityLiving());
+                    world.setBlockState(e.getPos(), BlockRegistry.STRIPPED_IRONWOOD_LOG.getDefaultState().with(BlockRotatedPillar.AXIS, state.get(BlockRotatedPillar.AXIS)));
+                }
+                if (state.getBlock() == BlockRegistry.IRONWOOD_WOOD) {
+                    world.playSound(e.getEntityPlayer(), e.getPos(), SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    e.getEntityPlayer().getHeldItemMainhand().damageItem(1, e.getEntityLiving());
+                    world.setBlockState(e.getPos(), BlockRegistry.STRIPPED_IRONWOOD_WOOD.getDefaultState().with(BlockRotatedPillar.AXIS, state.get(BlockRotatedPillar.AXIS)));
+                }
+                if (state.getBlock() == BlockRegistry.REDWOOD_LOG) {
+                    world.playSound(e.getEntityPlayer(), e.getPos(), SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    e.getEntityPlayer().getHeldItemMainhand().damageItem(1, e.getEntityLiving());
+                    world.setBlockState(e.getPos(), BlockRegistry.STRIPPED_REDWOOD_LOG.getDefaultState().with(BlockRotatedPillar.AXIS, state.get(BlockRotatedPillar.AXIS)));
+                }
+                if (state.getBlock() == BlockRegistry.REDWOOD_WOOD) {
+                    world.playSound(e.getEntityPlayer(), e.getPos(), SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    e.getEntityPlayer().getHeldItemMainhand().damageItem(1, e.getEntityLiving());
+                    world.setBlockState(e.getPos(), BlockRegistry.STRIPPED_REDWOOD_WOOD.getDefaultState().with(BlockRotatedPillar.AXIS, state.get(BlockRotatedPillar.AXIS)));
+                }
+            }
         }
 
         @SubscribeEvent
@@ -175,9 +228,14 @@ public class ExpertModeCore {
                 e.getDrops().add(new ItemStack(Items.STICK));
             }
             if (e.getHarvester() != null) {
-                if (e.getState().getBlock() instanceof BlockLog && !(e.getHarvester().getHeldItemMainhand().getItem() instanceof ItemAxe)) {
-                    e.getDrops().remove(0);
-                    e.getWorld().getWorld().setBlockState(e.getPos(), e.getState());
+                if (e.getState().getBlock() instanceof BlockLog) {
+                    if (!(e.getHarvester().getHeldItemMainhand().getItem() instanceof ItemAxe)) {
+                        e.getDrops().removeAll(e.getDrops());
+                        e.getWorld().getWorld().setBlockState(e.getPos(), e.getState());
+                    } else if (((ItemAxe) e.getHarvester().getHeldItemMainhand().getItem()).getTier().getHarvestLevel() < e.getState().getBlock().getHarvestLevel(e.getState())) {
+                        e.getDrops().removeAll(e.getDrops());
+                        e.getWorld().getWorld().setBlockState(e.getPos(), e.getState());
+                    }
                 }
                 if (tag("ores").contains(item) && !e.getDrops().contains(new ItemStack(e.getState().getBlock())) && !(e.getHarvester().getHeldItemMainhand().getItem() instanceof ModHammer)) {
                     e.getDrops().removeAll(e.getDrops());

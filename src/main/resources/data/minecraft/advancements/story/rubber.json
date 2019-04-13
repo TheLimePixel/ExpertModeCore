@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/sticks_and_stones",
+  "display": {
+    "icon": {
+      "item": "expertmodecore:rubber_drop"
+    },
+    "title": {
+      "translate": "Rubbery Goodness"
+    },
+    "description": {
+      "translate": "Obtain Sticky Resin by cutting down a Rubber Tree. They can be found it Forests"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "get_wood": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "expertmodecore:rubber_drop"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_wood"
+    ]
+  ]
+}

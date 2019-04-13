@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/iron_tools",
+  "display": {
+    "icon": {
+      "item": "expertmodecore:redwood_stick"
+    },
+    "title": {
+      "translate": "King Tree"
+    },
+    "description": {
+      "translate": "Cut down a Redwood tree and make Redwood Sticks. They can be found in Taigas"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "iron": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+  		    "item": "expertmodecore:redwood_stick"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "iron"
+    ]
+  ]
+}

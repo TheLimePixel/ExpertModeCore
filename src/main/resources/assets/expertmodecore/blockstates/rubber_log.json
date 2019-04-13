@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "axis=y,has_sap=true":  { "model": "expertmodecore:block/rubber_log" },
+        "axis=z,has_sap=true":   { "model": "expertmodecore:block/rubber_log", "x": 90 },
+        "axis=x,has_sap=true":   { "model": "expertmodecore:block/rubber_log", "x": 90, "y": 90 },
+        "axis=y,has_sap=false":  { "model": "expertmodecore:block/rubber_log" },
+        "axis=z,has_sap=false":   { "model": "expertmodecore:block/rubber_log", "x": 90 },
+        "axis=x,has_sap=false":   { "model": "expertmodecore:block/rubber_log", "x": 90, "y": 90 }
+    }
+}

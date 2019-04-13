@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "expertmodecore:ironwood_log",
+    "expertmodecore:ironwood_wood",
+    "expertmodecore:stripped_ironwood_log",
+    "expertmodecore:stripped_ironwood_wood"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+	"type": "uteamcore:crafting_special_copy_nbt",
+	"pattern": [
+		"WLW",
+		"LBL",
+		"WLW"
+	],
+	"key": {
+		"W": {
+			"tag": "minecraft:wool"
+		},
+		"L": {
+			"tag": "forge:plates/iron"
+		},
+		"B": {
+			"type": "uteamcore:copy_nbt",
+			"item": "usefulbackpacks:backpack_small"
+		}
+	},
+	"result": {
+		"item": "usefulbackpacks:backpack_medium"
+	}
+}

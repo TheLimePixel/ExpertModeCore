@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+  	"s",
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "expertmodecore:ironwood_planks"
+    },
+    "s": {
+      "tag": "expertmodecore:saws"
+  }
+  },
+  "result": {
+    "item": "expertmodecore:ironwood_stick",
+    "count": 4
+  }
+}

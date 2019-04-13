@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "expertmodecore:redwood_log"
+    }
+  },
+  "result": {
+    "item": "expertmodecore:redwood_wood",
+    "count": 3
+  }
+}

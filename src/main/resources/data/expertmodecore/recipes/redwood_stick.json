@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+  	"s",
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "expertmodecore:redwood_planks"
+    },
+    "s": {
+      "tag": "expertmodecore:saws"
+  }
+  },
+  "result": {
+    "item": "expertmodecore:redwood_stick",
+    "count": 4
+  }
+}

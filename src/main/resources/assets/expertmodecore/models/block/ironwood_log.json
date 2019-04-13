@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "expertmodecore:block/ironwood_log_top",
+        "side": "expertmodecore:block/ironwood_log"
+    }
+}

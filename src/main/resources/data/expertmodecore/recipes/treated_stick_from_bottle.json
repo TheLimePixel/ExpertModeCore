@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    " # ",
+    "#X#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "expertmodecore:creosote_bottle"
+    }
+  },
+  "result": {
+    "item": "expertmodecore:treated_stick",
+    "count": 4
+  }
+}
