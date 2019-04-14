@@ -1,6 +1,6 @@
 package com.EmosewaPixel.expertmodecore.tiles.containers;
 
-import com.EmosewaPixel.expertmodecore.tiles.TileEntityInfusionTable;
+import com.EmosewaPixel.expertmodecore.tiles.TileEntitySawmill;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
@@ -11,8 +11,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ContainerInfusionTable extends Container {
-    private TileEntityInfusionTable te;
+public class ContainerSawmill extends Container {
+    private TileEntitySawmill te;
 
     private IItemHandler itemHandler;
 
@@ -21,15 +21,14 @@ public class ContainerInfusionTable extends Container {
         return te.canInteractWith(playerIn);
     }
 
-    public ContainerInfusionTable(IInventory playerInventory, TileEntityInfusionTable te) {
+    public ContainerSawmill(IInventory playerInventory, TileEntitySawmill te) {
         this.te = te;
 
         te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> itemHandler = handler);
 
-        this.addSlot(new SlotItemHandler(itemHandler, 0, 38, 35));
-        this.addSlot(new SlotItemHandler(itemHandler, 1, 56, 35));
+        this.addSlot(new SlotItemHandler(itemHandler, 0, 56, 35));
 
-        this.addSlot(new SlotItemHandler(itemHandler, 2, 116, 35));
+        this.addSlot(new SlotItemHandler(itemHandler, 1, 116, 35));
 
         addPlayerSlots(playerInventory);
     }

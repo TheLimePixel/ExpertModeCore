@@ -2,11 +2,16 @@
   "type": "crafting_shapeless",
   "ingredients": [
     {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/wooden"
     },
-    {
-      "item": "minecraft:coal"
-    },
+    [
+      {
+        "item": "minecraft:coal"
+      },
+      {
+        "item": "minecraft:charcoal"
+      }
+    ],
     {
       "item": "expertmodecore:rubber_drop"
     }

@@ -12,9 +12,12 @@ import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
 import com.EmosewaPixel.expertmodecore.tiles.ExpertTypes;
 import com.EmosewaPixel.expertmodecore.tiles.guis.ModGuiHandler;
 import com.EmosewaPixel.expertmodecore.world.OreGen;
+import net.minecraft.advancements.AdvancementList;
+import net.minecraft.advancements.AdvancementManager;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -31,10 +34,12 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -111,6 +116,7 @@ public class ExpertModeCore {
             e.getRegistry().register(ExpertTypes.COKE_OVEN);
             e.getRegistry().register(ExpertTypes.CRUSHER);
             e.getRegistry().register(ExpertTypes.INFUSION_TABLE);
+            e.getRegistry().register(ExpertTypes.SAWMILL);
         }
     }
 
@@ -219,6 +225,13 @@ public class ExpertModeCore {
                 if (e.world.getBlockState(item.getPosition()).getBlock() instanceof BlockFire)
                     item.setItem(new ItemStack(ItemRegistry.CHARRED_IRON_INGOT, item.getItem().getCount()));
             }
+        }
+
+        @SubscribeEvent
+        public static void onDimTravel(EntityTravelToDimensionEvent e) {
+            if (e.getEntity() instanceof EntityPlayerMP)
+                if (e.getDimension() == DimensionType.NETHER && !((EntityPlayerMP) e.getEntity()).getAdvancements().getProgress(new AdvancementManager().getAdvancement(new ResourceLocation("minecraft:story/mine_diamond"))).isDone())
+                    e.setCanceled(true);
         }
 
         @SubscribeEvent

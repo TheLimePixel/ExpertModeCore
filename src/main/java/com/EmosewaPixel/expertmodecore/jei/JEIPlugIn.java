@@ -24,7 +24,7 @@ public class JEIPlugIn implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration reg) {
         IGuiHelper helper = reg.getJeiHelpers().getGuiHelper();
-        reg.addRecipeCategories(new AlloyerCategory(helper), new BlastFurnaceCategory(helper), new CokeOvenCategory(helper), new CrusherCategory(helper), new InfusionCategory(helper), new PressingCategory(helper));
+        reg.addRecipeCategories(new AlloyerCategory(helper), new BlastFurnaceCategory(helper), new CokeOvenCategory(helper), new CrusherCategory(helper), new InfusionCategory(helper), new PressingCategory(helper), new SawmillCategory(helper));
     }
 
     @Override
@@ -35,7 +35,7 @@ public class JEIPlugIn implements IModPlugin {
         reg.addRecipeCatalyst(new ItemStack(BlockRegistry.CRUSHER), new ResourceLocation("expertmodecore:crusher"));
         reg.addRecipeCatalyst(new ItemStack(BlockRegistry.INFUSION_TABLE), new ResourceLocation("expertmodecore:infusion"));
         reg.addRecipeCatalyst(new ItemStack(Blocks.PISTON), new ResourceLocation("expertmodecore:pressing"));
-
+        reg.addRecipeCatalyst(new ItemStack(BlockRegistry.SAWMILL), new ResourceLocation("expertmodecore:sawmill"));
     }
 
     @Override
@@ -46,5 +46,6 @@ public class JEIPlugIn implements IModPlugin {
         reg.addRecipes(RecipeTypes.crusherRecipes, new ResourceLocation("expertmodecore:crusher"));
         reg.addRecipes(RecipeTypes.infusionRecipes, new ResourceLocation("expertmodecore:infusion"));
         reg.addRecipes(RecipeTypes.pressingRecipes, new ResourceLocation("expertmodecore:pressing"));
+        reg.addRecipes(RecipeTypes.sawmillRecipes, new ResourceLocation("expertmodecore:sawmill"));
     }
 }

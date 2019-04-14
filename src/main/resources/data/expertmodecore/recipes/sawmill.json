@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "###",
+    "#B#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "expertmodecore:ironwood_log"
+    },
+    "B": {
+      "tag": "forge:plates/iron"
+    }
+  },
+  "result": {
+    "item": "expertmodecore:sawmill"
+  }
+}

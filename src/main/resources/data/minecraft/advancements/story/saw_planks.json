@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/ironwood_stick",
+  "display": {
+    "icon": {
+      "item": "expertmodecore:sawmill"
+    },
+    "title": {
+      "translate": "I Saw Some Wood"
+    },
+    "description": {
+      "translate": "Craft a Sawmill. It works when being given a continuous alternating Redstone Signal"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "iron": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+  		    "item": "expertmodecore:sawmill"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "iron"
+    ]
+  ]
+}

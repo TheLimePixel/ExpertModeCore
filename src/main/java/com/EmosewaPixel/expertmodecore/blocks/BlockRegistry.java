@@ -54,6 +54,7 @@ public class BlockRegistry {
     public static Block BLAST_FURNACE;
     public static Block CRUSHER;
     public static Block INFUSION_TABLE;
+    public static Block SAWMILL;
 
     public static void registry(RegistryEvent.Register<Block> e) {
         BRONZER_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6).sound(SoundType.METAL), "bronze_block", 0), e);
@@ -95,6 +96,7 @@ public class BlockRegistry {
         COKE_OVEN = register(new BlockCokeOven(), e);
         CRUSHER = register(new BlockCrusher(), e);
         INFUSION_TABLE = register(new BlockInfusionTable(), e);
+        SAWMILL = register(new BlockSawmill(), e);
     }
 
     public static void itemRegistry(RegistryEvent.Register<Item> e) {
@@ -137,6 +139,7 @@ public class BlockRegistry {
         registerItemBlock(COKE_OVEN, e);
         registerItemBlock(CRUSHER, e);
         registerItemBlock(INFUSION_TABLE, e);
+        registerItemBlock(SAWMILL, e);
     }
 
     private static Block register(Block block, RegistryEvent.Register<Block> e) {

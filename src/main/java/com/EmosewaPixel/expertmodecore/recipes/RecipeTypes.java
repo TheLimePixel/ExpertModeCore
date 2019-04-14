@@ -11,6 +11,7 @@ public class RecipeTypes {
     public static ArrayList<MachineRecipe> crusherRecipes = new ArrayList<>();
     public static ArrayList<MachineRecipe> infusionRecipes = new ArrayList<>();
     public static ArrayList<MachineRecipe> pressingRecipes = new ArrayList<>();
+    public static ArrayList<MachineRecipe> sawmillRecipes = new ArrayList<>();
 
 
     public static class AlloyerRecipe extends MachineRecipe {
@@ -57,6 +58,20 @@ public class RecipeTypes {
         public PressingRecipe(Object input, ItemStack output) {
             super(new Object[]{input}, new ItemStack[]{output}, 0);
             pressingRecipes.add(this);
+        }
+    }
+
+    public static class SawmillRecipe extends MachineRecipe {
+        private boolean highSignal;
+
+        public SawmillRecipe(Object input, ItemStack output, int time, boolean highSignal) {
+            super(new Object[]{input}, new ItemStack[]{output}, time);
+            sawmillRecipes.add(this);
+            this.highSignal=highSignal;
+        }
+
+        public boolean inHighSignal() {
+            return highSignal;
         }
     }
 }

@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "expertmodecore:block/sawmill_top",
+        "front": "expertmodecore:block/sawmill_front",
+        "side": "expertmodecore:block/sawmill_side"
+    }
+}

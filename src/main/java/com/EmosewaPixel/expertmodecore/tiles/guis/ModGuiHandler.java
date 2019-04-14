@@ -22,6 +22,8 @@ public class ModGuiHandler {
                 return new GUICrusher(player.inventory, (TileEntityCrusher) tile);
             case "expertmodecore:infusion_table":
                 return new GUIInfusionTable(player.inventory, (TileEntityInfusionTable) tile);
+            case "expertmodecore:sawmill":
+                return new GUISawmill(player.inventory, (TileEntitySawmill) tile);
             default:
                 return null;
         }
