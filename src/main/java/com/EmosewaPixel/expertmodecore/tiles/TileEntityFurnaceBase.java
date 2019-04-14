@@ -2,7 +2,6 @@ package com.EmosewaPixel.expertmodecore.tiles;
 
 import com.EmosewaPixel.expertmodecore.blocks.BlockFurnaceBase;
 import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
-import com.EmosewaPixel.expertmodecore.recipes.TagStack;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -25,7 +24,6 @@ import java.util.ArrayList;
 
 public class TileEntityFurnaceBase extends TileEntity implements ITickable {
     private int progress = 0;
-    private int maxProgress = 0;
     private int burnTime = 0;
     private int maxBurnTime = 0;
     private int inputCount;
@@ -33,6 +31,7 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
     public int slotCount;
 
     private ArrayList<MachineRecipe> recipes;
+    private MachineRecipe currentRecipe;
 
     public void setProgress(int i) {
         progress = i;
@@ -42,12 +41,12 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
         return progress;
     }
 
-    public void setMaxProgress(int i) {
-        maxProgress = i;
+    public MachineRecipe getCurrentRecipe() {
+        return currentRecipe;
     }
 
-    public int getMaxProgress() {
-        return maxProgress;
+    public void setCurrentRecipe(MachineRecipe recipe) {
+        currentRecipe = recipe;
     }
 
     public void setBurnTime(int i) {
@@ -93,7 +92,28 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
 
             @Override
             protected void onContentsChanged(int slot) {
+                TileEntityFurnaceBase.this.currentRecipe = getRecipeByInput();
                 TileEntityFurnaceBase.this.markDirty();
+            }
+
+            private MachineRecipe getRecipeByInput() {
+                ItemStack[] stacks = new ItemStack[getSlots()];
+                for (int i = 0; i < getSlots(); i++) {
+                    if (getStackInSlot(i).isEmpty())
+                        return null;
+                    stacks[i] = getStackInSlot(i);
+                }
+
+                ItemStack recipeInputs[] = new ItemStack[getSlots()];
+                MachineRecipe returnRecipe;
+                for (MachineRecipe recipe : TileEntityFurnaceBase.this.recipes)
+                    if (recipe.isInputValid(stacks)) {
+                        for (int i = 0; i < getSlots(); i++)
+                            recipeInputs[i] = new ItemStack(getStackInSlot(i).getItem(), recipe.getCountOfInputItem(getStackInSlot(i)));
+                        returnRecipe = new MachineRecipe(recipeInputs, recipe.getAllOutputs(), recipe.getTime());
+                        return returnRecipe;
+                    }
+                return null;
             }
         };
 
@@ -139,9 +159,12 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
                 burnTime--;
                 world.setBlockState(pos, world.getBlockState(pos).with(BlockFurnaceBase.LIT, true));
                 if (progress > 0) {
-                    progress--;
-                    if (progress == 0)
-                        smelt();
+                    if (shouldContinueProcess()) {
+                        progress--;
+                        if (progress == 0)
+                            smelt();
+                    } else
+                        progress = 0;
                 } else
                     startSmelting();
             } else {
@@ -162,30 +185,20 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
     }
 
     protected void startSmelting() {
-        MachineRecipe recipe = getRecipeByInput();
-        if (recipe != null)
-            if (canOutput(recipe, true)) {
-                maxProgress = progress = recipe.getTime() - 1;
+        if (currentRecipe != null)
+            if (canOutput(currentRecipe, true)) {
+                progress = currentRecipe.getTime() - 1;
             }
     }
 
     protected void smelt() {
-        MachineRecipe recipe = getRecipeByInput();
-        if (recipe != null)
-            if (canOutput(recipe, false)) {
-                for (int i = 0; i < inputCount; i++) {
-                    if (recipe.getinput(i) instanceof ItemStack)
-                        input.extractItem(i, ((ItemStack) recipe.getinput(i)).copy().getCount(), false);
-                    else
-                        input.extractItem(i, ((TagStack) recipe.getinput(i)).copy().getCount(), false);
-
-                }
-            }
+        canOutput(currentRecipe, false);
+        for (int i = 0; i < inputCount; i++)
+            input.extractItem(i, ((ItemStack) currentRecipe.getInput(i)).copy().getCount(), false);
     }
 
     protected void consumeFuel() {
-        MachineRecipe recipe = getRecipeByInput();
-        if (recipe != null && canOutput(recipe, true)) {
+        if (currentRecipe != null && canOutput(currentRecipe, true)) {
             burnTime = maxBurnTime = getItemBurnTime(fuel_input.getStackInSlot(0));
             if (burnTime > 0) {
                 if (fuel_input.getStackInSlot(0).getItem().hasContainerItem())
@@ -206,8 +219,9 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
             fuel_input.deserializeNBT((NBTTagCompound) compound.getTag("FuelItems"));
         if (compound.hasKey("OutputItems"))
             output.deserializeNBT((NBTTagCompound) compound.getTag("OutputItems"));
+        if (compound.hasKey("CurrentRecipe"))
+            currentRecipe.deserializeNBT((NBTTagCompound) compound.getTag("CurrentRecipe"));
         progress = compound.getInt("Progress");
-        maxProgress = compound.getInt("MaxProgress");
         burnTime = compound.getInt("BurnTime");
         maxBurnTime = compound.getInt("MaxBurnTime");
     }
@@ -218,8 +232,8 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
         compound.setTag("InputItems", input.serializeNBT());
         compound.setTag("FuelItems", fuel_input.serializeNBT());
         compound.setTag("OutputItems", output.serializeNBT());
+        compound.setTag("CurrentRecipe", currentRecipe.serializeNBT());
         compound.setInt("Progress", progress);
-        compound.setInt("MaxProgress", maxProgress);
         compound.setInt("BurnTime", burnTime);
         compound.setInt("MaxBurnTime", maxBurnTime);
         return compound;
@@ -246,19 +260,12 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
         return LazyOptional.empty();
     }
 
-    protected MachineRecipe getRecipeByInput() {
-        ItemStack[] stacks = new ItemStack[inputCount];
-        for (int i = 0; i < inputCount; i++) {
-            if (input.getStackInSlot(i).isEmpty())
-                return null;
-            stacks[i] = input.getStackInSlot(i);
-        }
-
-        for (MachineRecipe recipe : recipes) {
-            if (recipe.isInputValid(stacks))
-                return recipe;
-        }
-        return null;
+    protected boolean shouldContinueProcess() {
+        int matches = 0;
+        for (int i = 0; i < inputCount; i++)
+            if (input.getStackInSlot(i).getItem() == ((ItemStack) currentRecipe.getInput(i)).getItem() && input.getStackInSlot(i).getCount() >= ((ItemStack) currentRecipe.getInput(i)).getCount())
+                matches++;
+        return matches == inputCount;
     }
 
     protected boolean canOutput(MachineRecipe recipe, boolean simulate) {

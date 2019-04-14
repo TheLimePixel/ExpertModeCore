@@ -1,7 +1,10 @@
 package com.EmosewaPixel.expertmodecore.recipes;
 
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
+import net.minecraft.util.ResourceLocation;
 
 public class TagStack {
     private Tag<Item> tag;
@@ -34,5 +37,15 @@ public class TagStack {
 
     public TagStack copy() {
         return new TagStack(this.tag, this.count);
+    }
+
+    public NBTTagCompound write(NBTTagCompound nbt) {
+        nbt.setInt("Count", count);
+        nbt.setString("Id", tag.getId().toString());
+        return null;
+    }
+
+    public static TagStack read(NBTTagCompound nbt) {
+        return new TagStack(new ItemTags.Wrapper(new ResourceLocation(nbt.getString("Id"))), nbt.getInt("Count"));
     }
 }

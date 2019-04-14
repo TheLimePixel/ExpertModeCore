@@ -120,10 +120,10 @@ public class TileEntitySawmill extends TileEntity implements ITickable {
         MachineRecipe recipe = getRecipeByInput();
         if (recipe != null)
             if (canOutput(recipe, false)) {
-                if (recipe.getinput(0) instanceof ItemStack)
-                    input.extractItem(0, ((ItemStack) recipe.getinput(0)).copy().getCount(), false);
+                if (recipe.getInput(0) instanceof ItemStack)
+                    input.extractItem(0, ((ItemStack) recipe.getInput(0)).copy().getCount(), false);
                 else
-                    input.extractItem(0, ((TagStack) recipe.getinput(0)).copy().getCount(), false);
+                    input.extractItem(0, ((TagStack) recipe.getInput(0)).copy().getCount(), false);
             }
     }
 

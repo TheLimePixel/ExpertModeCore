@@ -108,12 +108,12 @@ public class TileEntityInfusionTable extends TileEntity implements ITickable {
             if (canOutput(recipe, false)) {
                 for (int i = 0; i < 2; i++)
                     for (int j = 0; j < 2; j++) {
-                        if (recipe.getinput(j) instanceof ItemStack) {
-                            if (input.getStackInSlot(i).getItem() == ((ItemStack) recipe.getinput(j)).getItem()) {
-                                input.extractItem(i, ((ItemStack) recipe.getinput(j)).copy().getCount(), false);
+                        if (recipe.getInput(j) instanceof ItemStack) {
+                            if (input.getStackInSlot(i).getItem() == ((ItemStack) recipe.getInput(j)).getItem()) {
+                                input.extractItem(i, ((ItemStack) recipe.getInput(j)).copy().getCount(), false);
                             }
-                        } else if (((TagStack) recipe.getinput(j)).geTag().contains(input.getStackInSlot(i).getItem()))
-                            input.extractItem(i, ((TagStack) recipe.getinput(j)).copy().getCount(), false);
+                        } else if (((TagStack) recipe.getInput(j)).geTag().contains(input.getStackInSlot(i).getItem()))
+                            input.extractItem(i, ((TagStack) recipe.getInput(j)).copy().getCount(), false);
                     }
                 progress = 0;
             }

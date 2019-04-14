@@ -12,7 +12,6 @@ import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
 import com.EmosewaPixel.expertmodecore.tiles.ExpertTypes;
 import com.EmosewaPixel.expertmodecore.tiles.guis.ModGuiHandler;
 import com.EmosewaPixel.expertmodecore.world.OreGen;
-import net.minecraft.advancements.AdvancementList;
 import net.minecraft.advancements.AdvancementManager;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;

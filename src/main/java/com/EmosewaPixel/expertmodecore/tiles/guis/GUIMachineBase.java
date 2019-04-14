@@ -27,7 +27,7 @@ public class GUIMachineBase extends GuiContainer {
             progress = getBurnLeftScaled(13);
             drawTexturedModalRect(guiLeft + 56 - (te.getInputCount() - 1) * 9, guiTop + 36 + 12 - progress, 176, 12 - progress, 14, progress + 1);
         }
-        if (te.getProgress() > 0) {
+        if (te.getProgress() > 0 && te.getCurrentRecipe() != null) {
             progress = getProgressLeftScaled(24);
             drawTexturedModalRect(guiLeft + 79, guiTop + 34, 176, 14, progress + 1, 16);
         }
@@ -49,7 +49,7 @@ public class GUIMachineBase extends GuiContainer {
     }
 
     private int getProgressLeftScaled(int scale) {
-        return (int) (scale - (float) te.getProgress() / te.getMaxProgress() * scale);
+        return (int) (scale - (float) te.getProgress() / te.getCurrentRecipe().getTime() * scale);
     }
 
     private int getBurnLeftScaled(int scale) {

@@ -2,12 +2,8 @@ package com.EmosewaPixel.expertmodecore.tiles;
 
 import com.EmosewaPixel.expertmodecore.blocks.BlockFurnaceBase;
 import com.EmosewaPixel.expertmodecore.items.ItemRegistry;
-import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
-import com.EmosewaPixel.expertmodecore.recipes.TagStack;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemBucket;
-import net.minecraft.item.ItemGlassBottle;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -75,9 +71,12 @@ public class TileEntityCokeOven extends TileEntityFurnaceBase implements ITickab
                 if (creosoteAmount < 6000) {
                     world.setBlockState(pos, world.getBlockState(pos).with(BlockFurnaceBase.LIT, true));
                     if (getProgress() > 0) {
-                        setProgress(getProgress() - 1);
-                        if (getProgress() == 0)
-                            smelt();
+                        if (shouldContinueProcess()) {
+                            setProgress(getProgress() - 1);
+                            if (getProgress() == 0)
+                                smelt();
+                        } else
+                            setProgress(0);
                     } else
                         startSmelting();
                 }
@@ -109,18 +108,8 @@ public class TileEntityCokeOven extends TileEntityFurnaceBase implements ITickab
 
     @Override
     protected void smelt() {
-        MachineRecipe recipe = getRecipeByInput();
-        if (recipe != null)
-            if (canOutput(recipe, false)) {
-                for (int i = 0; i < getInputCount(); i++) {
-                    if (recipe.getinput(i) instanceof ItemStack)
-                        input.extractItem(i, ((ItemStack) recipe.getinput(i)).copy().getCount(), false);
-                    else
-                        input.extractItem(i, ((TagStack) recipe.getinput(i)).copy().getCount(), false);
-
-                }
-                creosoteAmount += 500;
-            }
+        super.smelt();
+        creosoteAmount += 500;
     }
 
     @Override

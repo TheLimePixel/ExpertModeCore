@@ -2,7 +2,6 @@ package com.EmosewaPixel.expertmodecore.tiles;
 
 import com.EmosewaPixel.expertmodecore.blocks.BlockFurnaceBase;
 import com.EmosewaPixel.expertmodecore.items.ItemRegistry;
-import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -35,10 +34,8 @@ public class TileEntityBlastFurnace extends TileEntityFurnaceBase implements ITi
     @Override
     protected void consumeFuel() {
         Item fuel = fuel_input.getStackInSlot(0).getItem();
-        MachineRecipe recipe = getRecipeByInput();
-        if ((fuel == Items.COAL || fuel == Items.CHARCOAL || fuel == Blocks.COAL_BLOCK.asItem() || fuel == ItemRegistry.COKE_COKE) && recipe != null && canOutput(recipe, true)) {
+        if ((fuel == Items.COAL || fuel == Items.CHARCOAL || fuel == Blocks.COAL_BLOCK.asItem() || fuel == ItemRegistry.COKE_COKE) && getCurrentRecipe() != null && canOutput(getCurrentRecipe(), true)) {
             setBurnTime(getItemBurnTime(fuel_input.getStackInSlot(0)));
-            setMaxBurnTime(getItemBurnTime(fuel_input.getStackInSlot(0)));
             fuel_input.extractItem(0, 1, false);
         } else
             world.setBlockState(pos, world.getBlockState(pos).with(BlockFurnaceBase.LIT, false));
