@@ -2,18 +2,15 @@ package com.EmosewaPixel.expertmodecore.recipes;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.common.util.INBTSerializable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MachineRecipe implements INBTSerializable<NBTTagCompound> {
+public class MachineRecipe {
     private Object[] input;
     private ItemStack[] output;
     private int time;
+    public static final MachineRecipe EMPTY = new MachineRecipe(null, null, 0);
 
     public MachineRecipe(Object[] input, ItemStack[] output, int time) {
         this.input = input;
@@ -23,6 +20,10 @@ public class MachineRecipe implements INBTSerializable<NBTTagCompound> {
 
     public Object getInput(int index) {
         return input[index];
+    }
+
+    public Object[] getAllInputs() {
+        return input;
     }
 
     public ItemStack getOutput(int index) {
@@ -93,10 +94,10 @@ public class MachineRecipe implements INBTSerializable<NBTTagCompound> {
 
     public int getCountOfInputItem(ItemStack stack) {
         for (Object input : input) {
-            if (input instanceof ItemStack)
+            if (input instanceof ItemStack) {
                 if (stack.getItem() == ((ItemStack) input).getItem())
                     return ((ItemStack) input).getCount();
-            if (((TagStack) input).geTag().contains(stack.getItem()))
+            } else if (((TagStack) input).geTag().contains(stack.getItem()))
                 return ((TagStack) input).getCount();
         }
         return 0;
@@ -116,50 +117,7 @@ public class MachineRecipe implements INBTSerializable<NBTTagCompound> {
         return false;
     }
 
-    @Override
-    public NBTTagCompound serializeNBT() {
-        NBTTagList inputList = new NBTTagList();
-        for (Object obj : input)
-            if (obj instanceof ItemStack) {
-                if (!((ItemStack) obj).isEmpty()) {
-                    NBTTagCompound itemTag = new NBTTagCompound();
-                    itemTag.setString("Type", "Item");
-                    ((ItemStack) obj).write(itemTag);
-                    inputList.add(itemTag);
-                }
-            } else {
-                NBTTagCompound itemTag = new NBTTagCompound();
-                itemTag.setString("Type", "Tag");
-                ((TagStack) obj).write(itemTag);
-                inputList.add(itemTag);
-            }
-        NBTTagList outputList = new NBTTagList();
-        for (ItemStack stack : output)
-            if (!stack.isEmpty()) {
-                NBTTagCompound itemTag = new NBTTagCompound();
-                stack.write(itemTag);
-                outputList.add(itemTag);
-            }
-        NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setInt("Time", time);
-        nbt.setTag("Outputs", outputList);
-        nbt.setTag("Inputs", inputList);
-        return nbt;
-    }
-
-    @Override
-    public void deserializeNBT(NBTTagCompound nbt) {
-        setTime(nbt.getInt("Time"));
-        NBTTagList tagList = nbt.getList("Outputs", Constants.NBT.TAG_COMPOUND);
-        for (int i = 0; i < tagList.size(); i++)
-            output[i] = ItemStack.read(tagList.getCompound(i));
-        tagList = nbt.getList("Inputs", Constants.NBT.TAG_COMPOUND);
-        for (int i = 0; i < tagList.size(); i++) {
-            NBTTagCompound thing = tagList.getCompound(i);
-            if (thing.getString("Type").equals("Item"))
-                input[i] = ItemStack.read(thing);
-            if (thing.getString("Type").equals("Tag"))
-                input[i] = TagStack.read(thing);
-        }
+    public boolean isEmpty() {
+        return this == EMPTY;
     }
 }

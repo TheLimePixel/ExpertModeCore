@@ -87,7 +87,7 @@ public class ContainerMachineBase extends Container {
         super.detectAndSendChanges();
         for (IContainerListener listener : listeners) {
             listener.sendWindowProperty(this, 0, te.getProgress());
-            listener.sendWindowProperty(this, 1, te.getCurrentRecipe() != null ? te.getCurrentRecipe().getTime() : 0);
+            listener.sendWindowProperty(this, 1, te.getCurrentRecipe().getTime());
             listener.sendWindowProperty(this, 2, te.getBurnTime());
             listener.sendWindowProperty(this, 3, te.getMaxBurnTime());
             if (te instanceof TileEntityCokeOven)
@@ -108,7 +108,8 @@ public class ContainerMachineBase extends Container {
                 te.setBurnTime(data);
                 break;
             case 3:
-                te.setMaxBurnTime(data);
+                if (!te.getCurrentRecipe().isEmpty())
+                    te.setMaxBurnTime(data);
                 break;
             case 4:
                 if (te instanceof TileEntityCokeOven)

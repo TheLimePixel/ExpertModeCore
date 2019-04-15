@@ -2,7 +2,6 @@ package com.EmosewaPixel.expertmodecore.tiles;
 
 import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
-import com.EmosewaPixel.expertmodecore.recipes.TagStack;
 import net.minecraft.block.BlockBookshelf;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,12 +23,12 @@ import java.util.ArrayList;
 
 public class TileEntityInfusionTable extends TileEntity implements ITickable {
     private int progress = 0;
-    private int maxProgress = 0;
     private int inputCount = 2;
     private int outputCount = 1;
     public int slotCount = inputCount + outputCount;
 
     private ArrayList<MachineRecipe> recipes = RecipeTypes.infusionRecipes;
+    private MachineRecipe currentRecipe = MachineRecipe.EMPTY;
 
     public void setProgress(int i) {
         progress = i;
@@ -39,12 +38,12 @@ public class TileEntityInfusionTable extends TileEntity implements ITickable {
         return progress;
     }
 
-    public void setMaxProgress(int i) {
-        maxProgress = i;
+    public MachineRecipe getCurrentRecipe() {
+        return currentRecipe;
     }
 
-    public int getMaxProgress() {
-        return maxProgress;
+    public void setCurrentRecipe(MachineRecipe recipe) {
+        currentRecipe = recipe;
     }
 
     public TileEntityInfusionTable() {
@@ -63,6 +62,7 @@ public class TileEntityInfusionTable extends TileEntity implements ITickable {
 
         @Override
         protected void onContentsChanged(int slot) {
+            currentRecipe = getRecipeByInput();
             TileEntityInfusionTable.this.markDirty();
         }
     };
@@ -85,9 +85,12 @@ public class TileEntityInfusionTable extends TileEntity implements ITickable {
     public void tick() {
         if (!world.isRemote) {
             if (progress > 0) {
-                progress -= countShelves();
-                if (progress <= 0)
-                    infuse();
+                if (shouldContinueProcess()) {
+                    progress -= countShelves();
+                    if (progress <= 0)
+                        infuse();
+                } else
+                    progress = 0;
             } else
                 startInfusing();
             markDirty();
@@ -95,28 +98,17 @@ public class TileEntityInfusionTable extends TileEntity implements ITickable {
     }
 
     private void startInfusing() {
-        MachineRecipe recipe = getRecipeByInput();
-        if (recipe != null)
-            if (canOutput(recipe, true)) {
-                maxProgress = progress = recipe.getTime();
+        if (!currentRecipe.isEmpty())
+            if (canOutput(currentRecipe, true)) {
+                progress = currentRecipe.getTime();
             }
     }
 
     private void infuse() {
-        MachineRecipe recipe = getRecipeByInput();
-        if (recipe != null)
-            if (canOutput(recipe, false)) {
-                for (int i = 0; i < 2; i++)
-                    for (int j = 0; j < 2; j++) {
-                        if (recipe.getInput(j) instanceof ItemStack) {
-                            if (input.getStackInSlot(i).getItem() == ((ItemStack) recipe.getInput(j)).getItem()) {
-                                input.extractItem(i, ((ItemStack) recipe.getInput(j)).copy().getCount(), false);
-                            }
-                        } else if (((TagStack) recipe.getInput(j)).geTag().contains(input.getStackInSlot(i).getItem()))
-                            input.extractItem(i, ((TagStack) recipe.getInput(j)).copy().getCount(), false);
-                    }
-                progress = 0;
-            }
+        canOutput(currentRecipe, false);
+        for (int i = 0; i < inputCount; i++)
+            input.extractItem(i, ((ItemStack) currentRecipe.getInput(i)).copy().getCount(), false);
+        progress = 0;
     }
 
     private int countShelves() {
@@ -137,8 +129,8 @@ public class TileEntityInfusionTable extends TileEntity implements ITickable {
             input.deserializeNBT((NBTTagCompound) compound.getTag("InputItems"));
         if (compound.hasKey("OutputItems"))
             output.deserializeNBT((NBTTagCompound) compound.getTag("OutputItems"));
+        currentRecipe = getRecipeByInput();
         progress = compound.getInt("Progress");
-        maxProgress = compound.getInt("MaxProgress");
     }
 
     @Override
@@ -147,7 +139,6 @@ public class TileEntityInfusionTable extends TileEntity implements ITickable {
         compound.setTag("InputItems", input.serializeNBT());
         compound.setTag("OutputItems", output.serializeNBT());
         compound.setInt("Progress", progress);
-        compound.setInt("MaxProgress", maxProgress);
         return compound;
     }
 
@@ -169,19 +160,36 @@ public class TileEntityInfusionTable extends TileEntity implements ITickable {
         return LazyOptional.empty();
     }
 
+    private boolean shouldContinueProcess() {
+        if (currentRecipe.isEmpty())
+            return false;
+
+        int matches = 0;
+        for (int i = 0; i < inputCount; i++)
+            if (!input.getStackInSlot(i).isEmpty())
+                if (input.getStackInSlot(i).getItem() == ((ItemStack) currentRecipe.getInput(i)).getItem() && input.getStackInSlot(i).getCount() >= ((ItemStack) currentRecipe.getInput(i)).getCount())
+                    matches++;
+        return matches == inputCount;
+    }
+
     private MachineRecipe getRecipeByInput() {
-        ItemStack[] stacks = new ItemStack[inputCount];
-        for (int i = 0; i < inputCount; i++) {
+        ItemStack[] stacks = new ItemStack[input.getSlots()];
+        for (int i = 0; i < input.getSlots(); i++) {
             if (input.getStackInSlot(i).isEmpty())
-                return null;
+                return MachineRecipe.EMPTY;
             stacks[i] = input.getStackInSlot(i);
         }
 
-        for (MachineRecipe recipe : recipes) {
-            if (recipe.isInputValid(stacks))
-                return recipe;
-        }
-        return null;
+        ItemStack recipeInputs[] = new ItemStack[input.getSlots()];
+        MachineRecipe returnRecipe;
+        for (MachineRecipe recipe : recipes)
+            if (recipe.isInputValid(stacks)) {
+                for (int i = 0; i < input.getSlots(); i++)
+                    recipeInputs[i] = new ItemStack(input.getStackInSlot(i).getItem(), recipe.getCountOfInputItem(input.getStackInSlot(i)));
+                returnRecipe = new MachineRecipe(recipeInputs, recipe.getAllOutputs(), recipe.getTime());
+                return returnRecipe;
+            }
+        return MachineRecipe.EMPTY;
     }
 
     private boolean canOutput(MachineRecipe recipe, boolean simulate) {

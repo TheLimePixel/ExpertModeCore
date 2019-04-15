@@ -3,15 +3,16 @@ package com.EmosewaPixel.expertmodecore.tiles;
 import com.EmosewaPixel.expertmodecore.blocks.trees.BlockSawmill;
 import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
-import com.EmosewaPixel.expertmodecore.recipes.TagStack;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -23,13 +24,13 @@ import java.util.ArrayList;
 
 public class TileEntitySawmill extends TileEntity implements ITickable {
     private int progress = 0;
-    private int maxProgress = 0;
     public int slotCount = 2;
     private int curSignal;
     private static int prevSignals[] = new int[8];
     private boolean highForCurrent;
 
     private ArrayList<MachineRecipe> recipes = RecipeTypes.sawmillRecipes;
+    private MachineRecipe currentRecipe = MachineRecipe.EMPTY;
 
     public void setProgress(int i) {
         progress = i;
@@ -39,19 +40,19 @@ public class TileEntitySawmill extends TileEntity implements ITickable {
         return progress;
     }
 
-    public void setMaxProgress(int i) {
-        maxProgress = i;
+    public MachineRecipe getCurrentRecipe() {
+        return currentRecipe;
     }
 
-    public int getMaxProgress() {
-        return maxProgress;
+    public void setCurrentRecipe(MachineRecipe recipe) {
+        currentRecipe = recipe;
     }
 
     public TileEntitySawmill() {
         super(ExpertTypes.SAWMILL);
     }
 
-    protected ItemStackHandler input = new ItemStackHandler(1) {
+    private ItemStackHandler input = new ItemStackHandler(1) {
         @Override
         public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
             for (MachineRecipe recipe : TileEntitySawmill.this.recipes)
@@ -63,11 +64,12 @@ public class TileEntitySawmill extends TileEntity implements ITickable {
 
         @Override
         protected void onContentsChanged(int slot) {
+            TileEntitySawmill.this.currentRecipe = getRecipeByInput();
             TileEntitySawmill.this.markDirty();
         }
     };
 
-    protected ItemStackHandler output = new ItemStackHandler(1) {
+    private ItemStackHandler output = new ItemStackHandler(1) {
         @Override
         public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
             return false;
@@ -79,75 +81,93 @@ public class TileEntitySawmill extends TileEntity implements ITickable {
         }
     };
 
-    protected CombinedInvWrapper combinedHandler = new CombinedInvWrapper(input, output);
-    ;
+    private CombinedInvWrapper combinedHandler = new CombinedInvWrapper(input, output);
 
     @Override
     public void tick() {
         if (!world.isRemote) {
             curSignal = world.getRedstonePowerFromNeighbors(pos);
             if (progress > 0) {
-                int highestPrev = getHighestPrev();
-                if (highForCurrent == (highestPrev > 8) && highestPrev != 0) {
-                    for (int prevSignal : prevSignals)
-                        if ((prevSignal == 0) != (curSignal == 0)) {
-                            world.setBlockState(pos, world.getBlockState(pos).with(BlockSawmill.ON, true));
-                            progress--;
-                            break;
-                        } else
-                            world.setBlockState(pos, world.getBlockState(pos).with(BlockSawmill.ON, false));
-                    if (progress == 0)
-                        smelt();
-                } else progress = 0;
+                if (shouldContinueProcess()) {
+                    int highestPrev = getHighestPrev();
+                    if (highForCurrent == (highestPrev > 8) && highestPrev != 0) {
+                        for (int prevSignal : prevSignals)
+                            if ((prevSignal == 0) != (curSignal == 0)) {
+                                world.setBlockState(pos, world.getBlockState(pos).with(BlockSawmill.ON, true));
+                                progress--;
+                                break;
+                            } else
+                                world.setBlockState(pos, world.getBlockState(pos).with(BlockSawmill.ON, false));
+                        if (progress == 0)
+                            cut();
+                    } else
+                        progress = 0;
+                } else
+                    progress = 0;
             } else
-                startSmelting();
+                startCutting();
+            if (progress == 0)
+                world.setBlockState(pos, world.getBlockState(pos).with(BlockSawmill.ON, false));
             pushPrevs();
             markDirty();
         }
     }
 
+    protected void startCutting() {
+        if (!currentRecipe.isEmpty()) {
+            if (highForCurrent != (getHighestPrev() > 8))
+                currentRecipe = getRecipeByInput();
 
-    protected void startSmelting() {
-        MachineRecipe recipe = getRecipeByInput();
-        if (recipe != null)
-            if (canOutput(recipe, true)) {
-                maxProgress = progress = recipe.getTime() - 1;
-            } else
+            if (canOutput(currentRecipe, true))
+                progress = currentRecipe.getTime() - 1;
+            else
                 world.setBlockState(pos, world.getBlockState(pos).with(BlockSawmill.ON, false));
+        }
     }
 
-    protected void smelt() {
-        MachineRecipe recipe = getRecipeByInput();
-        if (recipe != null)
-            if (canOutput(recipe, false)) {
-                if (recipe.getInput(0) instanceof ItemStack)
-                    input.extractItem(0, ((ItemStack) recipe.getInput(0)).copy().getCount(), false);
-                else
-                    input.extractItem(0, ((TagStack) recipe.getInput(0)).copy().getCount(), false);
-            }
+    protected void cut() {
+        if (!currentRecipe.isEmpty())
+            if (canOutput(currentRecipe, false))
+                input.extractItem(0, ((ItemStack) currentRecipe.getInput(0)).copy().getCount(), false);
     }
 
     @Override
     public void read(NBTTagCompound compound) {
         super.read(compound);
+        NBTTagList prevList = compound.getList("Prev", Constants.NBT.TAG_INT);
+        for (int i = 0; i < prevList.size(); i++)
+            prevSignals[i] = prevList.getCompound(i).getInt("Prev");
         if (compound.hasKey("InputItems"))
             input.deserializeNBT((NBTTagCompound) compound.getTag("InputItems"));
         if (compound.hasKey("OutputItems"))
             output.deserializeNBT((NBTTagCompound) compound.getTag("OutputItems"));
+        currentRecipe = getRecipeByInput();
         progress = compound.getInt("Progress");
-        maxProgress = compound.getInt("MaxProgress");
-        highForCurrent = compound.getBoolean("HighForCurrent");
     }
 
     @Override
     public NBTTagCompound write(NBTTagCompound compound) {
         super.write(compound);
+        NBTTagList prevs = new NBTTagList();
+        for (int prev : prevSignals) {
+            NBTTagCompound aPrev = new NBTTagCompound();
+            aPrev.setInt("Prev", prev);
+            prevs.add(aPrev);
+        }
+        compound.setTag("PrevSignals", prevs);
         compound.setTag("InputItems", input.serializeNBT());
         compound.setTag("OutputItems", output.serializeNBT());
         compound.setInt("Progress", progress);
-        compound.setInt("MaxProgress", maxProgress);
-        compound.setBoolean("HighForCurrent", highForCurrent);
         return compound;
+    }
+
+    protected boolean shouldContinueProcess() {
+        if (currentRecipe.isEmpty())
+            return false;
+
+        if (!input.getStackInSlot(0).isEmpty())
+            return (input.getStackInSlot(0).getItem() == ((ItemStack) currentRecipe.getInput(0)).getItem() && input.getStackInSlot(0).getCount() >= ((ItemStack) currentRecipe.getInput(0)).getCount());
+        return false;
     }
 
     public boolean canInteractWith(EntityPlayer playerIn) {
@@ -185,16 +205,18 @@ public class TileEntitySawmill extends TileEntity implements ITickable {
         return LazyOptional.empty();
     }
 
-    protected MachineRecipe getRecipeByInput() {
+    private MachineRecipe getRecipeByInput() {
         if (input.getStackInSlot(0).isEmpty())
-            return null;
+            return MachineRecipe.EMPTY;
 
+        MachineRecipe returnRecipe;
         for (MachineRecipe recipe : recipes)
-            if (recipe.isInputValid(new ItemStack[]{input.getStackInSlot(0)}) && ((RecipeTypes.SawmillRecipe) recipe).inHighSignal() == (getHighestPrev() > 8)) {
-                highForCurrent = ((RecipeTypes.SawmillRecipe) recipe).inHighSignal();
-                return recipe;
+            if (recipe.isInputValid(new ItemStack[]{input.getStackInSlot(0)}) && ((RecipeTypes.SawmillRecipe) recipe).isHighSignal() == (getHighestPrev() > 8)) {
+                highForCurrent = ((RecipeTypes.SawmillRecipe) recipe).isHighSignal();
+                returnRecipe = new MachineRecipe(new ItemStack[]{new ItemStack(input.getStackInSlot(0).getItem(), recipe.getCountOfInputItem(input.getStackInSlot(0)))}, recipe.getAllOutputs(), recipe.getTime());
+                return returnRecipe;
             }
-        return null;
+        return MachineRecipe.EMPTY;
     }
 
     protected boolean canOutput(MachineRecipe recipe, boolean simulate) {

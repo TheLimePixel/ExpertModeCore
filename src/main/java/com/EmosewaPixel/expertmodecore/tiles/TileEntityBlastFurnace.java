@@ -34,7 +34,7 @@ public class TileEntityBlastFurnace extends TileEntityFurnaceBase implements ITi
     @Override
     protected void consumeFuel() {
         Item fuel = fuel_input.getStackInSlot(0).getItem();
-        if ((fuel == Items.COAL || fuel == Items.CHARCOAL || fuel == Blocks.COAL_BLOCK.asItem() || fuel == ItemRegistry.COKE_COKE) && getCurrentRecipe() != null && canOutput(getCurrentRecipe(), true)) {
+        if ((fuel == Items.COAL || fuel == Items.CHARCOAL || fuel == Blocks.COAL_BLOCK.asItem() || fuel == ItemRegistry.COKE_COKE) && !getCurrentRecipe().isEmpty() && canOutput(getCurrentRecipe(), true)) {
             setBurnTime(getItemBurnTime(fuel_input.getStackInSlot(0)));
             setMaxBurnTime(getItemBurnTime(fuel_input.getStackInSlot(0)));
             fuel_input.extractItem(0, 1, false);

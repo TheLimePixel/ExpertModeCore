@@ -33,7 +33,7 @@ public class SawmillCategory extends MachineBaseCategory {
     @Override
     public void draw(MachineRecipe recipe, double mouseX, double mouseY) {
         arrow.draw(24, 18);
-        if (((RecipeTypes.SawmillRecipe) recipe).inHighSignal())
+        if (((RecipeTypes.SawmillRecipe) recipe).isHighSignal())
             Minecraft.getInstance().fontRenderer.drawString("Requires a high signal", -12, 4, 0x000000);
         else
             Minecraft.getInstance().fontRenderer.drawString("Requires a low signal", -10, 4, 0x000000);

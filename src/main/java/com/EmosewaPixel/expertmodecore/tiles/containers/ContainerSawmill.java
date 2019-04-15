@@ -77,7 +77,7 @@ public class ContainerSawmill extends Container {
         super.detectAndSendChanges();
         for (IContainerListener listener : listeners) {
             listener.sendWindowProperty(this, 0, te.getProgress());
-            listener.sendWindowProperty(this, 1, te.getMaxProgress());
+            listener.sendWindowProperty(this, 1, te.getCurrentRecipe().getTime());
         }
     }
 
@@ -88,7 +88,8 @@ public class ContainerSawmill extends Container {
                 te.setProgress(data);
                 break;
             case 1:
-                te.setMaxProgress(data);
+                if (!te.getCurrentRecipe().isEmpty())
+                    te.getCurrentRecipe().setTime(data);
                 break;
         }
     }

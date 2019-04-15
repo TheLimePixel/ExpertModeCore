@@ -20,7 +20,7 @@ public class GUISawmill extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         mc.getTextureManager().bindTexture(new ResourceLocation("expertmodecore:textures/gui/container/sawmill.png"));
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-        if (te.getProgress() > 0) {
+        if (te.getProgress() > 0 && !te.getCurrentRecipe().isEmpty()) {
             int progress = getProgressLeftScaled(24);
             drawTexturedModalRect(guiLeft + 79, guiTop + 34, 176, 14, progress + 1, 16);
         }
@@ -41,6 +41,6 @@ public class GUISawmill extends GuiContainer {
     }
 
     private int getProgressLeftScaled(int scale) {
-        return (int) (scale - (float) te.getProgress() / te.getMaxProgress() * scale);
+        return (int) (scale - (float) te.getProgress() / te.getCurrentRecipe().getTime() * scale);
     }
 }

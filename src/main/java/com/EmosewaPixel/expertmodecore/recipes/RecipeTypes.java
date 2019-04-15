@@ -70,7 +70,7 @@ public class RecipeTypes {
             this.highSignal=highSignal;
         }
 
-        public boolean inHighSignal() {
+        public boolean isHighSignal() {
             return highSignal;
         }
     }
