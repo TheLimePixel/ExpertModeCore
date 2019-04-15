@@ -243,8 +243,9 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
     protected boolean shouldContinueProcess() {
         int matches = 0;
         for (int i = 0; i < inputCount; i++)
-            if (input.getStackInSlot(i).getItem() == ((ItemStack) currentRecipe.getInput(i)).getItem() && input.getStackInSlot(i).getCount() >= ((ItemStack) currentRecipe.getInput(i)).getCount())
-                matches++;
+            if (!input.getStackInSlot(i).isEmpty())
+                if (input.getStackInSlot(i).getItem() == ((ItemStack) currentRecipe.getInput(i)).getItem() && input.getStackInSlot(i).getCount() >= ((ItemStack) currentRecipe.getInput(i)).getCount())
+                    matches++;
         return matches == inputCount;
     }
 
