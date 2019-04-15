@@ -9,7 +9,7 @@ public class ModHammer extends ItemPickaxe {
     public ModHammer(IItemTier tier, int attackDamageIn, float attackSpeedIn) {
         super(tier, attackDamageIn, attackSpeedIn, new Properties().defaultMaxDamage(tier.getMaxUses()).group(ExpertModeCore.main));
         setRegistryName(tier.toString().toLowerCase() + "_hammer");
-        efficiency = tier.getEfficiency() / 4;
+        efficiency = tier.getEfficiency() / 2;
     }
 
     @Override

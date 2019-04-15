@@ -120,12 +120,13 @@ public class MachineRecipe implements INBTSerializable<NBTTagCompound> {
     public NBTTagCompound serializeNBT() {
         NBTTagList inputList = new NBTTagList();
         for (Object obj : input)
-            if (obj instanceof ItemStack)
+            if (obj instanceof ItemStack) {
                 if (!((ItemStack) obj).isEmpty()) {
-                NBTTagCompound itemTag = new NBTTagCompound();
-                itemTag.setString("Type", "Item");
-                ((ItemStack) obj).write(itemTag);
-                inputList.add(itemTag);
+                    NBTTagCompound itemTag = new NBTTagCompound();
+                    itemTag.setString("Type", "Item");
+                    ((ItemStack) obj).write(itemTag);
+                    inputList.add(itemTag);
+                }
             } else {
                 NBTTagCompound itemTag = new NBTTagCompound();
                 itemTag.setString("Type", "Tag");

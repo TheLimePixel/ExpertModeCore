@@ -95,26 +95,6 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
                 TileEntityFurnaceBase.this.currentRecipe = getRecipeByInput();
                 TileEntityFurnaceBase.this.markDirty();
             }
-
-            private MachineRecipe getRecipeByInput() {
-                ItemStack[] stacks = new ItemStack[getSlots()];
-                for (int i = 0; i < getSlots(); i++) {
-                    if (getStackInSlot(i).isEmpty())
-                        return null;
-                    stacks[i] = getStackInSlot(i);
-                }
-
-                ItemStack recipeInputs[] = new ItemStack[getSlots()];
-                MachineRecipe returnRecipe;
-                for (MachineRecipe recipe : TileEntityFurnaceBase.this.recipes)
-                    if (recipe.isInputValid(stacks)) {
-                        for (int i = 0; i < getSlots(); i++)
-                            recipeInputs[i] = new ItemStack(getStackInSlot(i).getItem(), recipe.getCountOfInputItem(getStackInSlot(i)));
-                        returnRecipe = new MachineRecipe(recipeInputs, recipe.getAllOutputs(), recipe.getTime());
-                        return returnRecipe;
-                    }
-                return null;
-            }
         };
 
         fuel_input = new ItemStackHandler(1) {
@@ -284,5 +264,26 @@ public class TileEntityFurnaceBase extends TileEntity implements ITickable {
 
             world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack));
         }
+    }
+
+
+    private MachineRecipe getRecipeByInput() {
+        ItemStack[] stacks = new ItemStack[input.getSlots()];
+        for (int i = 0; i < input.getSlots(); i++) {
+            if (input.getStackInSlot(i).isEmpty())
+                return null;
+            stacks[i] = input.getStackInSlot(i);
+        }
+
+        ItemStack recipeInputs[] = new ItemStack[input.getSlots()];
+        MachineRecipe returnRecipe;
+        for (MachineRecipe recipe : TileEntityFurnaceBase.this.recipes)
+            if (recipe.isInputValid(stacks)) {
+                for (int i = 0; i < input.getSlots(); i++)
+                    recipeInputs[i] = new ItemStack(input.getStackInSlot(i).getItem(), recipe.getCountOfInputItem(input.getStackInSlot(i)));
+                returnRecipe = new MachineRecipe(recipeInputs, recipe.getAllOutputs(), recipe.getTime());
+                return returnRecipe;
+            }
+        return null;
     }
 }
