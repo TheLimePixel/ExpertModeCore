@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "FFF",
+    "FSF",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "item": "expertmodecore:redwood_stick"
+    },
+    "F": {
+      "tag": "forge:ingots/crystalline"
+    }
+  },
+  "result": {
+    "item": "expertmodecore:crystalline_hammer"
+  }
+}

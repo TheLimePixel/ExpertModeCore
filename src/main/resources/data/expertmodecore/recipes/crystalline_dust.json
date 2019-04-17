@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:dusts/diamond"
+    },
+    {
+      "tag": "forge:dusts/quartz"
+    },
+    {
+      "tag": "forge:dusts/prismarine"
+    },
+    {
+      "tag": "forge:dusts/lapis"
+    },
+  ],
+  "result": {
+    "item": "expertmodecore:crystalline_dust",
+    "count": 2
+  }
+}

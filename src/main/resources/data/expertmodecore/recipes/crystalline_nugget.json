@@ -1,0 +1,12 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "expertmodecore:crystalline_ingot"
+    }
+  ],
+  "result": {
+    "item": "expertmodecore:crystalline_nugget",
+    "count": 9
+  }
+}

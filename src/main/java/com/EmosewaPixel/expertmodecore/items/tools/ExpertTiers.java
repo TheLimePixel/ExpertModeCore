@@ -1,11 +1,10 @@
 package com.EmosewaPixel.expertmodecore.items.tools;
 
+import com.EmosewaPixel.expertmodecore.recipes.RecipeAddition;
 import net.minecraft.init.Items;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.LazyLoadBase;
-import net.minecraft.util.ResourceLocation;
 
 import java.util.function.Supplier;
 
@@ -14,13 +13,16 @@ public enum ExpertTiers implements IItemTier {
         return Ingredient.fromItems(Items.FLINT);
     }),
     BRONZE(1, 172, 4.0F, 1.0F, 5, () -> {
-        return Ingredient.fromTag(new ItemTags.Wrapper(new ResourceLocation("forge:ingots/steel")));
+        return Ingredient.fromTag(RecipeAddition.INGOTS_BRONZE);
     }),
     STEEl(2, 320, 6.0F, 2.0F, 14, () -> {
-        return Ingredient.fromTag(new ItemTags.Wrapper(new ResourceLocation("forge:ingots/steel")));
+        return Ingredient.fromTag(RecipeAddition.INGOTS_STEEL);
+    }),
+    CRYSTALLINE(3, 2030, 8.0F, 3.0F, 10, () -> {
+        return Ingredient.fromTag(RecipeAddition.INGOTS_CRYSTALLINE);
     }),
     ELECTRUM(1, 96, 12.0F, 0.0F, 22, () -> {
-        return Ingredient.fromTag(new ItemTags.Wrapper(new ResourceLocation("forge:ingots/electrum")));
+        return Ingredient.fromTag(RecipeAddition.INGOTS_ELECTRUM);
     });
 
     /**

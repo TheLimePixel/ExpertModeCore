@@ -10,10 +10,10 @@
       "item": "expertmodecore:redwood_stick"
     },
     "X": {
-      "item": "minecraft:diamond"
+      "tag": "forge:plates/crystalline"
     }
   },
   "result": {
-    "item": "minecraft:diamond_hoe"
+    "item": "expertmodecore:crystalline_hoe"
   }
 }

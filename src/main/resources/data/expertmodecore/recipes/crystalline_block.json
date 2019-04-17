@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/crystalline"
+    }
+  },
+  "result": {
+    "item": "expertmodecore:crystalline_block"
+  }
+}

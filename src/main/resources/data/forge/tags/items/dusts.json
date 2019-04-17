@@ -4,9 +4,14 @@
   "values": [
     "#forge:dusts/bronze",
     "#forge:dusts/copper",
+    "#forge:dusts/crystalline",
+    "#forge:dusts/diamond",
     "#forge:dusts/electrum",
     "#forge:dusts/iron",
     "#forge:dusts/gold",
+    "#forge:dusts/lapis",
+    "#forge:dusts/quartz",
+    "#forge:dusts/prismarine",
     "#forge:dusts/silver",
     "#forge:dusts/steel",
     "#forge:dusts/tin"

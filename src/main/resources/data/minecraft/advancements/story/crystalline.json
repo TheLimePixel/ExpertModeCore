@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:story/mine_diamond",
+  "display": {
+    "icon": {
+      "item": "expertmodecore:crystalline_ingot"
+    },
+    "title": {
+      "translate": "Crystal Clear"
+    },
+    "description": {
+      "translate": "Obtain a Crystalline Ingot by exploding Crystalline Dust"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "iron": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+  		    "tag": "forge:ingots/crystalline"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "iron"
+    ]
+  ]
+}

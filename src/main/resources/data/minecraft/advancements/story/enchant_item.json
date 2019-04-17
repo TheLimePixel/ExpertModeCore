@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:story/form_obsidian",
+  "parent": "minecraft:story/crystalline",
   "display": {
     "icon": {
       "item": "minecraft:enchanted_book"

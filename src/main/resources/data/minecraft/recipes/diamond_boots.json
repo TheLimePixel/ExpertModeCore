@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "tag": "forge:plates/crystalline"
+    }
+  },
+  "result": {
+    "item": "expertmodecore:crystalline_boots"
+  }
+}

@@ -71,7 +71,7 @@ repositories {
 
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.13.2-25.0.107'
+    minecraft 'net.minecraftforge:forge:1.13.2-25.0.146'
     compileOnly ("mezz.jei:jei-${mc_version}:${jei_version}:api")
     compileOnly ("mezz.jei:jei-${mc_version}:${jei_version}")
 }

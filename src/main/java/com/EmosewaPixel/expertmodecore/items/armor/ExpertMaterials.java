@@ -1,12 +1,11 @@
 package com.EmosewaPixel.expertmodecore.items.armor;
 
+import com.EmosewaPixel.expertmodecore.recipes.RecipeAddition;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.LazyLoadBase;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -15,13 +14,16 @@ import java.util.function.Supplier;
 
 public enum ExpertMaterials implements IArmorMaterial {
     BRONZE("bronze", 15, new int[]{1, 4, 5, 2}, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> {
-        return Ingredient.fromTag(new ItemTags.Wrapper(new ResourceLocation("forge:ingots/bronze")));
+        return Ingredient.fromTag(RecipeAddition.INGOTS_BRONZE);
     }),
     STEEL("steel", 15, new int[]{2, 5, 6, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> {
-        return Ingredient.fromTag(new ItemTags.Wrapper(new ResourceLocation("forge:ingots/steel")));
+        return Ingredient.fromTag(RecipeAddition.INGOTS_STEEL);
+    }),
+    CRYSTALLINE("crystalline", 33, new int[]{3, 6, 8, 3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> {
+        return Ingredient.fromTag(RecipeAddition.INGOTS_CRYSTALLINE);
     }),
     ELECTRUM("electrum", 7, new int[]{1, 3, 5, 2}, 25, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F, () -> {
-        return Ingredient.fromTag(new ItemTags.Wrapper(new ResourceLocation("forge:ingots/electrum")));
+        return Ingredient.fromTag(RecipeAddition.INGOTS_ELECTRUM);
     });
 
     private static final int[] MAX_DAMAGE_ARRAY = new int[]{13, 15, 16, 11};

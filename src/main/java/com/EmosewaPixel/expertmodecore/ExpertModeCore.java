@@ -15,6 +15,7 @@ import com.EmosewaPixel.expertmodecore.world.OreGen;
 import net.minecraft.advancements.AdvancementManager;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -42,6 +43,7 @@ import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ExtensionPoint;
@@ -172,6 +174,23 @@ public class ExpertModeCore {
         }
 
         @SubscribeEvent
+        public static void onExplosion(ExplosionEvent.Detonate e) {
+            Iterator<Entity> iterator = e.getAffectedEntities().iterator();
+            while (iterator.hasNext()) {
+                Entity entity = iterator.next();
+                if (entity instanceof EntityItem) {
+                    EntityItem item = (EntityItem) entity;
+                    for (MachineRecipe recipe : RecipeTypes.explosionRecipes)
+                        if (recipe.isInputValid(new ItemStack[]{item.getItem()})) {
+                            item.setItem(new ItemStack(recipe.getOutput(0).getItem(), item.getItem().getCount()));
+                            iterator.remove();
+                            break;
+                        }
+                }
+            }
+        }
+
+        @SubscribeEvent
         public static void onBreak(BlockEvent.BreakEvent e) {
             if (new ItemTags.Wrapper(new ResourceLocation("forge:ores")).contains(e.getState().getBlock().asItem()) && !(e.getPlayer().getHeldItemMainhand().getItem() instanceof ModHammer))
                 e.setExpToDrop(0);
@@ -229,7 +248,7 @@ public class ExpertModeCore {
         @SubscribeEvent
         public static void onDimTravel(EntityTravelToDimensionEvent e) {
             if (e.getEntity() instanceof EntityPlayerMP)
-                if (e.getDimension() == DimensionType.NETHER && !((EntityPlayerMP) e.getEntity()).getAdvancements().getProgress(new AdvancementManager().getAdvancement(new ResourceLocation("minecraft:story/mine_diamond"))).isDone())
+                if (e.getDimension() == DimensionType.NETHER && !((EntityPlayerMP) e.getEntity()).getAdvancements().getProgress(new AdvancementManager().getAdvancement(new ResourceLocation("minecraft:story/smelt_iron"))).isDone())
                     e.setCanceled(true);
         }
 

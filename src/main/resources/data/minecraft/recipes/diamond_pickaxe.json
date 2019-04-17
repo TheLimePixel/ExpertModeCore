@@ -10,10 +10,10 @@
       "item": "expertmodecore:redwood_stick"
     },
     "X": {
-      "item": "minecraft:diamond"
+      "tag": "forge:plates/crystalline"
     }
   },
   "result": {
-    "item": "minecraft:diamond_pickaxe"
+    "item": "expertmodecore:crystalline_pickaxe"
   }
 }

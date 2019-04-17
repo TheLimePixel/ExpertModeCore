@@ -9,6 +9,7 @@ public class RecipeTypes {
     public static ArrayList<MachineRecipe> blastFurnaceRecipes = new ArrayList<>();
     public static ArrayList<MachineRecipe> cokeOvenRecipes = new ArrayList<>();
     public static ArrayList<MachineRecipe> crusherRecipes = new ArrayList<>();
+    public static ArrayList<MachineRecipe> explosionRecipes = new ArrayList<>();
     public static ArrayList<MachineRecipe> infusionRecipes = new ArrayList<>();
     public static ArrayList<MachineRecipe> pressingRecipes = new ArrayList<>();
     public static ArrayList<MachineRecipe> sawmillRecipes = new ArrayList<>();
@@ -47,6 +48,13 @@ public class RecipeTypes {
         }
     }
 
+    public static class ExplosionRecipe extends MachineRecipe {
+        public ExplosionRecipe(Object input, ItemStack output) {
+            super(new Object[]{input}, new ItemStack[]{output}, 0);
+            explosionRecipes.add(this);
+        }
+    }
+
     public static class InfusionRecipe extends MachineRecipe {
         public InfusionRecipe(Object input1, Object input2, ItemStack output, int time) {
             super(new Object[]{input1, input2}, new ItemStack[]{output}, time);
@@ -67,7 +75,7 @@ public class RecipeTypes {
         public SawmillRecipe(Object input, ItemStack output, int time, boolean highSignal) {
             super(new Object[]{input}, new ItemStack[]{output}, time);
             sawmillRecipes.add(this);
-            this.highSignal=highSignal;
+            this.highSignal = highSignal;
         }
 
         public boolean isHighSignal() {

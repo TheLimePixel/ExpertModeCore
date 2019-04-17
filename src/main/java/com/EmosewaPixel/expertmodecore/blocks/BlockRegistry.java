@@ -20,6 +20,7 @@ public class BlockRegistry {
     public static Block COKE_BRICKS;
     public static Block COPPER_BLOCK;
     public static Block COPPER_ORE;
+    public static Block CRYSTALLINE_BLOCK;
     public static Block ELECTRUM_BLOCK;
     public static Block SILVER_BLOCK;
     public static Block SILVER_ORE;
@@ -62,6 +63,7 @@ public class BlockRegistry {
         COKE_BRICKS = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2, 6).sound(SoundType.STONE), "coke_bricks", 0), e);
         COPPER_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6).sound(SoundType.METAL), "copper_block", 0), e);
         COPPER_ORE = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6).sound(SoundType.STONE), "copper_ore", 0), e);
+        CRYSTALLINE_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6).sound(SoundType.METAL), "crystalline_block", 2), e);
         ELECTRUM_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6).sound(SoundType.METAL), "electrum_block", 2), e);
         SILVER_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(5, 6).sound(SoundType.METAL), "silver_block", 1), e);
         SILVER_ORE = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(5, 6).sound(SoundType.STONE), "silver_ore", 1), e);
@@ -105,6 +107,7 @@ public class BlockRegistry {
         registerItemBlock(COKE_BRICKS, e);
         registerItemBlock(COPPER_BLOCK, e);
         registerItemBlock(COPPER_ORE, e);
+        registerItemBlock(CRYSTALLINE_BLOCK, e);
         registerItemBlock(ELECTRUM_BLOCK, e);
         registerItemBlock(SILVER_BLOCK, e);
         registerItemBlock(SILVER_ORE, e);

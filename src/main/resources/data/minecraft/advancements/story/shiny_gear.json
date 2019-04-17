@@ -1,14 +1,14 @@
 {
-  "parent": "minecraft:story/mine_diamond",
+  "parent": "minecraft:story/crystalline",
   "display": {
     "icon": {
-      "item": "minecraft:diamond_chestplate"
+      "item": "expertmodecore:crystalline_chestplate"
     },
     "title": {
-      "translate": "advancements.story.shiny_gear.title"
+      "translate": "Cover Me In Crystal"
     },
     "description": {
-      "translate": "advancements.story.shiny_gear.description"
+      "translate": "Crystalline Armor saves lives"
     },
     "frame": "task",
     "show_toast": true,
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:diamond_helmet"
+            "item": "expertmodecore:crystalline_helmet"
           }
         ]
       }
@@ -31,7 +31,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:diamond_chestplate"
+            "item": "expertmodecore:crystalline_chestplate"
           }
         ]
       }
@@ -41,7 +41,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:diamond_leggings"
+            "item": "expertmodecore:crystalline_leggings"
           }
         ]
       }
@@ -51,7 +51,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:diamond_boots"
+            "item": "expertmodecore:crystalline_boots"
           }
         ]
       }
