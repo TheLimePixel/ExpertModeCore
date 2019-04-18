@@ -1,14 +1,14 @@
 {
-  "parent": "minecraft:story/sticks_and_stones",
+  "parent": "minecraft:story/chest",
   "display": {
     "icon": {
-      "item": "expertmodecore:rubber_drop"
+      "item": "usefulbackpacks:backpack_small"
     },
     "title": {
-      "translate": "Rubbery Goodness"
+      "translate": "Portable Storage"
     },
     "description": {
-      "translate": "Obtain Sticky Resin by cutting down a Rubber Tree. They can be found in every biome that has trees"
+      "translate": "Craft a Backpack"
     },
     "frame": "task",
     "show_toast": true,
@@ -16,12 +16,12 @@
     "hidden": false
   },
   "criteria": {
-    "get_wood": {
+    "get_chest": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "expertmodecore:rubber_drop"
+            "item": "usefulbackpacks:backpack_small"
           }
         ]
       }
@@ -29,7 +29,7 @@
   },
   "requirements": [
     [
-      "get_wood"
+      "get_chest"
     ]
   ]
 }

@@ -1,14 +1,14 @@
 {
-  "parent": "minecraft:story/sticks_and_stones",
+  "parent": "minecraft:adventure/root",
   "display": {
     "icon": {
-      "item": "expertmodecore:rubber_drop"
+      "item": "minecraft:compass"
     },
     "title": {
-      "translate": "Rubbery Goodness"
+      "translate": "Do You Know Da Wae?"
     },
     "description": {
-      "translate": "Obtain Sticky Resin by cutting down a Rubber Tree. They can be found in every biome that has trees"
+      "translate": "Craft a Compass"
     },
     "frame": "task",
     "show_toast": true,
@@ -16,12 +16,12 @@
     "hidden": false
   },
   "criteria": {
-    "get_wood": {
+    "has_compass": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "expertmodecore:rubber_drop"
+            "item": "minecraft:compass"
           }
         ]
       }
@@ -29,7 +29,7 @@
   },
   "requirements": [
     [
-      "get_wood"
+      "has_compass"
     ]
   ]
 }
