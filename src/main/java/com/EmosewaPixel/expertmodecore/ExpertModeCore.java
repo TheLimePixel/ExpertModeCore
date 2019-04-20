@@ -2,7 +2,9 @@ package com.EmosewaPixel.expertmodecore;
 
 import com.EmosewaPixel.expertmodecore.blocks.BlockRegistry;
 import com.EmosewaPixel.expertmodecore.items.ItemRegistry;
-import com.EmosewaPixel.expertmodecore.items.tools.ModHammer;
+import com.EmosewaPixel.expertmodecore.items.tools.MaterialHammer;
+import com.EmosewaPixel.expertmodecore.materials.MaterialItems;
+import com.EmosewaPixel.expertmodecore.materials.MaterialList;
 import com.EmosewaPixel.expertmodecore.proxy.ClientProxy;
 import com.EmosewaPixel.expertmodecore.proxy.IModProxy;
 import com.EmosewaPixel.expertmodecore.proxy.ServerProxy;
@@ -70,7 +72,7 @@ public class ExpertModeCore {
     public static ItemGroup main = new ItemGroup("expert_mode_main") {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ItemRegistry.FLINT_PICK);
+            return new ItemStack(BlockRegistry.COKE_OVEN);
         }
     };
 
@@ -82,6 +84,8 @@ public class ExpertModeCore {
         ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.GUIFACTORY, () -> ModGuiHandler::guis);
 
         MinecraftForge.EVENT_BUS.register(this);
+
+        MaterialList.registry();
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -192,10 +196,10 @@ public class ExpertModeCore {
 
         @SubscribeEvent
         public static void onBreak(BlockEvent.BreakEvent e) {
-            if (new ItemTags.Wrapper(new ResourceLocation("forge:ores")).contains(e.getState().getBlock().asItem()) && !(e.getPlayer().getHeldItemMainhand().getItem() instanceof ModHammer))
+            if (new ItemTags.Wrapper(new ResourceLocation("forge:ores")).contains(e.getState().getBlock().asItem()) && !(e.getPlayer().getHeldItemMainhand().getItem() instanceof MaterialHammer))
                 e.setExpToDrop(0);
 
-            if (e.getState().getBlock() == Blocks.REDSTONE_ORE && e.getPlayer().getHeldItemMainhand().getItem() == ItemRegistry.BRONZE_HAMMER) {
+            if (e.getState().getBlock() == Blocks.REDSTONE_ORE && e.getPlayer().getHeldItemMainhand().getItem() == MaterialItems.getItem(MaterialList.BRONZE, "hammer")) {
                 e.getWorld().spawnEntity(new EntityItem(e.getWorld().getWorld(), e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), new ItemStack(Items.REDSTONE, 3)));
                 e.getWorld().spawnEntity(new EntityItem(e.getWorld().getWorld(), e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), new ItemStack(ItemRegistry.STONE_DUST)));
             }
@@ -241,7 +245,7 @@ public class ExpertModeCore {
                         item.attackEntityFrom(DamageSource.IN_FIRE, -100);
 
                 if (e.world.getBlockState(item.getPosition()).getBlock() instanceof BlockFire)
-                    item.setItem(new ItemStack(ItemRegistry.CHARRED_IRON_INGOT, item.getItem().getCount()));
+                    item.setItem(new ItemStack(RecipeAddition.CHARRED_IRON_INGOT, item.getItem().getCount()));
             }
         }
 
@@ -268,31 +272,31 @@ public class ExpertModeCore {
                         e.getWorld().getWorld().setBlockState(e.getPos(), e.getState());
                     }
                 }
-                if (tag("ores").contains(item) && !e.getDrops().contains(new ItemStack(e.getState().getBlock())) && !(e.getHarvester().getHeldItemMainhand().getItem() instanceof ModHammer)) {
+                if (tag("ores").contains(item) && !e.getDrops().contains(new ItemStack(e.getState().getBlock())) && !(e.getHarvester().getHeldItemMainhand().getItem() instanceof MaterialHammer)) {
                     e.getDrops().removeAll(e.getDrops());
                     e.getDrops().add(new ItemStack(e.getState().getBlock()));
                 }
-                if (e.getHarvester().getHeldItemMainhand().getItem() instanceof ModHammer) {
+                if (e.getHarvester().getHeldItemMainhand().getItem() instanceof MaterialHammer) {
                     if (tag("ores").contains(item)) {
                         if (Tags.Items.ORES_IRON.contains(item)) {
                             e.getDrops().removeAll(e.getDrops());
-                            e.getDrops().add(new ItemStack(ItemRegistry.IRON_DUST));
+                            e.getDrops().add(new ItemStack(RecipeAddition.IRON_DUST));
                         }
                         if (RecipeAddition.ORES_COPPER.contains(item)) {
                             e.getDrops().removeAll(e.getDrops());
-                            e.getDrops().add(new ItemStack(ItemRegistry.COPPER_DUST));
+                            e.getDrops().add(new ItemStack(RecipeAddition.COPPER_DUST));
                         }
                         if (RecipeAddition.ORES_TIN.contains(item)) {
                             e.getDrops().removeAll(e.getDrops());
-                            e.getDrops().add(new ItemStack(ItemRegistry.TIN_DUST));
+                            e.getDrops().add(new ItemStack(RecipeAddition.TIN_DUST));
                         }
                         if (RecipeAddition.ORES_SILVER.contains(item)) {
                             e.getDrops().removeAll(e.getDrops());
-                            e.getDrops().add(new ItemStack(ItemRegistry.SILVER_DUST));
+                            e.getDrops().add(new ItemStack(RecipeAddition.SILVER_DUST));
                         }
                         if (Tags.Items.ORES_GOLD.contains(item)) {
                             e.getDrops().removeAll(e.getDrops());
-                            e.getDrops().add(new ItemStack(ItemRegistry.GOLD_DUST));
+                            e.getDrops().add(new ItemStack(RecipeAddition.GOLD_DUST));
                         }
                         e.getDrops().add(new ItemStack(ItemRegistry.STONE_DUST));
                     }

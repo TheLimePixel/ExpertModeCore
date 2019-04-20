@@ -1,0 +1,37 @@
+package com.EmosewaPixel.expertmodecore.materials;
+
+import net.minecraft.item.IArmorMaterial;
+import net.minecraft.item.IItemTier;
+
+public class IngotMaterial extends DustMaterial {
+    private IHarvestTier harvestTier = null;
+
+    public IngotMaterial(String name, TextureType textureType, int color) {
+        super(name, textureType, color);
+    }
+
+    public IngotMaterial hasOre() {
+        setHasOre(true);
+        return this;
+    }
+
+    public IngotMaterial doesntHaveBase() {
+        setHasBase(false);
+        return this;
+    }
+
+    public IngotMaterial setToolAndArmorMaterial(IItemTier itemTier, IArmorMaterial armorMaterial) {
+        setItemTier(itemTier);
+        setArmorMaterial(armorMaterial);
+        return this;
+    }
+
+    public IngotMaterial setHarvestTier(IHarvestTier tier) {
+        this.harvestTier = tier;
+        return this;
+    }
+
+    public IHarvestTier getHarvestTier() {
+        return harvestTier;
+    }
+}

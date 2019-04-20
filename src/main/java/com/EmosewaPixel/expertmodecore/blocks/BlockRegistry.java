@@ -2,6 +2,10 @@ package com.EmosewaPixel.expertmodecore.blocks;
 
 import com.EmosewaPixel.expertmodecore.ExpertModeCore;
 import com.EmosewaPixel.expertmodecore.blocks.trees.*;
+import com.EmosewaPixel.expertmodecore.materials.IMaterialItem;
+import com.EmosewaPixel.expertmodecore.materials.IngotMaterial;
+import com.EmosewaPixel.expertmodecore.materials.MaterialBlocks;
+import com.EmosewaPixel.expertmodecore.materials.MaterialList;
 import com.EmosewaPixel.expertmodecore.world.tree.IronwoodTree;
 import com.EmosewaPixel.expertmodecore.world.tree.RedwoodTree;
 import com.EmosewaPixel.expertmodecore.world.tree.RubberTree;
@@ -15,18 +19,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
 
 public class BlockRegistry {
-    public static Block BRONZER_BLOCK;
-    public static Block CHARRED_IRON_BLOCK;
     public static Block COKE_BRICKS;
-    public static Block COPPER_BLOCK;
-    public static Block COPPER_ORE;
-    public static Block CRYSTALLINE_BLOCK;
-    public static Block ELECTRUM_BLOCK;
-    public static Block SILVER_BLOCK;
-    public static Block SILVER_ORE;
-    public static Block STEEL_BLOCK;
-    public static Block TIN_BLOCK;
-    public static Block TIN_ORE;
 
     public static Block IRONWOOD_LEAVES;
     public static Block IRONWOOD_LOG;
@@ -58,18 +51,15 @@ public class BlockRegistry {
     public static Block SAWMILL;
 
     public static void registry(RegistryEvent.Register<Block> e) {
-        BRONZER_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6).sound(SoundType.METAL), "bronze_block", 0), e);
-        CHARRED_IRON_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(5, 6).sound(SoundType.METAL), "charred_iron_block", 1), e);
+        for (com.EmosewaPixel.expertmodecore.materials.Material mat : MaterialList.materials)
+            if (mat instanceof IngotMaterial)
+                if (((IngotMaterial) mat).getHarvestTier() != null) {
+                    register(new MaterialBlock(Block.Properties.create(Material.IRON).sound(SoundType.METAL), (IngotMaterial) mat, "block"), e);
+                    if (mat.doesHaveOre())
+                        register(new MaterialBlock(Block.Properties.create(Material.ROCK).sound(SoundType.STONE), (IngotMaterial) mat, "ore"), e);
+                }
+
         COKE_BRICKS = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2, 6).sound(SoundType.STONE), "coke_bricks", 0), e);
-        COPPER_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6).sound(SoundType.METAL), "copper_block", 0), e);
-        COPPER_ORE = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6).sound(SoundType.STONE), "copper_ore", 0), e);
-        CRYSTALLINE_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6).sound(SoundType.METAL), "crystalline_block", 2), e);
-        ELECTRUM_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6).sound(SoundType.METAL), "electrum_block", 2), e);
-        SILVER_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(5, 6).sound(SoundType.METAL), "silver_block", 1), e);
-        SILVER_ORE = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(5, 6).sound(SoundType.STONE), "silver_ore", 1), e);
-        STEEL_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(5, 6).sound(SoundType.METAL), "steel_block", 1), e);
-        TIN_BLOCK = register(new ModBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(1.5F, 6).sound(SoundType.METAL), "tin_block", 0), e);
-        TIN_ORE = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6).sound(SoundType.STONE), "tin_ore", 0), e);
 
         IRONWOOD_LEAVES = register(new BlockIronwoodLeaves(), e);
         IRONWOOD_LOG = register(new ModLog("ironwood_log", 1, 7), e);
@@ -102,19 +92,11 @@ public class BlockRegistry {
     }
 
     public static void itemRegistry(RegistryEvent.Register<Item> e) {
-        registerItemBlock(BRONZER_BLOCK, e);
-        registerItemBlock(CHARRED_IRON_BLOCK, e);
-        registerItemBlock(COKE_BRICKS, e);
-        registerItemBlock(COPPER_BLOCK, e);
-        registerItemBlock(COPPER_ORE, e);
-        registerItemBlock(CRYSTALLINE_BLOCK, e);
-        registerItemBlock(ELECTRUM_BLOCK, e);
-        registerItemBlock(SILVER_BLOCK, e);
-        registerItemBlock(SILVER_ORE, e);
-        registerItemBlock(STEEL_BLOCK, e);
-        registerItemBlock(TIN_BLOCK, e);
-        registerItemBlock(TIN_ORE, e);
+        for (IMaterialItem block : MaterialBlocks.materialBlocks)
+            if (block instanceof Block)
+                registerItemBlock((Block) block, e);
 
+        registerItemBlock(COKE_BRICKS, e);
         registerItemBlock(IRONWOOD_LEAVES, e);
         registerItemBlock(IRONWOOD_LOG, e);
         registerItemBlock(IRONWOOD_PLANKS, e);

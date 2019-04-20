@@ -2,6 +2,7 @@ package com.EmosewaPixel.expertmodecore.world;
 
 import com.EmosewaPixel.expertmodecore.blocks.BlockRegistry;
 import com.EmosewaPixel.expertmodecore.blocks.trees.BlockRubberLog;
+import com.EmosewaPixel.expertmodecore.recipes.RecipeAddition;
 import com.EmosewaPixel.expertmodecore.world.tree.BigRubberTreeFeatures;
 import com.EmosewaPixel.expertmodecore.world.tree.GiantTree;
 import net.minecraft.world.biome.Biome;
@@ -17,17 +18,17 @@ public class OreGen {
     public static void addOres() {
         for (Biome biome : ForgeRegistries.BIOMES) {
             biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, new DimensionFeature<>(
-                    Feature.MINABLE, new MinableConfig(MinableConfig.IS_ROCK, BlockRegistry.COPPER_ORE.getDefaultState(), 9), Biome.COUNT_RANGE,
+                    Feature.MINABLE, new MinableConfig(MinableConfig.IS_ROCK, RecipeAddition.COPPER_ORE.getDefaultState(), 9), Biome.COUNT_RANGE,
                     new CountRangeConfig(25, 0, 0, 64), DimensionType.OVERWORLD
             ));
 
             biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, new DimensionFeature<>(
-                    Feature.MINABLE, new MinableConfig(MinableConfig.IS_ROCK, BlockRegistry.SILVER_ORE.getDefaultState(), 9), Biome.COUNT_RANGE,
+                    Feature.MINABLE, new MinableConfig(MinableConfig.IS_ROCK, RecipeAddition.SILVER_ORE.getDefaultState(), 9), Biome.COUNT_RANGE,
                     new CountRangeConfig(10, 0, 0, 64), DimensionType.OVERWORLD
             ));
 
             biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, new DimensionFeature<>(
-                    Feature.MINABLE, new MinableConfig(MinableConfig.IS_ROCK, BlockRegistry.TIN_ORE.getDefaultState(), 9), Biome.COUNT_RANGE,
+                    Feature.MINABLE, new MinableConfig(MinableConfig.IS_ROCK, RecipeAddition.TIN_ORE.getDefaultState(), 9), Biome.COUNT_RANGE,
                     new CountRangeConfig(16, 0, 0, 64), DimensionType.OVERWORLD
             ));
 
