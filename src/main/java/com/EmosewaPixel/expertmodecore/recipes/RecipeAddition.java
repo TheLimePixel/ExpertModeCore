@@ -77,7 +77,7 @@ public class RecipeAddition {
         new RecipeTypes.InfusionRecipe(new ItemStack(Items.SLIME_BALL), new ItemStack(Items.BLAZE_POWDER), new ItemStack(Items.MAGMA_CREAM), 2000);
 
         new RecipeTypes.CokeOvenRecipe(new TagStack(ItemTags.LOGS), new ItemStack(Items.CHARCOAL), 1800);
-        new RecipeTypes.CokeOvenRecipe(new ItemStack(Items.COAL), new ItemStack(ItemRegistry.COKE_COKE), 1800);
+        new RecipeTypes.CokeOvenRecipe(new ItemStack(Items.COAL), new ItemStack(ItemRegistry.COAL_COKE), 1800);
 
         new RecipeTypes.PressingRecipe(new TagStack(Tags.Items.INGOTS_IRON), new ItemStack(IRON_PLATE));
         new RecipeTypes.PressingRecipe(new TagStack(Tags.Items.INGOTS_GOLD), new ItemStack(GOLD_PLATE));

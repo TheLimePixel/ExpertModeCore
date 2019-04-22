@@ -12,7 +12,7 @@ public class MaterialPick extends ItemPickaxe implements IMaterialItem {
 
     public MaterialPick(Material mat) {
         super(mat.getItemTier(), 1, -2.8F, (new Item.Properties()).group(ExpertModeCore.main));
-        setRegistryName(mat.getName() + "_pickaxe");
+        setRegistryName("expertmodecore:" + mat.getName() + "_pickaxe");
         this.material = mat;
         MaterialItems.materialItems.add(this);
     }

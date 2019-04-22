@@ -44,7 +44,7 @@ public class BlockFurnaceBase extends Block implements ITileEntityProvider {
 
     public BlockFurnaceBase(String name) {
         super(Properties.create(Material.ROCK).hardnessAndResistance(3.5F));
-        setRegistryName(name);
+        setRegistryName("expertmodecore:" + name);
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.NORTH).with(LIT, false));
         this.name = name;
     }

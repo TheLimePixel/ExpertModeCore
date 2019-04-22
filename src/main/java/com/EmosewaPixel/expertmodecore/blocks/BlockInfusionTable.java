@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
 public class BlockInfusionTable extends Block implements ITileEntityProvider {
     public BlockInfusionTable() {
         super(Properties.create(Material.ROCK).hardnessAndResistance(3.5F));
-        setRegistryName("infusion_table");
+        setRegistryName("expertmodecore:infusion_table");
     }
 
     @Nullable

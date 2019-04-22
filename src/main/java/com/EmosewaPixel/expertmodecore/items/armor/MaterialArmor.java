@@ -30,7 +30,7 @@ public class MaterialArmor extends ItemArmor implements IMaterialItem {
                 type = "boots";
         }
         this.type = type;
-        setRegistryName(material.getName() + "_" + type);
+        setRegistryName("expertmodecore:" + material.getName() + "_" + type);
         MaterialItems.materialItems.add(this);
     }
 

@@ -129,7 +129,7 @@ public class ExpertModeCore {
     public static class GameEvents {
         @SubscribeEvent
         public static void fuelTime(FurnaceFuelBurnTimeEvent e) {
-            if (e.getItemStack().getItem() == ItemRegistry.COKE_COKE)
+            if (e.getItemStack().getItem() == ItemRegistry.COAL_COKE)
                 e.setBurnTime(3200);
             if (e.getItemStack().getItem() == ItemRegistry.CREOSOTE_BUCKET)
                 e.setBurnTime(6400);

@@ -11,7 +11,7 @@ public class MaterialSword extends ItemSword implements IMaterialItem {
 
     public MaterialSword(Material mat) {
         super(mat.getItemTier(), 3, -2.4F, (new Properties()).group(ExpertModeCore.main));
-        setRegistryName(mat.getName() + "_sword");
+        setRegistryName("expertmodecore:" + mat.getName() + "_sword");
         this.material = mat;
         MaterialItems.materialItems.add(this);
     }

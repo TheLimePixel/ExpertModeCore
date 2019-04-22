@@ -10,7 +10,7 @@ public class FakeFluidContainer extends Item {
 
     public FakeFluidContainer(String name, Item container) {
         super(new Properties().group(ExpertModeCore.main).maxStackSize(1));
-        setRegistryName(name);
+        setRegistryName("expertmodecore:" + name);
         this.container = container;
     }
 

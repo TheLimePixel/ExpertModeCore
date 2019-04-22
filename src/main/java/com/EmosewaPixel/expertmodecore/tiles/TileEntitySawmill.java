@@ -1,6 +1,6 @@
 package com.EmosewaPixel.expertmodecore.tiles;
 
-import com.EmosewaPixel.expertmodecore.blocks.trees.BlockSawmill;
+import com.EmosewaPixel.expertmodecore.blocks.BlockSawmill;
 import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
 import net.minecraft.entity.item.EntityItem;

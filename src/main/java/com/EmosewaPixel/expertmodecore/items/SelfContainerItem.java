@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 public class SelfContainerItem extends Item {
     public SelfContainerItem(String name) {
         super(new Item.Properties().group(ExpertModeCore.main));
-        setRegistryName(name);
+        setRegistryName("expertmodecore:" + name);
     }
 
     @Override

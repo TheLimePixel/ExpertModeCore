@@ -19,7 +19,7 @@ public class TileEntityBlastFurnace extends TileEntityFurnaceBase implements ITi
         fuel_input = new ItemStackHandler(1) {
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-                return stack.getItem() == Items.COAL || stack.getItem() == Items.CHARCOAL || stack.getItem() == Blocks.COAL_BLOCK.asItem() || stack.getItem() == ItemRegistry.COKE_COKE;
+                return stack.getItem() == Items.COAL || stack.getItem() == Items.CHARCOAL || stack.getItem() == Blocks.COAL_BLOCK.asItem() || stack.getItem() == ItemRegistry.COAL_COKE;
             }
 
             @Override
@@ -34,7 +34,7 @@ public class TileEntityBlastFurnace extends TileEntityFurnaceBase implements ITi
     @Override
     protected void consumeFuel() {
         Item fuel = fuel_input.getStackInSlot(0).getItem();
-        if ((fuel == Items.COAL || fuel == Items.CHARCOAL || fuel == Blocks.COAL_BLOCK.asItem() || fuel == ItemRegistry.COKE_COKE) && !getCurrentRecipe().isEmpty() && canOutput(getCurrentRecipe(), true)) {
+        if ((fuel == Items.COAL || fuel == Items.CHARCOAL || fuel == Blocks.COAL_BLOCK.asItem() || fuel == ItemRegistry.COAL_COKE) && !getCurrentRecipe().isEmpty() && canOutput(getCurrentRecipe(), true)) {
             setBurnTime(getItemBurnTime(fuel_input.getStackInSlot(0)));
             setMaxBurnTime(getItemBurnTime(fuel_input.getStackInSlot(0)));
             fuel_input.extractItem(0, 1, false);

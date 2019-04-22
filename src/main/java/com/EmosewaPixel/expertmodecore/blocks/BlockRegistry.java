@@ -18,6 +18,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
 
+import java.util.ArrayList;
+
 public class BlockRegistry {
     public static Block COKE_BRICKS;
 
@@ -50,6 +52,8 @@ public class BlockRegistry {
     public static Block INFUSION_TABLE;
     public static Block SAWMILL;
 
+    private static ArrayList<Block> templates = new ArrayList<>();
+
     public static void registry(RegistryEvent.Register<Block> e) {
         for (com.EmosewaPixel.expertmodecore.materials.Material mat : MaterialList.materials)
             if (mat instanceof IngotMaterial)
@@ -63,25 +67,25 @@ public class BlockRegistry {
 
         IRONWOOD_LEAVES = register(new BlockIronwoodLeaves(), e);
         IRONWOOD_LOG = register(new ModLog("ironwood_log", 1, 7), e);
-        IRONWOOD_PLANKS = register(new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)).setRegistryName("ironwood_planks"), e);
+        IRONWOOD_PLANKS = register(new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)).setRegistryName("expertmodecore:ironwood_planks"), e);
         IRONWOOD_SAPLING = register(new ModSapling(new IronwoodTree(), "ironwood_sapling"), e);
-        IRONWOOD_WOOD = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("ironwood_wood"), e);
+        IRONWOOD_WOOD = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("expertmodecore:ironwood_wood"), e);
         REDWOOD_LEAVES = register(new BlockRedwoodLeaves(), e);
         REDWOOD_LOG = register(new ModLog("redwood_log", 2, 4), e);
-        REDWOOD_PLANKS = register(new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)).setRegistryName("redwood_planks"), e);
+        REDWOOD_PLANKS = register(new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)).setRegistryName("expertmodecore:redwood_planks"), e);
         REDWOOD_SAPLING = register(new ModSapling(new RedwoodTree(), "redwood_sapling"), e);
-        REDWOOD_WOOD = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("redwood_wood"), e);
+        REDWOOD_WOOD = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("expertmodecore:redwood_wood"), e);
         RUBBER_LEAVES = register(new BlockRubberLeaves(), e);
         RUBBER_LOG = register(new BlockRubberLog(), e);
-        RUBBER_PLANKS = register(new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)).setRegistryName("rubber_planks"), e);
+        RUBBER_PLANKS = register(new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD)).setRegistryName("expertmodecore:rubber_planks"), e);
         RUBBER_SAPLING = register(new ModSapling(new RubberTree(), "rubber_sapling"), e);
-        RUBBER_WOOD = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("rubber_wood"), e);
-        STRIPPED_IRONWOOD_LOG = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("stripped_ironwood_log"), e);
-        STRIPPED_IRONWOOD_WOOD = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("stripped_ironwood_wood"), e);
-        STRIPPED_REDWOOD_LOG = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("stripped_redwood_log"), e);
-        STRIPPED_REDWOOD_WOOD = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("stripped_redwood_wood"), e);
-        STRIPPED_RUBBER_LOG = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("stripped_rubber_log"), e);
-        STRIPPED_RUBBER_WOOD = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("stripped_rubber_wood"), e);
+        RUBBER_WOOD = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("expertmodecore:rubber_wood"), e);
+        STRIPPED_IRONWOOD_LOG = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("expertmodecore:stripped_ironwood_log"), e);
+        STRIPPED_IRONWOOD_WOOD = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("expertmodecore:stripped_ironwood_wood"), e);
+        STRIPPED_REDWOOD_LOG = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("expertmodecore:stripped_redwood_log"), e);
+        STRIPPED_REDWOOD_WOOD = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("expertmodecore:stripped_redwood_wood"), e);
+        STRIPPED_RUBBER_LOG = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("expertmodecore:stripped_rubber_log"), e);
+        STRIPPED_RUBBER_WOOD = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("expertmodecore:stripped_rubber_wood"), e);
 
         ALLOYER = register(new BlockAlloyer(), e);
         BLAST_FURNACE = register(new BlockBlastFurnace(), e);
@@ -89,6 +93,12 @@ public class BlockRegistry {
         CRUSHER = register(new BlockCrusher(), e);
         INFUSION_TABLE = register(new BlockInfusionTable(), e);
         SAWMILL = register(new BlockSawmill(), e);
+
+        templates.add(register(new ModBlock(Block.Properties.create(Material.IRON), "iron_block", 0), e));
+        templates.add(register(new ModBlock(Block.Properties.create(Material.IRON), "regular_block", 0), e));
+        templates.add(register(new ModBlock(Block.Properties.create(Material.IRON), "shiny_block", 0), e));
+        templates.add(register(new ModBlock(Block.Properties.create(Material.IRON), "regular_ore", 0), e));
+        templates.add(register(new ModBlock(Block.Properties.create(Material.IRON), "shiny_ore", 0), e));
     }
 
     public static void itemRegistry(RegistryEvent.Register<Item> e) {
@@ -125,6 +135,9 @@ public class BlockRegistry {
         registerItemBlock(CRUSHER, e);
         registerItemBlock(INFUSION_TABLE, e);
         registerItemBlock(SAWMILL, e);
+
+        for (Block template : templates)
+            registerItemBlock(template, e, false);
     }
 
     private static Block register(Block block, RegistryEvent.Register<Block> e) {
@@ -133,6 +146,10 @@ public class BlockRegistry {
     }
 
     private static void registerItemBlock(Block block, RegistryEvent.Register<Item> e) {
-        e.getRegistry().register(new ItemBlock(block, new Item.Properties().group(ExpertModeCore.main)).setRegistryName(block.getRegistryName()));
+        registerItemBlock(block, e, true);
+    }
+
+    private static void registerItemBlock(Block block, RegistryEvent.Register<Item> e, boolean withGroup) {
+        e.getRegistry().register(new ItemBlock(block, withGroup ? new Item.Properties().group(ExpertModeCore.main) : new Item.Properties()).setRegistryName(block.getRegistryName()));
     }
 }

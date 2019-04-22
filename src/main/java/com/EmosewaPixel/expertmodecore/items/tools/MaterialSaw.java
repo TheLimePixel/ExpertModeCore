@@ -13,7 +13,7 @@ public class MaterialSaw extends ItemAxe implements IMaterialItem {
 
     public MaterialSaw(Material mat) {
         super(mat.getItemTier(), 3, 3.4F - mat.getItemTier().getEfficiency() / 2 * 0.1F, new Item.Properties().defaultMaxDamage(mat.getItemTier().getMaxUses() / 3 * 2).group(ExpertModeCore.main));
-        setRegistryName(mat.getName() + "_saw");
+        setRegistryName("expertmodecore:" + mat.getName() + "_saw");
         efficiency = mat.getItemTier().getEfficiency() / 2;
         this.material = mat;
         MaterialItems.materialItems.add(this);

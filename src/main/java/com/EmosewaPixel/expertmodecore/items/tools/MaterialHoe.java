@@ -11,7 +11,7 @@ public class MaterialHoe extends ItemHoe implements IMaterialItem {
 
     public MaterialHoe(Material mat) {
         super(mat.getItemTier(), mat.getItemTier().getHarvestLevel() - 3, (new Properties()).group(ExpertModeCore.main));
-        setRegistryName(mat.getName() + "_hoe");
+        setRegistryName("expertmodecore:" + mat.getName() + "_hoe");
         this.material = mat;
         MaterialItems.materialItems.add(this);
     }

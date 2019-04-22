@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 public class BlockRedwoodLeaves extends BlockLeaves {
     public BlockRedwoodLeaves() {
         super(Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).needsRandomTick().sound(SoundType.PLANT));
-        setRegistryName("redwood_leaves");
+        setRegistryName("expertmodecore:redwood_leaves");
     }
 
     @Override

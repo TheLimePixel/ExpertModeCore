@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 public class BlockIronwoodLeaves extends BlockLeaves {
     public BlockIronwoodLeaves() {
         super(Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).needsRandomTick().sound(SoundType.PLANT));
-        setRegistryName("ironwood_leaves");
+        setRegistryName("expertmodecore:ironwood_leaves");
     }
 
     @Override

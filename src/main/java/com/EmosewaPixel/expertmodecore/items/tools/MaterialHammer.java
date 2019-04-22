@@ -12,7 +12,7 @@ public class MaterialHammer extends ItemPickaxe implements IMaterialItem {
 
     public MaterialHammer(Material mat) {
         super(mat.getItemTier(), 6, -3.4F + mat.getItemTier().getEfficiency() / 2 * 0.1F, new Properties().defaultMaxDamage(mat.getItemTier().getMaxUses()).group(ExpertModeCore.main));
-        setRegistryName(mat.getName() + "_hammer");
+        setRegistryName("expertmodecore:" + mat.getName() + "_hammer");
         efficiency = mat.getItemTier().getEfficiency() / 2;
         this.material = mat;
         MaterialItems.materialItems.add(this);

@@ -13,7 +13,7 @@ public class ModLog extends BlockLog {
 
     public ModLog(String name, int harvestLvl, float hardness) {
         super(MaterialColor.DIRT, Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(hardness).sound(SoundType.WOOD));
-        setRegistryName(name);
+        setRegistryName("expertmodecore:" + name);
         this.harvestLvl = harvestLvl;
     }
 

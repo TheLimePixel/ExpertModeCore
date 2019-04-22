@@ -12,7 +12,7 @@ public class MaterialItem extends Item implements IMaterialItem {
 
     public MaterialItem(Material material, String type) {
         super(new Item.Properties().group(ExpertModeCore.main));
-        setRegistryName(material.getName() + "_" + type);
+        setRegistryName("expertmodecore:" + material.getName() + "_" + type);
         this.material = material;
         this.type = type;
         MaterialItems.materialItems.add(this);

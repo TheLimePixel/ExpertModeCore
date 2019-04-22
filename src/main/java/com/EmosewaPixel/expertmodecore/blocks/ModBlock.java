@@ -6,10 +6,11 @@ import net.minecraftforge.common.ToolType;
 
 public class ModBlock extends Block {
     private int level;
+
     public ModBlock(Block.Properties properties, String name, int level) {
         super(properties);
-        this.level=level;
-        setRegistryName(name);
+        this.level = level;
+        setRegistryName("expertmodecore:" + name);
     }
 
     @Override
