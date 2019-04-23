@@ -37,11 +37,13 @@ public class ClientProxy implements IModProxy {
 
     @SubscribeEvent
     public static void onModelBaking(ModelBakeEvent e) {
-        for (IMaterialItem item : MaterialItems.materialItems)
-            if (item instanceof Item && !(item instanceof ItemTiered)) {
+        for (IMaterialItem item : MaterialItems.materialItems) {
+            if (item instanceof Item && !(item instanceof ItemTiered))
                 e.getModelRegistry().put(new ModelResourceLocation(((Item) item).getRegistryName(), "inventory"), e.getModelRegistry().get(new ModelResourceLocation("expertmodecore:" + item.getMaterial().getTextureType().toString().toLowerCase() + "_" + item.getItemType(), "inventory")));
-            }
 
+            if (item instanceof ItemTiered)
+                e.getModelRegistry().put(new ModelResourceLocation(((Item) item).getRegistryName(), "inventory"), e.getModelRegistry().get(new ModelResourceLocation("expertmodecore:" + item.getItemType(), "inventory")));
+        }
         for (IMaterialItem block : MaterialBlocks.materialBlocks)
             if (block instanceof Block) {
                 e.getModelRegistry().put(new ModelResourceLocation(((Block) block).getRegistryName(), ""), e.getModelRegistry().get(new ModelResourceLocation("expertmodecore:" + block.getMaterial().getTextureType().toString().toLowerCase() + "_" + block.getItemType(), "")));
@@ -59,7 +61,7 @@ public class ClientProxy implements IModProxy {
         Minecraft.getInstance().getItemColors().register((ItemStack stack, int index) -> FoliageColors.getDefault(), BlockRegistry.REDWOOD_LEAVES);
 
         //Material Items
-        for (IMaterialItem item : MaterialItems.materialItems)
+        for (IMaterialItem item : MaterialItems.materialItems) {
             if (item instanceof Item && !(item instanceof ItemTiered))
                 Minecraft.getInstance().getItemColors().register((ItemStack stack, int index) -> {
                     Item sItem = stack.getItem();
@@ -67,6 +69,15 @@ public class ClientProxy implements IModProxy {
                         return ((IMaterialItem) sItem).getMaterial().getColor();
                     return -1;
                 }, (Item) item);
+
+            if (item instanceof ItemTiered)
+                Minecraft.getInstance().getItemColors().register((ItemStack stack, int index) -> {
+                    Item sItem = stack.getItem();
+                    if (sItem instanceof IMaterialItem && index == 1)
+                        return ((IMaterialItem) sItem).getMaterial().getColor();
+                    return -1;
+                }, (Item) item);
+        }
 
         for (IMaterialItem block : MaterialBlocks.materialBlocks)
             if (block instanceof Block) {

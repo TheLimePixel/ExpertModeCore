@@ -9,13 +9,13 @@ public class MaterialList {
     public static ArrayList<Material> materials = new ArrayList<>();
 
     public static Material IRON, GOLD, COPPER, TIN, SILVER, BRONZE, STEEL, ELECTRUM, CHARRED_IRON, CRYSTALLINE, FLINT,
-    LAPIS, QUARTZ, DIAMOND, PRISMARINE;
+    LAPIS, QUARTZ, DIAMOND, PRISMARINE, MAGMA, STONE, NETHERRACK;
 
     public static void registry() {
-        IRON = register(new IngotMaterial("iron", TextureType.IRON, 0xd8d8d8).doesntHaveBase());
-        GOLD = register(new IngotMaterial("gold", TextureType.SHINY, 0xfad64a).doesntHaveBase());
-        COPPER = register(new IngotMaterial("copper", TextureType.REGULAR, 0xe88e00).hasOre().setHarvestTier(HarvestTiers.STONE));
-        TIN = register(new IngotMaterial("tin", TextureType.REGULAR, 0xc3d4d4).hasOre().setHarvestTier(HarvestTiers.STONE));
+        IRON = register(new IngotMaterial("iron", TextureType.IRON, 0xd8d8d8).doesntHaveBase().hasOre());
+        GOLD = register(new IngotMaterial("gold", TextureType.SHINY, 0xfad64a).doesntHaveBase().hasOre());
+        COPPER = register(new IngotMaterial("copper", TextureType.REGULAR, 0xf39500).hasOre().setHarvestTier(HarvestTiers.STONE));
+        TIN = register(new IngotMaterial("tin", TextureType.REGULAR, 0xc1cfcf).hasOre().setHarvestTier(HarvestTiers.STONE));
         SILVER = register(new IngotMaterial("silver", TextureType.SHINY, 0xf0f7f7).hasOre().setHarvestTier(HarvestTiers.IRON));
         BRONZE = register(new IngotMaterial("bronze", TextureType.REGULAR, 0xd79117).setToolAndArmorMaterial(ExpertTiers.BRONZE, ExpertMaterials.BRONZE).setHarvestTier(HarvestTiers.STONE));
         STEEL = register(new IngotMaterial("steel", TextureType.IRON, 0xb7b7b7).setToolAndArmorMaterial(ExpertTiers.STEEl, ExpertMaterials.STEEL).setHarvestTier(HarvestTiers.IRON));
@@ -27,6 +27,9 @@ public class MaterialList {
         QUARTZ = register(new DustMaterial("quartz", TextureType.REGULAR, 0xe8dfd0));
         DIAMOND = register(new DustMaterial("diamond", TextureType.REGULAR, 0x34ebe3));
         PRISMARINE = register(new DustMaterial("prismarine", TextureType.REGULAR, 0xa1dacb));
+        MAGMA = register(new DustMaterial("magma", TextureType.REGULAR, 0xffb62e));
+        STONE = register(new DustMaterial("stone", TextureType.REGULAR, 0xcccccc).doesHaveSmallDust());
+        NETHERRACK = register(new DustMaterial("netherrack", TextureType.REGULAR, 0xb33939));
     }
 
     public static Material register(Material material) {

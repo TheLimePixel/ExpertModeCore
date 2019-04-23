@@ -17,7 +17,7 @@
     }
   ],
   "result": {
-    "item": "minecraft:torch",
+    "item": "expertmodecore:unlit_torch",
     "count": 4
   }
 }

@@ -4,6 +4,8 @@ import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.IItemTier;
 
 public class DustMaterial extends Material {
+    private boolean hasSmallDust = false;
+
     public DustMaterial(String name, TextureType textureType, int color) {
         super(name, textureType, color);
     }
@@ -22,5 +24,14 @@ public class DustMaterial extends Material {
         setItemTier(itemTier);
         setArmorMaterial(armorMaterial);
         return this;
+    }
+
+    public DustMaterial doesHaveSmallDust() {
+        hasSmallDust = true;
+        return this;
+    }
+
+    public boolean hasSmallDust() {
+        return hasSmallDust;
     }
 }

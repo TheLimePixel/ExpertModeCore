@@ -59,7 +59,7 @@ public class BlockRegistry {
             if (mat instanceof IngotMaterial)
                 if (((IngotMaterial) mat).getHarvestTier() != null) {
                     register(new MaterialBlock(Block.Properties.create(Material.IRON).sound(SoundType.METAL), (IngotMaterial) mat, "block"), e);
-                    if (mat.doesHaveOre())
+                    if (mat.doesHaveOre() && mat.doesHaveBase())
                         register(new MaterialBlock(Block.Properties.create(Material.ROCK).sound(SoundType.STONE), (IngotMaterial) mat, "ore"), e);
                 }
 

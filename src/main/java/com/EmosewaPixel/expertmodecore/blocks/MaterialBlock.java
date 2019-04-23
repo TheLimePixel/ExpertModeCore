@@ -4,6 +4,7 @@ import com.EmosewaPixel.expertmodecore.materials.IMaterialItem;
 import com.EmosewaPixel.expertmodecore.materials.IngotMaterial;
 import com.EmosewaPixel.expertmodecore.materials.Material;
 import com.EmosewaPixel.expertmodecore.materials.MaterialBlocks;
+import net.minecraft.util.BlockRenderLayer;
 
 public class MaterialBlock extends ModBlock implements IMaterialItem {
     private IngotMaterial material;
@@ -24,5 +25,10 @@ public class MaterialBlock extends ModBlock implements IMaterialItem {
     @Override
     public String getItemType() {
         return type;
+    }
+
+    @Override
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
     }
 }

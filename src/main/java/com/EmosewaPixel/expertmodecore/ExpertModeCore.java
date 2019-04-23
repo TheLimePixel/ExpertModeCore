@@ -3,6 +3,7 @@ package com.EmosewaPixel.expertmodecore;
 import com.EmosewaPixel.expertmodecore.blocks.BlockRegistry;
 import com.EmosewaPixel.expertmodecore.items.ItemRegistry;
 import com.EmosewaPixel.expertmodecore.items.tools.MaterialHammer;
+import com.EmosewaPixel.expertmodecore.materials.Material;
 import com.EmosewaPixel.expertmodecore.materials.MaterialItems;
 import com.EmosewaPixel.expertmodecore.materials.MaterialList;
 import com.EmosewaPixel.expertmodecore.proxy.ClientProxy;
@@ -38,7 +39,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
@@ -201,7 +201,7 @@ public class ExpertModeCore {
 
             if (e.getState().getBlock() == Blocks.REDSTONE_ORE && e.getPlayer().getHeldItemMainhand().getItem() == MaterialItems.getItem(MaterialList.BRONZE, "hammer")) {
                 e.getWorld().spawnEntity(new EntityItem(e.getWorld().getWorld(), e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), new ItemStack(Items.REDSTONE, 3)));
-                e.getWorld().spawnEntity(new EntityItem(e.getWorld().getWorld(), e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), new ItemStack(ItemRegistry.STONE_DUST)));
+                e.getWorld().spawnEntity(new EntityItem(e.getWorld().getWorld(), e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), new ItemStack(RecipeAddition.STONE_DUST)));
             }
         }
 
@@ -278,35 +278,21 @@ public class ExpertModeCore {
                 }
                 if (e.getHarvester().getHeldItemMainhand().getItem() instanceof MaterialHammer) {
                     if (tag("ores").contains(item)) {
-                        if (Tags.Items.ORES_IRON.contains(item)) {
-                            e.getDrops().removeAll(e.getDrops());
-                            e.getDrops().add(new ItemStack(RecipeAddition.IRON_DUST));
-                        }
-                        if (RecipeAddition.ORES_COPPER.contains(item)) {
-                            e.getDrops().removeAll(e.getDrops());
-                            e.getDrops().add(new ItemStack(RecipeAddition.COPPER_DUST));
-                        }
-                        if (RecipeAddition.ORES_TIN.contains(item)) {
-                            e.getDrops().removeAll(e.getDrops());
-                            e.getDrops().add(new ItemStack(RecipeAddition.TIN_DUST));
-                        }
-                        if (RecipeAddition.ORES_SILVER.contains(item)) {
-                            e.getDrops().removeAll(e.getDrops());
-                            e.getDrops().add(new ItemStack(RecipeAddition.SILVER_DUST));
-                        }
-                        if (Tags.Items.ORES_GOLD.contains(item)) {
-                            e.getDrops().removeAll(e.getDrops());
-                            e.getDrops().add(new ItemStack(RecipeAddition.GOLD_DUST));
-                        }
-                        e.getDrops().add(new ItemStack(ItemRegistry.STONE_DUST));
+                        for (Material mat : MaterialList.materials)
+                            if (mat.doesHaveOre())
+                                if (tag("ores/" + mat.getName()).contains(item)) {
+                                    e.getDrops().removeAll(e.getDrops());
+                                    e.getDrops().add(new ItemStack(MaterialItems.getItem(mat, "dust")));
+                                }
+                        e.getDrops().add(new ItemStack(RecipeAddition.STONE_DUST));
                     }
                     if (e.getState().getBlock() == Blocks.MAGMA_BLOCK) {
                         e.getDrops().remove(0);
-                        e.getDrops().add(new ItemStack(ItemRegistry.CRUSHED_MAGMA_BLOCK, 2));
+                        e.getDrops().add(new ItemStack(RecipeAddition.MAGMA_DUST, 2));
                     }
                     if (e.getState().getBlock() == Blocks.NETHERRACK) {
                         e.getDrops().remove(0);
-                        e.getDrops().add(new ItemStack(ItemRegistry.NETHERRACK_DUST, 2));
+                        e.getDrops().add(new ItemStack(RecipeAddition.NETHERRACK_DUST, 2));
                     }
                 }
             }

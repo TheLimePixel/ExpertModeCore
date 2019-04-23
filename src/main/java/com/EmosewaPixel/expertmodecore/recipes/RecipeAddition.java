@@ -2,9 +2,7 @@ package com.EmosewaPixel.expertmodecore.recipes;
 
 import com.EmosewaPixel.expertmodecore.blocks.BlockRegistry;
 import com.EmosewaPixel.expertmodecore.items.ItemRegistry;
-import com.EmosewaPixel.expertmodecore.materials.MaterialBlocks;
-import com.EmosewaPixel.expertmodecore.materials.MaterialItems;
-import com.EmosewaPixel.expertmodecore.materials.MaterialList;
+import com.EmosewaPixel.expertmodecore.materials.*;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -20,7 +18,7 @@ public class RecipeAddition {
         new RecipeTypes.BlastFurnaceRecipe(new ItemStack(Blocks.IRON_BLOCK), new ItemStack(STEEL_BLOCK), 9 * 300);
         new RecipeTypes.BlastFurnaceRecipe(new TagStack(PLATES_IRON), new ItemStack(STEEL_DUST), 300);
 
-        new RecipeTypes.AlloyerRecipe(new ItemStack(ItemRegistry.NETHERRACK_DUST), new ItemStack(ItemRegistry.UNFIRED_BRICK), new ItemStack(Items.NETHER_BRICK), 200);
+        new RecipeTypes.AlloyerRecipe(new ItemStack(NETHERRACK_DUST), new ItemStack(ItemRegistry.UNFIRED_BRICK), new ItemStack(Items.NETHER_BRICK), 200);
         new RecipeTypes.AlloyerRecipe(new TagStack(INGOTS_TIN), new TagStack(INGOTS_COPPER, 3), new ItemStack(BRONZE_INGOT, 4), 200);
         new RecipeTypes.AlloyerRecipe(new TagStack(DUSTS_TIN), new TagStack(DUSTS_COPPER, 3), new ItemStack(BRONZE_INGOT, 4), 200);
         new RecipeTypes.AlloyerRecipe(new TagStack(INGOTS_TIN), new TagStack(DUSTS_COPPER, 3), new ItemStack(BRONZE_INGOT, 4), 200);
@@ -34,37 +32,14 @@ public class RecipeAddition {
         new RecipeTypes.AlloyerRecipe(new TagStack(ItemTags.SAND), new ItemStack(ItemRegistry.UNFIRED_BRICK), new ItemStack(ItemRegistry.COKE_BRICK), 200);
 
         new RecipeTypes.CrusherRecipe(new ItemStack(Items.BLAZE_ROD), new ItemStack(Items.BLAZE_POWDER, 2), 100);
-        new RecipeTypes.CrusherRecipe(new ItemStack(Blocks.NETHERRACK), new ItemStack(ItemRegistry.NETHERRACK_DUST, 2), 150);
-        new RecipeTypes.CrusherRecipe(new ItemStack(Blocks.MAGMA_BLOCK), new ItemStack(ItemRegistry.CRUSHED_MAGMA_BLOCK, 2), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.ORES_IRON), new ItemStack(IRON_DUST, 2), new ItemStack(ItemRegistry.STONE_DUST), 200);
-        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.ORES_GOLD), new ItemStack(GOLD_DUST, 2), new ItemStack(ItemRegistry.STONE_DUST), 200);
-        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.ORES_REDSTONE), new ItemStack(Items.REDSTONE, 10), new ItemStack(ItemRegistry.STONE_DUST), 200);
-        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.ORES_LAPIS), new ItemStack(Items.LAPIS_LAZULI, 14), new ItemStack(ItemRegistry.STONE_DUST), 200);
-        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.ORES_EMERALD), new ItemStack(Items.EMERALD, 2), new ItemStack(ItemRegistry.STONE_DUST), 200);
-        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.ORES_DIAMOND), new ItemStack(Items.DIAMOND, 2), new ItemStack(ItemRegistry.STONE_DUST), 200);
-        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.ORES_COAL), new ItemStack(Items.COAL, 2), new ItemStack(ItemRegistry.STONE_DUST), 200);
-        new RecipeTypes.CrusherRecipe(new TagStack(ORES_COPPER), new ItemStack(COPPER_DUST, 2), new ItemStack(ItemRegistry.STONE_DUST), 200);
-        new RecipeTypes.CrusherRecipe(new TagStack(ORES_SILVER), new ItemStack(SILVER_DUST, 2), new ItemStack(ItemRegistry.STONE_DUST), 200);
-        new RecipeTypes.CrusherRecipe(new TagStack(ORES_TIN), new ItemStack(TIN_DUST, 2), new ItemStack(ItemRegistry.STONE_DUST), 200);
-        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.ORES_QUARTZ), new ItemStack(Items.QUARTZ, 2), new ItemStack(ItemRegistry.NETHERRACK_DUST), 200);
-        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.INGOTS_IRON), new ItemStack(IRON_DUST), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.INGOTS_GOLD), new ItemStack(GOLD_DUST), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(INGOTS_BRONZE), new ItemStack(BRONZE_DUST), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(INGOTS_COPPER), new ItemStack(COPPER_DUST), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(INGOTS_CRYSTALLINE), new ItemStack(CRYSTALLINE_DUST), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(INGOTS_ELECTRUM), new ItemStack(ELECTRUM_DUST), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(INGOTS_SILVER), new ItemStack(SILVER_DUST), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(INGOTS_STEEL), new ItemStack(STEEL_DUST), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(INGOTS_TIN), new ItemStack(TIN_DUST), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(PLATES_IRON), new ItemStack(IRON_DUST), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(PLATES_GOLD), new ItemStack(GOLD_DUST), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(PLATES_BRONZE), new ItemStack(BRONZE_DUST), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(PLATES_COPPER), new ItemStack(COPPER_DUST), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(PLATES_CRYSTALLINE), new ItemStack(CRYSTALLINE_DUST), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(PLATES_ELECTRUM), new ItemStack(ELECTRUM_DUST), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(PLATES_SILVER), new ItemStack(SILVER_DUST), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(PLATES_STEEL), new ItemStack(STEEL_DUST), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(PLATES_TIN), new ItemStack(TIN_DUST), 150);
+        new RecipeTypes.CrusherRecipe(new ItemStack(Blocks.NETHERRACK), new ItemStack(NETHERRACK_DUST, 2), 150);
+        new RecipeTypes.CrusherRecipe(new ItemStack(Blocks.MAGMA_BLOCK), new ItemStack(MAGMA_DUST, 2), 150);
+        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.ORES_REDSTONE), new ItemStack(Items.REDSTONE, 10), new ItemStack(STONE_DUST), 200);
+        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.ORES_LAPIS), new ItemStack(Items.LAPIS_LAZULI, 14), new ItemStack(STONE_DUST), 200);
+        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.ORES_EMERALD), new ItemStack(Items.EMERALD, 2), new ItemStack(STONE_DUST), 200);
+        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.ORES_DIAMOND), new ItemStack(Items.DIAMOND, 2), new ItemStack(STONE_DUST), 200);
+        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.ORES_COAL), new ItemStack(Items.COAL, 2), new ItemStack(STONE_DUST), 200);
+        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.ORES_QUARTZ), new ItemStack(Items.QUARTZ, 2), new ItemStack(NETHERRACK_DUST), 200);
         new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.GEMS_LAPIS), new ItemStack(LAPIS_DUST), 150);
         new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.GEMS_DIAMOND), new ItemStack(DIAMOND_DUST), 200);
         new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.GEMS_PRISMARINE), new ItemStack(PRISMARINE_DUST), 150);
@@ -79,16 +54,14 @@ public class RecipeAddition {
         new RecipeTypes.CokeOvenRecipe(new TagStack(ItemTags.LOGS), new ItemStack(Items.CHARCOAL), 1800);
         new RecipeTypes.CokeOvenRecipe(new ItemStack(Items.COAL), new ItemStack(ItemRegistry.COAL_COKE), 1800);
 
-        new RecipeTypes.PressingRecipe(new TagStack(Tags.Items.INGOTS_IRON), new ItemStack(IRON_PLATE));
-        new RecipeTypes.PressingRecipe(new TagStack(Tags.Items.INGOTS_GOLD), new ItemStack(GOLD_PLATE));
-        new RecipeTypes.PressingRecipe(new TagStack(INGOTS_BRONZE), new ItemStack(BRONZE_PLATE));
-        new RecipeTypes.PressingRecipe(new TagStack(INGOTS_COPPER), new ItemStack(COPPER_PLATE));
-        new RecipeTypes.PressingRecipe(new TagStack(INGOTS_CRYSTALLINE), new ItemStack(CRYSTALLINE_PLATE));
-        new RecipeTypes.PressingRecipe(new TagStack(INGOTS_ELECTRUM), new ItemStack(ELECTRUM_PLATE));
-        new RecipeTypes.PressingRecipe(new TagStack(INGOTS_SILVER), new ItemStack(SILVER_PLATE));
-        new RecipeTypes.PressingRecipe(new TagStack(INGOTS_STEEL), new ItemStack(STEEL_PLATE));
-        new RecipeTypes.PressingRecipe(new TagStack(INGOTS_TIN), new ItemStack(TIN_PLATE));
-        new RecipeTypes.PressingRecipe(new ItemStack(CHARRED_IRON_INGOT), new ItemStack(CHARRED_IRON_PLATE));
+        for (Material material : MaterialList.materials)
+            if (material instanceof IngotMaterial) {
+                new RecipeTypes.PressingRecipe(new TagStack(tag("ingots/" + material.getName())), new ItemStack(MaterialItems.getItem(material, "plate")));
+                new RecipeTypes.CrusherRecipe(new TagStack(tag("ingots/" + material.getName())), new ItemStack(MaterialItems.getItem(material, "dust")), 150);
+                new RecipeTypes.CrusherRecipe(new TagStack(tag("plates/" + material.getName())), new ItemStack(MaterialItems.getItem(material, "dust")), 150);
+                if (material.doesHaveOre())
+                    new RecipeTypes.CrusherRecipe(new TagStack(tag("ores/" + material.getName())), new ItemStack(MaterialItems.getItem(material, "dust"), 2), new ItemStack(STONE_DUST), 200);
+            }
 
         new RecipeTypes.SawmillRecipe(new ItemStack(BlockRegistry.IRONWOOD_PLANKS), new ItemStack(ItemRegistry.IRONWOOD_STICK, 2), 100, true);
         new RecipeTypes.SawmillRecipe(new ItemStack(BlockRegistry.REDWOOD_PLANKS), new ItemStack(ItemRegistry.REDWOOD_STICK, 2), 100, true);
@@ -146,20 +119,14 @@ public class RecipeAddition {
     public static final ItemTags.Wrapper INGOTS_BRONZE = tag("ingots/bronze");
     public static final ItemTags.Wrapper DUSTS_BRONZE = tag("dusts/bronze");
     public static final ItemTags.Wrapper BLOCKS_COPPER = tag("storage_blocks/copper");
-    public static final ItemTags.Wrapper PLATES_BRONZE = tag("plates/bronze");
     public static final ItemTags.Wrapper INGOTS_COPPER = tag("ingots/copper");
     public static final ItemTags.Wrapper DUSTS_COPPER = tag("dusts/copper");
-    public static final ItemTags.Wrapper ORES_COPPER = tag("ores/copper");
-    public static final ItemTags.Wrapper PLATES_COPPER = tag("plates/copper");
-    public static final ItemTags.Wrapper PLATES_CRYSTALLINE = tag("plates/crystalline");
     public static final ItemTags.Wrapper INGOTS_CRYSTALLINE = tag("ingots/crystalline");
     public static final ItemTags.Wrapper DUSTS_CRYSTALLINE = tag("dusts/crystalline");
     public static final ItemTags.Wrapper DUSTS_DIAMOND = tag("dusts/diamond");
     public static final ItemTags.Wrapper INGOTS_ELECTRUM = tag("ingots/electrum");
     public static final ItemTags.Wrapper DUSTS_ELECTRUM = tag("dusts/electrum");
-    public static final ItemTags.Wrapper PLATES_ELECTRUM = tag("plates/electrum");
     public static final ItemTags.Wrapper DUSTS_GOLD = tag("dusts/gold");
-    public static final ItemTags.Wrapper PLATES_GOLD = tag("plates/gold");
     public static final ItemTags.Wrapper PLATES_IRON = tag("plates/iron");
     public static final ItemTags.Wrapper DUSTS_LAPIS = tag("dusts/lapis");
     public static final ItemTags.Wrapper DUSTS_PRISMARINE = tag("dusts/prismarine");
@@ -167,16 +134,11 @@ public class RecipeAddition {
     public static final ItemTags.Wrapper BLOCKS_SILVER = tag("storage_blocks/silver");
     public static final ItemTags.Wrapper INGOTS_SILVER = tag("ingots/silver");
     public static final ItemTags.Wrapper DUSTS_SILVER = tag("dusts/silver");
-    public static final ItemTags.Wrapper ORES_SILVER = tag("ores/silver");
-    public static final ItemTags.Wrapper PLATES_SILVER = tag("plates/silver");
     public static final ItemTags.Wrapper INGOTS_STEEL = tag("ingots/steel");
     public static final ItemTags.Wrapper DUSTS_STEEL = tag("dusts/steel");
-    public static final ItemTags.Wrapper PLATES_STEEL = tag("plates/steel");
     public static final ItemTags.Wrapper BLOCKS_TIN = tag("storage_blocks/tin");
     public static final ItemTags.Wrapper INGOTS_TIN = tag("ingots/tin");
     public static final ItemTags.Wrapper DUSTS_TIN = tag("dusts/tin");
-    public static final ItemTags.Wrapper ORES_TIN = tag("ores/tin");
-    public static final ItemTags.Wrapper PLATES_TIN = tag("plates/tin");
 
     public static final Block BRONZE_BLOCK = MaterialBlocks.getBlock(MaterialList.BRONZE, "block");
     public static final Item BRONZE_DUST = MaterialItems.getItem(MaterialList.BRONZE, "dust");
@@ -205,6 +167,8 @@ public class RecipeAddition {
     public static final Item IRON_DUST = MaterialItems.getItem(MaterialList.IRON, "dust");
     public static final Item IRON_PLATE = MaterialItems.getItem(MaterialList.IRON, "plate");
     public static final Item LAPIS_DUST = MaterialItems.getItem(MaterialList.LAPIS, "dust");
+    public static final Item MAGMA_DUST = MaterialItems.getItem(MaterialList.MAGMA, "dust");
+    public static final Item NETHERRACK_DUST = MaterialItems.getItem(MaterialList.NETHERRACK, "dust");
     public static final Item QUARTZ_DUST = MaterialItems.getItem(MaterialList.QUARTZ, "dust");
     public static final Item PRISMARINE_DUST = MaterialItems.getItem(MaterialList.PRISMARINE, "dust");
     public static final Block SILVER_BLOCK = MaterialBlocks.getBlock(MaterialList.SILVER, "block");
@@ -216,6 +180,7 @@ public class RecipeAddition {
     public static final Item STEEL_DUST = MaterialItems.getItem(MaterialList.STEEL, "dust");
     public static final Item STEEL_INGOT = MaterialItems.getItem(MaterialList.STEEL, "ingot");
     public static final Item STEEL_PLATE = MaterialItems.getItem(MaterialList.STEEL, "plate");
+    public static final Item STONE_DUST = MaterialItems.getItem(MaterialList.STONE, "dust");
     public static final Block TIN_BLOCK = MaterialBlocks.getBlock(MaterialList.TIN, "block");
     public static final Item TIN_DUST = MaterialItems.getItem(MaterialList.TIN, "dust");
     public static final Item TIN_INGOT = MaterialItems.getItem(MaterialList.TIN, "ingot");
