@@ -3,9 +3,10 @@ package com.EmosewaPixel.expertmodecore;
 import com.EmosewaPixel.expertmodecore.blocks.BlockRegistry;
 import com.EmosewaPixel.expertmodecore.items.ItemRegistry;
 import com.EmosewaPixel.expertmodecore.items.tools.MaterialHammer;
-import com.EmosewaPixel.expertmodecore.materials.Material;
-import com.EmosewaPixel.expertmodecore.materials.MaterialItems;
-import com.EmosewaPixel.expertmodecore.materials.MaterialList;
+import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialItems;
+import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialsAndTextureTypes;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialRegistry;
 import com.EmosewaPixel.expertmodecore.proxy.ClientProxy;
 import com.EmosewaPixel.expertmodecore.proxy.IModProxy;
 import com.EmosewaPixel.expertmodecore.proxy.ServerProxy;
@@ -66,7 +67,7 @@ import java.util.List;
 @Mod(ExpertModeCore.ModId)
 public class ExpertModeCore {
     public static final String ModId = "expertmodecore";
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
     private static IModProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
 
     public static ItemGroup main = new ItemGroup("expert_mode_main") {
@@ -85,7 +86,7 @@ public class ExpertModeCore {
 
         MinecraftForge.EVENT_BUS.register(this);
 
-        MaterialList.registry();
+        new MaterialRegistry();
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -199,7 +200,7 @@ public class ExpertModeCore {
             if (new ItemTags.Wrapper(new ResourceLocation("forge:ores")).contains(e.getState().getBlock().asItem()) && !(e.getPlayer().getHeldItemMainhand().getItem() instanceof MaterialHammer))
                 e.setExpToDrop(0);
 
-            if (e.getState().getBlock() == Blocks.REDSTONE_ORE && e.getPlayer().getHeldItemMainhand().getItem() == MaterialItems.getItem(MaterialList.BRONZE, "hammer")) {
+            if (e.getState().getBlock() == Blocks.REDSTONE_ORE && e.getPlayer().getHeldItemMainhand().getItem() == MaterialItems.getItem(MaterialRegistry.BRONZE, MaterialRegistry.HAMMER)) {
                 e.getWorld().spawnEntity(new EntityItem(e.getWorld().getWorld(), e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), new ItemStack(Items.REDSTONE, 3)));
                 e.getWorld().spawnEntity(new EntityItem(e.getWorld().getWorld(), e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), new ItemStack(RecipeAddition.STONE_DUST)));
             }
@@ -278,11 +279,11 @@ public class ExpertModeCore {
                 }
                 if (e.getHarvester().getHeldItemMainhand().getItem() instanceof MaterialHammer) {
                     if (tag("ores").contains(item)) {
-                        for (Material mat : MaterialList.materials)
+                        for (Material mat : MaterialsAndTextureTypes.materials)
                             if (mat.doesHaveOre())
                                 if (tag("ores/" + mat.getName()).contains(item)) {
                                     e.getDrops().removeAll(e.getDrops());
-                                    e.getDrops().add(new ItemStack(MaterialItems.getItem(mat, "dust")));
+                                    e.getDrops().add(new ItemStack(MaterialItems.getItem(mat, MaterialRegistry.DUST)));
                                 }
                         e.getDrops().add(new ItemStack(RecipeAddition.STONE_DUST));
                     }

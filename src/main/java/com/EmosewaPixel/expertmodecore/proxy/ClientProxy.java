@@ -1,9 +1,9 @@
 package com.EmosewaPixel.expertmodecore.proxy;
 
 import com.EmosewaPixel.expertmodecore.blocks.BlockRegistry;
-import com.EmosewaPixel.expertmodecore.materials.IMaterialItem;
-import com.EmosewaPixel.expertmodecore.materials.MaterialBlocks;
-import com.EmosewaPixel.expertmodecore.materials.MaterialItems;
+import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialBlocks;
+import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialItems;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -37,17 +37,14 @@ public class ClientProxy implements IModProxy {
 
     @SubscribeEvent
     public static void onModelBaking(ModelBakeEvent e) {
-        for (IMaterialItem item : MaterialItems.materialItems) {
-            if (item instanceof Item && !(item instanceof ItemTiered))
-                e.getModelRegistry().put(new ModelResourceLocation(((Item) item).getRegistryName(), "inventory"), e.getModelRegistry().get(new ModelResourceLocation("expertmodecore:" + item.getMaterial().getTextureType().toString().toLowerCase() + "_" + item.getItemType(), "inventory")));
+        for (MaterialItem item : MaterialItems.materialItems)
+            if (item instanceof Item)
+                e.getModelRegistry().put(new ModelResourceLocation(((Item) item).getRegistryName(), "inventory"), e.getModelRegistry().get(new ModelResourceLocation("expertmodecore:" + item.getMaterial().getTextureType().toString() + "_" + item.getObjType().getName(), "inventory")));
 
-            if (item instanceof ItemTiered)
-                e.getModelRegistry().put(new ModelResourceLocation(((Item) item).getRegistryName(), "inventory"), e.getModelRegistry().get(new ModelResourceLocation("expertmodecore:" + item.getItemType(), "inventory")));
-        }
-        for (IMaterialItem block : MaterialBlocks.materialBlocks)
+        for (MaterialItem block : MaterialBlocks.materialBlocks)
             if (block instanceof Block) {
-                e.getModelRegistry().put(new ModelResourceLocation(((Block) block).getRegistryName(), ""), e.getModelRegistry().get(new ModelResourceLocation("expertmodecore:" + block.getMaterial().getTextureType().toString().toLowerCase() + "_" + block.getItemType(), "")));
-                e.getModelRegistry().put(new ModelResourceLocation(((Block) block).getRegistryName(), "inventory"), e.getModelRegistry().get(new ModelResourceLocation("expertmodecore:" + block.getMaterial().getTextureType().toString().toLowerCase() + "_" + block.getItemType(), "inventory")));
+                e.getModelRegistry().put(new ModelResourceLocation(((Block) block).getRegistryName(), ""), e.getModelRegistry().get(new ModelResourceLocation("expertmodecore:" + block.getMaterial().getTextureType().toString() + "_" + block.getObjType().getName(), "")));
+                e.getModelRegistry().put(new ModelResourceLocation(((Block) block).getRegistryName(), "inventory"), e.getModelRegistry().get(new ModelResourceLocation("expertmodecore:" + block.getMaterial().getTextureType().toString() + "_" + block.getObjType().getName(), "inventory")));
             }
     }
 
@@ -61,37 +58,37 @@ public class ClientProxy implements IModProxy {
         Minecraft.getInstance().getItemColors().register((ItemStack stack, int index) -> FoliageColors.getDefault(), BlockRegistry.REDWOOD_LEAVES);
 
         //Material Items
-        for (IMaterialItem item : MaterialItems.materialItems) {
+        for (MaterialItem item : MaterialItems.materialItems) {
             if (item instanceof Item && !(item instanceof ItemTiered))
                 Minecraft.getInstance().getItemColors().register((ItemStack stack, int index) -> {
                     Item sItem = stack.getItem();
-                    if (sItem instanceof IMaterialItem)
-                        return ((IMaterialItem) sItem).getMaterial().getColor();
+                    if (sItem instanceof MaterialItem)
+                        return ((MaterialItem) sItem).getMaterial().getColor();
                     return -1;
                 }, (Item) item);
 
             if (item instanceof ItemTiered)
                 Minecraft.getInstance().getItemColors().register((ItemStack stack, int index) -> {
                     Item sItem = stack.getItem();
-                    if (sItem instanceof IMaterialItem && index == 1)
-                        return ((IMaterialItem) sItem).getMaterial().getColor();
+                    if (sItem instanceof MaterialItem && index == 1)
+                        return ((MaterialItem) sItem).getMaterial().getColor();
                     return -1;
                 }, (Item) item);
         }
 
-        for (IMaterialItem block : MaterialBlocks.materialBlocks)
+        for (MaterialItem block : MaterialBlocks.materialBlocks)
             if (block instanceof Block) {
                 Minecraft.getInstance().getBlockColors().register((IBlockState state, @Nullable IWorldReaderBase reader, @Nullable BlockPos pos, int index) -> {
                     Block sBlock = state.getBlock();
-                    if (sBlock instanceof IMaterialItem && index == 0)
-                        return ((IMaterialItem) sBlock).getMaterial().getColor();
+                    if (sBlock instanceof MaterialItem && index == 0)
+                        return ((MaterialItem) sBlock).getMaterial().getColor();
                     return -1;
                 }, ((Block) block));
 
                 Minecraft.getInstance().getItemColors().register((ItemStack stack, int index) -> {
                     Block sBlock = Block.getBlockFromItem(stack.getItem());
-                    if (sBlock instanceof IMaterialItem && index == 0)
-                        return ((IMaterialItem) sBlock).getMaterial().getColor();
+                    if (sBlock instanceof MaterialItem && index == 0)
+                        return ((MaterialItem) sBlock).getMaterial().getColor();
                     return -1;
                 }, Item.getItemFromBlock((Block) block).asItem());
             }

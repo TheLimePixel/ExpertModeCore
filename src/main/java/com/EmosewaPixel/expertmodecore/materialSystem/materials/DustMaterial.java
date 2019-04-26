@@ -1,5 +1,6 @@
-package com.EmosewaPixel.expertmodecore.materials;
+package com.EmosewaPixel.expertmodecore.materialSystem.materials;
 
+import com.EmosewaPixel.expertmodecore.materialSystem.types.TextureType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.IItemTier;
 

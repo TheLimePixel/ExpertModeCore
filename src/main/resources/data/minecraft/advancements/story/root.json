@@ -16,64 +16,13 @@
     "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
   },
   "criteria": {
-    "stick": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "minecraft:stick"
-          }
-        ]
-      }
-    },
-    "gravel": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "minecraft:gravel"
-          }
-        ]
-      }
-    },
-    "flint": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "minecraft:flint"
-          }
-        ]
-      }
-    },
-    "sand": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "minecraft:sand"
-          }
-        ]
-      }
-    },
-    "dirt": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "minecraft:dirt"
-          }
-        ]
-      }
+    "auto": {
+      "trigger": "location"
     }
   },
   "requirements": [
     [
-      "stick",
-      "flint",
-      "gravel",
-      "sand",
-      "dirt"
+      "auto"
     ]
   ]
 }

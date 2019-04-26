@@ -1,6 +1,6 @@
-package com.EmosewaPixel.expertmodecore.materials;
+package com.EmosewaPixel.expertmodecore.materialSystem.materials;
 
-public enum HarvestTiers implements IHarvestTier {
+public enum HarvestTiers implements HarvestTier {
     STONE(1.5F, 1.5F, 0),
     IRON(3, 3, 1),
     DIAMOND(3, 3, 2);

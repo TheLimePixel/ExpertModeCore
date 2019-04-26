@@ -1,5 +1,7 @@
-package com.EmosewaPixel.expertmodecore.materials;
+package com.EmosewaPixel.expertmodecore.materialSystem.materials;
 
+import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialsAndTextureTypes;
+import com.EmosewaPixel.expertmodecore.materialSystem.types.TextureType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.IItemTier;
 
@@ -31,6 +33,11 @@ public class Material {
     public Material setToolAndArmorMaterial(IItemTier itemTier, IArmorMaterial armorMaterial) {
         this.itemTier = itemTier;
         this.armorMaterial = armorMaterial;
+        return this;
+    }
+
+    public Material build() {
+        MaterialsAndTextureTypes.materials.add(this);
         return this;
     }
 

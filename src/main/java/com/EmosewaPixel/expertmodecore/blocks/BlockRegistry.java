@@ -2,10 +2,15 @@ package com.EmosewaPixel.expertmodecore.blocks;
 
 import com.EmosewaPixel.expertmodecore.ExpertModeCore;
 import com.EmosewaPixel.expertmodecore.blocks.trees.*;
-import com.EmosewaPixel.expertmodecore.materials.IMaterialItem;
-import com.EmosewaPixel.expertmodecore.materials.IngotMaterial;
-import com.EmosewaPixel.expertmodecore.materials.MaterialBlocks;
-import com.EmosewaPixel.expertmodecore.materials.MaterialList;
+import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialBlocks;
+import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialsAndTextureTypes;
+import com.EmosewaPixel.expertmodecore.materialSystem.lists.ObjTypes;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.IngotMaterial;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialItem;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialRegistry;
+import com.EmosewaPixel.expertmodecore.materialSystem.types.BlockType;
+import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
+import com.EmosewaPixel.expertmodecore.materialSystem.types.TextureType;
 import com.EmosewaPixel.expertmodecore.world.tree.IronwoodTree;
 import com.EmosewaPixel.expertmodecore.world.tree.RedwoodTree;
 import com.EmosewaPixel.expertmodecore.world.tree.RubberTree;
@@ -55,13 +60,10 @@ public class BlockRegistry {
     private static ArrayList<Block> templates = new ArrayList<>();
 
     public static void registry(RegistryEvent.Register<Block> e) {
-        for (com.EmosewaPixel.expertmodecore.materials.Material mat : MaterialList.materials)
-            if (mat instanceof IngotMaterial)
-                if (((IngotMaterial) mat).getHarvestTier() != null) {
-                    register(new MaterialBlock(Block.Properties.create(Material.IRON).sound(SoundType.METAL), (IngotMaterial) mat, "block"), e);
-                    if (mat.doesHaveOre() && mat.doesHaveBase())
-                        register(new MaterialBlock(Block.Properties.create(Material.ROCK).sound(SoundType.STONE), (IngotMaterial) mat, "ore"), e);
-                }
+        for (com.EmosewaPixel.expertmodecore.materialSystem.materials.Material mat : MaterialsAndTextureTypes.materials)
+            for (ObjectType type : ObjTypes.objTypes)
+                if (type instanceof BlockType && type.isMaterialCompatible(mat))
+                    register(new MaterialBlock((IngotMaterial) mat, (BlockType) type), e);
 
         COKE_BRICKS = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2, 6).sound(SoundType.STONE), "coke_bricks", 0), e);
 
@@ -94,15 +96,15 @@ public class BlockRegistry {
         INFUSION_TABLE = register(new BlockInfusionTable(), e);
         SAWMILL = register(new BlockSawmill(), e);
 
-        templates.add(register(new ModBlock(Block.Properties.create(Material.IRON), "iron_block", 0), e));
-        templates.add(register(new ModBlock(Block.Properties.create(Material.IRON), "regular_block", 0), e));
-        templates.add(register(new ModBlock(Block.Properties.create(Material.IRON), "shiny_block", 0), e));
-        templates.add(register(new ModBlock(Block.Properties.create(Material.IRON), "regular_ore", 0), e));
-        templates.add(register(new ModBlock(Block.Properties.create(Material.IRON), "shiny_ore", 0), e));
+        for (ObjectType objT : ObjTypes.objTypes)
+            if (objT instanceof BlockType)
+                for (TextureType textureT : MaterialsAndTextureTypes.textureTypes)
+                    if (!(textureT == MaterialRegistry.iron && objT.isMaterialCompatible(MaterialRegistry.IRON)))
+                        templates.add(register(new ModBlock(Block.Properties.create(Material.IRON), textureT.toString() + "_" + objT.getName(), 0), e));
     }
 
     public static void itemRegistry(RegistryEvent.Register<Item> e) {
-        for (IMaterialItem block : MaterialBlocks.materialBlocks)
+        for (MaterialItem block : MaterialBlocks.materialBlocks)
             if (block instanceof Block)
                 registerItemBlock((Block) block, e);
 

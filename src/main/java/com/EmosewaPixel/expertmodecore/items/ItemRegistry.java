@@ -3,10 +3,13 @@ package com.EmosewaPixel.expertmodecore.items;
 import com.EmosewaPixel.expertmodecore.ExpertModeCore;
 import com.EmosewaPixel.expertmodecore.items.armor.MaterialArmor;
 import com.EmosewaPixel.expertmodecore.items.tools.*;
-import com.EmosewaPixel.expertmodecore.materials.DustMaterial;
-import com.EmosewaPixel.expertmodecore.materials.IngotMaterial;
-import com.EmosewaPixel.expertmodecore.materials.Material;
-import com.EmosewaPixel.expertmodecore.materials.MaterialList;
+import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialsAndTextureTypes;
+import com.EmosewaPixel.expertmodecore.materialSystem.lists.ObjTypes;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialRegistry;
+import com.EmosewaPixel.expertmodecore.materialSystem.types.ItemType;
+import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
+import com.EmosewaPixel.expertmodecore.materialSystem.types.TextureType;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -28,20 +31,10 @@ public class ItemRegistry {
     public static Item UNLIT_TORCH;
 
     public static void registry(RegistryEvent.Register<Item> e) {
-        for (Material mat : MaterialList.materials) {
-            if (mat instanceof IngotMaterial) {
-                if (mat.doesHaveBase()) {
-                    register(new MaterialItem(mat, "ingot"), e);
-                    register(new MaterialItem(mat, "nugget"), e);
-                }
-                register(new MaterialItem(mat, "plate"), e);
-            }
-
-            if (mat instanceof DustMaterial) {
-                register(new MaterialItem(mat, "dust"), e);
-                if (((DustMaterial) mat).hasSmallDust())
-                    register(new MaterialItem(mat, "small_dust"), e);
-            }
+        for (Material mat : MaterialsAndTextureTypes.materials) {
+            for (ObjectType type : ObjTypes.objTypes)
+                if (type instanceof ItemType && type.isMaterialCompatible(mat))
+                    register(new MaterialItem(mat, type), e);
 
             if (mat.getArmorMaterial() != null)
                 for (EntityEquipmentSlot slot : new EntityEquipmentSlot[]{EntityEquipmentSlot.CHEST, EntityEquipmentSlot.FEET, EntityEquipmentSlot.HEAD, EntityEquipmentSlot.LEGS})
@@ -58,37 +51,11 @@ public class ItemRegistry {
             }
         }
 
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:regular_ingot"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:iron_ingot"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:shiny_ingot"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:regular_dust"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:shiny_dust"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:regular_plate"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:shiny_plate"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:regular_nugget"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:iron_nugget"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:shiny_nugget"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:regular_boots"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:iron_boots"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:shiny_boots"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:regular_chestplate"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:iron_chestplate"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:shiny_chestplate"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:regular_helmet"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:iron_helmet"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:shiny_helmet"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:regular_leggings"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:iron_leggings"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:shiny_leggings"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:regular_small_dust"), e);
-
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:axe"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:hammer"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:hoe"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:pickaxe"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:saw"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:shovel"), e);
-        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:sword"), e);
+        for (ObjectType objT : ObjTypes.objTypes)
+            if (objT instanceof ItemType)
+                for (TextureType textureT : MaterialsAndTextureTypes.textureTypes)
+                    if (!(textureT == MaterialRegistry.iron && objT.isMaterialCompatible(MaterialRegistry.IRON)))
+                        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:" + textureT.toString() + "_" + objT.getName()), e);
 
         BRICK_MOLD = register(new SelfContainerItem("brick_mold"), e);
         COKE_BRICK = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("expertmodecore:coke_brick"), e);

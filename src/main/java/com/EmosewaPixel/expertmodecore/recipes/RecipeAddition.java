@@ -2,7 +2,12 @@ package com.EmosewaPixel.expertmodecore.recipes;
 
 import com.EmosewaPixel.expertmodecore.blocks.BlockRegistry;
 import com.EmosewaPixel.expertmodecore.items.ItemRegistry;
-import com.EmosewaPixel.expertmodecore.materials.*;
+import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialBlocks;
+import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialItems;
+import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialsAndTextureTypes;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.IngotMaterial;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -54,13 +59,13 @@ public class RecipeAddition {
         new RecipeTypes.CokeOvenRecipe(new TagStack(ItemTags.LOGS), new ItemStack(Items.CHARCOAL), 1800);
         new RecipeTypes.CokeOvenRecipe(new ItemStack(Items.COAL), new ItemStack(ItemRegistry.COAL_COKE), 1800);
 
-        for (Material material : MaterialList.materials)
+        for (Material material : MaterialsAndTextureTypes.materials)
             if (material instanceof IngotMaterial) {
-                new RecipeTypes.PressingRecipe(new TagStack(tag("ingots/" + material.getName())), new ItemStack(MaterialItems.getItem(material, "plate")));
-                new RecipeTypes.CrusherRecipe(new TagStack(tag("ingots/" + material.getName())), new ItemStack(MaterialItems.getItem(material, "dust")), 150);
-                new RecipeTypes.CrusherRecipe(new TagStack(tag("plates/" + material.getName())), new ItemStack(MaterialItems.getItem(material, "dust")), 150);
+                new RecipeTypes.PressingRecipe(new TagStack(tag("ingots/" + material.getName())), new ItemStack(MaterialItems.getItem(material, MaterialRegistry.PLATE)));
+                new RecipeTypes.CrusherRecipe(new TagStack(tag("ingots/" + material.getName())), new ItemStack(MaterialItems.getItem(material, MaterialRegistry.DUST)), 150);
+                new RecipeTypes.CrusherRecipe(new TagStack(tag("plates/" + material.getName())), new ItemStack(MaterialItems.getItem(material, MaterialRegistry.DUST)), 150);
                 if (material.doesHaveOre())
-                    new RecipeTypes.CrusherRecipe(new TagStack(tag("ores/" + material.getName())), new ItemStack(MaterialItems.getItem(material, "dust"), 2), new ItemStack(STONE_DUST), 200);
+                    new RecipeTypes.CrusherRecipe(new TagStack(tag("ores/" + material.getName())), new ItemStack(MaterialItems.getItem(material, MaterialRegistry.DUST), 2), new ItemStack(STONE_DUST), 200);
             }
 
         new RecipeTypes.SawmillRecipe(new ItemStack(BlockRegistry.IRONWOOD_PLANKS), new ItemStack(ItemRegistry.IRONWOOD_STICK, 2), 100, true);
@@ -140,52 +145,52 @@ public class RecipeAddition {
     public static final ItemTags.Wrapper INGOTS_TIN = tag("ingots/tin");
     public static final ItemTags.Wrapper DUSTS_TIN = tag("dusts/tin");
 
-    public static final Block BRONZE_BLOCK = MaterialBlocks.getBlock(MaterialList.BRONZE, "block");
-    public static final Item BRONZE_DUST = MaterialItems.getItem(MaterialList.BRONZE, "dust");
-    public static final Item BRONZE_INGOT = MaterialItems.getItem(MaterialList.BRONZE, "ingot");
-    public static final Item BRONZE_PLATE = MaterialItems.getItem(MaterialList.BRONZE, "plate");
-    public static final Block CHARRED_IRON_BLOCK = MaterialBlocks.getBlock(MaterialList.CHARRED_IRON, "block");
-    public static final Item CHARRED_IRON_DUST = MaterialItems.getItem(MaterialList.CHARRED_IRON, "dust");
-    public static final Item CHARRED_IRON_INGOT = MaterialItems.getItem(MaterialList.CHARRED_IRON, "ingot");
-    public static final Item CHARRED_IRON_PLATE = MaterialItems.getItem(MaterialList.CHARRED_IRON, "plate");
-    public static final Block COPPER_BLOCK = MaterialBlocks.getBlock(MaterialList.COPPER, "block");
-    public static final Item COPPER_DUST = MaterialItems.getItem(MaterialList.COPPER, "dust");
-    public static final Item COPPER_INGOT = MaterialItems.getItem(MaterialList.COPPER, "ingot");
-    public static final Block COPPER_ORE = MaterialBlocks.getBlock(MaterialList.COPPER, "ore");
-    public static final Item COPPER_PLATE = MaterialItems.getItem(MaterialList.COPPER, "plate");
-    public static final Block CRYSTALLINE_BLOCK = MaterialBlocks.getBlock(MaterialList.CRYSTALLINE, "block");
-    public static final Item CRYSTALLINE_DUST = MaterialItems.getItem(MaterialList.CRYSTALLINE, "dust");
-    public static final Item CRYSTALLINE_INGOT = MaterialItems.getItem(MaterialList.CRYSTALLINE, "ingot");
-    public static final Item CRYSTALLINE_PLATE = MaterialItems.getItem(MaterialList.CRYSTALLINE, "plate");
-    public static final Item DIAMOND_DUST = MaterialItems.getItem(MaterialList.DIAMOND, "dust");
-    public static final Block ELECTRUM_BLOCK = MaterialBlocks.getBlock(MaterialList.ELECTRUM, "block");
-    public static final Item ELECTRUM_DUST = MaterialItems.getItem(MaterialList.ELECTRUM, "dust");
-    public static final Item ELECTRUM_INGOT = MaterialItems.getItem(MaterialList.ELECTRUM, "ingot");
-    public static final Item ELECTRUM_PLATE = MaterialItems.getItem(MaterialList.ELECTRUM, "plate");
-    public static final Item GOLD_DUST = MaterialItems.getItem(MaterialList.GOLD, "dust");
-    public static final Item GOLD_PLATE = MaterialItems.getItem(MaterialList.GOLD, "plate");
-    public static final Item IRON_DUST = MaterialItems.getItem(MaterialList.IRON, "dust");
-    public static final Item IRON_PLATE = MaterialItems.getItem(MaterialList.IRON, "plate");
-    public static final Item LAPIS_DUST = MaterialItems.getItem(MaterialList.LAPIS, "dust");
-    public static final Item MAGMA_DUST = MaterialItems.getItem(MaterialList.MAGMA, "dust");
-    public static final Item NETHERRACK_DUST = MaterialItems.getItem(MaterialList.NETHERRACK, "dust");
-    public static final Item QUARTZ_DUST = MaterialItems.getItem(MaterialList.QUARTZ, "dust");
-    public static final Item PRISMARINE_DUST = MaterialItems.getItem(MaterialList.PRISMARINE, "dust");
-    public static final Block SILVER_BLOCK = MaterialBlocks.getBlock(MaterialList.SILVER, "block");
-    public static final Item SILVER_DUST = MaterialItems.getItem(MaterialList.SILVER, "dust");
-    public static final Item SILVER_INGOT = MaterialItems.getItem(MaterialList.SILVER, "ingot");
-    public static final Block SILVER_ORE = MaterialBlocks.getBlock(MaterialList.SILVER, "ore");
-    public static final Item SILVER_PLATE = MaterialItems.getItem(MaterialList.SILVER, "plate");
-    public static final Block STEEL_BLOCK = MaterialBlocks.getBlock(MaterialList.STEEL, "block");
-    public static final Item STEEL_DUST = MaterialItems.getItem(MaterialList.STEEL, "dust");
-    public static final Item STEEL_INGOT = MaterialItems.getItem(MaterialList.STEEL, "ingot");
-    public static final Item STEEL_PLATE = MaterialItems.getItem(MaterialList.STEEL, "plate");
-    public static final Item STONE_DUST = MaterialItems.getItem(MaterialList.STONE, "dust");
-    public static final Block TIN_BLOCK = MaterialBlocks.getBlock(MaterialList.TIN, "block");
-    public static final Item TIN_DUST = MaterialItems.getItem(MaterialList.TIN, "dust");
-    public static final Item TIN_INGOT = MaterialItems.getItem(MaterialList.TIN, "ingot");
-    public static final Block TIN_ORE = MaterialBlocks.getBlock(MaterialList.TIN, "ore");
-    public static final Item TIN_PLATE = MaterialItems.getItem(MaterialList.TIN, "plate");
+    public static final Block BRONZE_BLOCK = MaterialBlocks.getBlock(MaterialRegistry.BRONZE, MaterialRegistry.BLOCK);
+    public static final Item BRONZE_DUST = MaterialItems.getItem(MaterialRegistry.BRONZE, MaterialRegistry.DUST);
+    public static final Item BRONZE_INGOT = MaterialItems.getItem(MaterialRegistry.BRONZE, MaterialRegistry.INGOT);
+    public static final Item BRONZE_PLATE = MaterialItems.getItem(MaterialRegistry.BRONZE, MaterialRegistry.PLATE);
+    public static final Block CHARRED_IRON_BLOCK = MaterialBlocks.getBlock(MaterialRegistry.CHARRED_IRON, MaterialRegistry.BLOCK);
+    public static final Item CHARRED_IRON_DUST = MaterialItems.getItem(MaterialRegistry.CHARRED_IRON, MaterialRegistry.DUST);
+    public static final Item CHARRED_IRON_INGOT = MaterialItems.getItem(MaterialRegistry.CHARRED_IRON, MaterialRegistry.INGOT);
+    public static final Item CHARRED_IRON_PLATE = MaterialItems.getItem(MaterialRegistry.CHARRED_IRON, MaterialRegistry.PLATE);
+    public static final Block COPPER_BLOCK = MaterialBlocks.getBlock(MaterialRegistry.COPPER, MaterialRegistry.BLOCK);
+    public static final Item COPPER_DUST = MaterialItems.getItem(MaterialRegistry.COPPER, MaterialRegistry.DUST);
+    public static final Item COPPER_INGOT = MaterialItems.getItem(MaterialRegistry.COPPER, MaterialRegistry.INGOT);
+    public static final Block COPPER_ORE = MaterialBlocks.getBlock(MaterialRegistry.COPPER, MaterialRegistry.ORE);
+    public static final Item COPPER_PLATE = MaterialItems.getItem(MaterialRegistry.COPPER, MaterialRegistry.PLATE);
+    public static final Block CRYSTALLINE_BLOCK = MaterialBlocks.getBlock(MaterialRegistry.CRYSTALLINE, MaterialRegistry.BLOCK);
+    public static final Item CRYSTALLINE_DUST = MaterialItems.getItem(MaterialRegistry.CRYSTALLINE, MaterialRegistry.DUST);
+    public static final Item CRYSTALLINE_INGOT = MaterialItems.getItem(MaterialRegistry.CRYSTALLINE, MaterialRegistry.INGOT);
+    public static final Item CRYSTALLINE_PLATE = MaterialItems.getItem(MaterialRegistry.CRYSTALLINE, MaterialRegistry.PLATE);
+    public static final Item DIAMOND_DUST = MaterialItems.getItem(MaterialRegistry.DIAMOND, MaterialRegistry.DUST);
+    public static final Block ELECTRUM_BLOCK = MaterialBlocks.getBlock(MaterialRegistry.ELECTRUM, MaterialRegistry.BLOCK);
+    public static final Item ELECTRUM_DUST = MaterialItems.getItem(MaterialRegistry.ELECTRUM, MaterialRegistry.DUST);
+    public static final Item ELECTRUM_INGOT = MaterialItems.getItem(MaterialRegistry.ELECTRUM, MaterialRegistry.INGOT);
+    public static final Item ELECTRUM_PLATE = MaterialItems.getItem(MaterialRegistry.ELECTRUM, MaterialRegistry.PLATE);
+    public static final Item GOLD_DUST = MaterialItems.getItem(MaterialRegistry.GOLD, MaterialRegistry.DUST);
+    public static final Item GOLD_PLATE = MaterialItems.getItem(MaterialRegistry.GOLD, MaterialRegistry.PLATE);
+    public static final Item IRON_DUST = MaterialItems.getItem(MaterialRegistry.IRON, MaterialRegistry.DUST);
+    public static final Item IRON_PLATE = MaterialItems.getItem(MaterialRegistry.IRON, MaterialRegistry.PLATE);
+    public static final Item LAPIS_DUST = MaterialItems.getItem(MaterialRegistry.LAPIS, MaterialRegistry.DUST);
+    public static final Item MAGMA_DUST = MaterialItems.getItem(MaterialRegistry.MAGMA, MaterialRegistry.DUST);
+    public static final Item NETHERRACK_DUST = MaterialItems.getItem(MaterialRegistry.NETHERRACK, MaterialRegistry.DUST);
+    public static final Item QUARTZ_DUST = MaterialItems.getItem(MaterialRegistry.QUARTZ, MaterialRegistry.DUST);
+    public static final Item PRISMARINE_DUST = MaterialItems.getItem(MaterialRegistry.PRISMARINE, MaterialRegistry.DUST);
+    public static final Block SILVER_BLOCK = MaterialBlocks.getBlock(MaterialRegistry.SILVER, MaterialRegistry.BLOCK);
+    public static final Item SILVER_DUST = MaterialItems.getItem(MaterialRegistry.SILVER, MaterialRegistry.DUST);
+    public static final Item SILVER_INGOT = MaterialItems.getItem(MaterialRegistry.SILVER, MaterialRegistry.INGOT);
+    public static final Block SILVER_ORE = MaterialBlocks.getBlock(MaterialRegistry.SILVER, MaterialRegistry.ORE);
+    public static final Item SILVER_PLATE = MaterialItems.getItem(MaterialRegistry.SILVER, MaterialRegistry.PLATE);
+    public static final Block STEEL_BLOCK = MaterialBlocks.getBlock(MaterialRegistry.STEEL, MaterialRegistry.BLOCK);
+    public static final Item STEEL_DUST = MaterialItems.getItem(MaterialRegistry.STEEL, MaterialRegistry.DUST);
+    public static final Item STEEL_INGOT = MaterialItems.getItem(MaterialRegistry.STEEL, MaterialRegistry.INGOT);
+    public static final Item STEEL_PLATE = MaterialItems.getItem(MaterialRegistry.STEEL, MaterialRegistry.PLATE);
+    public static final Item STONE_DUST = MaterialItems.getItem(MaterialRegistry.STONE, MaterialRegistry.DUST);
+    public static final Block TIN_BLOCK = MaterialBlocks.getBlock(MaterialRegistry.TIN, MaterialRegistry.BLOCK);
+    public static final Item TIN_DUST = MaterialItems.getItem(MaterialRegistry.TIN, MaterialRegistry.DUST);
+    public static final Item TIN_INGOT = MaterialItems.getItem(MaterialRegistry.TIN, MaterialRegistry.INGOT);
+    public static final Block TIN_ORE = MaterialBlocks.getBlock(MaterialRegistry.TIN, MaterialRegistry.ORE);
+    public static final Item TIN_PLATE = MaterialItems.getItem(MaterialRegistry.TIN, MaterialRegistry.PLATE);
 
     private static ItemTags.Wrapper tag(String name) {
         return new ItemTags.Wrapper(new ResourceLocation("forge", name));

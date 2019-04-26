@@ -1,12 +1,14 @@
 package com.EmosewaPixel.expertmodecore.items.tools;
 
 import com.EmosewaPixel.expertmodecore.ExpertModeCore;
-import com.EmosewaPixel.expertmodecore.materials.IMaterialItem;
-import com.EmosewaPixel.expertmodecore.materials.Material;
-import com.EmosewaPixel.expertmodecore.materials.MaterialItems;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialItem;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
+import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialItems;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialRegistry;
+import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
 import net.minecraft.item.ItemSword;
 
-public class MaterialSword extends ItemSword implements IMaterialItem {
+public class MaterialSword extends ItemSword implements MaterialItem {
     private Material material;
 
     public MaterialSword(Material mat) {
@@ -22,7 +24,7 @@ public class MaterialSword extends ItemSword implements IMaterialItem {
     }
 
     @Override
-    public String getItemType() {
-        return "sword";
+    public ObjectType getObjType() {
+        return MaterialRegistry.SWORD;
     }
 }

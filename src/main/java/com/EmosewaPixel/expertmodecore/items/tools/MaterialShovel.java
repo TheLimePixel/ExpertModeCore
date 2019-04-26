@@ -1,12 +1,14 @@
 package com.EmosewaPixel.expertmodecore.items.tools;
 
 import com.EmosewaPixel.expertmodecore.ExpertModeCore;
-import com.EmosewaPixel.expertmodecore.materials.IMaterialItem;
-import com.EmosewaPixel.expertmodecore.materials.Material;
-import com.EmosewaPixel.expertmodecore.materials.MaterialItems;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialItem;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
+import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialItems;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialRegistry;
+import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
 import net.minecraft.item.ItemSpade;
 
-public class MaterialShovel extends ItemSpade implements IMaterialItem {
+public class MaterialShovel extends ItemSpade implements MaterialItem {
     private Material material;
 
     public MaterialShovel(Material mat) {
@@ -22,7 +24,7 @@ public class MaterialShovel extends ItemSpade implements IMaterialItem {
     }
 
     @Override
-    public String getItemType() {
-        return "shovel";
+    public ObjectType getObjType() {
+        return MaterialRegistry.SHOVEL;
     }
 }

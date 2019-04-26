@@ -1,10 +1,11 @@
-package com.EmosewaPixel.expertmodecore.materials;
+package com.EmosewaPixel.expertmodecore.materialSystem.materials;
 
+import com.EmosewaPixel.expertmodecore.materialSystem.types.TextureType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.IItemTier;
 
 public class IngotMaterial extends DustMaterial {
-    private IHarvestTier harvestTier = null;
+    private HarvestTier harvestTier = null;
 
     public IngotMaterial(String name, TextureType textureType, int color) {
         super(name, textureType, color);
@@ -26,12 +27,12 @@ public class IngotMaterial extends DustMaterial {
         return this;
     }
 
-    public IngotMaterial setHarvestTier(IHarvestTier tier) {
+    public IngotMaterial setHarvestTier(HarvestTier tier) {
         this.harvestTier = tier;
         return this;
     }
 
-    public IHarvestTier getHarvestTier() {
+    public HarvestTier getHarvestTier() {
         return harvestTier;
     }
 }
