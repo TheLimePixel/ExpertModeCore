@@ -4,6 +4,8 @@ import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialsAndTextureT
 import com.EmosewaPixel.expertmodecore.materialSystem.types.TextureType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.IItemTier;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class Material {
     private String name;
@@ -83,5 +85,9 @@ public class Material {
 
     public void setArmorMaterial(IArmorMaterial armorMaterial) {
         this.armorMaterial = armorMaterial;
+    }
+
+    public ITextComponent getTranslationKey() {
+        return new TextComponentTranslation("material." + name + ".name");
     }
 }

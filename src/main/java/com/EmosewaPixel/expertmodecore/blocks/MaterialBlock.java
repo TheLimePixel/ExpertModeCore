@@ -7,6 +7,8 @@ import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialItem;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.BlockType;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class MaterialBlock extends ModBlock implements MaterialItem {
     private IngotMaterial material;
@@ -32,5 +34,10 @@ public class MaterialBlock extends ModBlock implements MaterialItem {
     @Override
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
+    }
+
+    @Override
+    public ITextComponent getNameTextComponent() {
+        return new TextComponentTranslation("blocktype." + type.getName() + ".name", material.getTranslationKey());
     }
 }

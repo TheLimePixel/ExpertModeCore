@@ -21,6 +21,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.event.RegistryEvent;
 
 import java.util.ArrayList;
@@ -152,6 +154,11 @@ public class BlockRegistry {
     }
 
     private static void registerItemBlock(Block block, RegistryEvent.Register<Item> e, boolean withGroup) {
-        e.getRegistry().register(new ItemBlock(block, withGroup ? new Item.Properties().group(ExpertModeCore.main) : new Item.Properties()).setRegistryName(block.getRegistryName()));
+        e.getRegistry().register(new ItemBlock(block, withGroup ? new Item.Properties().group(ExpertModeCore.main) : new Item.Properties()) {
+            @Override
+            public ITextComponent getDisplayName(ItemStack stack) {
+                return getBlock().getNameTextComponent();
+            }
+        }.setRegistryName(block.getRegistryName()));
     }
 }

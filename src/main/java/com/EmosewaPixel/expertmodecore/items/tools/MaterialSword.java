@@ -6,7 +6,10 @@ import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialItems;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialRegistry;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class MaterialSword extends ItemSword implements MaterialItem {
     private Material material;
@@ -26,5 +29,10 @@ public class MaterialSword extends ItemSword implements MaterialItem {
     @Override
     public ObjectType getObjType() {
         return MaterialRegistry.SWORD;
+    }
+
+    @Override
+    public ITextComponent getDisplayName(ItemStack stack) {
+        return new TextComponentTranslation("itemtype.sword.name", material.getTranslationKey());
     }
 }

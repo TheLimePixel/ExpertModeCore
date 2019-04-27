@@ -7,6 +7,9 @@ import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialItems;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialRegistry;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
 import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class MaterialHoe extends ItemHoe implements MaterialItem {
     private Material material;
@@ -26,5 +29,10 @@ public class MaterialHoe extends ItemHoe implements MaterialItem {
     @Override
     public ObjectType getObjType() {
         return MaterialRegistry.HOE;
+    }
+
+    @Override
+    public ITextComponent getDisplayName(ItemStack stack) {
+        return new TextComponentTranslation("itemtype.hoe.name", material.getTranslationKey());
     }
 }

@@ -8,6 +8,8 @@ import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialRegistry
 import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class MaterialHammer extends ItemPickaxe implements MaterialItem {
     private Material material;
@@ -43,5 +45,10 @@ public class MaterialHammer extends ItemPickaxe implements MaterialItem {
     @Override
     public ObjectType getObjType() {
         return MaterialRegistry.HAMMER;
+    }
+
+    @Override
+    public ITextComponent getDisplayName(ItemStack stack) {
+        return new TextComponentTranslation("itemtype.hammer.name", material.getTranslationKey());
     }
 }

@@ -7,6 +7,9 @@ import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialItems;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialRegistry;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
 import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class MaterialAxe extends ItemAxe implements MaterialItem {
     private Material material;
@@ -26,5 +29,10 @@ public class MaterialAxe extends ItemAxe implements MaterialItem {
     @Override
     public ObjectType getObjType() {
         return MaterialRegistry.AXE;
+    }
+
+    @Override
+    public ITextComponent getDisplayName(ItemStack stack) {
+        return new TextComponentTranslation("itemtype.axe.name", material.getTranslationKey());
     }
 }

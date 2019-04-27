@@ -1,10 +1,13 @@
 package com.EmosewaPixel.expertmodecore.items;
 
 import com.EmosewaPixel.expertmodecore.ExpertModeCore;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialItems;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class MaterialItem extends Item implements com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialItem {
     private Material material;
@@ -26,5 +29,10 @@ public class MaterialItem extends Item implements com.EmosewaPixel.expertmodecor
     @Override
     public ObjectType getObjType() {
         return type;
+    }
+
+    @Override
+    public ITextComponent getDisplayName(ItemStack stack) {
+        return new TextComponentTranslation("itemtype." + type.getName() + ".name", material.getTranslationKey());
     }
 }

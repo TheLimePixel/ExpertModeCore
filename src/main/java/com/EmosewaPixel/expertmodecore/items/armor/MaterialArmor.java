@@ -9,6 +9,9 @@ import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class MaterialArmor extends ItemArmor implements MaterialItem {
     private Material material;
@@ -44,5 +47,10 @@ public class MaterialArmor extends ItemArmor implements MaterialItem {
     @Override
     public ObjectType getObjType() {
         return ObjTypes.getTypeFromName(type);
+    }
+
+    @Override
+    public ITextComponent getDisplayName(ItemStack stack) {
+        return new TextComponentTranslation("itemtype." + type + ".name", material.getTranslationKey());
     }
 }
