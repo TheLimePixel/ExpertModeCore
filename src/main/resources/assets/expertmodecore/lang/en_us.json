@@ -44,7 +44,7 @@
 	"item.expertmodecore.unfired_coke_brick": "Unfired Coke Brick",
 	"item.expertmodecore.unlit_torch": "Unlit Torch",
 
-	"blocktype.block.name": "Block of %s",
+	"blocktype.storage_block.name": "Block of %s",
 	"blocktype.ore.name": "%s Ore",
 
 	"itemtype.ingot.name": "%s Ingot",

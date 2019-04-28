@@ -7,7 +7,6 @@ import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialsAndTextureT
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.ObjTypes;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.IngotMaterial;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialItem;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialRegistry;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.BlockType;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.TextureType;
@@ -101,8 +100,7 @@ public class BlockRegistry {
         for (ObjectType objT : ObjTypes.objTypes)
             if (objT instanceof BlockType)
                 for (TextureType textureT : MaterialsAndTextureTypes.textureTypes)
-                    if (!(textureT == MaterialRegistry.iron && objT.isMaterialCompatible(MaterialRegistry.IRON)))
-                        templates.add(register(new ModBlock(Block.Properties.create(Material.IRON), textureT.toString() + "_" + objT.getName(), 0), e));
+                    templates.add(register(new ModBlock(Block.Properties.create(Material.IRON), textureT.toString() + "_" + objT.getName(), 0), e));
     }
 
     public static void itemRegistry(RegistryEvent.Register<Item> e) {

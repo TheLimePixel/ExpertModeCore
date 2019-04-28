@@ -105,9 +105,10 @@ public class TileEntityInfusionTable extends TileEntity implements ITickable {
     }
 
     private void infuse() {
-        canOutput(currentRecipe, false);
+        MachineRecipe lastRecipe = currentRecipe;
+        canOutput(lastRecipe, false);
         for (int i = 0; i < inputCount; i++)
-            input.extractItem(i, ((ItemStack) currentRecipe.getInput(i)).copy().getCount(), false);
+            input.extractItem(i, lastRecipe.getInputCount(i), false);
         progress = 0;
     }
 
@@ -167,7 +168,7 @@ public class TileEntityInfusionTable extends TileEntity implements ITickable {
         int matches = 0;
         for (int i = 0; i < inputCount; i++)
             if (!input.getStackInSlot(i).isEmpty())
-                if (input.getStackInSlot(i).getItem() == ((ItemStack) currentRecipe.getInput(i)).getItem() && input.getStackInSlot(i).getCount() >= ((ItemStack) currentRecipe.getInput(i)).getCount())
+                if (input.getStackInSlot(i).getItem() == ((ItemStack) currentRecipe.getInput(i)).getItem() && input.getStackInSlot(i).getCount() >= currentRecipe.getInputCount(i))
                     matches++;
         return matches == inputCount;
     }

@@ -11,8 +11,12 @@ import com.EmosewaPixel.expertmodecore.proxy.ClientProxy;
 import com.EmosewaPixel.expertmodecore.proxy.IModProxy;
 import com.EmosewaPixel.expertmodecore.proxy.ServerProxy;
 import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
-import com.EmosewaPixel.expertmodecore.recipes.RecipeAddition;
+import com.EmosewaPixel.expertmodecore.recipes.MachineRecipeAddition;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
+import com.EmosewaPixel.expertmodecore.recipes.TagStack;
+import com.EmosewaPixel.expertmodecore.resourceAddition.DataAddition;
+import com.EmosewaPixel.expertmodecore.resourceAddition.FakePackFinder;
+import com.EmosewaPixel.expertmodecore.resourceAddition.RecipeInjector;
 import com.EmosewaPixel.expertmodecore.tiles.ExpertTypes;
 import com.EmosewaPixel.expertmodecore.tiles.guis.ModGuiHandler;
 import com.EmosewaPixel.expertmodecore.world.OreGen;
@@ -29,6 +33,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.resources.IResourceManagerReloadListener;
+import net.minecraft.resources.SimpleReloadableResourceManager;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.DamageSource;
@@ -56,11 +62,14 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
+import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -94,12 +103,13 @@ public class ExpertModeCore {
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
-        RecipeAddition.registry();
+        MachineRecipeAddition.registry();
         proxy.enque(event);
     }
 
     private void processIMC(final InterModProcessEvent event) {
         proxy.process(event);
+        DataAddition.register();
     }
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = ModId)
@@ -202,7 +212,7 @@ public class ExpertModeCore {
 
             if (e.getState().getBlock() == Blocks.REDSTONE_ORE && e.getPlayer().getHeldItemMainhand().getItem() == MaterialItems.getItem(MaterialRegistry.BRONZE, MaterialRegistry.HAMMER)) {
                 e.getWorld().spawnEntity(new EntityItem(e.getWorld().getWorld(), e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), new ItemStack(Items.REDSTONE, 3)));
-                e.getWorld().spawnEntity(new EntityItem(e.getWorld().getWorld(), e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), new ItemStack(RecipeAddition.STONE_DUST)));
+                e.getWorld().spawnEntity(new EntityItem(e.getWorld().getWorld(), e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), new TagStack(MachineRecipeAddition.DUSTS_STONE).asItemStack()));
             }
         }
 
@@ -228,6 +238,21 @@ public class ExpertModeCore {
         }
 
         @SubscribeEvent
+        public static void onServerAboutToStart(FMLServerAboutToStartEvent e) {
+            List<IResourceManagerReloadListener> reloadListeners;
+            try {
+                Field reloadListenersField = Arrays.stream(SimpleReloadableResourceManager.class.getDeclaredFields()).filter(field -> field.getType() == List.class).findFirst().get();
+                reloadListenersField.setAccessible(true);
+                reloadListeners = (List<IResourceManagerReloadListener>) reloadListenersField.get(e.getServer().getResourceManager());
+            } catch (Exception exc) {
+                LOGGER.warn("Unable to obtain listener list.", exc);
+                return;
+            }
+            reloadListeners.add(reloadListeners.indexOf(e.getServer().getRecipeManager()) + 1, resourceManager -> new RecipeInjector(e.getServer().getRecipeManager()).injectRecipes(resourceManager));
+            e.getServer().getResourcePacks().addPackFinder(new FakePackFinder());
+        }
+
+        @SubscribeEvent
         public static void onTick(TickEvent.WorldTickEvent e) {
             for (Iterator<EntityItem> iterator = ironIngots.iterator(); iterator.hasNext(); ) {
                 EntityItem item = iterator.next();
@@ -246,7 +271,7 @@ public class ExpertModeCore {
                         item.attackEntityFrom(DamageSource.IN_FIRE, -100);
 
                 if (e.world.getBlockState(item.getPosition()).getBlock() instanceof BlockFire)
-                    item.setItem(new ItemStack(RecipeAddition.CHARRED_IRON_INGOT, item.getItem().getCount()));
+                    item.setItem(new ItemStack(MachineRecipeAddition.CHARRED_IRON_INGOT, item.getItem().getCount()));
             }
         }
 
@@ -283,17 +308,17 @@ public class ExpertModeCore {
                             if (mat.doesHaveOre())
                                 if (tag("ores/" + mat.getName()).contains(item)) {
                                     e.getDrops().removeAll(e.getDrops());
-                                    e.getDrops().add(new ItemStack(MaterialItems.getItem(mat, MaterialRegistry.DUST)));
+                                    e.getDrops().add(new TagStack(tag("dusts/" + mat.getName())).asItemStack());
                                 }
-                        e.getDrops().add(new ItemStack(RecipeAddition.STONE_DUST));
+                        e.getDrops().add(new TagStack(MachineRecipeAddition.DUSTS_STONE).asItemStack());
                     }
                     if (e.getState().getBlock() == Blocks.MAGMA_BLOCK) {
                         e.getDrops().remove(0);
-                        e.getDrops().add(new ItemStack(RecipeAddition.MAGMA_DUST, 2));
+                        e.getDrops().add(new ItemStack(MachineRecipeAddition.MAGMA_DUST, 2));
                     }
                     if (e.getState().getBlock() == Blocks.NETHERRACK) {
                         e.getDrops().remove(0);
-                        e.getDrops().add(new ItemStack(RecipeAddition.NETHERRACK_DUST, 2));
+                        e.getDrops().add(new TagStack(MachineRecipeAddition.DUSTS_NETHERRACK, 2).asItemStack());
                     }
                 }
             }

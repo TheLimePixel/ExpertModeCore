@@ -6,7 +6,6 @@ import com.EmosewaPixel.expertmodecore.items.tools.*;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialsAndTextureTypes;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.ObjTypes;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialRegistry;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.ItemType;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.TextureType;
@@ -54,8 +53,7 @@ public class ItemRegistry {
         for (ObjectType objT : ObjTypes.objTypes)
             if (objT instanceof ItemType)
                 for (TextureType textureT : MaterialsAndTextureTypes.textureTypes)
-                    if (!(textureT == MaterialRegistry.iron && objT.isMaterialCompatible(MaterialRegistry.IRON)))
-                        register(new Item(new Item.Properties()).setRegistryName("expertmodecore:" + textureT.toString() + "_" + objT.getName()), e);
+                    register(new Item(new Item.Properties()).setRegistryName("expertmodecore:" + textureT.toString() + "_" + objT.getName()), e);
 
         BRICK_MOLD = register(new SelfContainerItem("brick_mold"), e);
         COKE_BRICK = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("expertmodecore:coke_brick"), e);

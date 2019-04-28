@@ -1,9 +1,14 @@
 package com.EmosewaPixel.expertmodecore.materialSystem.materials;
 
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialsAndTextureTypes;
+import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.TextureType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.Item;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 
@@ -89,5 +94,9 @@ public class Material {
 
     public ITextComponent getTranslationKey() {
         return new TextComponentTranslation("material." + name + ".name");
+    }
+
+    public Tag<Item> getTag(ObjectType type) {
+        return new ItemTags.Wrapper(new ResourceLocation("forge", type.getName() + "s/" + name));
     }
 }

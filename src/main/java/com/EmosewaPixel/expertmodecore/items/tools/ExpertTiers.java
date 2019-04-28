@@ -1,6 +1,6 @@
 package com.EmosewaPixel.expertmodecore.items.tools;
 
-import com.EmosewaPixel.expertmodecore.recipes.RecipeAddition;
+import com.EmosewaPixel.expertmodecore.recipes.MachineRecipeAddition;
 import net.minecraft.init.Items;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
@@ -13,16 +13,16 @@ public enum ExpertTiers implements IItemTier {
         return Ingredient.fromItems(Items.FLINT);
     }),
     BRONZE(1, 172, 4, 1, 5, () -> {
-        return Ingredient.fromTag(RecipeAddition.INGOTS_BRONZE);
+        return Ingredient.fromTag(MachineRecipeAddition.INGOTS_BRONZE);
     }),
     STEEl(2, 320, 6, 2, 14, () -> {
-        return Ingredient.fromTag(RecipeAddition.INGOTS_STEEL);
+        return Ingredient.fromTag(MachineRecipeAddition.INGOTS_STEEL);
     }),
     CRYSTALLINE(3, 2030, 8, 3, 10, () -> {
-        return Ingredient.fromTag(RecipeAddition.INGOTS_CRYSTALLINE);
+        return Ingredient.fromTag(MachineRecipeAddition.INGOTS_CRYSTALLINE);
     }),
     ELECTRUM(1, 96, 12, 0, 22, () -> {
-        return Ingredient.fromTag(RecipeAddition.INGOTS_ELECTRUM);
+        return Ingredient.fromTag(MachineRecipeAddition.INGOTS_ELECTRUM);
     });
 
     private final int harvestLevel;

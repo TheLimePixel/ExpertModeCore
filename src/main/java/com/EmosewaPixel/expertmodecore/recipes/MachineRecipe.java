@@ -8,11 +8,11 @@ import java.util.List;
 
 public class MachineRecipe {
     private Object[] input;
-    private ItemStack[] output;
+    private Object[] output;
     private int time;
     public static final MachineRecipe EMPTY = new MachineRecipe(null, null, 0);
 
-    public MachineRecipe(Object[] input, ItemStack[] output, int time) {
+    public MachineRecipe(Object[] input, Object[] output, int time) {
         this.input = input;
         this.output = output;
         this.time = time;
@@ -22,16 +22,35 @@ public class MachineRecipe {
         return input[index];
     }
 
+    public int getInputCount(int index) {
+        Object obj = getInput(index);
+        if (obj instanceof ItemStack)
+            return ((ItemStack) obj).getCount();
+        if (obj instanceof TagStack)
+            return ((TagStack) obj).getCount();
+        return 0;
+    }
+
     public Object[] getAllInputs() {
         return input;
     }
 
     public ItemStack getOutput(int index) {
-        return output[index];
+        if (output[index] instanceof ItemStack)
+            return (ItemStack) output[index];
+        else if (output[index] instanceof TagStack)
+            return ((TagStack) output[index]).asItemStack();
+        return null;
     }
 
     public ItemStack[] getAllOutputs() {
-        return output;
+        ItemStack[] outputStacks = new ItemStack[output.length];
+        for (int i = 0; i < output.length; i++)
+            if (output[i] instanceof ItemStack)
+                outputStacks[i] = (ItemStack) output[i];
+            else if (output[i] instanceof TagStack)
+                outputStacks[i] = ((TagStack) output[i]).asItemStack();
+        return outputStacks;
     }
 
     public List<List<ItemStack>> getInputsAsList() {
@@ -51,7 +70,7 @@ public class MachineRecipe {
 
     public List<ItemStack> getOutputsAsList() {
         List<ItemStack> list = new ArrayList<>();
-        for (ItemStack stack : output)
+        for (ItemStack stack : getAllOutputs())
             list.add(stack);
         return list;
     }

@@ -1,6 +1,8 @@
 package com.EmosewaPixel.expertmodecore.recipes;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tags.Tag;
 
 public class TagStack {
@@ -34,5 +36,9 @@ public class TagStack {
 
     public TagStack copy() {
         return new TagStack(this.tag, this.count);
+    }
+
+    public ItemStack asItemStack() {
+        return new ItemStack(tag.getAllElements().stream().findFirst().orElse(Items.AIR), count);
     }
 }
