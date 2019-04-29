@@ -1,6 +1,6 @@
 package com.EmosewaPixel.expertmodecore.resourceAddition;
 
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialItem;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.IMaterialItem;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.MultimapBuilder;
 import net.minecraft.block.Block;
@@ -10,7 +10,7 @@ public class TagMaps {
     protected static ListMultimap<String, Item> ITEM_TAGS = MultimapBuilder.treeKeys().arrayListValues().build();
     protected static ListMultimap<String, Block> BLOCK_TAGS = MultimapBuilder.treeKeys().arrayListValues().build();
 
-    public static void addItemToTag(MaterialItem item) {
+    public static void addItemToTag(IMaterialItem item) {
         if (item instanceof Item) {
             ITEM_TAGS.put(item.getObjType().getName() + "s/" + item.getMaterial().getName(), (Item) item);
             ITEM_TAGS.put(item.getObjType().getName() + "s", (Item) item);

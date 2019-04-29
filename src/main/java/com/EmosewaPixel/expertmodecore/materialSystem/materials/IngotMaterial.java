@@ -5,7 +5,7 @@ import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.IItemTier;
 
 public class IngotMaterial extends DustMaterial {
-    private HarvestTier harvestTier = null;
+    private IHarvestTier harvestTier = null;
 
     public IngotMaterial(String name, TextureType textureType, int color) {
         super(name, textureType, color);
@@ -27,12 +27,12 @@ public class IngotMaterial extends DustMaterial {
         return this;
     }
 
-    public IngotMaterial setHarvestTier(HarvestTier tier) {
+    public IngotMaterial setHarvestTier(IHarvestTier tier) {
         this.harvestTier = tier;
         return this;
     }
 
-    public HarvestTier getHarvestTier() {
+    public IHarvestTier getHarvestTier() {
         return harvestTier;
     }
 }

@@ -3,14 +3,14 @@ package com.EmosewaPixel.expertmodecore.blocks;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialBlocks;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.IngotMaterial;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialItem;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.IMaterialItem;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.BlockType;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 
-public class MaterialBlock extends ModBlock implements MaterialItem {
+public class MaterialBlock extends ModBlock implements IMaterialItem {
     private IngotMaterial material;
     private ObjectType type;
 

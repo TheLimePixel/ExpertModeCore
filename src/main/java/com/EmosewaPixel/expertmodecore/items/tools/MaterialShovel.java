@@ -1,7 +1,7 @@
 package com.EmosewaPixel.expertmodecore.items.tools;
 
 import com.EmosewaPixel.expertmodecore.ExpertModeCore;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialItem;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.IMaterialItem;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialItems;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialRegistry;
@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 
-public class MaterialShovel extends ItemSpade implements MaterialItem {
+public class MaterialShovel extends ItemSpade implements IMaterialItem {
     private Material material;
 
     public MaterialShovel(Material mat) {

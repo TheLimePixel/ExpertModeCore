@@ -1,6 +1,6 @@
 package com.EmosewaPixel.expertmodecore.materialSystem.materials;
 
-public interface HarvestTier {
+public interface IHarvestTier {
     float getHardness();
 
     float getResistance();

@@ -1,7 +1,7 @@
 package com.EmosewaPixel.expertmodecore.items.tools;
 
 import com.EmosewaPixel.expertmodecore.ExpertModeCore;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialItem;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.IMaterialItem;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialItems;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialRegistry;
@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 
-public class MaterialSaw extends ItemAxe implements MaterialItem {
+public class MaterialSaw extends ItemAxe implements IMaterialItem {
     private Material material;
 
     public MaterialSaw(Material mat) {
@@ -31,7 +31,7 @@ public class MaterialSaw extends ItemAxe implements MaterialItem {
     @Override
     public ItemStack getContainerItem(ItemStack itemStack) {
         ItemStack container = itemStack.copy();
-        container.setDamage(container.getDamage() + 2);
+        container.setDamage(container.getDamage() + 1);
         if (container.getDamage() < container.getMaxDamage())
             return container;
         else

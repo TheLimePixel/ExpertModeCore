@@ -6,7 +6,7 @@ import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialBlocks;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialsAndTextureTypes;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.ObjTypes;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.IngotMaterial;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialItem;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.IMaterialItem;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.BlockType;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.TextureType;
@@ -104,7 +104,7 @@ public class BlockRegistry {
     }
 
     public static void itemRegistry(RegistryEvent.Register<Item> e) {
-        for (MaterialItem block : MaterialBlocks.materialBlocks)
+        for (IMaterialItem block : MaterialBlocks.materialBlocks)
             if (block instanceof Block)
                 registerItemBlock((Block) block, e);
 

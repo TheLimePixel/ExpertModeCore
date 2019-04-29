@@ -4,7 +4,7 @@ import com.EmosewaPixel.expertmodecore.ExpertModeCore;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialItems;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.ObjTypes;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialItem;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.IMaterialItem;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 
-public class MaterialArmor extends ItemArmor implements MaterialItem {
+public class MaterialArmor extends ItemArmor implements IMaterialItem {
     private Material material;
     private String type;
 
