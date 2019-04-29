@@ -15,7 +15,7 @@ public class MaterialRegistry {
     public static Material IRON, GOLD, COPPER, TIN, SILVER, BRONZE, STEEL, ELECTRUM, CHARRED_IRON, CRYSTALLINE, FLINT,
             LAPIS, QUARTZ, DIAMOND, PRISMARINE, MAGMA, STONE, NETHERRACK;
 
-    public static ObjectType INGOT, NUGGET, PLATE, DUST, BLOCK, ORE, PICKAXE, SHOVEL, AXE, SAW, HAMMER, SWORD, HOE, CHESTPLATE, HELMET, BOOTS, LEGGINGS, SMALL_DUST;
+    public static ObjectType INGOT, NUGGET, PLATE, DUST, BLOCK, ORE, PICKAXE, SHOVEL, AXE, SAW, HAMMER, SWORD, HOE, CHESTPLATE, HELMET, BOOTS, LEGGINGS, SMALL_DUST, GEM;
 
     static {
         ROUGH = new TextureType("rough");
@@ -24,19 +24,19 @@ public class MaterialRegistry {
 
         IRON = new IngotMaterial("iron", ROUGH, 0xd8d8d8).doesntHaveBase().hasOre().build();
         GOLD = new IngotMaterial("gold", SHINY, 0xfad64a).doesntHaveBase().hasOre().build();
-        COPPER = new IngotMaterial("copper", REGULAR, 0xf39500).hasOre().setHarvestTier(HarvestTiers.STONE).build();
-        TIN = new IngotMaterial("tin", REGULAR, 0xc1cfcf).hasOre().setHarvestTier(HarvestTiers.STONE).build();
-        SILVER = new IngotMaterial("silver", SHINY, 0xf0f7f7).hasOre().setHarvestTier(HarvestTiers.IRON).build();
-        BRONZE = new IngotMaterial("bronze", REGULAR, 0xd79117).setToolAndArmorMaterial(ExpertTiers.BRONZE, ExpertMaterials.BRONZE).setHarvestTier(HarvestTiers.STONE).build();
-        STEEL = new IngotMaterial("steel", ROUGH, 0xb7b7b7).setToolAndArmorMaterial(ExpertTiers.STEEl, ExpertMaterials.STEEL).setHarvestTier(HarvestTiers.IRON).build();
-        ELECTRUM = new IngotMaterial("electrum", SHINY, 0xfaff3b).setToolAndArmorMaterial(ExpertTiers.ELECTRUM, ExpertMaterials.ELECTRUM).setHarvestTier(HarvestTiers.DIAMOND).build();
-        CHARRED_IRON = new IngotMaterial("charred_iron", ROUGH, 0x393939).setHarvestTier(HarvestTiers.IRON).build();
-        CRYSTALLINE = new IngotMaterial("crystalline", SHINY, 0x76dada).setToolAndArmorMaterial(ExpertTiers.CRYSTALLINE, ExpertMaterials.CRYSTALLINE).setHarvestTier(HarvestTiers.DIAMOND).build();
+        COPPER = new IngotMaterial("copper", REGULAR, 0xf39500).hasOre().setBlockHarvestTier(HarvestTiers.STONE).build();
+        TIN = new IngotMaterial("tin", REGULAR, 0xc1cfcf).hasOre().setBlockHarvestTier(HarvestTiers.STONE).build();
+        SILVER = new IngotMaterial("silver", SHINY, 0xf0f7f7).hasOre().setBlockHarvestTier(HarvestTiers.IRON).build();
+        BRONZE = new IngotMaterial("bronze", REGULAR, 0xd79117).setToolAndArmorMaterial(ExpertTiers.BRONZE, ExpertMaterials.BRONZE).setBlockHarvestTier(HarvestTiers.STONE).build();
+        STEEL = new IngotMaterial("steel", ROUGH, 0xb7b7b7).setToolAndArmorMaterial(ExpertTiers.STEEl, ExpertMaterials.STEEL).setBlockHarvestTier(HarvestTiers.IRON).build();
+        ELECTRUM = new IngotMaterial("electrum", SHINY, 0xfaff3b).setToolAndArmorMaterial(ExpertTiers.ELECTRUM, ExpertMaterials.ELECTRUM).setBlockHarvestTier(HarvestTiers.DIAMOND).build();
+        CHARRED_IRON = new IngotMaterial("charred_iron", ROUGH, 0x393939).setBlockHarvestTier(HarvestTiers.IRON).build();
+        CRYSTALLINE = new IngotMaterial("crystalline", SHINY, 0x76dada).setToolAndArmorMaterial(ExpertTiers.CRYSTALLINE, ExpertMaterials.CRYSTALLINE).setBlockHarvestTier(HarvestTiers.DIAMOND).build();
         FLINT = new Material("flint", REGULAR, 0x222020).setToolAndArmorMaterial(ExpertTiers.FLINT, null).build();
-        LAPIS = new DustMaterial("lapis", REGULAR, 0x2351be).build();
-        QUARTZ = new DustMaterial("quartz", REGULAR, 0xe8dfd0).build();
-        DIAMOND = new DustMaterial("diamond", REGULAR, 0x34ebe3).build();
-        PRISMARINE = new DustMaterial("prismarine", REGULAR, 0xa1dacb).build();
+        LAPIS = new GemMaterial("lapis", REGULAR, 0x2351be).doesntHaveBase().build();
+        QUARTZ = new GemMaterial("quartz", REGULAR, 0xe8dfd0).doesntHaveBase().build();
+        DIAMOND = new GemMaterial("diamond", REGULAR, 0x34ebe3).doesntHaveBase().build();
+        PRISMARINE = new GemMaterial("prismarine", REGULAR, 0xa1dacb).doesntHaveBase().build();
         MAGMA = new DustMaterial("magma", REGULAR, 0xffb62e).build();
         STONE = new DustMaterial("stone", REGULAR, 0xcccccc).doesHaveSmallDust().build();
         NETHERRACK = new DustMaterial("netherrack", REGULAR, 0xb33939).build();
@@ -54,8 +54,8 @@ public class MaterialRegistry {
         PLATE = new ItemType("plate", mat -> mat instanceof IngotMaterial);
         DUST = new ItemType("dust", mat -> mat instanceof DustMaterial);
         BLOCK = new BlockType("storage_block", mat -> {
-            if (mat instanceof IngotMaterial && mat.doesHaveBase())
-                return ((IngotMaterial) mat).getHarvestTier() != null;
+            if (mat instanceof DustMaterial && mat.doesHaveBase())
+                return ((DustMaterial) mat).getHarvestTier() != null;
             return false;
         }, Block.Properties.create(net.minecraft.block.material.Material.IRON).sound(SoundType.METAL));
         ORE = new BlockType("ore", mat -> {
@@ -77,6 +77,11 @@ public class MaterialRegistry {
         SMALL_DUST = new ItemType("small_dust", mat -> {
             if (mat instanceof DustMaterial)
                 return ((DustMaterial) mat).hasSmallDust();
+            return false;
+        });
+        GEM = new ItemType("gem", mat -> {
+            if (mat instanceof GemMaterial)
+                return mat.doesHaveBase();
             return false;
         });
     }

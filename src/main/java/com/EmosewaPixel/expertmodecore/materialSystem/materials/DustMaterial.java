@@ -6,6 +6,7 @@ import net.minecraft.item.IItemTier;
 
 public class DustMaterial extends Material {
     private boolean hasSmallDust = false;
+    private IHarvestTier harvestTier = null;
 
     public DustMaterial(String name, TextureType textureType, int color) {
         super(name, textureType, color);
@@ -34,5 +35,13 @@ public class DustMaterial extends Material {
 
     public boolean hasSmallDust() {
         return hasSmallDust;
+    }
+
+    public IHarvestTier getHarvestTier() {
+        return harvestTier;
+    }
+
+    public void setHarvestTier(IHarvestTier harvestTier) {
+        this.harvestTier = harvestTier;
     }
 }

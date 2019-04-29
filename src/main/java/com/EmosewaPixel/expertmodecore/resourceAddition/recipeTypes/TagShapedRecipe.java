@@ -1,4 +1,4 @@
-package com.EmosewaPixel.expertmodecore.resourceAddition;
+package com.EmosewaPixel.expertmodecore.resourceAddition.recipeTypes;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;

@@ -5,6 +5,7 @@ import com.EmosewaPixel.expertmodecore.items.ItemRegistry;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialBlocks;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialItems;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialsAndTextureTypes;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.GemMaterial;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.IngotMaterial;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialRegistry;
@@ -45,10 +46,6 @@ public class MachineRecipeAddition {
         new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.ORES_DIAMOND), new ItemStack(Items.DIAMOND, 2), new TagStack(DUSTS_STONE), 200);
         new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.ORES_COAL), new ItemStack(Items.COAL, 2), new TagStack(DUSTS_STONE), 200);
         new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.ORES_QUARTZ), new ItemStack(Items.QUARTZ, 2), new TagStack(DUSTS_NETHERRACK), 200);
-        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.GEMS_LAPIS), new TagStack(DUSTS_LAPIS), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.GEMS_DIAMOND), new TagStack(DUSTS_DIAMOND), 200);
-        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.GEMS_PRISMARINE), new TagStack(DUSTS_PRISMARINE), 150);
-        new RecipeTypes.CrusherRecipe(new TagStack(Tags.Items.GEMS_QUARRTZ), new TagStack(DUSTS_QUARTZ), 150);
         new RecipeTypes.CrusherRecipe(new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.PRISMARINE_CRYSTALS, 2), 150);
 
         new RecipeTypes.InfusionRecipe(new ItemStack(Items.ENDER_PEARL), new ItemStack(Items.BLAZE_POWDER), new ItemStack(Items.ENDER_EYE), 4000);
@@ -59,14 +56,19 @@ public class MachineRecipeAddition {
         new RecipeTypes.CokeOvenRecipe(new TagStack(ItemTags.LOGS), new ItemStack(Items.CHARCOAL), 1800);
         new RecipeTypes.CokeOvenRecipe(new ItemStack(Items.COAL), new ItemStack(ItemRegistry.COAL_COKE), 1800);
 
-        for (Material material : MaterialsAndTextureTypes.materials)
-            if (material instanceof IngotMaterial) {
+        for (Material material : MaterialsAndTextureTypes.materials) {
+            if (material instanceof GemMaterial) {
+                new RecipeTypes.CrusherRecipe(new TagStack(tag("gems/" + material.getName())), new TagStack(tag("dusts/" + material.getName())), 150);
+                new RecipeTypes.ExplosionRecipe(new TagStack(tag("dusts/" + material.getName())),new TagStack(tag("gems/" + material.getName())));
+            }
+                if (material instanceof IngotMaterial) {
                 new RecipeTypes.PressingRecipe(new TagStack(tag("ingots/" + material.getName())), new TagStack(tag("plates/" + material.getName())));
                 new RecipeTypes.CrusherRecipe(new TagStack(tag("ingots/" + material.getName())), new TagStack(tag("dusts/" + material.getName())), 150);
                 new RecipeTypes.CrusherRecipe(new TagStack(tag("plates/" + material.getName())), new TagStack(tag("dusts/" + material.getName())), 150);
                 if (material.doesHaveOre())
                     new RecipeTypes.CrusherRecipe(new TagStack(tag("ores/" + material.getName())), new TagStack(tag("dusts/" + material.getName()), 2), new TagStack(DUSTS_STONE).asItemStack(), 200);
             }
+        }
 
         new RecipeTypes.SawmillRecipe(new ItemStack(BlockRegistry.IRONWOOD_PLANKS), new ItemStack(ItemRegistry.IRONWOOD_STICK, 2), 100, true);
         new RecipeTypes.SawmillRecipe(new ItemStack(BlockRegistry.REDWOOD_PLANKS), new ItemStack(ItemRegistry.REDWOOD_STICK, 2), 100, true);
@@ -115,10 +117,6 @@ public class MachineRecipeAddition {
         new RecipeTypes.SawmillRecipe(new ItemStack(BlockRegistry.REDWOOD_WOOD), new ItemStack(BlockRegistry.STRIPPED_REDWOOD_WOOD), 200, false);
 
         new RecipeTypes.ExplosionRecipe(new TagStack(DUSTS_CRYSTALLINE), new TagStack(INGOTS_CRYSTALLINE));
-        new RecipeTypes.ExplosionRecipe(new TagStack(DUSTS_DIAMOND), new ItemStack(Items.DIAMOND));
-        new RecipeTypes.ExplosionRecipe(new TagStack(DUSTS_LAPIS), new ItemStack(Items.LAPIS_LAZULI));
-        new RecipeTypes.ExplosionRecipe(new TagStack(DUSTS_PRISMARINE), new ItemStack(Items.PRISMARINE_CRYSTALS));
-        new RecipeTypes.ExplosionRecipe(new TagStack(DUSTS_QUARTZ), new ItemStack(Items.QUARTZ));
     }
 
     public static final ItemTags.Wrapper BLOCKS_BRONZE = tag("blocks/bronze");

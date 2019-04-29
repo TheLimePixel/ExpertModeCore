@@ -1,5 +1,8 @@
 package com.EmosewaPixel.expertmodecore.resourceAddition;
 
+import com.EmosewaPixel.expertmodecore.resourceAddition.recipeTypes.TagFurnaceRecipe;
+import com.EmosewaPixel.expertmodecore.resourceAddition.recipeTypes.TagShapedRecipe;
+import com.EmosewaPixel.expertmodecore.resourceAddition.recipeTypes.TagShapelessRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
