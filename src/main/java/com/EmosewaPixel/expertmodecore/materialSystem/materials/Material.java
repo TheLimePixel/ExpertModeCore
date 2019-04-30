@@ -17,7 +17,6 @@ public class Material {
     private TextureType textureType;
     private int color;
     private boolean hasOre = false;
-    private boolean hasBase = true;
     private IItemTier itemTier = null;
     private IArmorMaterial armorMaterial = null;
 
@@ -29,11 +28,6 @@ public class Material {
 
     public Material hasOre() {
         this.hasOre = true;
-        return this;
-    }
-
-    public Material doesntHaveBase() {
-        this.hasBase = false;
         return this;
     }
 
@@ -64,10 +58,6 @@ public class Material {
         return hasOre;
     }
 
-    public boolean doesHaveBase() {
-        return hasBase;
-    }
-
     public IArmorMaterial getArmorMaterial() {
         return armorMaterial;
     }
@@ -78,10 +68,6 @@ public class Material {
 
     public void setHasOre(boolean hasOre) {
         this.hasOre = hasOre;
-    }
-
-    public void setHasBase(boolean hasBase) {
-        this.hasBase = hasBase;
     }
 
     public void setItemTier(IItemTier itemTier) {

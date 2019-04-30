@@ -36,7 +36,7 @@ public class MaterialArmor extends ItemArmor implements IMaterialItem {
         }
         this.type = type;
         setRegistryName("expertmodecore:" + material.getName() + "_" + type);
-        MaterialItems.materialItems.add(this);
+        MaterialItems.addItem(this);
     }
 
     @Override

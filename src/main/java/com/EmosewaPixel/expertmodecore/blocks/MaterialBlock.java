@@ -18,7 +18,7 @@ public class MaterialBlock extends ModBlock implements IMaterialItem {
         super(type.getProperties().hardnessAndResistance(mat.getHarvestTier().getHardness(), mat.getHarvestTier().getResistance()), mat.getName() + "_" + type.getName(), mat.getHarvestTier().getHarvestLevel());
         this.material = mat;
         this.type = type;
-        MaterialBlocks.materialBlocks.add(this);
+        MaterialBlocks.addBlock(this);
     }
 
     @Override

@@ -15,11 +15,6 @@ public class GemMaterial extends DustMaterial {
         return this;
     }
 
-    public GemMaterial doesntHaveBase() {
-        setHasBase(false);
-        return this;
-    }
-
     public GemMaterial setToolAndArmorMaterial(IItemTier itemTier, IArmorMaterial armorMaterial) {
         setItemTier(itemTier);
         setArmorMaterial(armorMaterial);

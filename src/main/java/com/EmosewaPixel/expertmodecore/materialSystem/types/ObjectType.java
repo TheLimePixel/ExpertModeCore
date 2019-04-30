@@ -7,11 +7,13 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.function.Predicate;
+
 public class ObjectType {
     private String name;
-    private TypeRequirement requirement;
+    private Predicate<Material> requirement;
 
-    public ObjectType(String name, TypeRequirement requirement) {
+    public ObjectType(String name, Predicate<Material> requirement) {
         this.name = name;
         this.requirement = requirement;
         ObjTypes.objTypes.add(this);
@@ -22,7 +24,7 @@ public class ObjectType {
     }
 
     public boolean isMaterialCompatible(Material mat) {
-        return requirement.compatibleMaterial(mat);
+        return requirement.test(mat);
     }
 
     public Tag<Item> getTag() {

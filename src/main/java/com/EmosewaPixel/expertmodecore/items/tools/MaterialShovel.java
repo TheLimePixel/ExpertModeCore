@@ -18,7 +18,7 @@ public class MaterialShovel extends ItemSpade implements IMaterialItem {
         super(mat.getItemTier(), 1.5F, -3, (new Properties()).group(ExpertModeCore.main));
         setRegistryName("expertmodecore:" + mat.getName() + "_shovel");
         this.material = mat;
-        MaterialItems.materialItems.add(this);
+        MaterialItems.addItem(this);
     }
 
     @Override

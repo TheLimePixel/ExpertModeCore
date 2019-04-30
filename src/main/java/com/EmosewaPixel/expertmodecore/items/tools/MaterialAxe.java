@@ -18,7 +18,7 @@ public class MaterialAxe extends ItemAxe implements IMaterialItem {
         super(mat.getItemTier(), 6, -3.4F + mat.getItemTier().getEfficiency() / 2 * 0.1F, (new Properties()).group(ExpertModeCore.main));
         setRegistryName("expertmodecore:" + mat.getName() + "_axe");
         this.material = mat;
-        MaterialItems.materialItems.add(this);
+        MaterialItems.addItem(this);
     }
 
     @Override

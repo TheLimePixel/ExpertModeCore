@@ -3,6 +3,7 @@ package com.EmosewaPixel.expertmodecore.items;
 import com.EmosewaPixel.expertmodecore.ExpertModeCore;
 import com.EmosewaPixel.expertmodecore.items.armor.MaterialArmor;
 import com.EmosewaPixel.expertmodecore.items.tools.*;
+import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialItems;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialsAndTextureTypes;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.ObjTypes;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
@@ -33,7 +34,8 @@ public class ItemRegistry {
         for (Material mat : MaterialsAndTextureTypes.materials) {
             for (ObjectType type : ObjTypes.objTypes)
                 if (type instanceof ItemType && type.isMaterialCompatible(mat))
-                    register(new MaterialItem(mat, type), e);
+                    if (!MaterialItems.contains(mat, type))
+                        register(new MaterialItem(mat, type), e);
 
             if (mat.getArmorMaterial() != null)
                 for (EntityEquipmentSlot slot : new EntityEquipmentSlot[]{EntityEquipmentSlot.CHEST, EntityEquipmentSlot.FEET, EntityEquipmentSlot.HEAD, EntityEquipmentSlot.LEGS})

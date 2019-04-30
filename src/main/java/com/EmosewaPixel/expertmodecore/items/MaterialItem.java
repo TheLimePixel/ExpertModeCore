@@ -19,7 +19,7 @@ public class MaterialItem extends Item implements IMaterialItem {
         setRegistryName("expertmodecore:" + material.getName() + "_" + type.getName());
         this.material = material;
         this.type = type;
-        MaterialItems.materialItems.add(this);
+        MaterialItems.addItem(this);
     }
 
     @Override

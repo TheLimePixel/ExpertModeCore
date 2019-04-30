@@ -3,20 +3,40 @@ package com.EmosewaPixel.expertmodecore.materialSystem.lists;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.IMaterialItem;
 import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
 import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
+import com.google.common.collect.HashBasedTable;
 import net.minecraft.block.Block;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.IRegistry;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MaterialBlocks {
-    public static ArrayList<IMaterialItem> materialBlocks = new ArrayList<>();
+    public static HashBasedTable<Material, ObjectType, Block> materialBlocks = HashBasedTable.create();
 
     public static Block getBlock(Material material, ObjectType type) {
-        Block block = IRegistry.field_212618_g.get(new ResourceLocation("expertmodecore", material.getName() + "_" + type.getName()));
-        if (block == null)
-            throw new IllegalStateException("Invalid Block requested: " + "expertmodecore:" + material.getName() + "_" + type.getName());
-        else
-            return block;
+        return materialBlocks.get(material, type);
+    }
+
+    public static boolean contains(Material material, ObjectType type) {
+        return getBlock(material, type) != null;
+    }
+
+    public static void addBlock(Material mat, ObjectType type, Block item) {
+        materialBlocks.put(mat, type, item);
+    }
+
+    public static void addBlock(IMaterialItem item) {
+        if (item instanceof Block)
+            addBlock(item.getMaterial(), item.getObjType(), (Block) item);
+    }
+
+    public static List<Block> getMaterialBlocks() {
+        List<Block> matBlocks = new ArrayList<>();
+
+        for (Material mat : MaterialsAndTextureTypes.materials)
+            for (ObjectType type : ObjTypes.objTypes)
+                if (getBlock(mat, type) instanceof IMaterialItem)
+                    matBlocks.add(getBlock(mat, type));
+
+        return matBlocks;
     }
 }

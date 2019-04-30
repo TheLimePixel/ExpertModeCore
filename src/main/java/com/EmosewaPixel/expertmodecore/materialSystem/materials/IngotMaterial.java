@@ -15,11 +15,6 @@ public class IngotMaterial extends DustMaterial {
         return this;
     }
 
-    public IngotMaterial doesntHaveBase() {
-        setHasBase(false);
-        return this;
-    }
-
     public IngotMaterial setToolAndArmorMaterial(IItemTier itemTier, IArmorMaterial armorMaterial) {
         setItemTier(itemTier);
         setArmorMaterial(armorMaterial);

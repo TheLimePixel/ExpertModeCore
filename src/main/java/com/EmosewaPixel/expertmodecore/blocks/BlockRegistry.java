@@ -63,7 +63,7 @@ public class BlockRegistry {
     public static void registry(RegistryEvent.Register<Block> e) {
         for (com.EmosewaPixel.expertmodecore.materialSystem.materials.Material mat : MaterialsAndTextureTypes.materials)
             for (ObjectType type : ObjTypes.objTypes)
-                if (type instanceof BlockType && type.isMaterialCompatible(mat))
+                if (type instanceof BlockType && type.isMaterialCompatible(mat) && !MaterialBlocks.contains(mat, type))
                     register(new MaterialBlock((IngotMaterial) mat, (BlockType) type), e);
 
         COKE_BRICKS = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2, 6).sound(SoundType.STONE), "coke_bricks", 0), e);
@@ -104,9 +104,9 @@ public class BlockRegistry {
     }
 
     public static void itemRegistry(RegistryEvent.Register<Item> e) {
-        for (IMaterialItem block : MaterialBlocks.materialBlocks)
-            if (block instanceof Block)
-                registerItemBlock((Block) block, e);
+        for (Block block : MaterialBlocks.getMaterialBlocks())
+            if (block instanceof IMaterialItem)
+                registerItemBlock(block, e);
 
         registerItemBlock(COKE_BRICKS, e);
         registerItemBlock(IRONWOOD_LEAVES, e);
