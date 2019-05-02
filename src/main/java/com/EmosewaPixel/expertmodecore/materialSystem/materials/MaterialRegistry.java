@@ -17,7 +17,7 @@ public class MaterialRegistry {
     public static TextureType ROUGH, REGULAR, SHINY;
 
     public static Material IRON, GOLD, COPPER, TIN, SILVER, BRONZE, STEEL, ELECTRUM, CHARRED_IRON, CRYSTALLINE, FLINT,
-            LAPIS, QUARTZ, DIAMOND, PRISMARINE, MAGMA, STONE, NETHERRACK, EMERALD;
+            LAPIS, QUARTZ, DIAMOND, PRISMARINE, MAGMA, STONE, NETHERRACK, EMERALD, REDSTONE;
 
     public static ObjectType INGOT, NUGGET, PLATE, DUST, BLOCK, ORE, PICKAXE, SHOVEL, AXE, SAW, HAMMER, SWORD, HOE, CHESTPLATE, HELMET, BOOTS, LEGGINGS, SMALL_DUST, GEM;
 
@@ -45,8 +45,9 @@ public class MaterialRegistry {
         EMERALD = new GemMaterial("emerald", REGULAR, 0x08ad2c).build();
         PRISMARINE = new GemMaterial("prismarine", REGULAR, 0xa1dacb).build();
         MAGMA = new DustMaterial("magma", REGULAR, 0xffb62e).build();
-        STONE = new DustMaterial("stone", REGULAR, 0xcccccc).doesHaveSmallDust().build();
+        STONE = new DustMaterial("stone", REGULAR, 0xcccccc).build();
         NETHERRACK = new DustMaterial("netherrack", REGULAR, 0xb33939).build();
+        REDSTONE = new DustMaterial("redstone", REGULAR, 0xfc1a19).hasOre().build();
 
         //Object Types
         INGOT = new ItemType("ingot", mat -> mat instanceof IngotMaterial);
@@ -74,11 +75,7 @@ public class MaterialRegistry {
         CHESTPLATE = new ItemType("chestplate", mat -> false);
         LEGGINGS = new ItemType("leggings", mat -> false);
         BOOTS = new ItemType("boots", mat -> false);
-        SMALL_DUST = new ItemType("small_dust", mat -> {
-            if (mat instanceof DustMaterial)
-                return ((DustMaterial) mat).hasSmallDust();
-            return false;
-        });
+        SMALL_DUST = new ItemType("small_dust", mat -> mat instanceof DustMaterial);
         GEM = new ItemType("gem", mat -> mat instanceof GemMaterial);
 
         //Giving vanilla items material values
@@ -109,5 +106,9 @@ public class MaterialRegistry {
 
         MaterialItems.addItem(PRISMARINE, GEM, Items.PRISMARINE_CRYSTALS);
         MaterialBlocks.addBlock(PRISMARINE, BLOCK, Blocks.PRISMARINE);
+
+        MaterialItems.addItem(REDSTONE, DUST, Items.REDSTONE);
+        MaterialBlocks.addBlock(REDSTONE, BLOCK, Blocks.REDSTONE_BLOCK);
+        MaterialBlocks.addBlock(REDSTONE, ORE, Blocks.REDSTONE_ORE);
     }
 }

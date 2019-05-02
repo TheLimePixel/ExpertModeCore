@@ -3,10 +3,7 @@ package com.EmosewaPixel.expertmodecore.resourceAddition;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialBlocks;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialItems;
 import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialsAndTextureTypes;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.IMaterialItem;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.IngotMaterial;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialRegistry;
+import com.EmosewaPixel.expertmodecore.materialSystem.materials.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -33,6 +30,10 @@ public class DataAddition {
                         RecipeInjector.addFurnaceRecipe(mat.getName() + "_ingot", mat.getTag(MaterialRegistry.DUST), new ItemStack(MaterialItems.getItem(mat, MaterialRegistry.INGOT)));
                     RecipeInjector.addShapedRecipe(mat.getName() + "_plate", new ItemStack(MaterialItems.getItem(mat, MaterialRegistry.PLATE)), "H", "I", 'H', MaterialRegistry.HAMMER.getTag(), 'I', mat.getTag(MaterialRegistry.INGOT));
                 }
+            }
+            if (mat instanceof DustMaterial) {
+                RecipeInjector.addShapedRecipe(mat.getName() + "_dust_from_small_dust", new ItemStack(MaterialItems.getItem(mat, MaterialRegistry.DUST)), "DD", "DD", 'D', mat.getTag(MaterialRegistry.SMALL_DUST));
+                RecipeInjector.addShapelessRecipe(mat.getName() + "_small_dust", new ItemStack(MaterialItems.getItem(mat, MaterialRegistry.SMALL_DUST), 4), mat.getTag(MaterialRegistry.DUST));
             }
         }
     }

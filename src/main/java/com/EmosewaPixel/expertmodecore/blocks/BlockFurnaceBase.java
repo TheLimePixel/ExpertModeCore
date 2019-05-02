@@ -68,7 +68,7 @@ public class BlockFurnaceBase extends Block implements ITileEntityProvider {
     }
 
 
-        public int getLightValue(IBlockState state) {
+    public int getLightValue(IBlockState state) {
         return state.get(LIT) ? 13 : 0;
     }
 
@@ -172,5 +172,4 @@ public class BlockFurnaceBase extends Block implements ITileEntityProvider {
             return null;
         }
     }
-
 }
