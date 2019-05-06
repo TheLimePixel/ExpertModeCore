@@ -1,11 +1,11 @@
 package com.EmosewaPixel.expertmodecore.items.armor;
 
 import com.EmosewaPixel.expertmodecore.ExpertModeCore;
-import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialItems;
-import com.EmosewaPixel.expertmodecore.materialSystem.lists.ObjTypes;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.IMaterialItem;
-import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
+import com.EmosewaPixel.pixellib.materialSystem.lists.MaterialItems;
+import com.EmosewaPixel.pixellib.materialSystem.lists.ObjTypes;
+import com.EmosewaPixel.pixellib.materialSystem.materials.IMaterialItem;
+import com.EmosewaPixel.pixellib.materialSystem.materials.Material;
+import com.EmosewaPixel.pixellib.materialSystem.types.ObjectType;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
@@ -46,7 +46,7 @@ public class MaterialArmor extends ItemArmor implements IMaterialItem {
 
     @Override
     public ObjectType getObjType() {
-        return ObjTypes.getTypeFromName(type);
+        return ObjTypes.get(type);
     }
 
     @Override

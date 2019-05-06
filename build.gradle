@@ -19,7 +19,7 @@ archivesBaseName = 'expertmodecore'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-    mappings channel: 'snapshot', version: '20180921-1.13'
+    mappings channel: 'snapshot', version: '20190505-1.13.2'
 
     runs {
         client {
@@ -71,9 +71,10 @@ repositories {
 
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.13.2-25.0.146'
+    minecraft 'net.minecraftforge:forge:1.13.2-25.0.191'
     compileOnly ("mezz.jei:jei-${mc_version}:${jei_version}:api")
     compileOnly ("mezz.jei:jei-${mc_version}:${jei_version}")
+    compile files("libs/pixellib-${lib_version}-deobf.jar")
 }
 
 jar {

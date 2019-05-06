@@ -8,7 +8,7 @@ import net.minecraft.block.trees.AbstractTree;
 
 public class ModSapling extends BlockSapling {
     public ModSapling(AbstractTree tree, String name) {
-        super(tree, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().needsRandomTick().hardnessAndResistance(0F).sound(SoundType.PLANT));
+        super(tree, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0F).sound(SoundType.PLANT));
         setRegistryName("expertmodecore:" + name);
     }
 }

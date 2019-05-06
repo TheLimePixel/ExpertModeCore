@@ -1,8 +1,9 @@
 package com.EmosewaPixel.expertmodecore.jei.categories;
 
 import com.EmosewaPixel.expertmodecore.blocks.BlockRegistry;
-import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
-import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
+import com.EmosewaPixel.expertmodecore.recipes.RedstoneBasedRecipe;
+import com.EmosewaPixel.pixellib.jei.MachineBaseCategory;
+import com.EmosewaPixel.pixellib.recipes.SimpleMachineRecipe;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
@@ -14,12 +15,12 @@ import java.util.List;
 
 public class SawmillCategory extends MachineBaseCategory {
     public SawmillCategory(IGuiHelper helper) {
-        super(helper, "sawmill", BlockRegistry.SAWMILL.asItem(), RecipeTypes.SawmillRecipe.class);
+        super(helper, "sawmill", BlockRegistry.SAWMILL.asItem());
         this.backGround = helper.createDrawable(new ResourceLocation("expertmodecore:textures/gui/container/sawmill.png"), 55, 16, 82, 54);
     }
 
     @Override
-    public void setRecipe(IRecipeLayout layout, MachineRecipe recipe, IIngredients ingredients) {
+    public void setRecipe(IRecipeLayout layout, SimpleMachineRecipe recipe, IIngredients ingredients) {
         List<List<ItemStack>> inputs = recipe.getInputsAsList();
         List<ItemStack> outputs = recipe.getOutputsAsList();
 
@@ -31,9 +32,9 @@ public class SawmillCategory extends MachineBaseCategory {
     }
 
     @Override
-    public void draw(MachineRecipe recipe, double mouseX, double mouseY) {
+    public void draw(SimpleMachineRecipe recipe, double mouseX, double mouseY) {
         arrow.draw(24, 18);
-        if (((RecipeTypes.SawmillRecipe) recipe).isHighSignal())
+        if (((RedstoneBasedRecipe) recipe).needsHighSignal())
             Minecraft.getInstance().fontRenderer.drawString("Requires a high signal", -12, 4, 0x000000);
         else
             Minecraft.getInstance().fontRenderer.drawString("Requires a low signal", -10, 4, 0x000000);

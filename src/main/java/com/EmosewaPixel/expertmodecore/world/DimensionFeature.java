@@ -23,9 +23,9 @@ public class DimensionFeature<F extends IFeatureConfig, D extends IPlacementConf
     }
 
     @Override
-    public boolean func_212245_a(IWorld world, IChunkGenerator<? extends IChunkGenSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+    public boolean place(IWorld world, IChunkGenerator<? extends IChunkGenSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
         if (world.getDimension().getType() == dim)
-            return super.func_212245_a(world, generator, rand, pos, config);
+            return super.place(world, generator, rand, pos, config);
         return false;
     }
 }

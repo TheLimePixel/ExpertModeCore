@@ -3,23 +3,23 @@ package com.EmosewaPixel.expertmodecore;
 import com.EmosewaPixel.expertmodecore.blocks.BlockRegistry;
 import com.EmosewaPixel.expertmodecore.items.ItemRegistry;
 import com.EmosewaPixel.expertmodecore.items.tools.MaterialHammer;
-import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialItems;
-import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialsAndTextureTypes;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialRegistry;
+import com.EmosewaPixel.expertmodecore.materials.MaterialAddition;
 import com.EmosewaPixel.expertmodecore.proxy.ClientProxy;
-import com.EmosewaPixel.expertmodecore.proxy.IModProxy;
 import com.EmosewaPixel.expertmodecore.proxy.ServerProxy;
-import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
 import com.EmosewaPixel.expertmodecore.recipes.MachineRecipeAddition;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
-import com.EmosewaPixel.expertmodecore.recipes.TagStack;
 import com.EmosewaPixel.expertmodecore.resourceAddition.DataAddition;
-import com.EmosewaPixel.expertmodecore.resourceAddition.FakePackFinder;
-import com.EmosewaPixel.expertmodecore.resourceAddition.RecipeInjector;
 import com.EmosewaPixel.expertmodecore.tiles.ExpertTypes;
 import com.EmosewaPixel.expertmodecore.tiles.guis.ModGuiHandler;
 import com.EmosewaPixel.expertmodecore.world.OreGen;
+import com.EmosewaPixel.pixellib.materialSystem.lists.MaterialBlocks;
+import com.EmosewaPixel.pixellib.materialSystem.lists.MaterialItems;
+import com.EmosewaPixel.pixellib.materialSystem.lists.Materials;
+import com.EmosewaPixel.pixellib.materialSystem.materials.Material;
+import com.EmosewaPixel.pixellib.materialSystem.materials.MaterialRegistry;
+import com.EmosewaPixel.pixellib.proxy.IModProxy;
+import com.EmosewaPixel.pixellib.recipes.SimpleMachineRecipe;
+import com.EmosewaPixel.pixellib.recipes.TagStack;
 import net.minecraft.advancements.AdvancementManager;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
@@ -33,8 +33,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.resources.IResourceManagerReloadListener;
-import net.minecraft.resources.SimpleReloadableResourceManager;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.DamageSource;
@@ -62,14 +60,11 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -95,7 +90,7 @@ public class ExpertModeCore {
 
         MinecraftForge.EVENT_BUS.register(this);
 
-        new MaterialRegistry();
+        new MaterialAddition();
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -140,8 +135,10 @@ public class ExpertModeCore {
     public static class GameEvents {
         @SubscribeEvent
         public static void fuelTime(FurnaceFuelBurnTimeEvent e) {
-            if (e.getItemStack().getItem() == ItemRegistry.COAL_COKE)
+            if (e.getItemStack().getItem() == MaterialItems.getItem(MaterialAddition.COKE, MaterialRegistry.GEM))
                 e.setBurnTime(3200);
+            if (e.getItemStack().getItem() == MaterialBlocks.getBlock(MaterialAddition.COKE, MaterialRegistry.BLOCK).asItem())
+                e.setBurnTime(32000);
             if (e.getItemStack().getItem() == ItemRegistry.CREOSOTE_BUCKET)
                 e.setBurnTime(6400);
             if (e.getItemStack().getItem() == ItemRegistry.CREOSOTE_BOTTLE)
@@ -195,7 +192,7 @@ public class ExpertModeCore {
                 Entity entity = iterator.next();
                 if (entity instanceof EntityItem) {
                     EntityItem item = (EntityItem) entity;
-                    for (MachineRecipe recipe : RecipeTypes.explosionRecipes)
+                    for (SimpleMachineRecipe recipe : RecipeTypes.EXPLOSION_RECIPES.getReipes())
                         if (recipe.isInputValid(new ItemStack[]{item.getItem()})) {
                             item.setItem(new ItemStack(recipe.getOutput(0).getItem(), item.getItem().getCount()));
                             iterator.remove();
@@ -210,7 +207,7 @@ public class ExpertModeCore {
             if (new ItemTags.Wrapper(new ResourceLocation("forge:ores")).contains(e.getState().getBlock().asItem()) && !(e.getPlayer().getHeldItemMainhand().getItem() instanceof MaterialHammer))
                 e.setExpToDrop(0);
 
-            if (e.getState().getBlock() == Blocks.REDSTONE_ORE && e.getPlayer().getHeldItemMainhand().getItem() == MaterialItems.getItem(MaterialRegistry.BRONZE, MaterialRegistry.HAMMER)) {
+            if (e.getState().getBlock() == Blocks.REDSTONE_ORE && e.getPlayer().getHeldItemMainhand().getItem() == MaterialItems.getItem(MaterialAddition.BRONZE, MaterialAddition.HAMMER)) {
                 e.getWorld().spawnEntity(new EntityItem(e.getWorld().getWorld(), e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), new ItemStack(Items.REDSTONE, 3)));
                 e.getWorld().spawnEntity(new EntityItem(e.getWorld().getWorld(), e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), new TagStack(MachineRecipeAddition.DUSTS_STONE).asItemStack()));
             }
@@ -222,7 +219,7 @@ public class ExpertModeCore {
                 BlockPos pos = e.getPos();
                 List<EntityItem> items = e.getWorld().getWorld().getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY(), pos.getZ() + 1));
                 for (EntityItem item : items)
-                    for (MachineRecipe recipe : RecipeTypes.pressingRecipes)
+                    for (SimpleMachineRecipe recipe : RecipeTypes.PRESSING_RECIPES.getReipes())
                         if (recipe.itemBelongsInRecipe(item.getItem()))
                             item.setItem(new ItemStack(recipe.getOutput(0).getItem(), item.getItem().copy().getCount()));
             }
@@ -235,21 +232,6 @@ public class ExpertModeCore {
             if (e.getEntity() instanceof EntityItem)
                 if (((EntityItem) e.getEntity()).getItem().getItem() == Items.IRON_INGOT)
                     ironIngots.add((EntityItem) e.getEntity());
-        }
-
-        @SubscribeEvent
-        public static void onServerAboutToStart(FMLServerAboutToStartEvent e) {
-            List<IResourceManagerReloadListener> reloadListeners;
-            try {
-                Field reloadListenersField = Arrays.stream(SimpleReloadableResourceManager.class.getDeclaredFields()).filter(field -> field.getType() == List.class).findFirst().get();
-                reloadListenersField.setAccessible(true);
-                reloadListeners = (List<IResourceManagerReloadListener>) reloadListenersField.get(e.getServer().getResourceManager());
-            } catch (Exception exc) {
-                LOGGER.warn("Unable to obtain listener list.", exc);
-                return;
-            }
-            reloadListeners.add(reloadListeners.indexOf(e.getServer().getRecipeManager()) + 1, resourceManager -> new RecipeInjector(e.getServer().getRecipeManager()).injectRecipes(resourceManager));
-            e.getServer().getResourcePacks().addPackFinder(new FakePackFinder());
         }
 
         @SubscribeEvent
@@ -304,7 +286,7 @@ public class ExpertModeCore {
                 }
                 if (e.getHarvester().getHeldItemMainhand().getItem() instanceof MaterialHammer) {
                     if (tag("ores").contains(item)) {
-                        for (Material mat : MaterialsAndTextureTypes.materials)
+                        for (Material mat : Materials.getAll())
                             if (mat.doesHaveOre())
                                 if (tag("ores/" + mat.getName()).contains(item)) {
                                     e.getDrops().removeAll(e.getDrops());

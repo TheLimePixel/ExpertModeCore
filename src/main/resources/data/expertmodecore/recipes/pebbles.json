@@ -1,7 +1,7 @@
 {
   "type": "smelting",
   "ingredient": {
-    "item": "expertmodecore:stone_small_dust"
+    "item": "pixellib:stone_small_dust"
   },
   "result": "expertmodecore:pebble",
   "experience": 1.0,

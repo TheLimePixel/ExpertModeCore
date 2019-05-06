@@ -30,23 +30,23 @@ public class GiantTree extends HugeTreesFeature<NoFeatureConfig> {
             for (int j = 0; j < i; ++j) {
                 IBlockState iblockstate = worldIn.getBlockState(position.up(j));
                 if (iblockstate.isAir(worldIn, position.up(j)) || iblockstate.isIn(BlockTags.LEAVES)) {
-                    this.func_208520_a(changedBlocks, worldIn, position.up(j), this.woodMetadata);
+                    this.setLogState(changedBlocks, worldIn, position.up(j), this.trunk);
                 }
 
                 if (j < i - 1) {
                     iblockstate = worldIn.getBlockState(position.add(1, j, 0));
                     if (iblockstate.isAir(worldIn, position.add(1, j, 0)) || iblockstate.isIn(BlockTags.LEAVES)) {
-                        this.func_208520_a(changedBlocks, worldIn, position.add(1, j, 0), this.woodMetadata);
+                        this.setLogState(changedBlocks, worldIn, position.add(1, j, 0), this.trunk);
                     }
 
                     iblockstate = worldIn.getBlockState(position.add(1, j, 1));
                     if (iblockstate.isAir(worldIn, position.add(1, j, 1)) || iblockstate.isIn(BlockTags.LEAVES)) {
-                        this.func_208520_a(changedBlocks, worldIn, position.add(1, j, 1), this.woodMetadata);
+                        this.setLogState(changedBlocks, worldIn, position.add(1, j, 1), this.trunk);
                     }
 
                     iblockstate = worldIn.getBlockState(position.add(0, j, 1));
                     if (iblockstate.isAir(worldIn, position.add(0, j, 1)) || iblockstate.isIn(BlockTags.LEAVES)) {
-                        this.func_208520_a(changedBlocks, worldIn, position.add(0, j, 1), this.woodMetadata);
+                        this.setLogState(changedBlocks, worldIn, position.add(0, j, 1), this.trunk);
                     }
                 }
             }

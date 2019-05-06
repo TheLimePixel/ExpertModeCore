@@ -2,14 +2,6 @@ package com.EmosewaPixel.expertmodecore.blocks;
 
 import com.EmosewaPixel.expertmodecore.ExpertModeCore;
 import com.EmosewaPixel.expertmodecore.blocks.trees.*;
-import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialBlocks;
-import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialsAndTextureTypes;
-import com.EmosewaPixel.expertmodecore.materialSystem.lists.ObjTypes;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.IngotMaterial;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.IMaterialItem;
-import com.EmosewaPixel.expertmodecore.materialSystem.types.BlockType;
-import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
-import com.EmosewaPixel.expertmodecore.materialSystem.types.TextureType;
 import com.EmosewaPixel.expertmodecore.world.tree.IronwoodTree;
 import com.EmosewaPixel.expertmodecore.world.tree.RedwoodTree;
 import com.EmosewaPixel.expertmodecore.world.tree.RubberTree;
@@ -23,8 +15,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.event.RegistryEvent;
-
-import java.util.ArrayList;
 
 public class BlockRegistry {
     public static Block COKE_BRICKS;
@@ -58,14 +48,7 @@ public class BlockRegistry {
     public static Block INFUSION_TABLE;
     public static Block SAWMILL;
 
-    private static ArrayList<Block> templates = new ArrayList<>();
-
     public static void registry(RegistryEvent.Register<Block> e) {
-        for (com.EmosewaPixel.expertmodecore.materialSystem.materials.Material mat : MaterialsAndTextureTypes.materials)
-            for (ObjectType type : ObjTypes.objTypes)
-                if (type instanceof BlockType && type.isMaterialCompatible(mat) && !MaterialBlocks.contains(mat, type))
-                    register(new MaterialBlock((IngotMaterial) mat, (BlockType) type), e);
-
         COKE_BRICKS = register(new ModBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2, 6).sound(SoundType.STONE), "coke_bricks", 0), e);
 
         IRONWOOD_LEAVES = register(new BlockIronwoodLeaves(), e);
@@ -96,18 +79,9 @@ public class BlockRegistry {
         CRUSHER = register(new BlockCrusher(), e);
         INFUSION_TABLE = register(new BlockInfusionTable(), e);
         SAWMILL = register(new BlockSawmill(), e);
-
-        for (ObjectType objT : ObjTypes.objTypes)
-            if (objT instanceof BlockType)
-                for (TextureType textureT : MaterialsAndTextureTypes.textureTypes)
-                    templates.add(register(new ModBlock(Block.Properties.create(Material.IRON), textureT.toString() + "_" + objT.getName(), 0), e));
     }
 
     public static void itemRegistry(RegistryEvent.Register<Item> e) {
-        for (Block block : MaterialBlocks.getMaterialBlocks())
-            if (block instanceof IMaterialItem)
-                registerItemBlock(block, e);
-
         registerItemBlock(COKE_BRICKS, e);
         registerItemBlock(IRONWOOD_LEAVES, e);
         registerItemBlock(IRONWOOD_LOG, e);
@@ -137,9 +111,6 @@ public class BlockRegistry {
         registerItemBlock(CRUSHER, e);
         registerItemBlock(INFUSION_TABLE, e);
         registerItemBlock(SAWMILL, e);
-
-        for (Block template : templates)
-            registerItemBlock(template, e, false);
     }
 
     private static Block register(Block block, RegistryEvent.Register<Block> e) {

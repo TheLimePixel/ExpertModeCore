@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 public class BlockIronwoodLeaves extends BlockLeaves {
     public BlockIronwoodLeaves() {
-        super(Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).needsRandomTick().sound(SoundType.PLANT));
+        super(Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT));
         setRegistryName("expertmodecore:ironwood_leaves");
     }
 

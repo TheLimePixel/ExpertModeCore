@@ -1,8 +1,8 @@
 package com.EmosewaPixel.expertmodecore.jei.categories;
 
 import com.EmosewaPixel.expertmodecore.blocks.BlockRegistry;
-import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
-import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
+import com.EmosewaPixel.pixellib.jei.MachineBaseCategory;
+import com.EmosewaPixel.pixellib.recipes.SimpleMachineRecipe;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
@@ -13,12 +13,12 @@ import java.util.List;
 
 public class AlloyerCategory extends MachineBaseCategory {
     public AlloyerCategory(IGuiHelper helper) {
-        super(helper, "alloyer", BlockRegistry.ALLOYER.asItem(), RecipeTypes.AlloyerRecipe.class);
+        super(helper, "alloyer", BlockRegistry.ALLOYER.asItem());
         this.backGround = helper.createDrawable(new ResourceLocation("expertmodecore:textures/gui/container/alloyer.png"), 37, 16, 100, 54);
     }
 
     @Override
-    public void setRecipe(IRecipeLayout layout, MachineRecipe recipe, IIngredients ingredients) {
+    public void setRecipe(IRecipeLayout layout, SimpleMachineRecipe recipe, IIngredients ingredients) {
         List<List<ItemStack>> inputs = recipe.getInputsAsList();
         List<ItemStack> outputs = recipe.getOutputsAsList();
 
@@ -33,7 +33,7 @@ public class AlloyerCategory extends MachineBaseCategory {
     }
 
     @Override
-    public void draw(MachineRecipe recipe, double mouseX, double mouseY) {
+    public void draw(SimpleMachineRecipe recipe, double mouseX, double mouseY) {
         arrow.draw(42, 18);
         flame.draw(10, 20);
     }

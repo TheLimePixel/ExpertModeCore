@@ -1,11 +1,11 @@
 package com.EmosewaPixel.expertmodecore.items.tools;
 
 import com.EmosewaPixel.expertmodecore.ExpertModeCore;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.IMaterialItem;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.Material;
-import com.EmosewaPixel.expertmodecore.materialSystem.lists.MaterialItems;
-import com.EmosewaPixel.expertmodecore.materialSystem.materials.MaterialRegistry;
-import com.EmosewaPixel.expertmodecore.materialSystem.types.ObjectType;
+import com.EmosewaPixel.expertmodecore.materials.MaterialAddition;
+import com.EmosewaPixel.pixellib.materialSystem.lists.MaterialItems;
+import com.EmosewaPixel.pixellib.materialSystem.materials.IMaterialItem;
+import com.EmosewaPixel.pixellib.materialSystem.materials.Material;
+import com.EmosewaPixel.pixellib.materialSystem.types.ObjectType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
@@ -29,7 +29,7 @@ public class MaterialPick extends ItemPickaxe implements IMaterialItem {
 
     @Override
     public ObjectType getObjType() {
-        return MaterialRegistry.PICKAXE;
+        return MaterialAddition.PICKAXE;
     }
 
     @Override

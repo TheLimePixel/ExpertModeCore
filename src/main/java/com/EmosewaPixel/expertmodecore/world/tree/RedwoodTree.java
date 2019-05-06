@@ -2,7 +2,6 @@ package com.EmosewaPixel.expertmodecore.world.tree;
 
 import net.minecraft.block.trees.AbstractBigTree;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.CanopyTreeFeature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 import javax.annotation.Nullable;

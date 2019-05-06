@@ -1,19 +1,18 @@
 package com.EmosewaPixel.expertmodecore.blocks;
 
-import com.EmosewaPixel.expertmodecore.tiles.TileEntityBlastFurnace;
+import com.EmosewaPixel.expertmodecore.tiles.TileEntityAlloyer;
+import com.EmosewaPixel.pixellib.blocks.BlockMachineFuelBased;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockReader;
 
-import javax.annotation.Nullable;
-
-public class BlockBlastFurnace extends BlockFurnaceBase {
+public class BlockBlastFurnace extends BlockMachineFuelBased {
     public BlockBlastFurnace() {
-        super("blast_furnace");
+        super(new ResourceLocation("expertmodecore:blast_furnace"));
     }
 
-    @Nullable
     @Override
     public TileEntity createNewTileEntity(IBlockReader worldIn) {
-        return new TileEntityBlastFurnace();
+        return new TileEntityAlloyer();
     }
 }

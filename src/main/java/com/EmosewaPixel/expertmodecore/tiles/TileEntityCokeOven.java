@@ -1,13 +1,13 @@
 package com.EmosewaPixel.expertmodecore.tiles;
 
-import com.EmosewaPixel.expertmodecore.blocks.BlockFurnaceBase;
 import com.EmosewaPixel.expertmodecore.items.ItemRegistry;
 import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
+import com.EmosewaPixel.pixellib.blocks.BlockMachineFuelBased;
+import com.EmosewaPixel.pixellib.tiles.TEFuelBased;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -17,7 +17,7 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TileEntityCokeOven extends TileEntityFurnaceBase implements ITickable {
+public class TileEntityCokeOven extends TEFuelBased {
     private int creosoteAmount;
 
     public void setCreosoteAmount(int amount) {
@@ -36,7 +36,7 @@ public class TileEntityCokeOven extends TileEntityFurnaceBase implements ITickab
 
         @Override
         protected void onContentsChanged(int slot) {
-            TileEntityCokeOven.this.markDirty();
+            markDirty();
         }
     };
 
@@ -48,17 +48,17 @@ public class TileEntityCokeOven extends TileEntityFurnaceBase implements ITickab
 
         @Override
         protected void onContentsChanged(int slot) {
-            TileEntityCokeOven.this.markDirty();
+            markDirty();
         }
     };
 
     private CombinedInvWrapper outputHandler;
 
     public TileEntityCokeOven() {
-        super(ExpertTypes.COKE_OVEN, 1, 1, RecipeTypes.cokeOvenRecipes);
+        super(ExpertTypes.COKE_OVEN, RecipeTypes.COKE_OVEN_RECIPES);
 
         combinedHandler = new CombinedInvWrapper(input, fuel_input, bucket_input, bucket_output, output);
-        slotCount = 5;
+        setSlotCount(5);
         outputHandler = new CombinedInvWrapper(bucket_output, output);
     }
 
@@ -69,22 +69,22 @@ public class TileEntityCokeOven extends TileEntityFurnaceBase implements ITickab
             if (getBurnTime() > 0) {
                 setBurnTime(getBurnTime() - 1);
                 if (creosoteAmount < 6000) {
-                    world.setBlockState(pos, world.getBlockState(pos).with(BlockFurnaceBase.LIT, true));
+                    world.setBlockState(pos, world.getBlockState(pos).with(BlockMachineFuelBased.LIT, true));
                     if (getProgress() > 0) {
-                        if (shouldContinueProcess()) {
+                        if (!getCurrentRecipe().isEmpty()) {
                             setProgress(getProgress() - 1);
                             if (getProgress() == 0)
-                                smelt();
+                                work();
                         } else
                             setProgress(0);
                     } else
-                        startSmelting();
+                        startWorking();
                 }
             } else {
                 if (!fuel_input.getStackInSlot(0).isEmpty() && creosoteAmount < 6000)
                     consumeFuel();
                 else
-                    world.setBlockState(pos, world.getBlockState(pos).with(BlockFurnaceBase.LIT, false));
+                    world.setBlockState(pos, world.getBlockState(pos).with(BlockMachineFuelBased.LIT, false));
             }
             if (creosoteAmount >= 500)
                 consumeBucket();
@@ -107,8 +107,8 @@ public class TileEntityCokeOven extends TileEntityFurnaceBase implements ITickab
     }
 
     @Override
-    protected void smelt() {
-        super.smelt();
+    protected void work() {
+        super.work();
         creosoteAmount += 500;
     }
 
@@ -116,18 +116,18 @@ public class TileEntityCokeOven extends TileEntityFurnaceBase implements ITickab
     public void read(NBTTagCompound compound) {
         super.read(compound);
         creosoteAmount = compound.getInt("CreosoteAmount");
-        if (compound.hasKey("BucketInput"))
-            bucket_input.deserializeNBT((NBTTagCompound) compound.getTag("BucketInput"));
-        if (compound.hasKey("BucketOutput"))
-            bucket_output.deserializeNBT((NBTTagCompound) compound.getTag("BucketOutput"));
+        if (compound.contains("BucketInput"))
+            bucket_input.deserializeNBT((NBTTagCompound) compound.get("BucketInput"));
+        if (compound.contains("BucketOutput"))
+            bucket_output.deserializeNBT((NBTTagCompound) compound.get("BucketOutput"));
     }
 
     @Override
     public NBTTagCompound write(NBTTagCompound compound) {
         super.write(compound);
-        compound.setInt("CreosoteAmount", creosoteAmount);
-        compound.setTag("BucketInput", bucket_input.serializeNBT());
-        compound.setTag("BucketOutput", bucket_output.serializeNBT());
+        compound.putInt("CreosoteAmount", creosoteAmount);
+        compound.put("BucketInput", bucket_input.serializeNBT());
+        compound.put("BucketOutput", bucket_output.serializeNBT());
         return compound;
     }
 

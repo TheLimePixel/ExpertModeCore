@@ -1,8 +1,8 @@
 package com.EmosewaPixel.expertmodecore.jei.categories;
 
 import com.EmosewaPixel.expertmodecore.blocks.BlockRegistry;
-import com.EmosewaPixel.expertmodecore.recipes.MachineRecipe;
-import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
+import com.EmosewaPixel.pixellib.jei.MachineBaseCategory;
+import com.EmosewaPixel.pixellib.recipes.SimpleMachineRecipe;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
@@ -13,12 +13,12 @@ import java.util.List;
 
 public class InfusionCategory extends MachineBaseCategory {
     public InfusionCategory(IGuiHelper helper) {
-        super(helper, "infusion", BlockRegistry.INFUSION_TABLE.asItem(), RecipeTypes.InfusionRecipe.class);
+        super(helper, "infusion", BlockRegistry.INFUSION_TABLE.asItem());
         this.backGround = helper.createDrawable(new ResourceLocation("expertmodecore:textures/gui/container/infusion_table.png"), 37, 16, 100, 54);
     }
 
     @Override
-    public void setRecipe(IRecipeLayout layout, MachineRecipe recipe, IIngredients ingredients) {
+    public void setRecipe(IRecipeLayout layout, SimpleMachineRecipe recipe, IIngredients ingredients) {
         List<List<ItemStack>> inputs = recipe.getInputsAsList();
         List<ItemStack> outputs = recipe.getOutputsAsList();
 
@@ -33,7 +33,7 @@ public class InfusionCategory extends MachineBaseCategory {
     }
 
     @Override
-    public void draw(MachineRecipe recipe, double mouseX, double mouseY) {
+    public void draw(SimpleMachineRecipe recipe, double mouseX, double mouseY) {
         arrow.draw(42, 18);
     }
 }

@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 public class BlockRubberLeaves extends BlockLeaves {
     public BlockRubberLeaves() {
-        super(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).needsRandomTick().sound(SoundType.PLANT));
+        super(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT));
         setRegistryName("expertmodecore:rubber_leaves");
     }
 

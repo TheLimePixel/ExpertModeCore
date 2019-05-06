@@ -1,5 +1,6 @@
 package com.EmosewaPixel.expertmodecore.proxy;
 
+import com.EmosewaPixel.pixellib.proxy.IModProxy;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;

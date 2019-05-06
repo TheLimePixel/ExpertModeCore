@@ -1,10 +1,10 @@
 package com.EmosewaPixel.expertmodecore.tiles;
 
 import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
-import net.minecraft.util.ITickable;
+import com.EmosewaPixel.pixellib.tiles.TEFuelBased;
 
-public class TileEntityCrusher extends TileEntityFurnaceBase implements ITickable {
+public class TileEntityCrusher extends TEFuelBased {
     public TileEntityCrusher() {
-        super(ExpertTypes.CRUSHER, 1, 2, RecipeTypes.crusherRecipes);
+        super(ExpertTypes.CRUSHER, RecipeTypes.CRUSHER_RECIPES);
     }
 }

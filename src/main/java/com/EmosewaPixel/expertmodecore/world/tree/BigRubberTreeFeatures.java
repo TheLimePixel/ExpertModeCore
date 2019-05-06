@@ -88,7 +88,7 @@ public class BigRubberTreeFeatures extends AbstractTreeFeature<NoFeatureConfig> 
             for (int j = 0; j <= i; ++j) {
                 BlockPos blockpos1 = pos.add((double) (0.5F + (float) j * f), (double) (0.5F + (float) j * f1), (double) (0.5F + (float) j * f2));
                 if (p_208523_5_) {
-                    this.func_208520_a(posSet, world, blockpos1, LOG.with(BlockLog.AXIS, this.getLoxAxis(pos, blockpos1)));
+                    this.setLogState(posSet, world, blockpos1, LOG.with(BlockLog.AXIS, this.getLoxAxis(pos, blockpos1)));
                 } else if (!this.canGrowInto(world, blockpos1)) {
                     return j;
                 }

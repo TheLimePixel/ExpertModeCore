@@ -1,12 +1,12 @@
 {
     "variants": {
-        "facing=north,on=false": { "model": "expertmodecore:block/sawmill" },
-        "facing=south,on=false": { "model": "expertmodecore:block/sawmill", "y": 180 },
-        "facing=west,on=false":  { "model": "expertmodecore:block/sawmill", "y": 270 },
-        "facing=east,on=false":  { "model": "expertmodecore:block/sawmill", "y": 90 },
-        "facing=north,on=true": { "model": "expertmodecore:block/sawmill_on" },
-        "facing=south,on=true": { "model": "expertmodecore:block/sawmill_on", "y": 180 },
-        "facing=west,on=true":  { "model": "expertmodecore:block/sawmill_on", "y": 270 },
-        "facing=east,on=true":  { "model": "expertmodecore:block/sawmill_on", "y": 90 }
+        "facing=north,active=false": { "model": "expertmodecore:block/sawmill" },
+        "facing=south,active=false": { "model": "expertmodecore:block/sawmill", "y": 180 },
+        "facing=west,active=false":  { "model": "expertmodecore:block/sawmill", "y": 270 },
+        "facing=east,active=false":  { "model": "expertmodecore:block/sawmill", "y": 90 },
+        "facing=north,active=true": { "model": "expertmodecore:block/sawmill_active" },
+        "facing=south,active=true": { "model": "expertmodecore:block/sawmill_active", "y": 180 },
+        "facing=west,active=true":  { "model": "expertmodecore:block/sawmill_active", "y": 270 },
+        "facing=east,active=true":  { "model": "expertmodecore:block/sawmill_active", "y": 90 }
     }
 }

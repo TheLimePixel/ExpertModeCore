@@ -40,12 +40,12 @@ public class JEIPlugIn implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration reg) {
-        reg.addRecipes(RecipeTypes.alloyerRecipes, new ResourceLocation("expertmodecore:alloyer"));
-        reg.addRecipes(RecipeTypes.blastFurnaceRecipes, new ResourceLocation("expertmodecore:blast_furnace"));
-        reg.addRecipes(RecipeTypes.cokeOvenRecipes, new ResourceLocation("expertmodecore:coke_oven"));
-        reg.addRecipes(RecipeTypes.crusherRecipes, new ResourceLocation("expertmodecore:crusher"));
-        reg.addRecipes(RecipeTypes.infusionRecipes, new ResourceLocation("expertmodecore:infusion"));
-        reg.addRecipes(RecipeTypes.pressingRecipes, new ResourceLocation("expertmodecore:pressing"));
-        reg.addRecipes(RecipeTypes.sawmillRecipes, new ResourceLocation("expertmodecore:sawmill"));
+        reg.addRecipes(RecipeTypes.ALLOYER_RECIPES.getReipes(), new ResourceLocation("expertmodecore:alloyer"));
+        reg.addRecipes(RecipeTypes.BLAST_FURNACE_RECIPES.getReipes(), new ResourceLocation("expertmodecore:blast_furnace"));
+        reg.addRecipes(RecipeTypes.COKE_OVEN_RECIPES.getReipes(), new ResourceLocation("expertmodecore:coke_oven"));
+        reg.addRecipes(RecipeTypes.CRUSHER_RECIPES.getReipes(), new ResourceLocation("expertmodecore:crusher"));
+        reg.addRecipes(RecipeTypes.INFUSION_RECIPES.getReipes(), new ResourceLocation("expertmodecore:infusion"));
+        reg.addRecipes(RecipeTypes.PRESSING_RECIPES.getReipes(), new ResourceLocation("expertmodecore:pressing"));
+        reg.addRecipes(RecipeTypes.SAWMILL_RECIPES.getReipes(), new ResourceLocation("expertmodecore:sawmill"));
     }
 }
