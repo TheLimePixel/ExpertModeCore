@@ -13,7 +13,7 @@ import java.util.List;
 
 public class AlloyerCategory extends MachineBaseCategory {
     public AlloyerCategory(IGuiHelper helper) {
-        super(helper, "alloyer", BlockRegistry.ALLOYER.asItem());
+        super(helper, "expertmodecore:alloyer", BlockRegistry.ALLOYER.asItem());
         this.backGround = helper.createDrawable(new ResourceLocation("expertmodecore:textures/gui/container/alloyer.png"), 37, 16, 100, 54);
     }
 
@@ -36,5 +36,16 @@ public class AlloyerCategory extends MachineBaseCategory {
     public void draw(SimpleMachineRecipe recipe, double mouseX, double mouseY) {
         arrow.draw(42, 18);
         flame.draw(10, 20);
+    }
+
+    @Override
+    public Class<? extends SimpleMachineRecipe> getRecipeClass() {
+        return recipeClass.class;
+    }
+
+    public static class recipeClass extends SimpleMachineRecipe {
+        public recipeClass(Object[] input, Object[] output, int time) {
+            super(input, output, time);
+        }
     }
 }

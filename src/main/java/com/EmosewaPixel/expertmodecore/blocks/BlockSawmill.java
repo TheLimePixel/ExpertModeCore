@@ -6,18 +6,15 @@ import com.EmosewaPixel.pixellib.blocks.BlockMachineActivateable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class BlockSawmill extends BlockMachineActivateable {
     public BlockSawmill() {
-        super(new ResourceLocation("expertmodecore:sawmill"));
+        super("expertmodecore:sawmill", TileEntitySawmill::new);
     }
 
     @Override
@@ -27,10 +24,5 @@ public class BlockSawmill extends BlockMachineActivateable {
         }
 
         return true;
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
-        return new TileEntitySawmill();
     }
 }

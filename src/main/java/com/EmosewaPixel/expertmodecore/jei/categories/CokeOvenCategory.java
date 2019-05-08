@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CokeOvenCategory extends MachineBaseCategory {
     public CokeOvenCategory(IGuiHelper helper) {
-        super(helper, "coke_oven", BlockRegistry.COKE_OVEN.asItem());
+        super(helper, "expertmodecore:coke_oven", BlockRegistry.COKE_OVEN.asItem());
         this.backGround = helper.createDrawable(new ResourceLocation("expertmodecore:textures/gui/jei/coke_oven.png"), 0, 0, 106, 54);
     }
 
@@ -33,5 +33,16 @@ public class CokeOvenCategory extends MachineBaseCategory {
     public void draw(SimpleMachineRecipe recipe, double mouseX, double mouseY) {
         arrow.draw(24, 18);
         flame.draw(1, 20);
+    }
+
+    @Override
+    public Class<? extends SimpleMachineRecipe> getRecipeClass() {
+        return recipeClass.class;
+    }
+
+    public static class recipeClass extends SimpleMachineRecipe {
+        public recipeClass(Object[] input, Object[] output, int time) {
+            super(input, output, time);
+        }
     }
 }

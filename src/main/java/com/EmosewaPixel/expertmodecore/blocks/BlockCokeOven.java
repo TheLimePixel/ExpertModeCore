@@ -6,18 +6,15 @@ import com.EmosewaPixel.pixellib.blocks.BlockMachineFuelBased;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class BlockCokeOven extends BlockMachineFuelBased {
     public BlockCokeOven() {
-        super(new ResourceLocation("expertmodecore:coke_oven"));
+        super("expertmodecore:coke_oven", TileEntityCokeOven::new);
     }
 
     @Override
@@ -27,10 +24,5 @@ public class BlockCokeOven extends BlockMachineFuelBased {
         }
 
         return true;
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
-        return new TileEntityCokeOven();
     }
 }

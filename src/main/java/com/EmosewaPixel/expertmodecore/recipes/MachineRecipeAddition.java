@@ -24,7 +24,7 @@ public class MachineRecipeAddition {
     public static void registry() {
         RecipeTypes.BLAST_FURNACE_RECIPES.recipeBuilder().input(new ItemStack(Items.IRON_INGOT)).output(new TagStack(INGOTS_STEEL)).time(300).buildAndRegister();
         RecipeTypes.BLAST_FURNACE_RECIPES.recipeBuilder().input(new ItemStack(Blocks.IRON_BLOCK)).output(new TagStack(BLOCKS_STEEL)).time(9 * 300).buildAndRegister();
-        RecipeTypes.BLAST_FURNACE_RECIPES.recipeBuilder().input(new TagStack(PLATES_IRON)).output(new TagStack(DUSTS_STEEL)).time(300).buildAndRegister();
+        RecipeTypes.BLAST_FURNACE_RECIPES.recipeBuilder().input(new TagStack(PLATES_IRON)).output(new TagStack(MaterialAddition.STEEL.getTag(MaterialAddition.PLATE))).time(300).buildAndRegister();
 
         RecipeTypes.ALLOYER_RECIPES.recipeBuilder().input(new TagStack(DUSTS_NETHERRACK), new ItemStack(ItemRegistry.UNFIRED_BRICK)).output(new ItemStack(Items.NETHER_BRICK)).time(200).buildAndRegister();
         RecipeTypes.ALLOYER_RECIPES.recipeBuilder().input(new TagStack(INGOTS_TIN), new TagStack(INGOTS_COPPER, 3)).output(new TagStack(INGOTS_BRONZE, 4)).time(200).buildAndRegister();
@@ -60,15 +60,15 @@ public class MachineRecipeAddition {
 
         for (Material material : Materials.getAll()) {
             if (material instanceof GemMaterial) {
-                RecipeTypes.CRUSHER_RECIPES.recipeBuilder().input(new TagStack(tag("gems/" + material.getName()))).output(new TagStack(tag("dusts/" + material.getName()))).time(150).buildAndRegister();
-                RecipeTypes.EXPLOSION_RECIPES.recipeBuilder().input(new TagStack(tag("dusts/" + material.getName()))).output(new TagStack(tag("gems/" + material.getName()))).buildAndRegister();
+                RecipeTypes.CRUSHER_RECIPES.recipeBuilder().input(new TagStack(material.getTag(MaterialRegistry.GEM))).output(new TagStack(material.getTag(MaterialRegistry.DUST))).time(150).buildAndRegister();
+                RecipeTypes.EXPLOSION_RECIPES.recipeBuilder().input(new TagStack(material.getTag(MaterialRegistry.DUST))).output(new TagStack(material.getTag(MaterialRegistry.GEM))).buildAndRegister();
             }
             if (material instanceof IngotMaterial) {
-                RecipeTypes.PRESSING_RECIPES.recipeBuilder().input(new TagStack(tag("ingots/" + material.getName()))).output(new TagStack(tag("plates/" + material.getName()))).buildAndRegister();
-                RecipeTypes.CRUSHER_RECIPES.recipeBuilder().input(new TagStack(tag("ingots/" + material.getName()))).output(new TagStack(tag("dusts/" + material.getName()))).time(150).buildAndRegister();
-                RecipeTypes.CRUSHER_RECIPES.recipeBuilder().input(new TagStack(tag("plates/" + material.getName()))).output(new TagStack(tag("dusts/" + material.getName()))).time(150).buildAndRegister();
+                RecipeTypes.PRESSING_RECIPES.recipeBuilder().input(new TagStack(material.getTag(MaterialRegistry.INGOT))).output(new TagStack(material.getTag(MaterialAddition.PLATE))).buildAndRegister();
+                RecipeTypes.CRUSHER_RECIPES.recipeBuilder().input(new TagStack(material.getTag(MaterialRegistry.INGOT))).output(new TagStack(material.getTag(MaterialRegistry.DUST))).time(150).buildAndRegister();
+                RecipeTypes.CRUSHER_RECIPES.recipeBuilder().input(new TagStack(material.getTag(MaterialAddition.PLATE))).output(new TagStack(material.getTag(MaterialRegistry.DUST))).time(150).buildAndRegister();
                 if (material.doesHaveOre())
-                    RecipeTypes.CRUSHER_RECIPES.recipeBuilder().input(new TagStack(tag("ores/" + material.getName()))).output(new TagStack(tag("dusts/" + material.getName()), 2), new TagStack(DUSTS_STONE).asItemStack()).time(200).buildAndRegister();
+                    RecipeTypes.CRUSHER_RECIPES.recipeBuilder().input(new TagStack(material.getTag(MaterialRegistry.ORE))).output(new TagStack(material.getTag(MaterialRegistry.DUST), 2), new TagStack(DUSTS_STONE)).time(200).buildAndRegister();
             }
         }
 
@@ -127,7 +127,7 @@ public class MachineRecipeAddition {
         RecipeTypes.blastFurnaceFuels.add(MaterialBlocks.getBlock(MaterialAddition.COKE, MaterialRegistry.BLOCK).asItem());
     }
 
-    public static final ItemTags.Wrapper BLOCKS_BRONZE = tag("blocks/bronze");
+    public static final ItemTags.Wrapper BLOCKS_BRONZE = tag("storage_blocks/bronze");
     public static final ItemTags.Wrapper INGOTS_BRONZE = tag("ingots/bronze");
     public static final ItemTags.Wrapper DUSTS_BRONZE = tag("dusts/bronze");
     public static final ItemTags.Wrapper BLOCKS_COPPER = tag("storage_blocks/copper");
@@ -136,7 +136,7 @@ public class MachineRecipeAddition {
     public static final ItemTags.Wrapper INGOTS_CRYSTALLINE = tag("ingots/crystalline");
     public static final ItemTags.Wrapper DUSTS_CRYSTALLINE = tag("dusts/crystalline");
     public static final ItemTags.Wrapper DUSTS_DIAMOND = tag("dusts/diamond");
-    public static final ItemTags.Wrapper BLOCKS_ELECTRUM = tag("blocks/bronze");
+    public static final ItemTags.Wrapper BLOCKS_ELECTRUM = tag("storage_blocks/bronze");
     public static final ItemTags.Wrapper INGOTS_ELECTRUM = tag("ingots/electrum");
     public static final ItemTags.Wrapper DUSTS_ELECTRUM = tag("dusts/electrum");
     public static final ItemTags.Wrapper DUSTS_GOLD = tag("dusts/gold");
@@ -148,7 +148,7 @@ public class MachineRecipeAddition {
     public static final ItemTags.Wrapper BLOCKS_SILVER = tag("storage_blocks/silver");
     public static final ItemTags.Wrapper INGOTS_SILVER = tag("ingots/silver");
     public static final ItemTags.Wrapper DUSTS_SILVER = tag("dusts/silver");
-    public static final ItemTags.Wrapper BLOCKS_STEEL = tag("blocks/steel");
+    public static final ItemTags.Wrapper BLOCKS_STEEL = tag("storage_blocks/steel");
     public static final ItemTags.Wrapper INGOTS_STEEL = tag("ingots/steel");
     public static final ItemTags.Wrapper DUSTS_STEEL = tag("dusts/steel");
     public static final ItemTags.Wrapper DUSTS_STONE = tag("dusts/stone");

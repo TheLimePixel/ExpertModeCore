@@ -25,7 +25,7 @@ public class ModGuiHandler {
             case "expertmodecore:crusher":
                 return new GUIFuelBasedMachine(player.inventory, (TEFuelBased) tile, "expertmodecore:textures/gui/container/crusher.png");
             case "expertmodecore:infusion_table":
-                return new GUIRecipeBasedMachine(player.inventory, (TERecipeBased) tile, "expertmodecore:textures/gui/container/infusion_table.png");
+                return new GUIRecipeBasedMachine<>(player.inventory, (TERecipeBased) tile, "expertmodecore:textures/gui/container/infusion_table.png");
             case "expertmodecore:sawmill":
                 return new GUIRecipeBasedMachine<>(player.inventory, (TileEntitySawmill) tile, "expertmodecore:textures/gui/container/sawmill.png");
             default:

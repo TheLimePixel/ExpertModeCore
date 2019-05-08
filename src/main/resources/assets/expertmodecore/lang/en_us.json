@@ -71,11 +71,11 @@
 	"material.steel.name": "Steel",
 	"material.tin.name": "Tin",
 
-	"gui.jei.category.alloyer": "Alloyer Recipes",
-	"gui.jei.category.blast_furnace": "Infernal Blast Furnace Recipes",
-	"gui.jei.category.coke_oven": "Coke Oven Recipes",
-	"gui.jei.category.crusher": "Crusher Recipes",
-	"gui.jei.category.infusion": "Infusion Recipes",
-	"gui.jei.category.pressing": "Pressing Recipes",
-	"gui.jei.category.sawmill": "Sawmill Recipes"
+	"gui.jei.category.expertmodecore:alloyer": "Alloyer Recipes",
+	"gui.jei.category.expertmodecore:blast_furnace": "Infernal Blast Furnace Recipes",
+	"gui.jei.category.expertmodecore:coke_oven": "Coke Oven Recipes",
+	"gui.jei.category.expertmodecore:crusher": "Crusher Recipes",
+	"gui.jei.category.expertmodecore:infusion": "Infusion Recipes",
+	"gui.jei.category.expertmodecore:pressing": "Pressing Recipes",
+	"gui.jei.category.expertmodecore:sawmill": "Sawmill Recipes"
 }

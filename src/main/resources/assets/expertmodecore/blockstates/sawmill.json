@@ -4,9 +4,9 @@
         "facing=south,active=false": { "model": "expertmodecore:block/sawmill", "y": 180 },
         "facing=west,active=false":  { "model": "expertmodecore:block/sawmill", "y": 270 },
         "facing=east,active=false":  { "model": "expertmodecore:block/sawmill", "y": 90 },
-        "facing=north,active=true": { "model": "expertmodecore:block/sawmill_active" },
-        "facing=south,active=true": { "model": "expertmodecore:block/sawmill_active", "y": 180 },
-        "facing=west,active=true":  { "model": "expertmodecore:block/sawmill_active", "y": 270 },
-        "facing=east,active=true":  { "model": "expertmodecore:block/sawmill_active", "y": 90 }
+        "facing=north,active=true": { "model": "expertmodecore:block/sawmill_on" },
+        "facing=south,active=true": { "model": "expertmodecore:block/sawmill_on", "y": 180 },
+        "facing=west,active=true":  { "model": "expertmodecore:block/sawmill_on", "y": 270 },
+        "facing=east,active=true":  { "model": "expertmodecore:block/sawmill_on", "y": 90 }
     }
 }

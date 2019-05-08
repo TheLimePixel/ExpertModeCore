@@ -13,7 +13,7 @@ import java.util.List;
 
 public class InfusionCategory extends MachineBaseCategory {
     public InfusionCategory(IGuiHelper helper) {
-        super(helper, "infusion", BlockRegistry.INFUSION_TABLE.asItem());
+        super(helper, "expertmodecore:infusion", BlockRegistry.INFUSION_TABLE.asItem());
         this.backGround = helper.createDrawable(new ResourceLocation("expertmodecore:textures/gui/container/infusion_table.png"), 37, 16, 100, 54);
     }
 
@@ -35,5 +35,16 @@ public class InfusionCategory extends MachineBaseCategory {
     @Override
     public void draw(SimpleMachineRecipe recipe, double mouseX, double mouseY) {
         arrow.draw(42, 18);
+    }
+
+    @Override
+    public Class<? extends SimpleMachineRecipe> getRecipeClass() {
+        return recipeClass.class;
+    }
+
+    public static class recipeClass extends SimpleMachineRecipe {
+        public recipeClass(Object[] input, Object[] output, int time) {
+            super(input, output, time);
+        }
     }
 }

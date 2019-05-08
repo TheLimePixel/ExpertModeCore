@@ -2,9 +2,13 @@ package com.EmosewaPixel.expertmodecore.blocks;
 
 import com.EmosewaPixel.expertmodecore.ExpertModeCore;
 import com.EmosewaPixel.expertmodecore.blocks.trees.*;
+import com.EmosewaPixel.expertmodecore.tiles.TileEntityAlloyer;
+import com.EmosewaPixel.expertmodecore.tiles.TileEntityBlastFurnace;
+import com.EmosewaPixel.expertmodecore.tiles.TileEntityCrusher;
 import com.EmosewaPixel.expertmodecore.world.tree.IronwoodTree;
 import com.EmosewaPixel.expertmodecore.world.tree.RedwoodTree;
 import com.EmosewaPixel.expertmodecore.world.tree.RubberTree;
+import com.EmosewaPixel.pixellib.blocks.BlockMachineFuelBased;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.SoundType;
@@ -73,10 +77,10 @@ public class BlockRegistry {
         STRIPPED_RUBBER_LOG = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("expertmodecore:stripped_rubber_log"), e);
         STRIPPED_RUBBER_WOOD = register(new BlockRotatedPillar(Block.Properties.create(Material.WOOD, MaterialColor.DIRT).hardnessAndResistance(2.0F).sound(SoundType.WOOD)).setRegistryName("expertmodecore:stripped_rubber_wood"), e);
 
-        ALLOYER = register(new BlockAlloyer(), e);
-        BLAST_FURNACE = register(new BlockBlastFurnace(), e);
+        ALLOYER = register(new BlockMachineFuelBased("expertmodecore:alloyer", TileEntityAlloyer::new), e);
+        BLAST_FURNACE = register(new BlockMachineFuelBased("expertmodecore:blast_furnace", TileEntityBlastFurnace::new), e);
         COKE_OVEN = register(new BlockCokeOven(), e);
-        CRUSHER = register(new BlockCrusher(), e);
+        CRUSHER = register(new BlockMachineFuelBased("expertmodecore:crusher", TileEntityCrusher::new), e);
         INFUSION_TABLE = register(new BlockInfusionTable(), e);
         SAWMILL = register(new BlockSawmill(), e);
     }

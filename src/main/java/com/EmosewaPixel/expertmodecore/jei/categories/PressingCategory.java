@@ -13,7 +13,7 @@ import java.util.List;
 
 public class PressingCategory extends MachineBaseCategory {
     public PressingCategory(IGuiHelper helper) {
-        super(helper, "pressing", Blocks.PISTON.asItem());
+        super(helper, "expertmodecore:pressing", Blocks.PISTON.asItem());
         this.backGround = helper.createDrawable(new ResourceLocation("expertmodecore:textures/gui/jei/pressing.png"), 0, 0, 82, 54);
     }
 
@@ -32,5 +32,16 @@ public class PressingCategory extends MachineBaseCategory {
     @Override
     public void draw(SimpleMachineRecipe recipe, double mouseX, double mouseY) {
         arrow.draw(24, 18);
+    }
+
+    @Override
+    public Class<? extends SimpleMachineRecipe> getRecipeClass() {
+        return recipeClass.class;
+    }
+
+    public static class recipeClass extends SimpleMachineRecipe {
+        public recipeClass(Object[] input, Object[] output, int time) {
+            super(input, output, time);
+        }
     }
 }

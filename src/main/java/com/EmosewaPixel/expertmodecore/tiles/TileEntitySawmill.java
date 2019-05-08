@@ -102,9 +102,8 @@ public class TileEntitySawmill extends AbstractTERecipeBased<RedstoneBasedRecipe
 
         RedstoneBasedRecipe returnRecipe;
         for (RedstoneBasedRecipe recipe : getRecipeList().getReipes())
-            if (recipe.isInputValid(new ItemStack[]{input.getStackInSlot(0)}) && getCurrentRecipe().needsHighSignal() == (getHighestPrev() > 8)) {
-                boolean highForCurrent = getCurrentRecipe().needsHighSignal();
-                returnRecipe = new RedstoneBasedRecipe(new ItemStack[]{new ItemStack(input.getStackInSlot(0).getItem(), recipe.getCountOfInputItem(input.getStackInSlot(0)))}, recipe.getAllOutputs(), recipe.getTime(), highForCurrent);
+            if (recipe.isInputValid(new ItemStack[]{input.getStackInSlot(0)}) && recipe.needsHighSignal() == (getHighestPrev() > 8)) {
+                returnRecipe = new RedstoneBasedRecipe(new ItemStack[]{new ItemStack(input.getStackInSlot(0).getItem(), recipe.getCountOfInputItem(input.getStackInSlot(0)))}, recipe.getAllOutputs(), recipe.getTime(), recipe.needsHighSignal());
                 return returnRecipe;
             }
         return RedstoneBasedRecipe.EMPTY;

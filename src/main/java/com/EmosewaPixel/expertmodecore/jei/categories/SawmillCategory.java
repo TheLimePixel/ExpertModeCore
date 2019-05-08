@@ -15,7 +15,7 @@ import java.util.List;
 
 public class SawmillCategory extends MachineBaseCategory {
     public SawmillCategory(IGuiHelper helper) {
-        super(helper, "sawmill", BlockRegistry.SAWMILL.asItem());
+        super(helper, "expertmodecore:sawmill", BlockRegistry.SAWMILL.asItem());
         this.backGround = helper.createDrawable(new ResourceLocation("expertmodecore:textures/gui/container/sawmill.png"), 55, 16, 82, 54);
     }
 
@@ -38,5 +38,16 @@ public class SawmillCategory extends MachineBaseCategory {
             Minecraft.getInstance().fontRenderer.drawString("Requires a high signal", -12, 4, 0x000000);
         else
             Minecraft.getInstance().fontRenderer.drawString("Requires a low signal", -10, 4, 0x000000);
+    }
+
+    @Override
+    public Class<? extends SimpleMachineRecipe> getRecipeClass() {
+        return recipeClass.class;
+    }
+
+    public static class recipeClass extends RedstoneBasedRecipe {
+        public recipeClass(Object[] input, Object[] output, int time, boolean highSignal) {
+            super(input, output, time, highSignal);
+        }
     }
 }
