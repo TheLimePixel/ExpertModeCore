@@ -2,7 +2,7 @@
   "type": "crafting_shapeless",
   "ingredients": [
     {
-      "item": "expertmodecore:coke_coal"
+      "tag": "forge:gems/coke"
     },
     {
       "item": "expertmodecore:rubber_drop"
@@ -12,7 +12,7 @@
     }
   ],
   "result": {
-    "item": "expertmodecore:unlit_torch",
+    "item": "minecraft:torch",
     "count": 8
   }
 }

@@ -1,9 +1,0 @@
-{
-  "type": "blasting",
-  "ingredient": {
-    "tag": "forge:dusts/steel"
-  },
-  "result": "expertmodecore:steel_ingot",
-  "experience": 1.0,
-  "cookingtime": 100
-}

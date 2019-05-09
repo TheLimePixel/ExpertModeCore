@@ -1,9 +1,0 @@
-{
-  "type": "blasting",
-  "ingredient": {
-    "tag": "forge:dusts/electrum"
-  },
-  "result": "expertmodecore:electrum_ingot",
-  "experience": 1.0,
-  "cookingtime": 100
-}

@@ -1,9 +1,0 @@
-{
-  "type": "blasting",
-  "ingredient": {
-    "tag": "forge:dusts/bronze"
-  },
-  "result": "expertmodecore:bronze_ingot",
-  "experience": 1.0,
-  "cookingtime": 200
-}

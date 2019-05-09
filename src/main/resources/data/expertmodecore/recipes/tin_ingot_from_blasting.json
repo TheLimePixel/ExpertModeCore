@@ -1,9 +1,0 @@
-{
-  "type": "blasting",
-  "ingredient": {
-    "tag": "forge:dusts/tin"
-  },
-  "result": "expertmodecore:tin_ingot",
-  "experience": 1.0,
-  "cookingtime": 100
-}

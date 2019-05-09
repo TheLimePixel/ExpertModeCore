@@ -1,9 +1,0 @@
-{
-  "type": "blasting",
-  "ingredient": {
-    "tag": "forge:dusts/charred_iron"
-  },
-  "result": "expertmodecore:charred_iron_ingot",
-  "experience": 1.0,
-  "cookingtime": 100
-}
