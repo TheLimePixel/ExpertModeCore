@@ -2,7 +2,7 @@
   "parent": "minecraft:story/lava_bucket",
   "display": {
     "icon": {
-      "item": "expertmodecore:charred_iron_ingot"
+      "item": "pixellib:charred_iron_ingot"
     },
     "title": {
       "translate": "Sacrifices Must Be Made"
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "expertmodecore:charred_iron_ingot"
+            "tag": "forge:ingots/charred_iron"
           }
         ]
       }

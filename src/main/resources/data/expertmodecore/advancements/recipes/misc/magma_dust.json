@@ -2,7 +2,7 @@
   "parent": "expertmodecore:recipes/root",
   "rewards": {
     "recipes": [
-      "expertmodecore:netherrack_dust"
+      "pixellib:netherrack_dust"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "expertmodecore:magma_dust"
+            "item": "pixellib:magma_dust"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "expertmodecore:netherrack_dust"
+        "recipe": "pixellib:netherrack_dust"
       }
     }
   },

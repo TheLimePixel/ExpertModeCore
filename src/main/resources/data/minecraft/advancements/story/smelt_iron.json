@@ -2,7 +2,7 @@
   "parent": "minecraft:story/boom",
   "display": {
     "icon": {
-      "item": "expertmodecore:steel_ingot"
+      "item": "pixellib:steel_ingot"
     },
     "title": {
       "translate": "advancements.story.smelt_iron.title"

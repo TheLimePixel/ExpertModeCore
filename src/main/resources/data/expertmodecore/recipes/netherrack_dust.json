@@ -5,17 +5,17 @@
       "tag": "forge:dusts/redstone"
     },
     {
-      "item": "expertmodecore:stone_dust"
+      "tag": "forge:dusts/stone"
     },
     {
-      "item": "expertmodecore:stone_dust"
+      "tag": "forge:dusts/stone"
     },
     {
-    "item": "expertmodecore:magma_dust"
+      "tag": "forge:dusts/magma"
     }
   ],
   "result": {
-    "item": "expertmodecore:netherrack_dust",
+    "item": "pixellib:netherrack_dust",
     "count": 4
   }
 }

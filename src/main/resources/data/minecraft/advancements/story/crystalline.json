@@ -2,7 +2,7 @@
   "parent": "minecraft:story/mine_diamond",
   "display": {
     "icon": {
-      "item": "expertmodecore:crystalline_ingot"
+      "item": "pixellib:crystalline_ingot"
     },
     "title": {
       "translate": "Crystal Clear"

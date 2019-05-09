@@ -2,7 +2,7 @@
   "parent": "minecraft:story/redstone",
   "display": {
     "icon": {
-      "item": "expertmodecore:netherrack_dust"
+      "item": "pixellib:netherrack_dust"
     },
     "title": {
       "translate": "Don't Breathe It In"
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-  		    "item": "expertmodecore:netherrack_dust"
+  		    "item": "pixellib:netherrack_dust"
           }
         ]
       }

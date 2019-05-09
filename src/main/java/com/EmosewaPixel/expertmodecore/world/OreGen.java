@@ -34,15 +34,15 @@ public class OreGen {
 
             if (biome.getCategory() == Biome.Category.FOREST || biome.getCategory() == Biome.Category.TAIGA || biome.getCategory() == Biome.Category.JUNGLE || biome.getCategory() == Biome.Category.SAVANNA || biome instanceof WoodedMountainsBiome)
                 biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, new DimensionFeature<>(
-                        Feature.RANDOM_FEATURE_LIST, new RandomDefaultFeatureListConfig(new Feature[]{new BigRubberTreeFeatures(false)}, new IFeatureConfig[]{IFeatureConfig.NO_FEATURE_CONFIG}, new float[]{0.05F}, new TreeFeature(true, 4, BlockRegistry.RUBBER_LOG.getDefaultState().with(BlockRubberLog.HAS_SAP, true), BlockRegistry.RUBBER_LEAVES.getDefaultState(), false), IFeatureConfig.NO_FEATURE_CONFIG), biome.AT_SURFACE_WITH_EXTRA, new AtSurfaceWithExtraConfig(0, 0.075F, 5), DimensionType.OVERWORLD));
+                        Feature.RANDOM_FEATURE_LIST, new RandomDefaultFeatureListConfig(new Feature[]{new BigRubberTreeFeatures(false)}, new IFeatureConfig[]{IFeatureConfig.NO_FEATURE_CONFIG}, new float[]{0.05F}, new TreeFeature(true, 4, BlockRegistry.RUBBER_LOG.getDefaultState().with(BlockRubberLog.HAS_SAP, true), BlockRegistry.RUBBER_LEAVES.getDefaultState(), false), IFeatureConfig.NO_FEATURE_CONFIG), biome.AT_SURFACE_WITH_EXTRA, new AtSurfaceWithExtraConfig(0, 0.1F, 5), DimensionType.OVERWORLD));
 
             if (biome.getCategory() == Biome.Category.SWAMP)
                 biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, new DimensionFeature<>(
-                        Feature.RANDOM_FEATURE_LIST, new RandomDefaultFeatureListConfig(new Feature[]{}, new IFeatureConfig[]{}, new float[]{}, new TreeFeature(true, 4, BlockRegistry.RUBBER_LOG.getDefaultState().with(BlockRubberLog.HAS_SAP, true), BlockRegistry.RUBBER_LEAVES.getDefaultState(), true), IFeatureConfig.NO_FEATURE_CONFIG), biome.AT_SURFACE_WITH_EXTRA, new AtSurfaceWithExtraConfig(0, 0.075F, 5), DimensionType.OVERWORLD));
+                        Feature.RANDOM_FEATURE_LIST, new RandomDefaultFeatureListConfig(new Feature[]{}, new IFeatureConfig[]{}, new float[]{}, new TreeFeature(true, 4, BlockRegistry.RUBBER_LOG.getDefaultState().with(BlockRubberLog.HAS_SAP, true), BlockRegistry.RUBBER_LEAVES.getDefaultState(), true), IFeatureConfig.NO_FEATURE_CONFIG), biome.AT_SURFACE_WITH_EXTRA, new AtSurfaceWithExtraConfig(0, 0.1F, 5), DimensionType.OVERWORLD));
 
             if (biome.getCategory() == Biome.Category.SAVANNA || biome.getCategory() == Biome.Category.MESA)
                 biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, new DimensionFeature<>(
-                        Feature.RANDOM_FEATURE_LIST, new RandomDefaultFeatureListConfig(new Feature[]{}, new IFeatureConfig[]{}, new float[]{}, new TreeFeature(true, 6, BlockRegistry.IRONWOOD_LOG.getDefaultState(), BlockRegistry.IRONWOOD_LEAVES.getDefaultState(), false), IFeatureConfig.NO_FEATURE_CONFIG), biome.AT_SURFACE_WITH_EXTRA, new AtSurfaceWithExtraConfig(0, 0.05F, 5), DimensionType.OVERWORLD));
+                        Feature.RANDOM_FEATURE_LIST, new RandomDefaultFeatureListConfig(new Feature[]{}, new IFeatureConfig[]{}, new float[]{}, new TreeFeature(true, 6, BlockRegistry.IRONWOOD_LOG.getDefaultState(), BlockRegistry.IRONWOOD_LEAVES.getDefaultState(), false), IFeatureConfig.NO_FEATURE_CONFIG), biome.AT_SURFACE_WITH_EXTRA, new AtSurfaceWithExtraConfig(0, 0.075F, 5), DimensionType.OVERWORLD));
 
             if (biome.getCategory() == Biome.Category.TAIGA)
                 biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, new DimensionFeature<>(

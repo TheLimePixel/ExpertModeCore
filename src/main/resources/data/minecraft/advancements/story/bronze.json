@@ -2,7 +2,7 @@
   "parent": "minecraft:story/its_getting_hot",
   "display": {
     "icon": {
-      "item": "expertmodecore:bronze_ingot"
+      "item": "pixellib:bronze_ingot"
     },
     "title": {
       "translate": "Bronze"
