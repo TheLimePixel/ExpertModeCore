@@ -32,7 +32,6 @@ public class ItemRegistry {
     public static Item TREATED_STICK;
     public static Item UNFIRED_BRICK;
     public static Item UNFIRED_COKE_BRICK;
-    public static Item UNLIT_TORCH;
 
     public static void registry(RegistryEvent.Register<Item> e) {
         for (Material mat : Materials.getAll()) {
@@ -71,7 +70,6 @@ public class ItemRegistry {
         TREATED_STICK = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("expertmodecore:treated_stick"), e);
         UNFIRED_BRICK = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("expertmodecore:unfired_brick"), e);
         UNFIRED_COKE_BRICK = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("expertmodecore:unfired_coke_brick"), e);
-        UNLIT_TORCH = register(new Item(new Item.Properties().group(ExpertModeCore.main)).setRegistryName("expertmodecore:unlit_torch"), e);
     }
 
     private static Item register(Item item, RegistryEvent.Register<Item> e) {
