@@ -15,6 +15,7 @@ import com.EmosewaPixel.expertmodecore.world.OreGen;
 import com.EmosewaPixel.pixellib.materialSystem.lists.MaterialBlocks;
 import com.EmosewaPixel.pixellib.materialSystem.lists.MaterialItems;
 import com.EmosewaPixel.pixellib.materialSystem.lists.Materials;
+import com.EmosewaPixel.pixellib.materialSystem.materials.IngotMaterial;
 import com.EmosewaPixel.pixellib.materialSystem.materials.Material;
 import com.EmosewaPixel.pixellib.materialSystem.materials.MaterialRegistry;
 import com.EmosewaPixel.pixellib.proxy.IModProxy;
@@ -287,7 +288,7 @@ public class ExpertModeCore {
                 if (e.getHarvester().getHeldItemMainhand().getItem() instanceof MaterialHammer) {
                     if (tag("ores").contains(item)) {
                         for (Material mat : Materials.getAll())
-                            if (mat.doesHaveOre())
+                            if (mat.doesHaveOre() && mat instanceof IngotMaterial)
                                 if (tag("ores/" + mat.getName()).contains(item)) {
                                     e.getDrops().removeAll(e.getDrops());
                                     e.getDrops().add(new TagStack(tag("dusts/" + mat.getName())).asItemStack());

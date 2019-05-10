@@ -16,10 +16,11 @@ public class DataAddition {
             if (mat instanceof IngotMaterial)
                 if (((IngotMaterial) mat).hasSimpleProcessing())
                     RecipeInjector.addShapedRecipe(location(mat.getName() + "_plate"), new ItemStack(MaterialItems.getItem(mat, MaterialAddition.PLATE)), "H", "I", 'H', MaterialAddition.HAMMER.getTag(), 'I', mat.getTag(MaterialRegistry.INGOT));
-            if (MaterialItems.contains(mat, MaterialRegistry.DUST) && MaterialItems.contains(mat, MaterialAddition.SMALL_DUST))
+            if (MaterialItems.contains(mat, MaterialRegistry.DUST) && MaterialItems.contains(mat, MaterialAddition.SMALL_DUST)) {
                 RecipeInjector.addShapedRecipe(location(mat.getName() + "_dust_from_small_dust"), new ItemStack(MaterialItems.getItem(mat, MaterialRegistry.DUST)), "DD", "DD", 'D', mat.getTag(MaterialAddition.SMALL_DUST));
+                RecipeInjector.addShapelessRecipe(location(mat.getName() + "_small_dust"), new ItemStack(MaterialItems.getItem(mat, MaterialAddition.SMALL_DUST), 4), mat.getTag(MaterialRegistry.DUST));
+            }
         }
-
     }
 
     private static ResourceLocation location(String name) {

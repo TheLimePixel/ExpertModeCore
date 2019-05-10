@@ -19,7 +19,7 @@ public class OreGen {
         for (Biome biome : ForgeRegistries.BIOMES) {
             biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, new DimensionFeature<>(
                     Feature.MINABLE, new MinableConfig(MinableConfig.IS_ROCK, MachineRecipeAddition.COPPER_ORE.getDefaultState(), 9), Biome.COUNT_RANGE,
-                    new CountRangeConfig(25, 0, 0, 64), DimensionType.OVERWORLD
+                    new CountRangeConfig(25, 16, 0, 96), DimensionType.OVERWORLD
             ));
 
             biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, new DimensionFeature<>(
@@ -29,7 +29,7 @@ public class OreGen {
 
             biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, new DimensionFeature<>(
                     Feature.MINABLE, new MinableConfig(MinableConfig.IS_ROCK, MachineRecipeAddition.TIN_ORE.getDefaultState(), 9), Biome.COUNT_RANGE,
-                    new CountRangeConfig(16, 0, 0, 64), DimensionType.OVERWORLD
+                    new CountRangeConfig(16, 0, 0, 36), DimensionType.OVERWORLD
             ));
 
             if (biome.getCategory() == Biome.Category.FOREST || biome.getCategory() == Biome.Category.TAIGA || biome.getCategory() == Biome.Category.JUNGLE || biome.getCategory() == Biome.Category.SAVANNA || biome instanceof WoodedMountainsBiome)
