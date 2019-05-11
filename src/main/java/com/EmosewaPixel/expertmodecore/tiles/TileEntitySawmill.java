@@ -15,6 +15,7 @@ public class TileEntitySawmill extends AbstractTERecipeBased<RedstoneBasedRecipe
 
     public TileEntitySawmill() {
         super(ExpertTypes.SAWMILL, RecipeTypes.SAWMILL_RECIPES);
+        setCurrentRecipe(RedstoneBasedRecipe.EMPTY);
     }
 
     @Override
