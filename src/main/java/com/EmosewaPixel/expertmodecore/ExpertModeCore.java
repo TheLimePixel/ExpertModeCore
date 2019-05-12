@@ -288,7 +288,7 @@ public class ExpertModeCore {
                 if (e.getHarvester().getHeldItemMainhand().getItem() instanceof MaterialHammer) {
                     if (tag("ores").contains(item)) {
                         for (Material mat : Materials.getAll())
-                            if (mat.doesHaveOre() && mat instanceof IngotMaterial)
+                            if (mat.hasTag(MaterialRegistry.HAS_ORE) && mat instanceof IngotMaterial)
                                 if (tag("ores/" + mat.getName()).contains(item)) {
                                     e.getDrops().removeAll(e.getDrops());
                                     e.getDrops().add(new TagStack(tag("dusts/" + mat.getName())).asItemStack());

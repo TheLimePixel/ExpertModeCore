@@ -67,7 +67,7 @@ public class MachineRecipeAddition {
                 RecipeTypes.PRESSING_RECIPES.recipeBuilder().input(new TagStack(material.getTag(MaterialRegistry.INGOT))).output(new TagStack(material.getTag(MaterialAddition.PLATE))).buildAndRegister();
                 RecipeTypes.CRUSHER_RECIPES.recipeBuilder().input(new TagStack(material.getTag(MaterialRegistry.INGOT))).output(new TagStack(material.getTag(MaterialRegistry.DUST))).time(150).buildAndRegister();
                 RecipeTypes.CRUSHER_RECIPES.recipeBuilder().input(new TagStack(material.getTag(MaterialAddition.PLATE))).output(new TagStack(material.getTag(MaterialRegistry.DUST))).time(150).buildAndRegister();
-                if (material.doesHaveOre())
+                if (material.hasTag(MaterialRegistry.HAS_ORE))
                     RecipeTypes.CRUSHER_RECIPES.recipeBuilder().input(new TagStack(material.getTag(MaterialRegistry.ORE))).output(new TagStack(material.getTag(MaterialRegistry.DUST), 2), new TagStack(DUSTS_STONE)).time(200).buildAndRegister();
             }
         }
@@ -87,9 +87,9 @@ public class MachineRecipeAddition {
         RecipeTypes.SAWMILL_RECIPES.recipeBuilder().input(new TagStack(ItemTags.JUNGLE_LOGS)).output(new ItemStack(Blocks.JUNGLE_PLANKS, 4)).time(100).highSignal().buildAndRegister();
         RecipeTypes.SAWMILL_RECIPES.recipeBuilder().input(new TagStack(ItemTags.ACACIA_LOGS)).output(new ItemStack(Blocks.ACACIA_PLANKS, 4)).time(100).highSignal().buildAndRegister();
         RecipeTypes.SAWMILL_RECIPES.recipeBuilder().input(new TagStack(ItemTags.DARK_OAK_LOGS)).output(new ItemStack(Blocks.DARK_OAK_PLANKS, 4)).time(100).highSignal().buildAndRegister();
-        RecipeTypes.SAWMILL_RECIPES.recipeBuilder().input(new TagStack(new ItemTags.Wrapper(new ResourceLocation("expertmodecore:rubber_logs")))).output(new ItemStack(BlockRegistry.RUBBER_PLANKS, 4)).time(100).highSignal().buildAndRegister();
-        RecipeTypes.SAWMILL_RECIPES.recipeBuilder().input(new TagStack(new ItemTags.Wrapper(new ResourceLocation("expertmodecore:ironwood_logs")))).output(new ItemStack(BlockRegistry.IRONWOOD_PLANKS, 4)).time(100).highSignal().buildAndRegister();
-        RecipeTypes.SAWMILL_RECIPES.recipeBuilder().input(new TagStack(new ItemTags.Wrapper(new ResourceLocation("expertmodecore:redwood_logs")))).output(new ItemStack(BlockRegistry.REDWOOD_PLANKS, 4)).time(100).highSignal().buildAndRegister();
+        RecipeTypes.SAWMILL_RECIPES.recipeBuilder().input(new TagStack(new ItemTags.Wrapper(new ResourceLocation("minecraft:rubber_logs")))).output(new ItemStack(BlockRegistry.RUBBER_PLANKS, 4)).time(100).highSignal().buildAndRegister();
+        RecipeTypes.SAWMILL_RECIPES.recipeBuilder().input(new TagStack(new ItemTags.Wrapper(new ResourceLocation("minecraft:ironwood_logs")))).output(new ItemStack(BlockRegistry.IRONWOOD_PLANKS, 4)).time(100).highSignal().buildAndRegister();
+        RecipeTypes.SAWMILL_RECIPES.recipeBuilder().input(new TagStack(new ItemTags.Wrapper(new ResourceLocation("minecraft:redwood_logs")))).output(new ItemStack(BlockRegistry.REDWOOD_PLANKS, 4)).time(100).highSignal().buildAndRegister();
         RecipeTypes.SAWMILL_RECIPES.recipeBuilder().input(new ItemStack(Blocks.OAK_LOG)).output(new ItemStack(Blocks.STRIPPED_OAK_LOG)).time(200).buildAndRegister();
         RecipeTypes.SAWMILL_RECIPES.recipeBuilder().input(new ItemStack(Blocks.BIRCH_LOG)).output(new ItemStack(Blocks.STRIPPED_BIRCH_LOG)).time(200).buildAndRegister();
         RecipeTypes.SAWMILL_RECIPES.recipeBuilder().input(new ItemStack(Blocks.SPRUCE_LOG)).output(new ItemStack(Blocks.STRIPPED_SPRUCE_LOG)).time(200).buildAndRegister();

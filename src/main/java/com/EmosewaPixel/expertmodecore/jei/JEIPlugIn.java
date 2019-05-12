@@ -14,8 +14,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.stream.Collectors;
-
 @JeiPlugin
 public class JEIPlugIn implements IModPlugin {
     @Override
@@ -31,7 +29,7 @@ public class JEIPlugIn implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration reg) {
-        reg.addRecipeCatalyst(new ItemStack(BlockRegistry.ALLOYER), new ResourceLocation("expertmodecore:alloyer"));
+        reg.addRecipeCatalyst(new ItemStack(BlockRegistry.ALLOYER), new ResourceLocation("expertmodecore:alloy_smelter"));
         reg.addRecipeCatalyst(new ItemStack(BlockRegistry.BLAST_FURNACE), new ResourceLocation("expertmodecore:blast_furnace"));
         reg.addRecipeCatalyst(new ItemStack(BlockRegistry.COKE_OVEN), new ResourceLocation("expertmodecore:coke_oven"));
         reg.addRecipeCatalyst(new ItemStack(BlockRegistry.CRUSHER), new ResourceLocation("expertmodecore:crusher"));
@@ -42,12 +40,12 @@ public class JEIPlugIn implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration reg) {
-        reg.addRecipes(RecipeTypes.ALLOYER_RECIPES.getReipes().stream().map(recipe -> new AlloyerCategory.recipeClass(recipe.getAllInputs(), recipe.getAllOutputs(), recipe.getTime())).collect(Collectors.toList()), new ResourceLocation("expertmodecore:alloyer"));
-        reg.addRecipes(RecipeTypes.BLAST_FURNACE_RECIPES.getReipes().stream().map(recipe -> new BlastFurnaceCategory.recipeClass(recipe.getAllInputs(), recipe.getAllOutputs(), recipe.getTime())).collect(Collectors.toList()), new ResourceLocation("expertmodecore:blast_furnace"));
-        reg.addRecipes(RecipeTypes.COKE_OVEN_RECIPES.getReipes().stream().map(recipe -> new CokeOvenCategory.recipeClass(recipe.getAllInputs(), recipe.getAllOutputs(), recipe.getTime())).collect(Collectors.toList()), new ResourceLocation("expertmodecore:coke_oven"));
-        reg.addRecipes(RecipeTypes.CRUSHER_RECIPES.getReipes().stream().map(recipe -> new CrusherCategory.recipeClass(recipe.getAllInputs(), recipe.getAllOutputs(), recipe.getTime())).collect(Collectors.toList()), new ResourceLocation("expertmodecore:crusher"));
-        reg.addRecipes(RecipeTypes.INFUSION_RECIPES.getReipes().stream().map(recipe -> new InfusionCategory.recipeClass(recipe.getAllInputs(), recipe.getAllOutputs(), recipe.getTime())).collect(Collectors.toList()), new ResourceLocation("expertmodecore:infusion"));
-        reg.addRecipes(RecipeTypes.PRESSING_RECIPES.getReipes().stream().map(recipe -> new PressingCategory.recipeClass(recipe.getAllInputs(), recipe.getAllOutputs(), recipe.getTime())).collect(Collectors.toList()), new ResourceLocation("expertmodecore:pressing"));
-        reg.addRecipes(RecipeTypes.SAWMILL_RECIPES.getReipes().stream().map(recipe -> new SawmillCategory.recipeClass(recipe.getAllInputs(), recipe.getAllOutputs(), recipe.getTime(), recipe.needsHighSignal())).collect(Collectors.toList()), new ResourceLocation("expertmodecore:sawmill"));
+        reg.addRecipes(RecipeTypes.ALLOYER_RECIPES.getReipes(), new ResourceLocation("expertmodecore:alloy_smelter"));
+        reg.addRecipes(RecipeTypes.BLAST_FURNACE_RECIPES.getReipes(), new ResourceLocation("expertmodecore:blast_furnace"));
+        reg.addRecipes(RecipeTypes.COKE_OVEN_RECIPES.getReipes(), new ResourceLocation("expertmodecore:coke_oven"));
+        reg.addRecipes(RecipeTypes.CRUSHER_RECIPES.getReipes(), new ResourceLocation("expertmodecore:crusher"));
+        reg.addRecipes(RecipeTypes.INFUSION_RECIPES.getReipes(), new ResourceLocation("expertmodecore:infusion"));
+        reg.addRecipes(RecipeTypes.PRESSING_RECIPES.getReipes(), new ResourceLocation("expertmodecore:pressing"));
+        reg.addRecipes(RecipeTypes.SAWMILL_RECIPES.getReipes(), new ResourceLocation("expertmodecore:sawmill"));
     }
 }

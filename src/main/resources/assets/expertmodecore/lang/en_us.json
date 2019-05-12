@@ -71,7 +71,7 @@
 	"material.steel.name": "Steel",
 	"material.tin.name": "Tin",
 
-	"gui.jei.category.expertmodecore:alloyer": "Alloyer Recipes",
+	"gui.jei.category.expertmodecore:alloy_smelter": "Alloyer Recipes",
 	"gui.jei.category.expertmodecore:blast_furnace": "Infernal Blast Furnace Recipes",
 	"gui.jei.category.expertmodecore:coke_oven": "Coke Oven Recipes",
 	"gui.jei.category.expertmodecore:crusher": "Crusher Recipes",

@@ -18,19 +18,19 @@ public class MaterialAddition {
 
     static {
         //Materials
-        COPPER = new IngotMaterial("copper", MaterialRegistry.REGULAR, 0xf39500, 0).hasOre().build();
-        TIN = new IngotMaterial("tin", MaterialRegistry.REGULAR, 0xc1cfcf, 0).hasOre().build();
-        SILVER = new IngotMaterial("silver", MaterialRegistry.SHINY, 0xf0f7f7, 1).hasOre().build();
+        COPPER = new IngotMaterial("copper", MaterialRegistry.REGULAR, 0xf39500, 0).addTags(MaterialRegistry.HAS_ORE).build();
+        TIN = new IngotMaterial("tin", MaterialRegistry.REGULAR, 0xc1ddec, 0).addTags(MaterialRegistry.HAS_ORE).build();
+        SILVER = new IngotMaterial("silver", MaterialRegistry.SHINY, 0xf0f7f7, 1).addTags(MaterialRegistry.HAS_ORE).build();
         BRONZE = new IngotMaterial("bronze", MaterialRegistry.REGULAR, 0xd79117, 0).setItemTier(ExpertTiers.BRONZE).setArmorMaterial(ExpertMaterials.BRONZE).build();
         STEEL = new IngotMaterial("steel", MaterialRegistry.ROUGH, 0xb7b7b7, 1).setItemTier(ExpertTiers.STEEl).setArmorMaterial(ExpertMaterials.STEEL).build();
         ELECTRUM = new IngotMaterial("electrum", MaterialRegistry.SHINY, 0xfaff3b, 1).setItemTier(ExpertTiers.ELECTRUM).setArmorMaterial(ExpertMaterials.ELECTRUM).build();
         CHARRED_IRON = new IngotMaterial("charred_iron", MaterialRegistry.ROUGH, 0x393939, 1).build();
-        CRYSTALLINE = new IngotMaterial("crystalline", MaterialRegistry.SHINY, 0x76dada, 2).setItemTier(ExpertTiers.CRYSTALLINE).setArmorMaterial(ExpertMaterials.CRYSTALLINE).build();
+        CRYSTALLINE = new IngotMaterial("crystalline", MaterialRegistry.SHINY, 0x76dada, 2).setItemTier(ExpertTiers.CRYSTALLINE).setArmorMaterial(ExpertMaterials.CRYSTALLINE).addTags(MaterialRegistry.DISABLE_SIMPLE_PROCESIING).build();
         FLINT = new Material("flint", MaterialRegistry.SHARP, 0x222020, -1).setItemTier(ExpertTiers.FLINT).build();
         PRISMARINE = new GemMaterial("prismarine", MaterialRegistry.REGULAR, 0xa1dacb, 0).build();
         MAGMA = new Material("magma", MaterialRegistry.REGULAR, 0xffb62e, 0).build();
         NETHERRACK = new Material("netherrack", MaterialRegistry.REGULAR, 0xb33939, 0).build();
-        COKE = new GemMaterial("coke", MaterialRegistry.FUEL, 0x7a939b,0).build();
+        COKE = new GemMaterial("coke", MaterialRegistry.FUEL, 0x7a939b, 0).build();
 
         //Object Types
         PLATE = new ItemType("plate", (mat) -> mat instanceof IngotMaterial);

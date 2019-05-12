@@ -1,6 +1,7 @@
 package com.EmosewaPixel.expertmodecore.jei.categories;
 
 import com.EmosewaPixel.expertmodecore.blocks.BlockRegistry;
+import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
 import com.EmosewaPixel.pixellib.jei.MachineBaseCategory;
 import com.EmosewaPixel.pixellib.recipes.SimpleMachineRecipe;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class CrusherCategory extends MachineBaseCategory {
     public CrusherCategory(IGuiHelper helper) {
-        super(helper, "expertmodecore:crusher", BlockRegistry.CRUSHER.asItem());
+        super(helper, BlockRegistry.CRUSHER.asItem(), RecipeTypes.CRUSHER_RECIPES);
         this.backGround = helper.createDrawable(new ResourceLocation("expertmodecore:textures/gui/container/crusher.png"), 55, 16, 82, 54);
     }
 
@@ -37,16 +38,5 @@ public class CrusherCategory extends MachineBaseCategory {
     public void draw(SimpleMachineRecipe recipe, double mouseX, double mouseY) {
         arrow.draw(24, 18);
         flame.draw(1, 20);
-    }
-
-    @Override
-    public Class<? extends SimpleMachineRecipe> getRecipeClass() {
-        return recipeClass.class;
-    }
-
-    public static class recipeClass extends SimpleMachineRecipe {
-        public recipeClass(Object[] input, Object[] output, int time) {
-            super(input, output, time);
-        }
     }
 }

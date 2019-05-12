@@ -1,5 +1,6 @@
 package com.EmosewaPixel.expertmodecore.jei.categories;
 
+import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
 import com.EmosewaPixel.pixellib.jei.MachineBaseCategory;
 import com.EmosewaPixel.pixellib.recipes.SimpleMachineRecipe;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class PressingCategory extends MachineBaseCategory {
     public PressingCategory(IGuiHelper helper) {
-        super(helper, "expertmodecore:pressing", Blocks.PISTON.asItem());
+        super(helper, Blocks.PISTON.asItem(), RecipeTypes.PRESSING_RECIPES);
         this.backGround = helper.createDrawable(new ResourceLocation("expertmodecore:textures/gui/jei/pressing.png"), 0, 0, 82, 54);
     }
 
@@ -32,16 +33,5 @@ public class PressingCategory extends MachineBaseCategory {
     @Override
     public void draw(SimpleMachineRecipe recipe, double mouseX, double mouseY) {
         arrow.draw(24, 18);
-    }
-
-    @Override
-    public Class<? extends SimpleMachineRecipe> getRecipeClass() {
-        return recipeClass.class;
-    }
-
-    public static class recipeClass extends SimpleMachineRecipe {
-        public recipeClass(Object[] input, Object[] output, int time) {
-            super(input, output, time);
-        }
     }
 }

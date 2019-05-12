@@ -1,6 +1,7 @@
 package com.EmosewaPixel.expertmodecore.jei.categories;
 
 import com.EmosewaPixel.expertmodecore.blocks.BlockRegistry;
+import com.EmosewaPixel.expertmodecore.recipes.RecipeTypes;
 import com.EmosewaPixel.pixellib.jei.MachineBaseCategory;
 import com.EmosewaPixel.pixellib.recipes.SimpleMachineRecipe;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class BlastFurnaceCategory extends MachineBaseCategory {
     public BlastFurnaceCategory(IGuiHelper helper) {
-        super(helper, "expertmodecore:blast_furnace", BlockRegistry.BLAST_FURNACE.asItem());
+        super(helper, BlockRegistry.BLAST_FURNACE.asItem(), RecipeTypes.BLAST_FURNACE_RECIPES);
         this.backGround = helper.createDrawable(new ResourceLocation("textures/gui/container/furnace.png"), 55, 16, 82, 54);
     }
 
@@ -33,16 +34,5 @@ public class BlastFurnaceCategory extends MachineBaseCategory {
     public void draw(SimpleMachineRecipe recipe, double mouseX, double mouseY) {
         arrow.draw(24, 18);
         flame.draw(1, 20);
-    }
-
-    @Override
-    public Class<? extends SimpleMachineRecipe> getRecipeClass() {
-        return recipeClass.class;
-    }
-
-    public static class recipeClass extends SimpleMachineRecipe {
-        public recipeClass(Object[] input, Object[] output, int time) {
-            super(input, output, time);
-        }
     }
 }
